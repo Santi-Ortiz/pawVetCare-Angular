@@ -16,6 +16,7 @@ body {
 
 .content {
     flex: 1;
+    padding-bottom: 110px;
 }
 .top-bar {
     background-color: #FFFFFFFF;
@@ -467,7 +468,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1100px;
+    margin-left: 1070px;
 }
 
 .info-button:hover {
@@ -656,7 +657,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1100px;
+    margin-left: 1067px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 

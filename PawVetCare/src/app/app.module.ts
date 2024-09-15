@@ -10,10 +10,12 @@ import { FooterComponent } from './recycle/footer/footer.component';
 import { HomeComponent } from './landing/home/home.component';
 import { EquipoComponent } from './landing/equipo/equipo.component';
 import { ContactoComponent } from './landing/contacto/contacto.component';
-import { TodasLasMascotasComponent } from './admin/todas-las-mascotas/todas-las-mascotas.component';
-import { VerTodasLasMascotasComponent } from './admin/ver-todas-las-mascotas/ver-todas-las-mascotas.component';
-import { VerMascotaComponent } from './admin/ver-mascota/ver-mascota.component';
 import { HeaderAdminMascotasComponent } from './recycle/header-admin-mascotas/header-admin-mascotas.component';
+import { VerMascotasComponent } from './mascota/ver-mascotas/ver-mascotas.component';
+import { PaginacionMascotasComponent } from './mascota/paginacion-mascotas/paginacion-mascotas.component';
+import { VerUnaMascotaComponent } from './mascota/ver-una-mascota/ver-una-mascota.component';
+import { HeaderVetMascotasComponent } from './recycle/header-vet-mascotas/header-vet-mascotas.component';
+import { HeaderClienteComponent } from './recycle/header-cliente/header-cliente.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +27,12 @@ import { HeaderAdminMascotasComponent } from './recycle/header-admin-mascotas/he
     HomeComponent,
     EquipoComponent,
     ContactoComponent,
-    TodasLasMascotasComponent,
-    VerTodasLasMascotasComponent,
-    VerMascotaComponent,
-    HeaderAdminMascotasComponent
+    HeaderAdminMascotasComponent,
+    VerMascotasComponent,
+    PaginacionMascotasComponent,
+    VerUnaMascotaComponent,
+    HeaderVetMascotasComponent,
+    HeaderClienteComponent
   ],
   imports: [
     BrowserModule,

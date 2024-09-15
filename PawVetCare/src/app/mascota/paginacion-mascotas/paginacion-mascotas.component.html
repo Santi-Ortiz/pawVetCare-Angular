@@ -1,8 +1,13 @@
-<app-header-admin-mascotas></app-header-admin-mascotas>
+<header *ngIf="userType === 'admin'">
+  <app-header-admin-mascotas></app-header-admin-mascotas>
+</header>
+<header *ngIf="userType === 'vet'">
+  <app-header-vet-mascotas></app-header-vet-mascotas>
+</header>
 <section class="content">
-    <p class="primerTitulo">Hola, admin</p>
+    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
     <p class="segundoTitulo">Navega por las mascotas:</p>  
-  
     <!-- Contenedor de mascotas -->
     <div class="mascotas-container" id="mascotasContainer">
       <div class="mascota-item" >

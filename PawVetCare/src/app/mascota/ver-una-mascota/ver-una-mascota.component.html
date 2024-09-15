@@ -1,51 +1,61 @@
-<app-header-admin-mascotas></app-header-admin-mascotas>
+<header *ngIf="userType === 'admin'">
+  <app-header-admin-mascotas></app-header-admin-mascotas>
+</header>
+<header *ngIf="userType === 'vet'">
+  <app-header-vet-mascotas></app-header-vet-mascotas>
+</header>
+<header *ngIf="userType === 'cliente'">
+  <app-header-cliente></app-header-cliente>
+</header>
 <section class="content">
-    <p class="primerTitulo">Hola, admin</p>
+    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+    <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
     <p class="segundoTitulo">Aquí está la información de la mascota:</p>
     <p class="tercerTitulo">Dar el medicamento:</p>
     
     <div class="container-informacion">
       <form class="containerMascota">    
-        <p class="tituloEditar">Editar</p>
-        <p class="tituloEliminar">Eliminar</p>
+        <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEditar">Editar</p>
+        <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEliminar">Eliminar</p>
         
         <div class="info-item">
           <small class="info-title">Nombre:</small>
-          <input class="info-label"  readonly>
+          <input class="info-label" formControlName="nombre" readonly>
         </div>
   
         <!-- Estado de la mascota -->
         <img class="estadoimg"  src="/assets/check.png" alt="Estado">
-        <img class="estadoimg" src="/assets/wrong.png" alt="Estado">
+        <img class="estadoimg"  src="/assets/wrong.png" alt="Estado">
   
         <div class="info-itemRaza">
           <small class="info-title">Raza:</small>
-          <input class="info-label"  readonly>
+          <input class="info-label" formControlName="raza" readonly>
         </div>
   
         <div class="info-itemEdad">
           <small class="info-title">Edad:</small>
-          <input class="info-label" readonly>
+          <input class="info-label" formControlName="edad" readonly>
         </div>
   
         <div class="info-itemPeso">
           <small class="info-title">Peso:</small>
-          <input class="info-label" readonly>
+          <input class="info-label" formControlName="peso" readonly>
         </div>
   
         <div class="info-itemEnfermedad">
           <small class="info-title">Enfermedad:</small>
-          <input class="info-label"  readonly>
+          <input class="info-label" formControlName="enfermedad" readonly>
         </div>
   
         <div class="info-itemDueño">
           <small class="info-title">Dueño C.C.:</small>
-          <input class="info-label" type="text"  readonly>
+          <input class="info-label" type="text" readonly>
         </div>
   
         <div class="info-itemEstado">
           <small class="info-title">Estado:</small>
-          <select id="state" class="info-select" >
+          <select id="state" class="info-select" formControlName="estado" [disabled]="true">
             <option value="TRUE" >Activo</option>
             <option value="FALSE" >Inactivo</option>
           </select>
@@ -53,12 +63,12 @@
   
         <div class="info-itemFoto">
           <small class="info-title">URL Foto:</small>
-          <input class="info-label"  readonly>
+          <input class="info-label" formControlName="foto" readonly>
         </div>
   
         <img class="mascotaimg" alt="cat">
   
-        <div class="container-botones">
+        <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
           <button class="editar-btn" id="editarBtn" type="button" >
             <span class="icon">✎</span>
             <span class="text">Editar todo</span>
@@ -67,8 +77,8 @@
       </form>
   
       <!-- Botón para eliminar -->
-      <form>
-        <button class="eliminar-btn" id="eliminarBtn" type="submit">
+      <form *ngIf="userType === 'admin' || userType === 'vet'">
+        <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="submit">
           <span class="icon">x</span>
           <span class="text">Eliminar</span>
         </button>

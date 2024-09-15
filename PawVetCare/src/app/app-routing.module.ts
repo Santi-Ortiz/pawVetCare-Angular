@@ -3,17 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './landing/home/home.component';
 import { EquipoComponent } from './landing/equipo/equipo.component';
 import { ContactoComponent } from './landing/contacto/contacto.component';
-import { TodasLasMascotasComponent } from './admin/todas-las-mascotas/todas-las-mascotas.component';
-import { VerMascotaComponent } from './admin/ver-mascota/ver-mascota.component';
-import { VerTodasLasMascotasComponent } from './admin/ver-todas-las-mascotas/ver-todas-las-mascotas.component';
+import { PaginacionMascotasComponent } from './mascota/paginacion-mascotas/paginacion-mascotas.component';
+import { VerUnaMascotaComponent } from './mascota/ver-una-mascota/ver-una-mascota.component';
+import { VerMascotasComponent } from './mascota/ver-mascotas/ver-mascotas.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'equipo', component: EquipoComponent},
   {path: 'contacto', component: ContactoComponent},
-  {path: 'admin/mascotas', component: TodasLasMascotasComponent},
-  {path: 'admin/mascotas/mascota', component: VerMascotaComponent},
-  {path: 'admin/mascotas/todas', component: VerTodasLasMascotasComponent},
+  {path: 'mascotas', component: VerMascotasComponent},
+  {path: 'mascotas/mascota', component: VerUnaMascotaComponent},
+  {path: 'mascotas/todas', component: PaginacionMascotasComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

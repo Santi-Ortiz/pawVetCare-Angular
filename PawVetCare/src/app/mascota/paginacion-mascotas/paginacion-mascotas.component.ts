@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ver-todas-las-mascotas',
-  templateUrl: './ver-todas-las-mascotas.component.html',
-  styleUrls: ['./ver-todas-las-mascotas.component.css']
+  selector: 'app-paginacion-mascotas',
+  templateUrl: './paginacion-mascotas.component.html',
+  styleUrls: ['./paginacion-mascotas.component.css']
 })
-export class VerTodasLasMascotasComponent {
+export class PaginacionMascotasComponent {
+  userType = 'admin';
   currentPage: number = 1;
   itemsPerPage: number = 4;
   mascotas: NodeListOf<HTMLElement>;
@@ -51,5 +52,4 @@ export class VerTodasLasMascotasComponent {
 
     this.showPage(this.currentPage);
   }
-  
 }
