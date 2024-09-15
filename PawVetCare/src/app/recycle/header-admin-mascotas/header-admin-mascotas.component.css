@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+    height: 105%;
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    padding-bottom: 100px;
+}
+
+.content {
+    flex: 1;
+    padding-bottom: 120px;
+}
+
+.top-bar {
+    background-color: #FFFFFFFF;
+    text-align: left;
+    padding: 10px 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 9px #E4E4E4, 0px 0px 2px #E4E4E4;
+    border-radius: 0px;
+    z-index: 9999;
+}
+
+.top-bar img {
+    height: 100px;
+    margin-right: 10px;
+    margin-left: 60px;
+}
+
+.header-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 471px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+    opacity: 1;
+}
+
+.header-menu.hidden {
+    display: none;
+}
+
+.header-menu .header-menu-item {
+    padding: 18px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #565E6CFF;
+    border-radius: 0px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.header-menu .header-menu-item strong {
+    font-weight: 700;
+}
+
+.header-menu .header-menu-item.selected {
+    position: relative;
+    font-weight: 700;
+    color: #BFD5D8FF;
+    text-decoration: none;
+}
+
+.header-menu .header-menu-item.selected:hover {
+    color: #89989b;
+}
+
+.header-menu .header-menu-item:hover {
+    color: #BFD5D8FF;
+    font-weight: 700;
+}
+
+.header-menu .header-menu-item.selected .indicator {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 4px;
+    background: #BFD5D8FF;
+    border-radius: 0px;
+    transition: transform 0.3s; 
+}
+
+.primerTitulo {
+    position: absolute; 
+    top: -40px; 
+    left: 15%;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: center;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.container-veterinarios {
+    position: absolute; 
+    top: 120px; 
+    left: 0px; 
+    height: 1000px; 
+    background: #FFFFFF;
+    border-radius: 0px; 
+    width: 100%;
+    display: flex;
+    z-index: 9997;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+}
+
+.buttonSoyPVC {
+    width: 113px;
+    height: 44px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+    color: #FFFFFFFF;
+    background: #BFD5D8FF;
+    opacity: 1;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+}
+
+.buttonSoyPVC:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.buttonSoyPVC:hover:active {
+    color: #FFFFFFFF;
+    background: #BFD5D8FF; 
+}
+
+.buttonSoyPVC:disabled {
+    opacity: 0.4; 
+}
+
+.buttonSinCuenta {
+    font-family: Poppins;
+    font-size: 12px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #000000;
+    margin-left: 20px;
+}
+
+.buttonSinCuenta:hover {
+    font-weight: bold;
+}
+
+.primerTitulo {
+    position: absolute; 
+    top: 90px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #9095A0;
+}
+
+.segundoTitulo {
+    position: absolute; 
+    top: 160px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.titulo-buscador {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buscador-form {
+    position: absolute; 
+    top: 240px; 
+    left: 1000px;
+    display: flex;
+    align-items: center;
+}
+
+.buscador-input {
+    padding: 10px;
+    font-family: Poppins;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 8px;
+}
+
+.buscador-button {
+    padding: 8px 16px;
+    background-color: #BFD4D7;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.buscador-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}
+
+
+.tercerTitulo {
+    position: absolute; 
+    top: 480px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.veterinario-foto {
+    width: 150px;
+    height: 150px;
+    margin-left: 30px;
+    border-radius: 200px;
+}
+
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-text {
+    width: 150%;
+    height: 0;
+    padding: 10px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.info-itemNombre {
+    width: 300px;
+    position: relative;
+    margin-top: -105px;
+    margin-left: 200px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCedula {
+    width: 300px;
+    position: relative;
+    margin-top: -110px;
+    top: 55px;
+    margin-left: 550px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEspecialidad {
+    width: 400px;
+    top: 55px;
+    margin-left: 900px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPeso {
+    width: 100px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 870px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEnfermedad {
+    width: 300px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 1010px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    display: inline-flex;
+    position: absolute;
+    margin-top: -50px;
+    width: 120px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: #545454;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1360px;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.estado img {
+    width: 40px; 
+    height: 40px;
+    border-radius: 0px;
+    margin: 0;
+}
+
+.veterinarios-container {
+    margin-top: 320px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+}
+
+.veterinario-item {
+    margin-left: 88px; 
+    width: 1500px; 
+    height: 150px;
+    padding: 20px;
+    background: #E6CECE;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
+}
+
+.pagination {
+    text-align: center;
+    font-family: Poppins;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.pagination button {
+    background-color: #E6CECE;
+    font-family: Poppins;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #545454;
+}
+
+
+.footer {
+    position: fixed;
+    background: #171A1FFF;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.footer img {
+    position: absolute; 
+    top: 10px; 
+    left: 820px; 
+    width: 100px; 
+    border-radius: 0px; 
+}
+
+.footer .direccion {
+    position: absolute; 
+    top: 0px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 14px; 
+    line-height: 26px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .correo {
+    position: absolute; 
+    top: 25px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 14px; 
+    line-height: 26px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .derechos {
+    position: absolute; 
+    top: 55px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 12px; 
+    line-height: 22px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .iconos img {
+    position: absolute; 
+    top: 15px; 
+    left: 1330px; 
+    width: 300px; 
+}

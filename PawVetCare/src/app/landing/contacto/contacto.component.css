@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    padding-bottom: 1050px;
+}
+
+.top-bar {
+    background-color: #FFFFFFFF;
+    text-align: left;
+    padding: 10px 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 9px #E4E4E4, 0px 0px 2px #E4E4E4;
+    border-radius: 0px;
+}
+
+.top-bar img {
+    height: 100px;
+    margin-right: 10px;
+    margin-left: 60px;
+}
+
+.header-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 471px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+    opacity: 1;
+}
+
+.header-menu.hidden {
+    display: none;
+}
+
+.header-menu .header-menu-item {
+    padding: 18px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #565E6CFF;
+    border-radius: 0px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.header-menu .header-menu-item strong {
+    font-weight: 700;
+}
+
+.header-menu .header-menu-item.selected {
+    position: relative;
+    font-weight: 700;
+    color: #BFD5D8FF;
+    text-decoration: none;
+}
+
+.header-menu .header-menu-item.selected:hover {
+    color: #89989b;
+}
+
+.header-menu .header-menu-item:hover {
+    color: #BFD5D8FF;
+    font-weight: 700;
+}
+
+.header-menu .header-menu-item.selected .indicator {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 4px;
+    background: #BFD5D8FF;
+    border-radius: 0px;
+    transition: transform 0.3s; 
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+}
+
+.buttonSoyPVC {
+    width: 113px;
+    height: 44px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+    color: #FFFFFFFF;
+    background: #BFD5D8FF;
+    opacity: 1;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+}
+
+.buttonSoyPVC:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.buttonSoyPVC:hover:active {
+    color: #FFFFFFFF;
+    background: #BFD5D8FF; 
+}
+
+.buttonSoyPVC:disabled {
+    opacity: 0.4; 
+}
+
+.buttonSinCuenta {
+    font-family: Poppins;
+    font-size: 12px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #000000;
+    margin-left: 20px;
+}
+
+.buttonSinCuenta:hover {
+    font-weight: bold;
+}
+
+.primerTitulo {
+    position: absolute; 
+    top: 90px; 
+    left: 15%;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: center;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.form-container {
+    position: absolute; 
+    background: #d0d7d8;
+    margin-top: 400px;
+    top: -150px;
+    margin-left: 328px;
+    font-family: Poppins;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #89989b;
+    width: 1000px;
+
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #FFFFFFFF;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #FFFFFFFF;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #FFFFFFFF;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.form-container textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-container button {
+    width: 100%;
+    font-family: Poppins;
+    padding: 10px;
+    background-color: #323842;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #8BB3B8;
+}
+
+.image-gallery-left,
+.image-gallery-right {
+    background-color: #FFFFFFFF;
+    position: absolute;
+    top: 200px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+}
+
+.image-gallery-left {
+  left: 60px;
+  background-color: #FFFFFFFF;
+}
+
+.image-gallery-right {
+    top: 230px;
+    right: 60px;
+}
+
+.image-gallery-left img,
+.image-gallery-right img {
+    width: 250px;
+    margin: none;
+    border-radius: 50000px; 
+}
+
+.container-footer {
+    position: absolute; 
+    top: 1050px; 
+    left: 1px; 
+    width: 100%; 
+    height: 50px; 
+    background: #FFFFFFFF;
+    border-radius: 0px; 
+}
+
+.footer {
+    position: fixed;
+    background: #171A1FFF;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.footer img {
+    position: absolute; 
+    top: 10px; 
+    left: 820px; 
+    width: 100px; 
+    border-radius: 0px; 
+}
+
+.footer .direccion {
+    position: absolute; 
+    top: 0px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 14px; 
+    line-height: 26px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .correo {
+    position: absolute; 
+    top: 25px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 14px; 
+    line-height: 26px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .derechos {
+    position: absolute; 
+    top: 55px; 
+    left: 91px; 
+    font-family: Poppins;
+    font-size: 12px; 
+    line-height: 22px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+}
+
+.footer .iconos img {
+    position: absolute; 
+    top: 15px; 
+    left: 1330px; 
+    width: 300px; 
+}
