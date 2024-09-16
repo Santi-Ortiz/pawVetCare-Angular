@@ -56,7 +56,8 @@ export class VerMascotasComponent {
     this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
   }
 
-  buscarMascota(id: number | undefined): void {
+  buscarMascota(mascotaId: number | undefined): void {
+    const id = Number(mascotaId);
     if (!id) {
       return;
     }
