@@ -279,6 +279,13 @@ section{
     color: #0A4D20FF;
 }
 
+.editar-btn.expanded:hover {
+    width: 150px;
+    border-radius: 26px;
+    background: rgb(47, 73, 56);
+    color: #FFFFFF;
+}
+
 .editar-btn:hover {
     background: #9ED6B1FF;
     color: #0A4D20FF;

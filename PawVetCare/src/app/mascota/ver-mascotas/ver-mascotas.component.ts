@@ -48,7 +48,7 @@ export class VerMascotasComponent {
     this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
     console.log(`Mostrando mascota en índice: ${this.index}`); 
     if (this.carrusel) {
-      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 106.5}%)`; 
+      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
     }
   }
 

@@ -492,7 +492,7 @@ body {
 
 .carrusel {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: transform;
 }
 
@@ -657,7 +657,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1067px;
+    margin-left: 1104px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 

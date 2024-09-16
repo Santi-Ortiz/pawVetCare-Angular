@@ -60,11 +60,16 @@ export class VerUnaMascotaComponent {
   }
 
   toggleEditMode(): void {
+    const botonEditar = document.getElementById('editarBtn');
     this.isEditMode = !this.isEditMode;  
 
     if (this.isEditMode) {
      
       this.mascotaForm.enable();
+      if (botonEditar) {
+        botonEditar.classList.add('expanded');
+        botonEditar.innerHTML = "<span class='text'>Guardar</span>";
+      }
       console.log('Formulario habilitado para edición');
     } else {
       
@@ -80,16 +85,28 @@ export class VerUnaMascotaComponent {
       }
 
       this.mascotaForm.disable();  
+      if (botonEditar) {
+        botonEditar.classList.remove('expanded');
+        botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+      }
     }
   }
 
   toggleEliminar(): void {
-    if (this.mascota && this.mascota.id !== undefined) {
-      this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
-      console.log('Mascota eliminada:', this.mascota.id);
-      this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+    const botonEliminar = document.getElementById('eliminarBtn');
+    // Si el botón ya está expandido, procede a eliminar la mascota
+    if (botonEliminar?.classList.contains('expanded')) {
+      if (this.mascota && this.mascota.id !== undefined) {
+        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
+        console.log('Mascota eliminada:', this.mascota.id);
+        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+      } else {
+        console.log('Error: No se pudo eliminar la mascota');
+      }
     } else {
-      console.log('Error: No se pudo eliminar la mascota');
+      if (botonEliminar) {
+        botonEliminar.classList.add('expanded');
+      }
     }
   }
 
