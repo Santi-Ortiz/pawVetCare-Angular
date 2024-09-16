@@ -10,16 +10,16 @@
     <p class="segundoTitulo">Navega por las mascotas:</p>  
     <!-- Contenedor de mascotas -->
     <div class="mascotas-container" id="mascotasContainer">
-      <div class="mascota-item" >
+      <!--<div class="mascota-item" >
         <div class="mascota-info">
-          <!-- Imagen de la mascota -->
+          Imagen de la mascota 
           <img  class="mascota-foto">
           
-          <!-- Icono de estado (activo/inactivo) -->
+          Icono de estado (activo/inactivo) 
           <img src="/assets/check.png" alt="Estado Activo" class="estadoimg">
           <img src="/assets/wrong.png" alt="Estado Inactivo" class="estadoimg">
   
-          <!-- Información de la mascota -->
+          Información de la mascota 
           <div class="info-itemNombre">
             <small class="info-title">Nombre:</small>
             <label class="info-label"> </label>
@@ -41,10 +41,11 @@
             <label class="info-label"> </label>
           </div>
   
-          <!-- Botón para más información -->
-          <a class="info-button" >+ Info</a>
+           Botón para más información 
+          <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
+
         </div>
-      </div>
+      </div>-->
     </div>
   
     <!-- Controles de paginación -->
