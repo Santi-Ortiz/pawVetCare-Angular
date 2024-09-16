@@ -76,6 +76,7 @@ export class VerUnaMascotaComponent {
       if (this.mascota) {
         this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
         console.log('Mascota actualizada:', mascotaActualizada);
+        this.router.navigate(['/mascotas']); 
       }
 
       this.mascotaForm.disable();  
