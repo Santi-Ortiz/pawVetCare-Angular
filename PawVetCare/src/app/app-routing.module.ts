@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'equipo', component: EquipoComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'mascotas', component: VerMascotasComponent},
-  {path: 'mascotas/mascota', component: VerUnaMascotaComponent},
+  {path: 'mascota/:id', component: VerUnaMascotaComponent},
   {path: 'mascotas/todas', component: PaginacionMascotasComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

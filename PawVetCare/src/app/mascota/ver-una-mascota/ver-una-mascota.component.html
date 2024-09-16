@@ -15,13 +15,13 @@
     <p class="tercerTitulo">Dar el medicamento:</p>
     
     <div class="container-informacion">
-      <form class="containerMascota">    
+      <form [formGroup]="mascotaForm" class="containerMascota">    
         <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEditar">Editar</p>
         <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEliminar">Eliminar</p>
         
         <div class="info-item">
           <small class="info-title">Nombre:</small>
-          <input class="info-label" formControlName="nombre" readonly>
+          <input class="info-label" formControlName="nombre">
         </div>
   
         <!-- Estado de la mascota -->
@@ -30,32 +30,32 @@
   
         <div class="info-itemRaza">
           <small class="info-title">Raza:</small>
-          <input class="info-label" formControlName="raza" readonly>
+          <input class="info-label" formControlName="raza">
         </div>
   
         <div class="info-itemEdad">
           <small class="info-title">Edad:</small>
-          <input class="info-label" formControlName="edad" readonly>
+          <input class="info-label" formControlName="edad">
         </div>
   
         <div class="info-itemPeso">
           <small class="info-title">Peso:</small>
-          <input class="info-label" formControlName="peso" readonly>
+          <input class="info-label" formControlName="peso">
         </div>
   
         <div class="info-itemEnfermedad">
           <small class="info-title">Enfermedad:</small>
-          <input class="info-label" formControlName="enfermedad" readonly>
+          <input class="info-label" formControlName="enfermedad">
         </div>
   
         <div class="info-itemDueño">
           <small class="info-title">Dueño C.C.:</small>
-          <input class="info-label" type="text" readonly>
+          <input class="info-label" formControlName="cliente">
         </div>
   
         <div class="info-itemEstado">
           <small class="info-title">Estado:</small>
-          <select id="state" class="info-select" formControlName="estado" [disabled]="true">
+          <select id="state" class="info-select" formControlName="estado">
             <option value="TRUE" >Activo</option>
             <option value="FALSE" >Inactivo</option>
           </select>
@@ -63,22 +63,23 @@
   
         <div class="info-itemFoto">
           <small class="info-title">URL Foto:</small>
-          <input class="info-label" formControlName="foto" readonly>
+          <input class="info-label" formControlName="foto">
         </div>
   
-        <img class="mascotaimg" alt="cat">
+        <img class="mascotaimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">
+
   
         <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
-          <button class="editar-btn" id="editarBtn" type="button" >
+          <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">
             <span class="icon">✎</span>
-            <span class="text">Editar todo</span>
+            <span class="text">{{ isEditMode ? 'Guardar' : 'Editar todo' }}</span>
           </button>
         </div>
       </form>
   
       <!-- Botón para eliminar -->
       <form *ngIf="userType === 'admin' || userType === 'vet'">
-        <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="submit">
+        <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()">
           <span class="icon">x</span>
           <span class="text">Eliminar</span>
         </button>
