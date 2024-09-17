@@ -15,8 +15,20 @@ export class VerUnaMascotaComponent {
   userType = 'admin';
 
   mascotaForm: FormGroup;
-  mascota: Mascota | undefined;
   isEditMode: boolean = false;
+
+  mascota: Mascota = {
+    id: 0,
+      nombre: '',
+      raza: '',
+      edad: 0,
+      peso: 0,
+      enfermedad: '',
+      foto: '',
+      estado: true,
+      cliente: 0,
+      tratamientos: [],
+  }
 
   constructor(
     private fb: FormBuilder,  
@@ -35,6 +47,12 @@ export class VerUnaMascotaComponent {
       estado: [''],
       foto: ['']
     });
+
+    // Escuchar los cambios en el formulario y actualizar el objeto mascota
+    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
+      this.mascota.estado = nuevoEstado;
+    });
+
   }
 
   ngOnInit(): void {
@@ -42,7 +60,18 @@ export class VerUnaMascotaComponent {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     
    
-    this.mascota = this.mascotasService.getMascota(id);
+    this.mascota = this.mascotasService.getMascota(id) || {
+      id: 0,
+      nombre: '',
+      raza: '',
+      edad: 0,
+      peso: 0,
+      enfermedad: '',
+      foto: '',
+      estado: true,  // Valor por defecto
+      cliente: 0,
+      tratamientos: []
+    };
     
     if (this.mascota) {
       this.mascotaForm.patchValue({
@@ -75,7 +104,8 @@ export class VerUnaMascotaComponent {
       
       const mascotaActualizada: Mascota = {
         ...this.mascota,  
-        ...this.mascotaForm.value 
+        ...this.mascotaForm.value, 
+        estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
 
       if (this.mascota) {

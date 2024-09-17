@@ -27,9 +27,8 @@
                 <!-- Mostrar la información de cada mascota -->
                 <img [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre" class="mascota-foto">
       
-                <!-- Mostrar el estado de la mascota -->
-                <img *ngIf="mascota.estado" class="estadoimg" src="assets/check.png" alt="Estado Activo">
-                <img *ngIf="!mascota.estado" class="estadoimg" src="assets/wrong.png" alt="Estado Inactivo">
+                <img *ngIf="mascota?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
+                <img *ngIf="mascota?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
       
                 <div class="info-itemNombre">
                   <small class="info-title">Nombre:</small>

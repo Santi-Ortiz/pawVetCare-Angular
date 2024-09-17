@@ -24,8 +24,8 @@
           <input class="info-label" formControlName="nombre">
         </div>
   
-        <img class="estadoimg"  src="/assets/check.png" alt="Estado">
-        <img class="estadoimg"  src="/assets/wrong.png" alt="Estado">
+        <img *ngIf="mascota?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
+        <img *ngIf="mascota?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
   
         <div class="info-itemRaza">
           <small class="info-title">Raza:</small>
@@ -55,8 +55,8 @@
         <div class="info-itemEstado">
           <small class="info-title">Estado:</small>
           <select id="state" class="info-select" formControlName="estado">
-            <option value="TRUE" >Activo</option>
-            <option value="FALSE" >Inactivo</option>
+            <option [ngValue]="true">Activo</option>
+            <option [ngValue]="false">Inactivo</option>
           </select>
         </div>
   
