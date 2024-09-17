@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.round-corner{
+    border-radius: 10px;
+}
+
+.mg-10{
+    margin: 10px;
+}
+
+.mg-05{
+    margin: 5px;
+}

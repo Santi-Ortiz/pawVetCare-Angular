@@ -357,7 +357,7 @@ body {
 }
 
 .info-itemEnfermedad {
-    width: 230px;
+    width: 300px;
     position: relative;
     margin-top: -55px;
     margin-left: 1010px;
@@ -381,7 +381,7 @@ body {
     display: inline-flex;
     position: absolute;
     margin-top: -50px;
-    width: 160px;
+    width: 120px;
     height: 44px;
     align-items: center;
     justify-content: center;
@@ -394,7 +394,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1300px;
+    margin-left: 1360px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 

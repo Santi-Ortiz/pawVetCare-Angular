@@ -9,7 +9,7 @@ import {MascotasService} from '../../services/mascotas.service';
   styleUrls: ['./ver-mascotas.component.css']
 })
 export class VerMascotasComponent {
-  userType = 'admin'; 
+  userType = 'cliente'; 
   mascotaId: number | undefined;
   index = 0;
   intervalId: any;

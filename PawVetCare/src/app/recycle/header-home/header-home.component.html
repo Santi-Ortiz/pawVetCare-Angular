@@ -2,13 +2,38 @@
     <a routerLink="/">
         <img src="../assets/isologoAzul.png" alt="Logo Azul">
     </a>
+
+    <!-- Menú de navegación -->
     <nav>
         <div class="header-menu">
-            <a routerLink="/" class="header-menu-item selected">HOME<div class="indicator"></div></a>
-            <a routerLink="/equipo" class="header-menu-item">EQUIPO</a>
-            <a routerLink="/contacto" class="header-menu-item">CONTACTO</a>
+            <!-- HOME estará seleccionado cuando la ruta sea exactamente '/' -->
+            <a routerLink="/home" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                HOME
+                <div class="indicator"></div>
+            </a>
+
+            <!-- EQUIPO estará seleccionado cuando la ruta sea '/equipo' -->
+            <a routerLink="/equipo" 
+               routerLinkActive="selected" 
+               class="header-menu-item">
+                EQUIPO
+                <div class="indicator"></div>
+            </a>
+
+            <!-- CONTACTO estará seleccionado cuando la ruta sea '/contacto' -->
+            <a routerLink="/contacto" 
+               routerLinkActive="selected" 
+               class="header-menu-item">
+                CONTACTO
+                <div class="indicator"></div>
+            </a>
         </div>
     </nav>
+
+    <!-- Botones adicionales -->
     <div class="button-container">
         <a routerLink="/iniciarSesion/sesiones" class="buttonSoyPVC">Soy PVC</a>
         <a routerLink="/registro" class="buttonSinCuenta">NO TENGO CUENTA</a>

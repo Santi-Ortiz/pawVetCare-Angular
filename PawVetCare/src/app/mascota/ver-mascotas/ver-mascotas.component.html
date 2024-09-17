@@ -1,8 +1,11 @@
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas></app-header-admin-mascotas>
-  </header>
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+</header>
 <header *ngIf="userType === 'vet'">
-    <app-header-vet-mascotas></app-header-vet-mascotas>
+  <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
+</header>
+<header *ngIf="userType === 'cliente'">
+  <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
 </header>
 <section class = "content">
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
@@ -16,91 +19,6 @@
     <!--Enlace para ver todas las mascotas-->
     <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
     <p class="tercerTitulo">Agrega mascotas:</p>    
-    <!--Carrusel mostrar todas las mascotas-->
-    <div class="carrusel-container" *ngIf="mascotas.length > 0">
-        <button class="carrusel-prev" (click)="cambiarMascota(-1)">
-            <img src="../assets/previous.png" alt="Regreso">
-        </button>
-        <div class="carrusel" #carrusel>
-            <div class="mascota-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
-                <div class="mascota-info">
-                <!-- Mostrar la información de cada mascota -->
-                <img [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre" class="mascota-foto">
-      
-                <img *ngIf="mascota?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
-                <img *ngIf="mascota?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
-      
-                <div class="info-itemNombre">
-                  <small class="info-title">Nombre:</small>
-                  <label class="info-label">{{ mascota.nombre }}</label>
-                </div>
-      
-                <div class="info-itemRaza">
-                  <small class="info-title">Raza:</small>
-                  <label class="info-label">{{ mascota.raza }}</label>
-                </div>
-      
-                <div class="info-itemEdad">
-                  <small class="info-title">Edad:</small>
-                  <label class="info-label">{{ mascota.edad }}</label>
-                </div>
-      
-                <div class="info-itemPeso">
-                  <small class="info-title">Peso:</small>
-                  <label class="info-label">{{ mascota.peso }} kg</label>
-                </div>
-      
-                <div class="info-itemEnfermedad">
-                  <small class="info-title">Enfermedad:</small>
-                  <label class="info-label">{{ mascota.enfermedad }}</label>
-                </div>
-                
-                <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
-                </div>
-            </div>
-        </div>
-        <button class="carrusel-next" (click)="cambiarMascota(1)">
-            <img src="assets/next.png" alt="Siguiente">
-        </button>
-    </div>
-    
-    <!--Formulario agregar mascota-->
-    <form (ngSubmit)="agregarMascota()" class="agregar-container">
-        <div class="infoadd-itemNombre">
-          <small class="info-title">Nombre:</small>
-          <input [(ngModel)]="nuevaMascota.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
-        </div>
-        <div class="infoadd-itemRaza">
-          <small class="info-title">Raza:</small>
-          <input [(ngModel)]="nuevaMascota.raza" name="raza" class="inputadd-text" id="raza" placeholder="Ingresa la raza" required>
-        </div>
-        <div class="infoadd-itemEdad">
-          <small class="info-title">Edad:</small>
-          <input [(ngModel)]="nuevaMascota.edad" name="edad" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required>
-        </div>
-        <div class="infoadd-itemPeso">
-          <small class="info-title">Peso:</small>
-          <input [(ngModel)]="nuevaMascota.peso" name="peso" type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required>
-        </div>
-        <div class="infoadd-itemEnfermedad">
-          <small class="info-title">Enfermedad:</small>
-          <input [(ngModel)]="nuevaMascota.enfermedad" name="enfermedad" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required>
-        </div>
-        <div class="infoadd-itemDueño">
-          <small class="info-title">Dueño C.C.:</small>
-          <input [(ngModel)]="nuevaMascota.cliente" name="cliente" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula" required>
-        </div>
-        <div class="infoadd-itemEstado">
-          <small class="info-title">Estado:</small>
-          <select [(ngModel)]="nuevaMascota.estado" name="estado" class="inputadd-text" required>
-            <option [value]="true">Activo</option>
-            <option [value]="false">Inactivo</option>
-          </select>
-        </div>
-        <div class="infoadd-itemURL">
-          <small class="info-title">URL:</small>
-          <input [(ngModel)]="nuevaMascota.foto" name="foto" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto" required>
-        </div>
-        <button type="submit" class="agregar-button">Agregar Mascota</button>
-    </form>       
+    <app-carrusel-mascotas [mascotas]="mascotas"></app-carrusel-mascotas>
+    <app-formulario-agregar-mascota></app-formulario-agregar-mascota>      
 </section>

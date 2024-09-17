@@ -5,8 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderHomeComponent } from './recycle/header-home/header-home.component';
-import { HeaderContactoComponent } from './recycle/header-contacto/header-contacto.component';
-import { HeaderEquipoComponent } from './recycle/header-equipo/header-equipo.component';
 import { FooterComponent } from './recycle/footer/footer.component';
 import { HomeComponent } from './landing/home/home.component';
 import { EquipoComponent } from './landing/equipo/equipo.component';
@@ -15,15 +13,14 @@ import { HeaderAdminMascotasComponent } from './recycle/header-admin-mascotas/he
 import { VerMascotasComponent } from './mascota/ver-mascotas/ver-mascotas.component';
 import { PaginacionMascotasComponent } from './mascota/paginacion-mascotas/paginacion-mascotas.component';
 import { VerUnaMascotaComponent } from './mascota/ver-una-mascota/ver-una-mascota.component';
-import { HeaderVetMascotasComponent } from './recycle/header-vet-mascotas/header-vet-mascotas.component';
-import { HeaderClienteComponent } from './recycle/header-cliente/header-cliente.component';
-
+import { CarruselMascotasComponent } from './recycle/carrusel-mascotas/carrusel-mascotas.component';
+import { FormularioAgregarMascotaComponent } from './recycle/formulario-agregar-mascota/formulario-agregar-mascota.component';
+import { InformacionMascotaComponent } from './recycle/informacion-mascota/informacion-mascota.component';
+import { MascotaItemComponent } from './recycle/mascota-item/mascota-item.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderHomeComponent,
-    HeaderContactoComponent,
-    HeaderEquipoComponent,
     FooterComponent,
     HomeComponent,
     EquipoComponent,
@@ -32,8 +29,10 @@ import { HeaderClienteComponent } from './recycle/header-cliente/header-cliente.
     VerMascotasComponent,
     PaginacionMascotasComponent,
     VerUnaMascotaComponent,
-    HeaderVetMascotasComponent,
-    HeaderClienteComponent
+    CarruselMascotasComponent,
+    FormularioAgregarMascotaComponent,
+    InformacionMascotaComponent,
+    MascotaItemComponent
   ],
   imports: [
     BrowserModule,

@@ -2,16 +2,60 @@
     <a routerLink="/">
         <img src="../assets/isologoAzul.png" alt="Logo Azul">
     </a>
-    <!-- Botones de navegación -->
+
+    <!-- Menú de navegación -->
     <nav>
         <div class="header-menu">
-            <a routerLink="/admin/dashboard" class="header-menu-item">DASHBOARD</a>
-            <a routerLink="/mascotas" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
-            <a routerLink="/admin/veterinarios" class="header-menu-item">VETERINARIOS</a>
-            <a routerLink="/admin/clientes" class="header-menu-item">CLIENTES</a>
-            <a routerLink="/admin/inicializacion"class="header-menu-item">INICIALIZACIÓN</a>
+            <!-- DASHBOARD solo visible para admin -->
+            <a *ngIf="userType === 'admin'"
+               routerLink="/admin/dashboard" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                DASHBOARD
+            </a>
+
+            <!-- MASCOTAS visible para admin y vet -->
+            <!-- routerLink="{{userType}}/mascotas" -->
+            <a *ngIf="userType === 'admin' || userType === 'vet' || userType === 'cliente'"
+               routerLink="/mascotas" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                MASCOTAS
+                <div class="indicator"></div>
+            </a>
+
+            <!-- VETERINARIOS solo visible para admin -->
+            <a *ngIf="userType === 'admin'"
+               routerLink="/admin/veterinarios" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                VETERINARIOS
+            </a>
+
+            <!-- CLIENTES visible para admin y vet -->
+            <a *ngIf="userType === 'admin' || userType === 'vet'"
+               routerLink="{{userType}}/clientes" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                CLIENTES
+            </a>
+
+            <!-- INICIALIZACIÓN solo visible para admin -->
+            <a *ngIf="userType === 'admin'"
+               routerLink="/admin/inicializacion" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                INICIALIZACIÓN
+            </a>
         </div>
     </nav>
+
+    <!-- Botón de Cerrar Sesión -->
     <div class="button-container">
         <a routerLink="/" class="buttonSinCuenta">CERRAR SESIÓN</a>
     </div>

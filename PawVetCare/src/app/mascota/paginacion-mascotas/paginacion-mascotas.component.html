@@ -1,58 +1,18 @@
 <header *ngIf="userType === 'admin'">
-  <app-header-admin-mascotas></app-header-admin-mascotas>
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
 </header>
 <header *ngIf="userType === 'vet'">
-  <app-header-vet-mascotas></app-header-vet-mascotas>
+  <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
 </header>
 <section class="content">
-    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-    <p class="segundoTitulo">Navega por las mascotas:</p>  
-    <!-- Contenedor de mascotas -->
-    <div class="mascotas-container" id="mascotasContainer">
-      <!--<div class="mascota-item" >
-        <div class="mascota-info">
-          Imagen de la mascota 
-          <img  class="mascota-foto">
-          
-          Icono de estado (activo/inactivo) 
-          <img src="/assets/check.png" alt="Estado Activo" class="estadoimg">
-          <img src="/assets/wrong.png" alt="Estado Inactivo" class="estadoimg">
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+  <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
+  <p class="segundoTitulo">Aquí está la información de las mascotas:</p>
   
-          Información de la mascota 
-          <div class="info-itemNombre">
-            <small class="info-title">Nombre:</small>
-            <label class="info-label"> </label>
-          </div>
-          <div class="info-itemRaza">
-            <small class="info-title">Raza:</small>
-            <label class="info-label"> </label>
-          </div>
-          <div class="info-itemEdad">
-            <small class="info-title">Edad:</small>
-            <label class="info-label"> </label>
-          </div>
-          <div class="info-itemPeso">
-            <small class="info-title">Peso:</small>
-            <label class="info-label"> </label>
-          </div>
-          <div class="info-itemEnfermedad">
-            <small class="info-title">Enfermedad:</small>
-            <label class="info-label"> </label>
-          </div>
-  
-           Botón para más información 
-          <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
-
-        </div>
-      </div>-->
-    </div>
-  
-    <!-- Controles de paginación -->
-    <div class="pagination">
-      <button id="prevPage" (click)="changePage(-1)">Anterior</button>
-      <span id="pageNumber">{{ currentPage }}</span>
-      <button id="nextPage" (click)="changePage(1)">Siguiente</button>
-    </div>
-  </section>
-  
+  <app-mascota-item
+    [mascotas]="mascotas"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage">
+  </app-mascota-item>
+</section>

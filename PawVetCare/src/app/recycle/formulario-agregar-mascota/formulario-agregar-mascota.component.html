@@ -1,0 +1,38 @@
+<form (ngSubmit)="agregarMascota()" class="agregar-container">
+    <div class="infoadd-itemNombre">
+      <small class="info-title">Nombre:</small>
+      <input [(ngModel)]="nuevaMascota.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
+    </div>
+    <div class="infoadd-itemRaza">
+      <small class="info-title">Raza:</small>
+      <input [(ngModel)]="nuevaMascota.raza" name="raza" class="inputadd-text" id="raza" placeholder="Ingresa la raza" required>
+    </div>
+    <div class="infoadd-itemEdad">
+      <small class="info-title">Edad:</small>
+      <input [(ngModel)]="nuevaMascota.edad" name="edad" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required>
+    </div>
+    <div class="infoadd-itemPeso">
+      <small class="info-title">Peso:</small>
+      <input [(ngModel)]="nuevaMascota.peso" name="peso" type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required>
+    </div>
+    <div class="infoadd-itemEnfermedad">
+      <small class="info-title">Enfermedad:</small>
+      <input [(ngModel)]="nuevaMascota.enfermedad" name="enfermedad" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required>
+    </div>
+    <div class="infoadd-itemDueño">
+      <small class="info-title">Dueño C.C.:</small>
+      <input [(ngModel)]="nuevaMascota.cliente" name="cliente" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula" required>
+    </div>
+    <div class="infoadd-itemEstado">
+      <small class="info-title">Estado:</small>
+      <select [(ngModel)]="nuevaMascota.estado" name="estado" class="inputadd-text" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
+    <div class="infoadd-itemURL">
+      <small class="info-title">URL:</small>
+      <input [(ngModel)]="nuevaMascota.foto" name="foto" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto" required>
+    </div>
+    <button type="submit" class="agregar-button">Agregar Mascota</button>
+</form>
