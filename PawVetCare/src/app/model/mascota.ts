@@ -1,3 +1,5 @@
+import { Tratamiento } from "./tratamiento";
+
 export interface Mascota {
     id: number;
     nombre: string;
@@ -8,5 +10,6 @@ export interface Mascota {
     foto: string;
     estado: boolean;
     cliente: number;
+    tratamientos: Tratamiento[];
   }
   

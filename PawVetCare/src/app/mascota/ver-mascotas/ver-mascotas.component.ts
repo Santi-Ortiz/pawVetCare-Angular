@@ -25,6 +25,7 @@ export class VerMascotasComponent {
     foto: '',
     estado: true,
     cliente: 0,
+    tratamientos: [],
   };
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
@@ -82,6 +83,7 @@ export class VerMascotasComponent {
       foto: '',
       estado: true,
       cliente: 0,
+      tratamientos: [],
     };
   }
 

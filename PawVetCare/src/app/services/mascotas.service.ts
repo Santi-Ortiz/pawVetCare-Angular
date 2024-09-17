@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Mascota } from '../model/mascota'; 
+import { Tratamiento } from '../model/tratamiento'; 
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class MascotasService {
       enfermedad: 'Sobrepeso',
       foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Firulais_2.0.jpg/330px-Firulais_2.0.jpg',
       estado: true,
-      cliente: 1
+      cliente: 1,
+      tratamientos: [],
     },
     {
       id: 1,
@@ -28,7 +30,8 @@ export class MascotasService {
       enfermedad: 'Alergia',
       foto: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Norwichterrier.jpg',
       estado: true,
-      cliente: 2
+      cliente: 2,
+      tratamientos: [],
     },
     {
       id: 2,
@@ -39,7 +42,8 @@ export class MascotasService {
       enfermedad: 'Chandosa',
       foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/02_I_Exposici%C3%B3n_Monogr%C3%A1fica_Club_Rottweiler_de_Espa%C3%B1a_-_Santa_Brigida_-_Gran_Canaria.jpg/450px-02_I_Exposici%C3%B3n_Monogr%C3%A1fica_Club_Rottweiler_de_Espa%C3%B1a_-_Santa_Brigida_-_Gran_Canaria.jpg',
       estado: true,
-      cliente:3
+      cliente:3,
+      tratamientos: [],
     },
     {
       id: 3,
@@ -50,7 +54,8 @@ export class MascotasService {
       enfermedad: 'Pulgoso',
       foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Golden_Retriever_9-year_old.jpg/480px-Golden_Retriever_9-year_old.jpg',
       estado: true,
-      cliente:4
+      cliente:4,
+      tratamientos: [],
     },
     {
       id: 4,
@@ -61,7 +66,8 @@ export class MascotasService {
       enfermedad: 'Rabia',
       foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Rey_nieve.jpg/480px-Rey_nieve.jpg',
       estado: true,
-      cliente:5
+      cliente:5,
+      tratamientos: [],
     }
   ];
 
