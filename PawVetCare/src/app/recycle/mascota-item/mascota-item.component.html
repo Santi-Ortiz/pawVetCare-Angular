@@ -1,4 +1,4 @@
-<div id="mascotasContainer">
+<div class="mascotas-container" id="mascotasContainer">
     <div *ngFor="let mascota of mascotasPagina" class="mascota-item">
       <div class="mascota-info">
         <img class="mascota-foto" [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre">
@@ -16,5 +16,5 @@
     <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
     <span>Pagina {{currentPage}} de {{totalPages}}</span>
     <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
-  </div>
+</div>
   
