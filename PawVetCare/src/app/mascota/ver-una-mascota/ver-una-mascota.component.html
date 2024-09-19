@@ -11,7 +11,7 @@
     <p class="segundoTitulo">Aquí está la información de la mascota:</p>
     <p class="tercerTitulo">Dar el medicamento:</p>
     
-    <div class="container-informacion">
+    <!--<div class="container-informacion">
       <form [formGroup]="mascotaForm" class="containerMascota">    
         <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEditar">Editar</p>
         <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEliminar">Eliminar</p>
@@ -73,13 +73,14 @@
         </div>
       </form>
   
-      <!-- Botón para eliminar -->
+     Botón para eliminar
       <form *ngIf="userType === 'admin' || userType === 'vet'">
         <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()">
           <span class="icon">x</span>
           <span class="text">Eliminar</span>
         </button>
       </form>
-    </div>  
+    </div> -->
+    <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
   </section>
   

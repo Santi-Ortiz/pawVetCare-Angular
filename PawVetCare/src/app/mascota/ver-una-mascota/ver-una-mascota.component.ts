@@ -12,6 +12,7 @@ import { Mascota } from '../../model/mascota';
 })
 
 export class VerUnaMascotaComponent {
+  
   userType = 'admin';
 
   mascotaForm: FormGroup;

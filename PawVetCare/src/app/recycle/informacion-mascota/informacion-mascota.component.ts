@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Mascota } from 'src/app/model/mascota';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
@@ -10,11 +10,38 @@ import { MascotasService } from 'src/app/services/mascotas.service';
   styleUrls: ['./informacion-mascota.component.css']
 })
 export class InformacionMascotaComponent {
+  userType = 'admin';
+
   @Input()
   mascotaForm!: FormGroup;
   @Input() mascota: any;  // Ajusta el tipo según la estructura de tu mascota
   @Input()
   isEditMode!: boolean;
+
+  constructor(
+    private fb: FormBuilder,  
+    private route: ActivatedRoute, 
+    private router: Router,
+    private mascotasService: MascotasService  
+  ) {
+
+    this.mascotaForm = this.fb.group({
+      nombre: [''],
+      raza: [''],
+      edad: [''],
+      peso: [''],
+      enfermedad: [''],
+      cliente: [''],
+      estado: [''],
+      foto: ['']
+    });
+
+    // Escuchar los cambios en el formulario y actualizar el objeto mascota
+    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
+      this.mascota.estado = nuevoEstado;
+    });
+
+  }
 
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
@@ -35,9 +62,9 @@ export class InformacionMascotaComponent {
       };
 
       if (this.mascota) {
-        // Llama al servicio para actualizar la mascota
+        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
         console.log('Mascota actualizada:', mascotaActualizada);
-        // Navega a la página de mascotas o maneja el flujo según sea necesario
+        this.router.navigate(['/mascotas']); 
       }
 
       this.mascotaForm.disable();
@@ -50,14 +77,19 @@ export class InformacionMascotaComponent {
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
+    // Si el botón ya está expandido, procede a eliminar la mascota
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota) {
-        // Llama al servicio para eliminar la mascota
-        console.log('Mascota eliminada:', this.mascota);
-        // Navega a la página de mascotas o maneja el flujo según sea necesario
+      if (this.mascota && this.mascota.id !== undefined) {
+        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
+        console.log('Mascota eliminada:', this.mascota.id);
+        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+      } else {
+        console.log('Error: No se pudo eliminar la mascota');
       }
     } else {
-      botonEliminar?.classList.add('expanded');
+      if (botonEliminar) {
+        botonEliminar.classList.add('expanded');
+      }
     }
   }
 }
