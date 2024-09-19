@@ -68,6 +68,18 @@ export class MascotasService {
       estado: true,
       cliente:5,
       tratamientos: [],
+    },
+    {
+      id: 5,
+      nombre: 'Maria',
+      raza: 'Chihuahua',
+      edad: 3,
+      peso: 4,
+      enfermedad: 'Tendinitis',
+      foto: 'https://http2.mlstatic.com/D_NQ_NP_657941-MCO49101017442_022022-O.webp',
+      estado: true,
+      cliente:5,
+      tratamientos: [],
     }
   ];
 
