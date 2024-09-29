@@ -1,0 +1,31 @@
+<div class="carrusel-container" *ngIf="mascotas.length > 0">
+    <button class="carrusel-prev" (click)="cambiarMascota(-1)">
+        <img src="../assets/previous.png" alt="Regreso">
+    </button>
+    <div class="carrusel">
+        <div class="mascota-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <div class="mascota-info">
+                <div class="info-itemNombre">
+                    <small class="info-title">Nombre:</small>
+                    <label class="info-label">{{ mascota.nombre }}</label>
+                </div>
+                <div class="info-itemCedula">
+                    <small class="info-title">Cédula:</small>
+                    <label class="info-label">{{ mascota.raza }}</label>
+                </div>
+                <div class="info-itemCorreo">
+                    <small class="info-title">Correo:</small>
+                    <label class="info-label">{{ mascota.edad }}</label>
+                </div>
+                <div class="info-itemCelular">
+                    <small class="info-title">Celular:</small>
+                    <label class="info-label">{{ mascota.peso }}</label>
+                    </div>
+                <a class="info-button" [routerLink]="['/cliente', mascota.id]">+ Info</a>
+            </div>
+        </div>
+    </div>
+    <button class="carrusel-next" (click)="cambiarMascota(1)">
+        <img src="assets/next.png" alt="Siguiente">
+    </button>
+</div>

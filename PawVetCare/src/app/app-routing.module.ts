@@ -6,6 +6,12 @@ import { ContactoComponent } from './landing/contacto/contacto.component';
 import { PaginacionMascotasComponent } from './mascota/paginacion-mascotas/paginacion-mascotas.component';
 import { VerUnaMascotaComponent } from './mascota/ver-una-mascota/ver-una-mascota.component';
 import { VerMascotasComponent } from './mascota/ver-mascotas/ver-mascotas.component';
+import { VerClientesComponent } from './cliente/ver-clientes/ver-clientes.component';
+import { VerUnClienteComponent } from './cliente/ver-un-cliente/ver-un-cliente.component';
+import { PaginacionClientesComponent } from './cliente/paginacion-clientes/paginacion-clientes.component';
+import { VerVeterinarioComponent } from './veterinario/ver-veterinario/ver-veterinario.component';
+import { VerUnVeterinarioComponent } from './veterinario/ver-un-veterinario/ver-un-veterinario.component';
+import { PaginacionVeterinarioComponent } from './veterinario/paginacion-veterinario/paginacion-veterinario.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -14,6 +20,12 @@ const routes: Routes = [
   {path: 'mascotas', component: VerMascotasComponent},
   {path: 'mascota/:id', component: VerUnaMascotaComponent},
   {path: 'mascotas/todas', component: PaginacionMascotasComponent},
+  {path: 'clientes', component: VerClientesComponent},
+  {path: 'cliente/:id', component: VerUnClienteComponent},
+  {path: 'clientes/todos', component: PaginacionClientesComponent},
+  {path: 'veterinarios', component: VerVeterinarioComponent},
+  {path: 'veterinario/:id', component: VerUnVeterinarioComponent},
+  {path: 'veterinarios/todos', component: PaginacionVeterinarioComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

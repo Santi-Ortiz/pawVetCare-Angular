@@ -7,18 +7,29 @@
 <header *ngIf="userType === 'cliente'">
   <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
 </header>
-<section class = "content">
+
+<section class="content">
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
     <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+    <p *ngIf="userType === 'cliente'" class="primerTitulo">Hola, username</p>
     <p class="segundoTitulo">Aquí están todas las mascotas:</p>
-    <!--Búsqueda por ID-->
-    <form (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
-        <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
-        <button type="submit" class="buscador-button">Buscar</button>
-    </form>
-    <!--Enlace para ver todas las mascotas-->
+
+    <!-- Búsqueda por ID, se oculta para cliente -->
+    <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
+      <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+      <button type="submit" class="buscador-button">Buscar</button>
+  </form>
+
+    <!-- Enlace para ver todas las mascotas -->
     <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
-    <p class="tercerTitulo">Agrega mascotas:</p>    
-    <app-carrusel-mascotas [mascotas]="mascotas"></app-carrusel-mascotas>
-    <app-formulario-agregar-mascota></app-formulario-agregar-mascota>      
+
+    <!-- Texto condicional para agregar mascotas o contacto -->
+    <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Agrega mascotas:</p>
+    <p *ngIf="userType === 'cliente'" class="tercerTitulo">Para más información, contacta a tu Vet</p>
+
+    <!-- Carrusel de mascotas -->
+    <app-carrusel-mascotas [mascotas]="mascotas" [marginTop]="'120px'" [left]="'88px'"></app-carrusel-mascotas>
+
+    <!-- Formulario de agregar mascota solo para admins y vets -->
+    <app-formulario-agregar-mascota *ngIf="userType !== 'cliente'"></app-formulario-agregar-mascota>
 </section>

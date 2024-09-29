@@ -1,0 +1,135 @@
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-itemNombre {
+    width: 300px;
+    position: relative;
+    margin-top:45px;
+    margin-left: 50px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCedula {
+    width: 200px;
+    position: relative;
+    margin-top: -110px;
+    top: 55px;
+    margin-left: 390px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCorreo {
+    width: 450px;
+    top: 55px;
+    margin-left: 630px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCelular {
+    width: 190px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 1120px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    display: inline-flex;
+    position: absolute;
+    margin-top: -50px;
+    width: 100px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFFFF;
+    background: #000000;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1370px;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.info-button:hover {
+    color: #FFFFFF;
+    background: #FF3B00;
+}
+
+.clientes-container {
+    margin-top: 320px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+}
+
+.cliente-item {
+    margin-left: 88px; 
+    width: 1500px; 
+    height: 150px;
+    padding: 20px;
+    background: #C09181;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
+}
+
+.pagination {
+    text-align: center;
+    font-family: Poppins;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.pagination button {
+    background: #C09181;
+    font-family: Poppins;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #000000;
+}

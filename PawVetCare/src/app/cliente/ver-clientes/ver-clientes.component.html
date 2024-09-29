@@ -1,0 +1,21 @@
+<header *ngIf="userType === 'admin'">
+    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+  </header>
+  <header *ngIf="userType === 'vet'">
+    <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
+  </header>
+  <section class = "content">
+      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+      <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+      <p class="segundoTitulo">Aquí están todos los clientes:</p>
+      <!--Búsqueda por ID-->
+      <form (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
+          <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+          <button type="submit" class="buscador-button">Buscar</button>
+      </form>
+      <!--Enlace para ver todas las mascotas-->
+      <a routerLink="/clientes/todos" class="todas-button">+ Ver todos los clientes</a>
+      <p class="tercerTitulo">Agrega clientes:</p>    
+      <app-carrusel-clientes [mascotas]="mascotas"></app-carrusel-clientes>
+      <app-formulario-agregar-cliente></app-formulario-agregar-cliente>      
+  </section>

@@ -8,11 +8,12 @@
         <div class="header-menu">
             <!-- DASHBOARD solo visible para admin -->
             <a *ngIf="userType === 'admin'"
-               routerLink="/admin/dashboard" 
+               routerLink="/dashboard" 
                routerLinkActive="selected" 
                [routerLinkActiveOptions]="{ exact: true }" 
                class="header-menu-item">
                 DASHBOARD
+                <div class="indicator"></div>
             </a>
 
             <!-- MASCOTAS visible para admin y vet -->
@@ -28,29 +29,32 @@
 
             <!-- VETERINARIOS solo visible para admin -->
             <a *ngIf="userType === 'admin'"
-               routerLink="/admin/veterinarios" 
+               routerLink="/veterinarios" 
                routerLinkActive="selected" 
                [routerLinkActiveOptions]="{ exact: true }" 
                class="header-menu-item">
                 VETERINARIOS
+                <div class="indicator"></div>
             </a>
 
             <!-- CLIENTES visible para admin y vet -->
             <a *ngIf="userType === 'admin' || userType === 'vet'"
-               routerLink="{{userType}}/clientes" 
+               routerLink="/clientes" 
                routerLinkActive="selected" 
                [routerLinkActiveOptions]="{ exact: true }" 
                class="header-menu-item">
-                CLIENTES
+               CLIENTES
+               <div class="indicator"></div>
             </a>
 
             <!-- INICIALIZACIÓN solo visible para admin -->
             <a *ngIf="userType === 'admin'"
-               routerLink="/admin/inicializacion" 
+               routerLink="/inicializacion" 
                routerLinkActive="selected" 
                [routerLinkActiveOptions]="{ exact: true }" 
                class="header-menu-item">
                 INICIALIZACIÓN
+                <div class="indicator"></div>
             </a>
         </div>
     </nav>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import {Mascota} from '../../model/mascota';
 import {MascotasService} from '../../services/mascotas.service';
@@ -9,7 +9,7 @@ import {MascotasService} from '../../services/mascotas.service';
   styleUrls: ['./ver-mascotas.component.css']
 })
 export class VerMascotasComponent {
-  userType = 'cliente'; 
+  userType = 'admin'; 
   mascotaId: number | undefined;
   index = 0;
   intervalId: any;

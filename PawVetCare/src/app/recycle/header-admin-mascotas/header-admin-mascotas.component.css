@@ -11,6 +11,7 @@
     box-shadow: 0px 4px 9px #E4E4E4, 0px 0px 2px #E4E4E4;
     border-radius: 0px;
     z-index: 9999;
+    margin-left: -10px;
 }
 
 .top-bar img {

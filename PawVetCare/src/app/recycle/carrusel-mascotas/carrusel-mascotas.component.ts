@@ -7,6 +7,8 @@ import { Mascota } from 'src/app/model/mascota';
   styleUrls: ['./carrusel-mascotas.component.css']
 })
 export class CarruselMascotasComponent {
+  @Input() marginTop: string = '0px';
+  @Input() left: string = '0px';
   @Input() mascotas: Mascota[] = [];
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
   index = 0;

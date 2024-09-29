@@ -1,4 +1,4 @@
-<div class="carrusel-container" *ngIf="mascotas.length > 0">
+<div class="carrusel-container" [ngStyle]="{'margin-top': marginTop, 'left': left}"  *ngIf="mascotas.length > 0">
     <button class="carrusel-prev" (click)="cambiarMascota(-1)">
         <img src="../assets/previous.png" alt="Regreso">
     </button>

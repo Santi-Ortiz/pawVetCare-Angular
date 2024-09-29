@@ -1,0 +1,44 @@
+<div class="container-informacion">
+    <form [formGroup]="mascotaForm" class="containerVeterinario">    
+      <p class="tituloEditar">Editar</p>
+      <p class="tituloEliminar">Eliminar</p>
+      
+      <div class="info-item">
+        <small class="info-title">Nombre:</small>
+        <input class="info-label" formControlName="nombre">
+      </div>
+  
+      <div class="info-itemCedula">
+        <small class="info-title">Cédula:</small>
+        <input class="info-label" formControlName="raza">
+      </div>
+  
+      <div class="info-itemEspecialidad">
+        <small class="info-title">Especialidad:</small>
+        <input class="info-label" formControlName="edad">
+      </div>
+  
+      <div class="info-itemFoto">
+        <small class="info-title">URL Foto:</small>
+        <input class="info-label" formControlName="peso">
+      </div>
+
+      <img class="veterinarioimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">
+  
+      <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
+        <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">
+          <span class="icon">✎</span>
+          <span class="text">{{ isEditMode ? 'Guardar' : 'Editar todo' }}</span>
+        </button>
+      </div>
+    </form>
+  
+    <!-- Botón para eliminar -->
+    <form *ngIf="userType === 'admin' || userType === 'vet'">
+      <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()">
+        <span class="icon">x</span>
+        <span class="text">Eliminar</span>
+      </button>
+    </form>
+  </div>
+  

@@ -1,0 +1,9 @@
+<header *ngIf="userType === 'admin'">
+    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+  </header>
+  <section class="content">
+      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+      <p class="segundoTitulo">Aquí está la información del veterinario:</p>
+      <app-informacion-veterinario [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-veterinario>
+    </section>
+    

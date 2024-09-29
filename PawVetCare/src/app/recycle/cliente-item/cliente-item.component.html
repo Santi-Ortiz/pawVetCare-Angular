@@ -1,0 +1,16 @@
+<div class="clientes-container" id="clientesContainer">
+    <div *ngFor="let mascota of mascotasPagina" class="cliente-item">
+      <div class="cliente-info">
+        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{mascota.nombre}}</label></div>
+        <div class="info-itemCedula"><small class="info-title">Cédula:</small><label class="info-label">{{mascota.raza}}</label></div>
+        <div class="info-itemCorreo"><small class="info-title">Correo:</small><label class="info-label">{{mascota.edad}}</label></div>
+        <div class="info-itemCelular"><small class="info-title">Celular:</small><label class="info-label">{{mascota.peso}}</label></div>
+        <a class="info-button" [routerLink]="['/cliente', mascota.id]">+ Info</a>
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+    <span>Pagina {{currentPage}} de {{totalPages}}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>

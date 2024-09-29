@@ -17,6 +17,20 @@ import { CarruselMascotasComponent } from './recycle/carrusel-mascotas/carrusel-
 import { FormularioAgregarMascotaComponent } from './recycle/formulario-agregar-mascota/formulario-agregar-mascota.component';
 import { InformacionMascotaComponent } from './recycle/informacion-mascota/informacion-mascota.component';
 import { MascotaItemComponent } from './recycle/mascota-item/mascota-item.component';
+import { PaginacionClientesComponent } from './cliente/paginacion-clientes/paginacion-clientes.component';
+import { VerClientesComponent } from './cliente/ver-clientes/ver-clientes.component';
+import { VerUnClienteComponent } from './cliente/ver-un-cliente/ver-un-cliente.component';
+import { CarruselClientesComponent } from './recycle/carrusel-clientes/carrusel-clientes.component';
+import { FormularioAgregarClienteComponent } from './recycle/formulario-agregar-cliente/formulario-agregar-cliente.component';
+import { ClienteItemComponent } from './recycle/cliente-item/cliente-item.component';
+import { InformacionClienteComponent } from './recycle/informacion-cliente/informacion-cliente.component';
+import { PaginacionVeterinarioComponent } from './veterinario/paginacion-veterinario/paginacion-veterinario.component';
+import { VerVeterinarioComponent } from './veterinario/ver-veterinario/ver-veterinario.component';
+import { VerUnVeterinarioComponent } from './veterinario/ver-un-veterinario/ver-un-veterinario.component';
+import { CarruselVeterinariosComponent } from './recycle/carrusel-veterinarios/carrusel-veterinarios.component';
+import { FormularioAgregarVeterinarioComponent } from './recycle/formulario-agregar-veterinario/formulario-agregar-veterinario.component';
+import { VeterinarioItemComponent } from './recycle/veterinario-item/veterinario-item.component';
+import { InformacionVeterinarioComponent } from './recycle/informacion-veterinario/informacion-veterinario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +46,21 @@ import { MascotaItemComponent } from './recycle/mascota-item/mascota-item.compon
     CarruselMascotasComponent,
     FormularioAgregarMascotaComponent,
     InformacionMascotaComponent,
-    MascotaItemComponent
+    MascotaItemComponent,
+    PaginacionClientesComponent,
+    VerClientesComponent,
+    VerUnClienteComponent,
+    CarruselClientesComponent,
+    FormularioAgregarClienteComponent,
+    ClienteItemComponent,
+    InformacionClienteComponent,
+    PaginacionVeterinarioComponent,
+    VerVeterinarioComponent,
+    VerUnVeterinarioComponent,
+    CarruselVeterinariosComponent,
+    FormularioAgregarVeterinarioComponent,
+    VeterinarioItemComponent,
+    InformacionVeterinarioComponent
   ],
   imports: [
     BrowserModule,

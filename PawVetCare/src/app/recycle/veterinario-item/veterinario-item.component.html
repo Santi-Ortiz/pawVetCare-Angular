@@ -1,0 +1,17 @@
+<div class="veterinarios-container" id="veterinariosContainer">
+    <div *ngFor="let mascota of mascotasPagina" class="veterinario-item">
+      <div class="veterinario-info">
+        <img class="veterinario-foto" [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre">
+        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{mascota.nombre}}</label></div>
+        <div class="info-itemCedula"><small class="info-title">Cédula:</small><label class="info-label">{{mascota.raza}}</label></div>
+        <div class="info-itemEspecialidad"><small class="info-title">Especialidad:</small><label class="info-label">{{mascota.edad}}</label></div>
+        <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
+      </div>
+    </div>
+</div>
+<div class="pagination">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+    <span>Pagina {{currentPage}} de {{totalPages}}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>
+  
