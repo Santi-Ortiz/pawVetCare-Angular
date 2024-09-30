@@ -1,0 +1,113 @@
+.primerTitulo {
+    position: absolute; 
+    top: 120px; 
+    left: 420px; 
+    width: 1000px; 
+    height: 47px; 
+    font-family: Poppins;
+    font-size: 47px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+    text-align: center;
+}
+
+.subTitulo {
+    position: absolute; 
+    top: 20px; 
+    left: -150px; 
+    width: 1000px; 
+    height: 47px; 
+    font-family: Poppins;
+    font-size: 35px; 
+    line-height: 84px; 
+    font-weight: 600; 
+    color: #FFFFFFFF;
+    text-align: center;
+}
+
+.subTitulo2 {
+    position: absolute; 
+    top: 80px; 
+    left: -150px; 
+    width: 1000px; 
+    height: 47px; 
+    font-family: Poppins;
+    font-size: 25px; 
+    line-height: 84px; 
+    font-weight: 600; 
+    color: #FFFFFFFF;
+    text-align: center;
+}
+
+.container-login{
+    position: absolute; 
+    top: 283px; 
+    left: 550px; 
+    width: 700px; 
+    height: 500px; 
+    background: #C09181; 
+    border-radius: 12px;
+}
+
+.container-login form {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    margin-top: 200px;
+    width: 400px; 
+    margin-left: 150px;
+}
+
+.form-group {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #E5E5E5;
+    color: #000000;
+}

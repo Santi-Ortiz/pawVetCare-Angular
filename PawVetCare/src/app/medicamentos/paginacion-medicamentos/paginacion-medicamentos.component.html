@@ -4,7 +4,10 @@
   <section class="content">
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
     <p class="segundoTitulo">Todos los medicamentos:</p>
-    
+    <form class="buscador-form">
+        <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
+        <button type="submit" class="buscador-button">Buscar</button>
+    </form>
     <app-medicamento-item
       [mascotas]="mascotas"
       [currentPage]="currentPage"

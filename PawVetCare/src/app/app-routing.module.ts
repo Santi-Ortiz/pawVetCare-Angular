@@ -14,6 +14,11 @@ import { VerUnVeterinarioComponent } from './veterinario/ver-un-veterinario/ver-
 import { PaginacionVeterinarioComponent } from './veterinario/paginacion-veterinario/paginacion-veterinario.component';
 import { InicializacionComponent } from './administrador/inicializacion/inicializacion.component';
 import { PaginacionMedicamentosComponent } from './medicamentos/paginacion-medicamentos/paginacion-medicamentos.component';
+import { TodasLasSesionesComponent } from './iniciar-sesion/todas-las-sesiones/todas-las-sesiones.component';
+import { IniciarClienteComponent } from './iniciar-sesion/iniciar-cliente/iniciar-cliente.component';
+import { RegistroClienteComponent } from './registro/registro-cliente/registro-cliente.component';
+import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinario/iniciar-veterinario.component';
+import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,6 +35,11 @@ const routes: Routes = [
   {path: 'veterinarios/todos', component: PaginacionVeterinarioComponent},
   {path: 'inicializacion', component: InicializacionComponent},
   {path: 'medicamentos/todos', component: PaginacionMedicamentosComponent},
+  {path: 'iniciarSesion/sesiones', component: TodasLasSesionesComponent},
+  {path: 'iniciarSesion/cliente', component: IniciarClienteComponent},
+  {path: 'iniciarSesion/veterinario', component: IniciarVeterinarioComponent},
+  {path: 'iniciarSesion/administrador', component: IniciarAdministradorComponent},
+  {path: 'registro', component: RegistroClienteComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

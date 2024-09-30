@@ -1,0 +1,37 @@
+.container-cliente {
+    position: absolute;
+    top: 240px;
+    left: 167px;
+    width: 1350px;
+    height: 213px;
+    background: #BFD5D8FF;
+    border-radius: 107px;
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.container-cliente:hover {
+    background: #9095A0;
+}
+
+.text-cliente {
+    position: absolute;
+    top: 20px;
+    left: 142px;
+    width: 603px;
+    height: 68px;
+    font-family: Poppins;
+    font-size: 48px;
+    line-height: 68px;
+    font-weight: 600;
+    color: #FFFFFFFF;
+}
+
+.img-cliente {
+    position: absolute;
+    top: 17px;
+    left: 1002px;
+    width: 192px;
+    height: 180px;
+    border-radius: 0px;
+}

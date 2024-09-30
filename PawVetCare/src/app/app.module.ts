@@ -36,6 +36,18 @@ import { ContainerInicializarComponent } from './recycle/container-inicializar/c
 import { CarruselMedicamentosComponent } from './recycle/carrusel-medicamentos/carrusel-medicamentos.component';
 import { PaginacionMedicamentosComponent } from './medicamentos/paginacion-medicamentos/paginacion-medicamentos.component';
 import { MedicamentoItemComponent } from './recycle/medicamento-item/medicamento-item.component';
+import { TodasLasSesionesComponent } from './iniciar-sesion/todas-las-sesiones/todas-las-sesiones.component';
+import { ContainerSesionClienteComponent } from './recycle/container-sesion-cliente/container-sesion-cliente.component';
+import { ContainerSesionVeterinarioComponent } from './recycle/container-sesion-veterinario/container-sesion-veterinario.component';
+import { ContainerSesionAdminComponent } from './recycle/container-sesion-admin/container-sesion-admin.component';
+import { IniciarClienteComponent } from './iniciar-sesion/iniciar-cliente/iniciar-cliente.component';
+import { ContainerSesionFormClienteComponent } from './recycle/container-sesion-form-cliente/container-sesion-form-cliente.component';
+import { ContainerRegistroFormClienteComponent } from './recycle/container-registro-form-cliente/container-registro-form-cliente.component';
+import { RegistroClienteComponent } from './registro/registro-cliente/registro-cliente.component';
+import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinario/iniciar-veterinario.component';
+import { ContainerSesionFormVeterinarioComponent } from './recycle/container-sesion-form-veterinario/container-sesion-form-veterinario.component';
+import { ContainerSesionFormAdministradorComponent } from './recycle/container-sesion-form-administrador/container-sesion-form-administrador.component';
+import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +82,19 @@ import { MedicamentoItemComponent } from './recycle/medicamento-item/medicamento
     ContainerInicializarComponent,
     CarruselMedicamentosComponent,
     PaginacionMedicamentosComponent,
-    MedicamentoItemComponent
+    MedicamentoItemComponent,
+    TodasLasSesionesComponent,
+    ContainerSesionClienteComponent,
+    ContainerSesionVeterinarioComponent,
+    ContainerSesionAdminComponent,
+    IniciarClienteComponent,
+    ContainerSesionFormClienteComponent,
+    ContainerRegistroFormClienteComponent,
+    RegistroClienteComponent,
+    IniciarVeterinarioComponent,
+    ContainerSesionFormVeterinarioComponent,
+    ContainerSesionFormAdministradorComponent,
+    IniciarAdministradorComponent
   ],
   imports: [
     BrowserModule,
