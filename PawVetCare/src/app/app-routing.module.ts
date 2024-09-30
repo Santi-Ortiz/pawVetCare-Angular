@@ -19,6 +19,7 @@ import { IniciarClienteComponent } from './iniciar-sesion/iniciar-cliente/inicia
 import { RegistroClienteComponent } from './registro/registro-cliente/registro-cliente.component';
 import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinario/iniciar-veterinario.component';
 import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
+import { VerDashboardComponent } from './dashboard/ver-dashboard/ver-dashboard.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'veterinario/:id', component: VerUnVeterinarioComponent},
   {path: 'veterinarios/todos', component: PaginacionVeterinarioComponent},
   {path: 'inicializacion', component: InicializacionComponent},
+  {path: 'dashboard', component: VerDashboardComponent},
   {path: 'medicamentos/todos', component: PaginacionMedicamentosComponent},
   {path: 'iniciarSesion/sesiones', component: TodasLasSesionesComponent},
   {path: 'iniciarSesion/cliente', component: IniciarClienteComponent},

@@ -1,0 +1,17 @@
+<header *ngIf="userType === 'admin'">
+    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+  </header>
+  <section class="content">
+      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+      <p class="segundoTitulo">Aquí están las KPI's:</p>
+      <app-container-total-tratamientos></app-container-total-tratamientos>
+      <app-container-total-tratamientos-por-tipo></app-container-total-tratamientos-por-tipo>
+      <app-container-cantidad-veterinarios-activos></app-container-cantidad-veterinarios-activos>
+      <app-container-cantidad-veterinarios-inactivos></app-container-cantidad-veterinarios-inactivos>
+      <app-container-cantidad-mascotas-totales></app-container-cantidad-mascotas-totales>
+      <app-container-cantidad-mascotas-activas></app-container-cantidad-mascotas-activas>
+      <app-container-ventas-totales></app-container-ventas-totales>
+      <app-container-ganancias-totales></app-container-ganancias-totales>
+      <app-container-top-3-tratamientos></app-container-top-3-tratamientos>
+  </section>
+  

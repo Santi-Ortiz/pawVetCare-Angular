@@ -1,0 +1,319 @@
+.titulo-buscador {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buscador-form {
+    position: absolute; 
+    top: 240px; 
+    left: 1000px;
+    display: flex;
+    align-items: center;
+}
+
+.buscador-input {
+    padding: 10px;
+    width: 150px;
+    font-family: Poppins;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 8px;
+}
+
+.buscador-button {
+    padding: 8px 16px;
+    background-color: #BFD4D7;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.buscador-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}
+
+.todas-button {
+    position:absolute;
+    margin-top: 120px;
+    margin-left: 1390px;
+    padding: 8px 16px;
+    background-color: #9095A0;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.todas-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}
+
+.carrusel-container {
+    position: relative;
+    top: 200px;
+    left: 88px; 
+    margin-top: -130px;
+    width: 1540px; 
+    height: 200px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.carrusel {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.medicamento-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-left:100px;
+    text-align: left;
+}
+
+.carrusel-prev, .carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    top: 60px;
+    margin-left: 20px;
+}
+
+.info-button {
+    position: absolute;
+    top: 60px;
+    width: 80px;
+    height: 44px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BED6D8;
+    background: #1A292B;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1100px;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.veterinario-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+}
+
+.carrusel-container {
+    position: relative;
+    top: 250px;
+    left: 35px; 
+    width: 1470px; 
+    height: 200px;
+    border-radius: 12px;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: left;
+}
+
+.mascota-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+}
+
+.carrusel-prev, .carrusel-next {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.carrusel-prev img, .carrusel-next img {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carrusel-prev {
+    left: 40px;
+}
+
+.carrusel-next {
+    right: 80px;
+}
+
+.estado-icon {
+    font-size: 1.5em;
+}
+
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-text {
+    width: 150%;
+    height: 0;
+    padding: 10px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    top: 60px;
+    margin-left: 20px;
+}
+
+.info-itemId {
+    position: absolute;
+    width: 80px;
+    top: 55px;
+    margin-left: 0px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemNombre {
+    position: absolute;
+    width: 320px;
+    top: 55px;
+    margin-left: 0px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPrecioVenta {
+    position: absolute;
+    width: 250px;
+    top: 55px;
+    margin-left: 360px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPrecioCompra {
+    position: absolute;
+    width: 250px;
+    top: 55px;
+    margin-left: 650px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCantidad{
+    position: absolute;
+    width: 275px;
+    top: 55px;
+    margin-left: 940px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    position: absolute;
+    display: inline-flex;
+    top: 60px;
+    width: 80px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFFFF;
+    background: #000000;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1090px;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.info-button:hover {
+    color: #FFFFFF;
+    background: #FF3B00;
+}

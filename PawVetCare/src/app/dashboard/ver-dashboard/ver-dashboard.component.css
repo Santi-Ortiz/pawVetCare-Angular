@@ -1,21 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-html {
-    height: 100%;
-    width: 100%;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-}
 .content {
     flex: 1;
-    padding-bottom: 120px;
+    padding-bottom: 130px;
 }
 
 .primerTitulo {
     position: absolute; 
-    top: 80px; 
+    top: 90px; 
     left: 85px;
     width: 1190px; 
     height: 252px; 
@@ -40,12 +30,12 @@ html, body {
     font-size: 55px; 
     line-height: 84px; 
     font-weight: 500; 
-    color: #323842;
+    color: #323842FF;
 }
 
 .tercerTitulo {
     position: absolute; 
-    top: 640px; 
+    top: 610px; 
     left: 85px;
     width: 1190px; 
     height: 252px; 
@@ -55,21 +45,25 @@ html, body {
     font-size: 55px; 
     line-height: 84px; 
     font-weight: 500; 
-    color: #323842;
+    color: #323842FF;
 }
 
-.container-informacion {
-    position: absolute; 
-    top: 220px; 
-    width: 1540px; 
-    left: 0px; 
-    height: 350px; 
-    border-radius: 0px; 
-    display: flex;
-    z-index: 9997;
+.todas-button {
+    position:absolute;
+    margin-top: 40px;
+    margin-left: 1350px;
+    padding: 8px 16px;
+    background-color: #9095A0;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 
-section{
-    margin-left: 50px;
-    margin-right: 50px;
+.todas-button:hover {
+    background-color: #F3F4F6;
+    color: black;
 }

@@ -48,6 +48,19 @@ import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinari
 import { ContainerSesionFormVeterinarioComponent } from './recycle/container-sesion-form-veterinario/container-sesion-form-veterinario.component';
 import { ContainerSesionFormAdministradorComponent } from './recycle/container-sesion-form-administrador/container-sesion-form-administrador.component';
 import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
+import { VerDashboardComponent } from './dashboard/ver-dashboard/ver-dashboard.component';
+import { ContainerTotalTratamientosComponent } from './recycle/container-total-tratamientos/container-total-tratamientos.component';
+import { ContainerTotalTratamientosPorTipoComponent } from './recycle/container-total-tratamientos-por-tipo/container-total-tratamientos-por-tipo.component';
+import { CarruselMedicamentosDashboardComponent } from './recycle/carrusel-medicamentos-dashboard/carrusel-medicamentos-dashboard.component';
+import { ContainerCantidadVeterinariosActivosComponent } from './recycle/container-cantidad-veterinarios-activos/container-cantidad-veterinarios-activos.component';
+import { ContainerCantidadVeterinariosInactivosComponent } from './recycle/container-cantidad-veterinarios-inactivos/container-cantidad-veterinarios-inactivos.component';
+import { ContainerCantidadMascotasTotalesComponent } from './recycle/container-cantidad-mascotas-totales/container-cantidad-mascotas-totales.component';
+import { ContainerCantidadMascotasActivasComponent } from './recycle/container-cantidad-mascotas-activas/container-cantidad-mascotas-activas.component';
+import { ContainerVentasTotalesComponent } from './recycle/container-ventas-totales/container-ventas-totales.component';
+import { ContainerGananciasTotalesComponent } from './recycle/container-ganancias-totales/container-ganancias-totales.component';
+import { ContainerTop3TratamientosComponent } from './recycle/container-top-3-tratamientos/container-top-3-tratamientos.component';
+import { CarruselTopMedicamentosComponent } from './recycle/carrusel-top-medicamentos/carrusel-top-medicamentos.component';
+import { FormularioDarTratamientoComponent } from './recycle/formulario-dar-tratamiento/formulario-dar-tratamiento.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +107,20 @@ import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administ
     IniciarVeterinarioComponent,
     ContainerSesionFormVeterinarioComponent,
     ContainerSesionFormAdministradorComponent,
-    IniciarAdministradorComponent
+    IniciarAdministradorComponent,
+    VerDashboardComponent,
+    ContainerTotalTratamientosComponent,
+    ContainerTotalTratamientosPorTipoComponent,
+    CarruselMedicamentosDashboardComponent,
+    ContainerCantidadVeterinariosActivosComponent,
+    ContainerCantidadVeterinariosInactivosComponent,
+    ContainerCantidadMascotasTotalesComponent,
+    ContainerCantidadMascotasActivasComponent,
+    ContainerVentasTotalesComponent,
+    ContainerGananciasTotalesComponent,
+    ContainerTop3TratamientosComponent,
+    CarruselTopMedicamentosComponent,
+    FormularioDarTratamientoComponent
   ],
   imports: [
     BrowserModule,

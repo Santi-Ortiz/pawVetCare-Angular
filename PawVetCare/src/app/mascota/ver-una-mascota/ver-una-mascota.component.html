@@ -9,7 +9,8 @@
     <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
     <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
     <p class="segundoTitulo">Aquí está la información de la mascota:</p>
-    <p class="tercerTitulo">Dar el medicamento:</p>
+    <p class="tercerTitulo">Dar tratamiento:</p>
     <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
+    <app-formulario-dar-tratamiento *ngIf="userType !== 'cliente'"></app-formulario-dar-tratamiento>
   </section>
   
