@@ -1,0 +1,34 @@
+<div class="carrusel-container" *ngIf="mascotas.length > 0">
+    <button class="carrusel-prev" (click)="cambiarMascota(-1)">
+        <img src="../assets/previous.png" alt="Regreso">
+    </button>
+    <div class="carrusel">
+        <div class="medicamento-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <div class="medicamento-info">
+                <div class="info-itemNombre">
+                    <small class="info-title">Nombre:</small>
+                    <label class="info-label">{{ mascota.nombre }}</label>
+                </div>
+                <div class="info-itemPrecioVenta">
+                    <small class="info-title">P. venta:</small>
+                    <label class="info-label">{{ mascota.raza }}</label>
+                </div>
+                <div class="info-itemPrecioCompra">
+                    <small class="info-title">P. compra:</small>
+                    <label class="info-label">{{ mascota.raza }}</label>
+                </div>
+                <div class="info-itemUnidadesDisponibles">
+                    <small class="info-title">Uni. Disp.:</small>
+                    <label class="info-label">{{ mascota.edad }}</label>
+                </div>
+                <div class="info-itemUnidadesVendidas">
+                    <small class="info-title">Uni. Vend.:</small>
+                    <label class="info-label">{{ mascota.edad }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carrusel-next" (click)="cambiarMascota(1)">
+        <img src="assets/next.png" alt="Siguiente">
+    </button>
+</div>

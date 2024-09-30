@@ -1,0 +1,12 @@
+<div class="container-inicializar">
+    <p class="subTitulo">Sube el archivo excel</p>
+    
+    <!-- Campo para subir archivo -->
+    <div class="container">
+        <input type="file" (change)="onFileSelected($event)" accept=".xlsx" class="file-input">
+    </div>
+    
+    <!-- Botón para subir archivo -->
+    <button class="subir-btn" (click)="onUpload()">Subir</button>
+  </div>
+  

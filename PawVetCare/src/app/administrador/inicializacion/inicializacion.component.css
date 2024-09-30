@@ -1,0 +1,69 @@
+.content {
+    flex: 1;
+    padding-bottom: 330px;
+}
+
+.primerTitulo {
+    position: absolute; 
+    top: 90px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #9095A0;
+}
+
+.segundoTitulo {
+    position: absolute; 
+    top: 160px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.tercerTitulo {
+    position: absolute; 
+    top: 610px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.todas-button {
+    position:absolute;
+    margin-top: 40px;
+    margin-left: 1350px;
+    padding: 8px 16px;
+    background-color: #9095A0;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.todas-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}

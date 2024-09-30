@@ -1,0 +1,163 @@
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.info-itemNombre {
+    width: 400px;
+    position: relative;
+    margin-top: 45px;
+    margin-left: 30px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPrecioVenta {
+    width: 250px;
+    position: relative;
+    margin-top: -110px;
+    top: 55px;
+    margin-left: 480px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPrecioCompra {
+    width: 250px;
+    top: 55px;
+    margin-left: 780px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemUnidadesDisponibles {
+    width: 150px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 1080px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemUnidadesVendidas {
+    width: 150px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 1285px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    display: inline-flex;
+    position: absolute;
+    margin-top: -50px;
+    width: 120px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BED6D8;
+    background: #1A292B;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1360px;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.estado img {
+    width: 40px; 
+    height: 40px;
+    border-radius: 0px;
+    margin: 0;
+}
+
+.medicamentos-container {
+    margin-top: 320px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+}
+
+.medicamento-item {
+    margin-left: 88px; 
+    width: 1500px; 
+    height: 150px;
+    padding: 20px;
+    background: #FFFFFFFF;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
+}
+
+.pagination {
+    text-align: center;
+    font-family: Poppins;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.pagination button {
+    background-color: #9095A0;
+    font-family: Poppins;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}

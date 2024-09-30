@@ -31,6 +31,11 @@ import { CarruselVeterinariosComponent } from './recycle/carrusel-veterinarios/c
 import { FormularioAgregarVeterinarioComponent } from './recycle/formulario-agregar-veterinario/formulario-agregar-veterinario.component';
 import { VeterinarioItemComponent } from './recycle/veterinario-item/veterinario-item.component';
 import { InformacionVeterinarioComponent } from './recycle/informacion-veterinario/informacion-veterinario.component';
+import { InicializacionComponent } from './administrador/inicializacion/inicializacion.component';
+import { ContainerInicializarComponent } from './recycle/container-inicializar/container-inicializar.component';
+import { CarruselMedicamentosComponent } from './recycle/carrusel-medicamentos/carrusel-medicamentos.component';
+import { PaginacionMedicamentosComponent } from './medicamentos/paginacion-medicamentos/paginacion-medicamentos.component';
+import { MedicamentoItemComponent } from './recycle/medicamento-item/medicamento-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +65,12 @@ import { InformacionVeterinarioComponent } from './recycle/informacion-veterinar
     CarruselVeterinariosComponent,
     FormularioAgregarVeterinarioComponent,
     VeterinarioItemComponent,
-    InformacionVeterinarioComponent
+    InformacionVeterinarioComponent,
+    InicializacionComponent,
+    ContainerInicializarComponent,
+    CarruselMedicamentosComponent,
+    PaginacionMedicamentosComponent,
+    MedicamentoItemComponent
   ],
   imports: [
     BrowserModule,

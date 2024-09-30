@@ -12,6 +12,8 @@ import { PaginacionClientesComponent } from './cliente/paginacion-clientes/pagin
 import { VerVeterinarioComponent } from './veterinario/ver-veterinario/ver-veterinario.component';
 import { VerUnVeterinarioComponent } from './veterinario/ver-un-veterinario/ver-un-veterinario.component';
 import { PaginacionVeterinarioComponent } from './veterinario/paginacion-veterinario/paginacion-veterinario.component';
+import { InicializacionComponent } from './administrador/inicializacion/inicializacion.component';
+import { PaginacionMedicamentosComponent } from './medicamentos/paginacion-medicamentos/paginacion-medicamentos.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'veterinarios', component: VerVeterinarioComponent},
   {path: 'veterinario/:id', component: VerUnVeterinarioComponent},
   {path: 'veterinarios/todos', component: PaginacionVeterinarioComponent},
+  {path: 'inicializacion', component: InicializacionComponent},
+  {path: 'medicamentos/todos', component: PaginacionMedicamentosComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
