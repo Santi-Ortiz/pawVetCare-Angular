@@ -25,7 +25,26 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'equipo', component: EquipoComponent},
   {path: 'contacto', component: ContactoComponent},
+  //VerMascotasComponent
   {path: 'mascotas', component: VerMascotasComponent},
+  {
+    path: 'admin/mascotas',
+    component: VerMascotasComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'admin' } 
+  },
+  {
+    path: 'veterinario/mascotas',
+    component: VerMascotasComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'vet' }
+  },
+  {
+    path: 'cliente/mascotas',
+    component: VerMascotasComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'cliente' }
+  }
   {path: 'mascota/:id', component: VerUnaMascotaComponent},
   {path: 'mascotas/todas', component: PaginacionMascotasComponent},
   {path: 'clientes', component: VerClientesComponent},

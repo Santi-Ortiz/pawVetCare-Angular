@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@ang
 import { Router } from '@angular/router';
 import {Mascota} from '../../model/mascota';
 import {MascotasService} from '../../services/mascotas.service';
+import {ClienteService} from '../../services/cliente.service';
 
 @Component({
   selector: 'app-ver-mascotas',
@@ -9,7 +10,9 @@ import {MascotasService} from '../../services/mascotas.service';
   styleUrls: ['./ver-mascotas.component.css']
 })
 export class VerMascotasComponent {
-  userType = 'admin'; 
+
+  userRole: string | null = null;
+  cliente: Cliente | undefined;
   mascotaId: number | undefined;
   index = 0;
   intervalId: any;
@@ -30,12 +33,44 @@ export class VerMascotasComponent {
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
 
-  constructor(private mascotasService: MascotasService, private router: Router) {} 
+  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {} 
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    //console.log(this.mascotas);
+    this.userRole = this.authService.getUserRole();
+    this.loadMascotas();
     this.autoMoverCarrusel();
+  }
+
+  loadMascotas(): void {
+    if (this.userRole === 'admin') {
+      this.mascotasService.obtenerMascotasAdmin().subscribe(
+        (data: Mascota[]) => {
+          this.mascotas = data;
+        },
+        (error) => {
+          console.error('Error al obtener mascotas del administrador', error);
+        }
+      );
+    } else if (this.userRole === 'vet') {
+      this.mascotasService.obtenerMascotasVet().subscribe(
+        (data: Mascota[]) => {
+          this.mascotas = data;
+        },
+        (error) => {
+          console.error('Error al obtener mascotas del veterinario', error);
+        }
+      );
+    } else if (this.userRole === 'cliente') {
+      const idCliente = this.authService.getUserId(); 
+      this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
+        (data: Mascota[]) => {
+          this.mascotas = data;
+        },
+        (error) => {
+          console.error('Error al obtener mascotas del cliente', error);
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {

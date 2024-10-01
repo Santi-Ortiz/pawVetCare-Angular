@@ -1,89 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Mascota } from '../model/mascota'; 
 import { Tratamiento } from '../model/tratamiento'; 
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MascotasService {
-  // Base de datos
-  private mascotas: Mascota[] = [
-    {
-      id: 0,
-      nombre: 'Firulais',
-      raza: 'Labrador',
-      edad: 4,
-      peso: 20,
-      enfermedad: 'Sobrepeso',
-      foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Firulais_2.0.jpg/330px-Firulais_2.0.jpg',
-      estado: true,
-      cliente: 1,
-      tratamientos: [],
-    },
-    {
-      id: 1,
-      nombre: 'Mittens',
-      raza: 'Terrier de Norwich',
-      edad: 2,
-      peso: 5,
-      enfermedad: 'Alergia',
-      foto: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Norwichterrier.jpg',
-      estado: true,
-      cliente: 2,
-      tratamientos: [],
-    },
-    {
-      id: 2,
-      nombre: 'Alejandra',
-      raza: 'Rottweiler',
-      edad: 1,
-      peso: 3,
-      enfermedad: 'Chandosa',
-      foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/02_I_Exposici%C3%B3n_Monogr%C3%A1fica_Club_Rottweiler_de_Espa%C3%B1a_-_Santa_Brigida_-_Gran_Canaria.jpg/450px-02_I_Exposici%C3%B3n_Monogr%C3%A1fica_Club_Rottweiler_de_Espa%C3%B1a_-_Santa_Brigida_-_Gran_Canaria.jpg',
-      estado: true,
-      cliente:3,
-      tratamientos: [],
-    },
-    {
-      id: 3,
-      nombre: 'Santiago',
-      raza: 'Golden Retriever',
-      edad: 1,
-      peso: 4,
-      enfermedad: 'Pulgoso',
-      foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Golden_Retriever_9-year_old.jpg/480px-Golden_Retriever_9-year_old.jpg',
-      estado: true,
-      cliente:4,
-      tratamientos: [],
-    },
-    {
-      id: 4,
-      nombre: 'Nicolas',
-      raza: 'San bernardo',
-      edad: 3,
-      peso: 4,
-      enfermedad: 'Rabia',
-      foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Rey_nieve.jpg/480px-Rey_nieve.jpg',
-      estado: true,
-      cliente:5,
-      tratamientos: [],
-    },
-    {
-      id: 5,
-      nombre: 'Maria',
-      raza: 'Chihuahua',
-      edad: 3,
-      peso: 4,
-      enfermedad: 'Tendinitis',
-      foto: 'https://http2.mlstatic.com/D_NQ_NP_657941-MCO49101017442_022022-O.webp',
-      estado: true,
-      cliente:5,
-      tratamientos: [],
-    }
-  ];
+  
+  //Springboot
+  private apiUrl = 'http://localhost:8080/api/mascotas';
 
-  constructor() {}
+  /*constructor() {}
 
   // Obtener todas las mascotas
   getMascotas(): Mascota[] {
@@ -113,5 +43,55 @@ export class MascotasService {
   // Eliminar una mascota
   eliminarMascota(id: number): void {
     this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
+  }*/
+
+
+ //Springboot con Angular 
+ 
+  constructor(private http: HttpClient) { }
+
+  // Obtener todas las mascotas (Administrador)
+  obtenerMascotasAdmin(): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(`${this.apiUrl}/admin/todas`);
+  }
+
+  // Obtener todas las mascotas (Veterinarios)
+  obtenerMascotasVet(): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(`${this.apiUrl}/vet/todas`);
+  }
+
+  // Obtener una mascota por ID
+  obtenerMascotaPorId(id: number): Observable<Mascota> {
+    return this.http.get<Mascota>(`${this.apiUrl}/find/${id}`);
+  }
+
+  // Agregar nueva mascota (Administrador)
+  agregarMascotaAdmin(mascota: Mascota, idCliente: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/admin/agregar?idCliente=${idCliente}`, mascota);
+  }
+
+  // Agregar nueva mascota (Veterinario)
+  agregarMascotaVet(mascota: Mascota, idCliente: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/vet/agregar?idCliente=${idCliente}`, mascota);
+  }
+
+  // Eliminar mascota (Administrador)
+  eliminarMascotaAdmin(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/admin/delete/${id}`);
+  }
+
+  // Eliminar mascota (Veterinario)
+  eliminarMascotaVet(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/vet/delete/${id}`);
+  }
+
+  // Actualizar una mascota (Veterinario)
+  actualizarMascotaVet(id: number, mascota: Mascota): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/vet/${id}`, mascota);
+  }
+
+  // Actualizar una mascota (Administrador)
+  actualizarMascotaAdmin(id: number, mascota: Mascota): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/ad/${id}`, mascota);
   }
 }
