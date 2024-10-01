@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import {Mascota} from '../../model/mascota';
 import {MascotasService} from '../../services/mascotas.service';
 import {ClienteService} from '../../services/cliente.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Cliente } from 'src/app/model/cliente';
 
 @Component({
   selector: 'app-ver-mascotas',
@@ -11,7 +13,7 @@ import {ClienteService} from '../../services/cliente.service';
 })
 export class VerMascotasComponent {
 
-  userRole: string | null = null;
+  userType: string | null = null;
   cliente: Cliente | undefined;
   mascotaId: number | undefined;
   index = 0;
@@ -32,17 +34,18 @@ export class VerMascotasComponent {
   };
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+  clienteService: any;
 
   constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {} 
 
   ngOnInit(): void {
-    this.userRole = this.authService.getUserRole();
+    this.userType = this.authService.getUserRole();
     this.loadMascotas();
     this.autoMoverCarrusel();
   }
 
   loadMascotas(): void {
-    if (this.userRole === 'admin') {
+    if (this.userType === 'admin') {
       this.mascotasService.obtenerMascotasAdmin().subscribe(
         (data: Mascota[]) => {
           this.mascotas = data;
@@ -51,7 +54,7 @@ export class VerMascotasComponent {
           console.error('Error al obtener mascotas del administrador', error);
         }
       );
-    } else if (this.userRole === 'vet') {
+    } else if (this.userType === 'vet') {
       this.mascotasService.obtenerMascotasVet().subscribe(
         (data: Mascota[]) => {
           this.mascotas = data;
@@ -60,13 +63,13 @@ export class VerMascotasComponent {
           console.error('Error al obtener mascotas del veterinario', error);
         }
       );
-    } else if (this.userRole === 'cliente') {
+    } else if (this.userType === 'cliente') {
       const idCliente = this.authService.getUserId(); 
       this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
         (data: Mascota[]) => {
           this.mascotas = data;
         },
-        (error) => {
+        (error: any) => {
           console.error('Error al obtener mascotas del cliente', error);
         }
       );
@@ -97,7 +100,7 @@ export class VerMascotasComponent {
     if (!id) {
       return;
     }
-    const mascota = this.mascotasService.getMascota(id);
+    const mascota = this.mascotasService.obtenerMascotaPorId(id);
     if (mascota) {
       this.router.navigate(['/mascota', id]);
     } else {
@@ -106,20 +109,31 @@ export class VerMascotasComponent {
   }
   
   agregarMascota(): void {
-    this.mascotasService.agregarMascota(this.nuevaMascota);  // Agrega la nueva mascota al servicio
-    alert('Mascota agregada exitosamente');
-    this.nuevaMascota = {  // Reinicia el formulario de nueva mascota
-      id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,
-      cliente: 0,
-      tratamientos: [],
-    };
-  }
+    if (this.nuevaMascota.cliente === undefined) {
+      alert('Por favor, asigna un cliente válido antes de agregar la mascota.');
+      return;
+    }
+    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+      (response) => {
+        alert('Mascota agregada exitosamente');
 
+        this.nuevaMascota = {
+          id: 0,
+          nombre: '',
+          raza: '',
+          edad: 0,
+          peso: 0,
+          enfermedad: '',
+          foto: '',
+          estado: true,
+          cliente: 0,
+          tratamientos: [],
+        };
+        this.loadMascotas();
+      },
+      (error) => {
+        alert('Error al agregar la mascota. Por favor, intenta de nuevo.');
+      }
+    );
+  }  
 }

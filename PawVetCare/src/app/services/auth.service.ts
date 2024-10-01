@@ -21,10 +21,18 @@ export class AuthService {
     }
   }
 
+ 
   getUserRole(): string | null {
-    return this.currentUser ? this.currentUser.role : null;
+
+    return localStorage.getItem('userRole');
   }
 
+
+  getUserId(): number | null {
+
+    const id = localStorage.getItem('userId');
+    return id ? Number(id) : null;
+  }
   isAuthenticated(): boolean {
     return !!this.currentUser;
   }

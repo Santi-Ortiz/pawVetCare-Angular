@@ -33,8 +33,14 @@ export class InicializacionComponent {
   constructor(private mascotasService: MascotasService, private router: Router) {} 
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    //console.log(this.mascotas);
+    this.mascotasService.obtenerMascotasAdmin().subscribe(
+      (data: Mascota[]) => {
+        this.mascotas = data;
+      },
+      (error) => {
+        console.error('Error al cargar las mascotas (admin):', error);
+      }
+    );
     this.autoMoverCarrusel();
   }
 

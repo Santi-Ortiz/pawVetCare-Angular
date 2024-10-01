@@ -60,7 +60,7 @@ export class VerUnClienteComponent {
   }
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
+    this.mascotas = this.mascotasService.obtenerMascotasAdmin();
     //console.log(this.mascotas);
     this.autoMoverCarrusel();
     
