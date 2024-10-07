@@ -46,8 +46,9 @@ export class InformacionMascotaComponent {
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
     this.isEditMode = !this.isEditMode;
-
+  
     if (this.isEditMode) {
+    
       this.mascotaForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
@@ -55,18 +56,29 @@ export class InformacionMascotaComponent {
       }
       console.log('Formulario habilitado para edición');
     } else {
+    
       const mascotaActualizada = {
         ...this.mascota,
         ...this.mascotaForm.value,
         estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
-
+  
       if (this.mascota) {
-        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas']); 
+     
+        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada con éxito:', response);
+            alert('Mascota actualizada correctamente');
+            this.router.navigate(['/mascotas/todas']);  
+          },
+          error => {
+            console.error('Error al actualizar la mascota:', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          }
+        );
       }
-
+  
+     
       this.mascotaForm.disable();
       if (botonEditar) {
         botonEditar.classList.remove('expanded');
@@ -74,22 +86,36 @@ export class InformacionMascotaComponent {
       }
     }
   }
+  
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
-    // Si el botón ya está expandido, procede a eliminar la mascota
+    
+  
     if (botonEliminar?.classList.contains('expanded')) {
       if (this.mascota && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
-        console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+     
+        this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+          response => {
+            console.log('Mascota eliminada:', this.mascota?.id);
+            alert('Mascota eliminada exitosamente');
+            this.router.navigate(['/mascotas/todas']); 
+          },
+          error => {
+            console.error('Error al eliminar la mascota:', error);
+            alert('Hubo un error al eliminar la mascota. Inténtalo nuevamente más tarde.');
+          }
+        );
       } else {
         console.log('Error: No se pudo eliminar la mascota');
+        alert('Error: No se encontró la mascota para eliminar.');
       }
     } else {
+   
       if (botonEliminar) {
         botonEliminar.classList.add('expanded');
       }
     }
   }
+  
 }

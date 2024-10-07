@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class MascotasService {
   
   //Springboot
-  private apiUrl = 'http://localhost:8080/api/mascotas';
+  private apiUrl = 'http://localhost:8090/api/mascota';
 
   /*constructor() {}
 

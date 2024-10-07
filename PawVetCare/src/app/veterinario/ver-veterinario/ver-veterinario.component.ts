@@ -33,9 +33,23 @@ export class VerVeterinarioComponent {
   constructor(private mascotasService: MascotasService, private router: Router) {} 
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    //console.log(this.mascotas);
-    this.autoMoverCarrusel();
+    if (this.userType === 'admin') {
+      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+        console.log(this.mascotas);  
+        this.autoMoverCarrusel();
+      }, (error: any) => {
+        console.error('Error al cargar las mascotas:', error);  
+      });
+    }else if (this.userType === 'vet') {
+      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+        console.log(this.mascotas);  
+        this.autoMoverCarrusel();
+      }, (error: any) => {
+        console.error('Error al cargar las mascotas:', error);  
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -62,18 +76,54 @@ export class VerVeterinarioComponent {
     if (!id) {
       return;
     }
-    const mascota = this.mascotasService.getMascota(id);
-    if (mascota) {
-      this.router.navigate(['/veterinario', id]);
-    } else {
-      alert(`Mascota con ID ${id} no encontrada`);
+    this.mascotasService.obtenerMascotaPorId(id).subscribe(
+      (mascota: Mascota) => {
+  
+        if (mascota) {
+          this.router.navigate(['/veterinario', id]);
+        } else {
+          alert(`Mascota con ID ${id} no encontrada`);
+        }
+      },
+      (error) => {
+        console.error('Error al buscar la mascota:', error);
+        alert(`Error al buscar la mascota con ID ${id}`);
+      }
+    );
+  }
+  
+  
+  agregarMascota(): void {
+   
+    if (this.userType === 'admin') {
+   
+      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+        (response: string) => {
+          alert('Mascota agregada exitosamente (Admin)');
+          this.resetFormularioMascota();  
+        },
+        (error) => {
+          console.error('Error al agregar mascota (Admin):', error);
+          alert('Error al agregar la mascota');
+        }
+      );
+    } else if (this.userType === 'vet') {
+      
+      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+        (response: string) => {
+          alert('Mascota agregada exitosamente (Vet)');
+          this.resetFormularioMascota();  
+        },
+        (error) => {
+          console.error('Error al agregar mascota (Vet):', error);
+          alert('Error al agregar la mascota');
+        }
+      );
     }
   }
   
-  agregarMascota(): void {
-    this.mascotasService.agregarMascota(this.nuevaMascota);  // Agrega la nueva mascota al servicio
-    alert('Mascota agregada exitosamente');
-    this.nuevaMascota = {  // Reinicia el formulario de nueva mascota
+  resetFormularioMascota(): void {
+    this.nuevaMascota = {
       id: 0,
       nombre: '',
       raza: '',
@@ -83,7 +133,8 @@ export class VerVeterinarioComponent {
       foto: '',
       estado: true,
       cliente: 0,
-      tratamientos: [],
+      tratamientos: []
     };
   }
+  
 }

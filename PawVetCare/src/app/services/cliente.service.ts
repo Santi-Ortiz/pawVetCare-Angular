@@ -9,7 +9,7 @@ import { Mascota } from '../model/mascota';
 })
 export class ClienteService {
 
-  private apiUrl = '/api/cliente';  
+  private apiUrl = 'http://localhost:8090/api/cliente';
 
   constructor(private http: HttpClient) { }
 

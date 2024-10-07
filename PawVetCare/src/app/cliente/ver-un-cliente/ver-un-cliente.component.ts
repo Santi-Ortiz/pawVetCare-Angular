@@ -60,40 +60,79 @@ export class VerUnClienteComponent {
   }
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.obtenerMascotasAdmin();
+    let mascotaSeleccionada: Mascota | undefined;
+    if (this.userType === 'admin') {
+      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+      });
+    }else if(this.userType === 'vet') {
+      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+      });
+    }
     //console.log(this.mascotas);
     this.autoMoverCarrusel();
     
     const id = Number(this.route.snapshot.paramMap.get('id'));
     
-   
-    this.mascota = this.mascotasService.getMascota(id) || {
-      id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,  // Valor por defecto
-      cliente: 0,
-      tratamientos: []
-    };
-    
-    if (this.mascota) {
-      this.mascotaForm.patchValue({
-        nombre: this.mascota.nombre,
-        raza: this.mascota.raza,
-        edad: this.mascota.edad,
-        peso: this.mascota.peso,
-        enfermedad: this.mascota.enfermedad,
-        cliente: this.mascota.cliente,
-        estado: this.mascota.estado,
-        foto: this.mascota.foto
+    if (this.userType === 'admin') {
+      this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
+        this.mascota = mascota;
+        this.mascotaForm.patchValue({
+          nombre: this.mascota.nombre,
+          raza: this.mascota.raza,
+          edad: this.mascota.edad,
+          peso: this.mascota.peso,
+          enfermedad: this.mascota.enfermedad,
+          cliente: this.mascota.cliente,
+          estado: this.mascota.estado,
+          foto: this.mascota.foto
+        });
+        this.mascotaForm.disable();
+      }, () => {
+        this.mascota = {
+          id: 0,
+          nombre: '',
+          raza: '',
+          edad: 0,
+          peso: 0,
+          enfermedad: '',
+          foto: '',
+          estado: true,  
+          cliente: 0,
+          tratamientos: []
+        };
       });
-    }
-    this.mascotaForm.disable();
+    } else if (this.userType === 'vet') {
+      this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
+        this.mascota = mascota;
+        this.mascotaForm.patchValue({
+          nombre: this.mascota.nombre,
+          raza: this.mascota.raza,
+          edad: this.mascota.edad,
+          peso: this.mascota.peso,
+          enfermedad: this.mascota.enfermedad,
+          cliente: this.mascota.cliente,
+          estado: this.mascota.estado,
+          foto: this.mascota.foto
+        });
+        this.mascotaForm.disable();
+      }, () => {
+        this.mascota = {
+          id: 0,
+          nombre: '',
+          raza: '',
+          edad: 0,
+          peso: 0,
+          enfermedad: '',
+          foto: '',
+          estado: true,  
+          cliente: 0,
+          tratamientos: []
+        };
+      });
   }
+}
 
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
@@ -115,10 +154,14 @@ export class VerUnClienteComponent {
         estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
 
-      if (this.mascota) {
-        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
+      if (this.userType === 'admin'){
+        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada);
         console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas']); 
+        this.router.navigate(['/mascotas/todas']); 
+      }else if(this.userType === 'vet'){
+        this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada);
+        console.log('Mascota actualizada:', mascotaActualizada);
+        this.router.navigate(['/mascotas/todas']); 
       }
 
       this.mascotaForm.disable();  
@@ -133,10 +176,14 @@ export class VerUnClienteComponent {
     const botonEliminar = document.getElementById('eliminarBtn');
     // Si el botón ya está expandido, procede a eliminar la mascota
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
+      if (this.userType === 'admin' && this.mascota.id !== undefined) {
+        this.mascotasService.eliminarMascotaAdmin(this.mascota.id);  // Eliminar la mascota por ID
         console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
+      } else if(this.userType === 'admin' && this.mascota.id !== undefined){
+        this.mascotasService.eliminarMascotaVet(this.mascota.id);  // Eliminar la mascota por ID
+        console.log('Mascota eliminada:', this.mascota.id);
+        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
       } else {
         console.log('Error: No se pudo eliminar la mascota');
       }

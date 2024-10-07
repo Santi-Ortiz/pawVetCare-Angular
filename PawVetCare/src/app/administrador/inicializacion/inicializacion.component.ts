@@ -68,7 +68,8 @@ export class InicializacionComponent {
     if (!id) {
       return;
     }
-    const mascota = this.mascotasService.getMascota(id);
+
+    const mascota = this.mascotasService.obtenerMascotaPorId(id);
     if (mascota) {
       this.router.navigate(['/mascota', id]);
     } else {
@@ -77,9 +78,13 @@ export class InicializacionComponent {
   }
   
   agregarMascota(): void {
-    this.mascotasService.agregarMascota(this.nuevaMascota);  // Agrega la nueva mascota al servicio
+    if (this.userType === 'admin') {
+      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }else if(this.userType === 'vet'){
+      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }
     alert('Mascota agregada exitosamente');
-    this.nuevaMascota = {  // Reinicia el formulario de nueva mascota
+    this.nuevaMascota = { 
       id: 0,
       nombre: '',
       raza: '',

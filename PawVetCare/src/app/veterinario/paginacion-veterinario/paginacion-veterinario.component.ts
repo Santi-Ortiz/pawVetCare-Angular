@@ -18,10 +18,25 @@ export class PaginacionVeterinarioComponent {
   constructor(private mascotasService: MascotasService, private router: Router) {}
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    console.log(this.mascotas);  // Verifica que los datos están cargando correctamente
-    this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+    if (this.userType === 'admin') {
+      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+        console.log(this.mascotas);  
+        this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+      }, (error: any) => {
+        console.error('Error al cargar las mascotas:', error);  
+      });
+    }else if (this.userType === 'vet') {
+      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+        console.log(this.mascotas);  
+        this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+      }, (error: any) => {
+        console.error('Error al cargar las mascotas:', error);  
+      });
+    }
   }
+  
 
   changePage(direction: number): void {
     const newPage = this.currentPage + direction;

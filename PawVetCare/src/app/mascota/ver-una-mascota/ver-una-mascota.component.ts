@@ -57,44 +57,45 @@ export class VerUnaMascotaComponent {
   }
 
   ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));  
     
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    
-   
-    this.mascota = this.mascotasService.getMascota(id) || {
-      id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,  // Valor por defecto
-      cliente: 0,
-      tratamientos: []
-    };
-    
-    if (this.mascota) {
-      this.mascotaForm.patchValue({
-        nombre: this.mascota.nombre,
-        raza: this.mascota.raza,
-        edad: this.mascota.edad,
-        peso: this.mascota.peso,
-        enfermedad: this.mascota.enfermedad,
-        cliente: this.mascota.cliente,
-        estado: this.mascota.estado,
-        foto: this.mascota.foto
-      });
+    if (!id) {
+      alert('ID de mascota inválido.');
+      return;
     }
-    this.mascotaForm.disable();
+  
+    this.mascotasService.obtenerMascotaPorId(id).subscribe(
+      (mascota: Mascota) => {
+  
+        this.mascota = mascota;
+  
+      
+        this.mascotaForm.patchValue({
+          nombre: this.mascota.nombre,
+          raza: this.mascota.raza,
+          edad: this.mascota.edad,
+          peso: this.mascota.peso,
+          enfermedad: this.mascota.enfermedad,
+          cliente: this.mascota.cliente,
+          estado: this.mascota.estado,
+          foto: this.mascota.foto
+        });
+  
+        this.mascotaForm.disable();
+      },
+      (error) => {
+        console.error(`Error al obtener la mascota con ID ${id}:`, error);
+        alert(`Mascota con ID ${id} no encontrada`);
+      }
+    );
   }
+  
 
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
-    this.isEditMode = !this.isEditMode;  
-
+    this.isEditMode = !this.isEditMode;
+  
     if (this.isEditMode) {
-     
       this.mascotaForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
@@ -102,35 +103,74 @@ export class VerUnaMascotaComponent {
       }
       console.log('Formulario habilitado para edición');
     } else {
-      
       const mascotaActualizada: Mascota = {
-        ...this.mascota,  
-        ...this.mascotaForm.value, 
+        ...this.mascota,
+        ...this.mascotaForm.value,
         estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
-
-      if (this.mascota) {
-        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas']); 
+  
+     
+      if (!mascotaActualizada.id) {
+        alert('ID de la mascota no está definido.');
+        return;
       }
+  
 
-      this.mascotaForm.disable();  
-      if (botonEditar) {
-        botonEditar.classList.remove('expanded');
-        botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+      if (this.userType === 'admin') {
+        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el administrador:', response);
+            this.router.navigate(['/mascotas/todas']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (admin):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
+      } else if (this.userType === 'vet') {
+        this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el veterinario:', response);
+            this.router.navigate(['/mascotas/todas']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (vet):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
       }
     }
   }
+  
+  finalizeEditMode(botonEditar: HTMLElement | null): void {
+    this.isEditMode = false;
+    this.mascotaForm.disable();
+    if (botonEditar) {
+      botonEditar.classList.remove('expanded');
+      botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+    }
+  }
+  
+  
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
     // Si el botón ya está expandido, procede a eliminar la mascota
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
+      if (this.userType === 'admin' && this.mascota.id !== undefined) {
+        this.mascotasService.eliminarMascotaAdmin(this.mascota.id);  // Eliminar la mascota por ID
         console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
+      } else if(this.userType === 'admin' && this.mascota.id !== undefined){
+        this.mascotasService.eliminarMascotaVet(this.mascota.id);  // Eliminar la mascota por ID
+        console.log('Mascota eliminada:', this.mascota.id);
+        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
       } else {
         console.log('Error: No se pudo eliminar la mascota');
       }

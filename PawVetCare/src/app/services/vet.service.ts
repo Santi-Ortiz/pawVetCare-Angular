@@ -9,7 +9,7 @@ import { Cliente } from '../model/cliente';
 })
 export class VeterinarioService {
 
-  private apiUrl = '/api/veterinario'; 
+  private apiUrl = 'http://localhost:8090/api/veterinario';
 
   constructor(private http: HttpClient) { }
 

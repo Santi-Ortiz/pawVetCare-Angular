@@ -18,8 +18,32 @@ export class PaginacionMedicamentosComponent {
   constructor(private mascotasService: MascotasService, private router: Router) {}
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    console.log(this.mascotas);  // Verifica que los datos están cargando correctamente
+ 
+    if (this.userType === 'admin') {
+      this.mascotasService.obtenerMascotasAdmin().subscribe(
+        (mascotas: Mascota[]) => {
+          this.mascotas = mascotas;
+          this.calcularTotalPaginas();  
+        },
+        (error) => {
+          console.error('Error al cargar las mascotas del admin:', error);
+        }
+      );
+    } else if (this.userType === 'vet') {
+   
+      this.mascotasService.obtenerMascotasVet().subscribe(
+        (mascotas: Mascota[]) => {
+          this.mascotas = mascotas;
+          this.calcularTotalPaginas(); 
+        },
+        (error) => {
+          console.error('Error al cargar las mascotas del vet:', error);
+        }
+      );
+    }
+  }
+  
+  calcularTotalPaginas(): void {
     this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
   }
 

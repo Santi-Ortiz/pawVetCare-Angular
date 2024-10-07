@@ -56,22 +56,9 @@ export class VerUnVeterinarioComponent {
   ngOnInit(): void {
     
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    
-   
-    this.mascota = this.mascotasService.getMascota(id) || {
-      id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,  // Valor por defecto
-      cliente: 0,
-      tratamientos: []
-    };
-    
-    if (this.mascota) {
+
+    this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
+      this.mascota = mascota;
       this.mascotaForm.patchValue({
         nombre: this.mascota.nombre,
         raza: this.mascota.raza,
@@ -82,8 +69,21 @@ export class VerUnVeterinarioComponent {
         estado: this.mascota.estado,
         foto: this.mascota.foto
       });
-    }
-    this.mascotaForm.disable();
+      this.mascotaForm.disable();
+    }, () => {
+      this.mascota = {
+        id: 0,
+        nombre: '',
+        raza: '',
+        edad: 0,
+        peso: 0,
+        enfermedad: '',
+        foto: '',
+        estado: true,  
+        cliente: 0,
+        tratamientos: []
+      };
+    });
   }
 
   toggleEditMode(): void {
@@ -107,9 +107,25 @@ export class VerUnVeterinarioComponent {
       };
 
       if (this.mascota) {
-        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
+        if (this.userType === 'admin') {
+          this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada).subscribe(response => {
+            console.log('Mascota actualizada por el administrador:', response);
+            // Aquí puedes agregar cualquier lógica adicional, como mostrar una notificación
+          }, error => {
+            console.error('Error al actualizar la mascota (admin):', error);
+            // Manejo de errores
+          });
+        } else if (this.userType === 'vet') {
+          this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada).subscribe(response => {
+            console.log('Mascota actualizada por el veterinario:', response);
+            // Aquí puedes agregar cualquier lógica adicional, como mostrar una notificación
+          }, error => {
+            console.error('Error al actualizar la mascota (vet):', error);
+            // Manejo de errores
+          });
+        }        
         console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas']); 
+        this.router.navigate(['/mascotas/todas']); 
       }
 
       this.mascotaForm.disable();  
@@ -122,12 +138,31 @@ export class VerUnVeterinarioComponent {
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
-    // Si el botón ya está expandido, procede a eliminar la mascota
+    
     if (botonEliminar?.classList.contains('expanded')) {
       if (this.mascota && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
-        console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+    
+        if (this.userType === 'admin') {
+          this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+            response => {
+              console.log('Mascota eliminada por el admin:', response);
+              this.router.navigate(['/mascotas/todas']);  
+            },
+            error => {
+              console.error('Error al eliminar la mascota (admin):', error);
+            }
+          );
+        } else if (this.userType === 'vet') {
+          this.mascotasService.eliminarMascotaVet(this.mascota.id).subscribe(
+            response => {
+              console.log('Mascota eliminada por el veterinario:', response);
+              this.router.navigate(['/mascotas/todas']); 
+            },
+            error => {
+              console.error('Error al eliminar la mascota (vet):', error);
+            }
+          );
+        }
       } else {
         console.log('Error: No se pudo eliminar la mascota');
       }
@@ -137,4 +172,5 @@ export class VerUnVeterinarioComponent {
       }
     }
   }
+  
 }

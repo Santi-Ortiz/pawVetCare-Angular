@@ -29,14 +29,27 @@ export class ContainerTotalTratamientosPorTipoComponent {
   };
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+  mascotaSeleccionada: Mascota | undefined;
 
   constructor(private mascotasService: MascotasService, private router: Router) {} 
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    //console.log(this.mascotas);
-    this.autoMoverCarrusel();
+    
+    this.mascotasService.obtenerMascotasAdmin().subscribe(
+      (mascotas: Mascota[]) => {
+        
+        this.mascotas = mascotas;
+  
+       
+        this.autoMoverCarrusel();
+      },
+      (error) => {
+        console.error('Error al obtener las mascotas:', error);
+        alert('Hubo un error al cargar las mascotas. Inténtalo nuevamente más tarde.');
+      }
+    );
   }
+  
 
   ngOnDestroy(): void {
     if (this.intervalId) {
@@ -58,20 +71,45 @@ export class ContainerTotalTratamientosPorTipoComponent {
   }
 
   buscarMascota(mascotaId: number | undefined): void {
-    const id = Number(mascotaId);
-    if (!id) {
-      return;
-    }
-    const mascota = this.mascotasService.getMascota(id);
-    if (mascota) {
-      this.router.navigate(['/mascota', id]);
-    } else {
-      alert(`Mascota con ID ${id} no encontrada`);
-    }
+  const id = Number(mascotaId);
+
+  if (!id) {
+    alert('ID de mascota inválido.');
+    return;
   }
+
+  if (this.userType === 'admin') {
+    this.mascotasService.obtenerMascotaPorId(id).subscribe(
+      (mascota: Mascota) => {
+        this.mascotaSeleccionada = mascota; 
+        this.router.navigate(['/mascota', id]);  
+      },
+      (error) => {
+        console.error(`Error al obtener la mascota para admin con ID ${id}:`, error);
+        alert(`Mascota con ID ${id} no encontrada`);
+      }
+    );
+  } else if (this.userType === 'vet') {
+    this.mascotasService.obtenerMascotaPorId(id).subscribe(
+      (mascota: Mascota) => {
+        this.mascotaSeleccionada = mascota; 
+        this.router.navigate(['/mascota', id]);  
+      },
+      (error) => {
+        console.error(`Error al obtener la mascota para vet con ID ${id}:`, error);
+        alert(`Mascota con ID ${id} no encontrada`);
+      }
+    );
+  }
+}
+
   
   agregarMascota(): void {
-    this.mascotasService.agregarMascota(this.nuevaMascota);  // Agrega la nueva mascota al servicio
+    if (this.userType === 'admin') {
+      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }else if(this.userType === 'vet'){
+      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }
     alert('Mascota agregada exitosamente');
     this.nuevaMascota = {  // Reinicia el formulario de nueva mascota
       id: 0,

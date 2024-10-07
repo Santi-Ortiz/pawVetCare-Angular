@@ -60,10 +60,14 @@ export class InformacionClienteComponent {
         estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
 
-      if (this.mascota) {
-        this.mascotasService.actualizarMascota(mascotaActualizada.id, mascotaActualizada);
+      if (this.userType === 'admin'){
+        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada);
         console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas']); 
+        this.router.navigate(['/mascotas/todas']); 
+      } else if(this.userType === 'vet'){
+        this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada);
+        console.log('Mascota actualizada:', mascotaActualizada);
+        this.router.navigate(['/mascotas/todas']); 
       }
 
       this.mascotaForm.disable();
@@ -76,16 +80,28 @@ export class InformacionClienteComponent {
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
-    // Si el botón ya está expandido, procede a eliminar la mascota
+    
+  
     if (botonEliminar?.classList.contains('expanded')) {
       if (this.mascota && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascota(this.mascota.id);  // Eliminar la mascota por ID
-        console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas']);  // Redirigir a la lista de mascotas
+     
+        this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+          response => {
+            console.log('Mascota eliminada:', this.mascota?.id);
+            alert('Mascota eliminada exitosamente');
+            this.router.navigate(['/mascotas/todas']); 
+          },
+          error => {
+            console.error('Error al eliminar la mascota:', error);
+            alert('Hubo un error al eliminar la mascota. Inténtalo nuevamente más tarde.');
+          }
+        );
       } else {
         console.log('Error: No se pudo eliminar la mascota');
+        alert('Error: No se encontró la mascota para eliminar.');
       }
     } else {
+   
       if (botonEliminar) {
         botonEliminar.classList.add('expanded');
       }

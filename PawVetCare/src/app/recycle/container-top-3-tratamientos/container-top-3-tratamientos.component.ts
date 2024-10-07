@@ -14,6 +14,8 @@ export class ContainerTop3TratamientosComponent {
   index = 0;
   intervalId: any;
   mascotas: Mascota[] = [];
+  mascotaSeleccionada: Mascota | undefined; 
+
 
   nuevaMascota: Mascota = {
     id: 0,
@@ -33,10 +35,24 @@ export class ContainerTop3TratamientosComponent {
   constructor(private mascotasService: MascotasService, private router: Router) {} 
 
   ngOnInit(): void {
-    this.mascotas = this.mascotasService.getMascotas();
-    //console.log(this.mascotas);
+    // Se valida el tipo de usuario: admin o veterinario
+    if (this.userType === 'admin') {
+      // Código específico para admin
+      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+      });
+      console.log('Admin accediendo a las mascotas');
+    } else if (this.userType === 'vet') {
+      // Código específico para veterinario
+      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
+        this.mascotas = mascotas;
+      });
+      console.log('Veterinario accediendo a las mascotas');
+    }
+  
     this.autoMoverCarrusel();
   }
+  
 
   ngOnDestroy(): void {
     if (this.intervalId) {
@@ -58,11 +74,22 @@ export class ContainerTop3TratamientosComponent {
   }
 
   buscarMascota(mascotaId: number | undefined): void {
+    let mascota: Mascota | undefined;
     const id = Number(mascotaId);
     if (!id) {
       return;
     }
-    const mascota = this.mascotasService.getMascota(id);
+    
+    // Se valida el tipo de usuario: admin o veterinario
+    if (this.userType === 'admin') {
+      const mascota = this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
+      this.mascotaSeleccionada = mascota;
+    });
+    }else if(this.userType === 'vet'){
+      const mascota = this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
+      this.mascotaSeleccionada = mascota;
+    })}
+    
     if (mascota) {
       this.router.navigate(['/mascota', id]);
     } else {
@@ -71,9 +98,13 @@ export class ContainerTop3TratamientosComponent {
   }
   
   agregarMascota(): void {
-    this.mascotasService.agregarMascota(this.nuevaMascota);  // Agrega la nueva mascota al servicio
+    if (this.userType === 'admin') {
+      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }else if(this.userType === 'vet'){
+      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cliente); 
+    }
     alert('Mascota agregada exitosamente');
-    this.nuevaMascota = {  // Reinicia el formulario de nueva mascota
+    this.nuevaMascota = { 
       id: 0,
       nombre: '',
       raza: '',

@@ -20,6 +20,7 @@ import { RegistroClienteComponent } from './registro/registro-cliente/registro-c
 import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinario/iniciar-veterinario.component';
 import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
 import { VerDashboardComponent } from './dashboard/ver-dashboard/ver-dashboard.component';
+import { AuthGuard } from './guard/authguard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -44,7 +45,7 @@ const routes: Routes = [
     component: VerMascotasComponent,
     canActivate: [AuthGuard],
     data: { role: 'cliente' }
-  }
+  },
   {path: 'mascota/:id', component: VerUnaMascotaComponent},
   {path: 'mascotas/todas', component: PaginacionMascotasComponent},
   {path: 'clientes', component: VerClientesComponent},

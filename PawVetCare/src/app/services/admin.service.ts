@@ -9,7 +9,7 @@ import { Cliente } from '../model/cliente';
 })
 export class AdminService {
 
-  private apiUrl = '/api/admin';  
+  private apiUrl = 'http://localhost:8090/api/admin';
 
   constructor(private http: HttpClient) { }
 
