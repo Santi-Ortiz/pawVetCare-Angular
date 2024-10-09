@@ -21,15 +21,15 @@ export class VerUnClienteComponent {
 
   mascota: Mascota = {
     id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,
-      cliente: 0,
-      tratamientos: [],
+    nombre: '',
+    raza: '',
+    edad: 0,
+    peso: 0,
+    enfermedad: '',
+    foto: '',
+    estado: true,
+    cedulaCliente:0,
+    tratamientos: [],
   }
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
@@ -84,7 +84,7 @@ export class VerUnClienteComponent {
           edad: this.mascota.edad,
           peso: this.mascota.peso,
           enfermedad: this.mascota.enfermedad,
-          cliente: this.mascota.cliente,
+          cliente: this.mascota.cedulaCliente,
           estado: this.mascota.estado,
           foto: this.mascota.foto
         });
@@ -99,7 +99,7 @@ export class VerUnClienteComponent {
           enfermedad: '',
           foto: '',
           estado: true,  
-          cliente: 0,
+          cedulaCliente:0,
           tratamientos: []
         };
       });
@@ -112,7 +112,7 @@ export class VerUnClienteComponent {
           edad: this.mascota.edad,
           peso: this.mascota.peso,
           enfermedad: this.mascota.enfermedad,
-          cliente: this.mascota.cliente,
+          cliente: this.mascota.cedulaCliente,
           estado: this.mascota.estado,
           foto: this.mascota.foto
         });
@@ -127,7 +127,7 @@ export class VerUnClienteComponent {
           enfermedad: '',
           foto: '',
           estado: true,  
-          cliente: 0,
+          cedulaCliente:0,
           tratamientos: []
         };
       });

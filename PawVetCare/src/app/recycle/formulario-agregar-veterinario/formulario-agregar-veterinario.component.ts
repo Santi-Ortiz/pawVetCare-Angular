@@ -18,7 +18,7 @@ export class FormularioAgregarVeterinarioComponent {
     enfermedad: '',
     foto: '',
     estado: true,
-    cliente: 0,
+    cedulaCliente:0,
     tratamientos: [],
   };
 
@@ -26,7 +26,7 @@ export class FormularioAgregarVeterinarioComponent {
 
   agregarMascota(): void {
     
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
       response => {
         alert('Mascota agregada exitosamente');
        
@@ -39,7 +39,7 @@ export class FormularioAgregarVeterinarioComponent {
           enfermedad: '',
           foto: '',
           estado: true,
-          cliente: 0,
+          cedulaCliente:0,
           tratamientos: [],
         };
   

@@ -48,8 +48,9 @@
       <small class="info-title">URL Foto:</small>
       <input class="info-label" formControlName="foto">
     </div>
-
-    <img class="mascotaimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">
+    
+    <!-- Mostrar la imagen de la mascota o una imagen de error si no se encuentra la URL -->
+    <img class="mascotaimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">    
 
     <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
       <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">

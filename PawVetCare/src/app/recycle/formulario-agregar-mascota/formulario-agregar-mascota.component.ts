@@ -18,14 +18,14 @@ export class FormularioAgregarMascotaComponent {
     enfermedad: '',
     foto: '',
     estado: true,
-    cliente: 0,
+    cedulaCliente:0,
     tratamientos: [],
   };
 
   constructor(private mascotasService: MascotasService, private router:Router) {}
 
   agregarMascota(): void {
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
       response => {
         alert('Mascota agregada exitosamente');
         
@@ -39,7 +39,7 @@ export class FormularioAgregarMascotaComponent {
           enfermedad: '',
           foto: '',
           estado: true,
-          cliente: 0,
+          cedulaCliente:0,
           tratamientos: [],
         };
   

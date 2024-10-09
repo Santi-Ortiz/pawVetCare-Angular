@@ -24,7 +24,7 @@ export class VerVeterinarioComponent {
     enfermedad: '',
     foto: '',
     estado: true,
-    cliente: 0,
+    cedulaCliente:0,
     tratamientos: [],
   };
 
@@ -97,7 +97,7 @@ export class VerVeterinarioComponent {
    
     if (this.userType === 'admin') {
    
-      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
         (response: string) => {
           alert('Mascota agregada exitosamente (Admin)');
           this.resetFormularioMascota();  
@@ -109,7 +109,7 @@ export class VerVeterinarioComponent {
       );
     } else if (this.userType === 'vet') {
       
-      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+      this.mascotasService.agregarMascotaVet(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
         (response: string) => {
           alert('Mascota agregada exitosamente (Vet)');
           this.resetFormularioMascota();  
@@ -132,7 +132,7 @@ export class VerVeterinarioComponent {
       enfermedad: '',
       foto: '',
       estado: true,
-      cliente: 0,
+      cedulaCliente: 0,
       tratamientos: []
     };
   }

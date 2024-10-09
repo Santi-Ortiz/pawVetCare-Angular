@@ -9,7 +9,7 @@ export interface Mascota {
     enfermedad: string;
     foto: string;
     estado: boolean;
-    cliente: number;
+    cedulaCliente: number;
     tratamientos: Tratamiento[];
   }
   

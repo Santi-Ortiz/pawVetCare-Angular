@@ -29,7 +29,7 @@ export class VerMascotasComponent {
     enfermedad: '',
     foto: '',
     estado: true,
-    cliente: 0,
+    cedulaCliente:0,
     tratamientos: [],
   };
 
@@ -109,11 +109,11 @@ export class VerMascotasComponent {
   }
   
   agregarMascota(): void {
-    if (this.nuevaMascota.cliente === undefined) {
+    if (this.nuevaMascota.cedulaCliente === undefined) {
       alert('Por favor, asigna un cliente válido antes de agregar la mascota.');
       return;
     }
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cliente).subscribe(
+    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
       (response) => {
         alert('Mascota agregada exitosamente');
 
@@ -126,7 +126,7 @@ export class VerMascotasComponent {
           enfermedad: '',
           foto: '',
           estado: true,
-          cliente: 0,
+          cedulaCliente:0,
           tratamientos: [],
         };
         this.loadMascotas();

@@ -24,7 +24,7 @@ export class VerUnVeterinarioComponent {
       enfermedad: '',
       foto: '',
       estado: true,
-      cliente: 0,
+      cedulaCliente:0,
       tratamientos: [],
   }
 
@@ -65,7 +65,7 @@ export class VerUnVeterinarioComponent {
         edad: this.mascota.edad,
         peso: this.mascota.peso,
         enfermedad: this.mascota.enfermedad,
-        cliente: this.mascota.cliente,
+        cliente: this.mascota.cedulaCliente,
         estado: this.mascota.estado,
         foto: this.mascota.foto
       });
@@ -80,7 +80,7 @@ export class VerUnVeterinarioComponent {
         enfermedad: '',
         foto: '',
         estado: true,  
-        cliente: 0,
+        cedulaCliente:0,
         tratamientos: []
       };
     });

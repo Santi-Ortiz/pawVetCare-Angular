@@ -19,7 +19,7 @@ export class VerUnaMascotaComponent {
   isEditMode: boolean = false;
 
   mascota: Mascota = {
-    id: 0,
+      id: 0,
       nombre: '',
       raza: '',
       edad: 0,
@@ -27,7 +27,7 @@ export class VerUnaMascotaComponent {
       enfermedad: '',
       foto: '',
       estado: true,
-      cliente: 0,
+      cedulaCliente:0,
       tratamientos: [],
   }
 
@@ -57,8 +57,8 @@ export class VerUnaMascotaComponent {
   }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));  
-    
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+  
     if (!id) {
       alert('ID de mascota inválido.');
       return;
@@ -66,17 +66,17 @@ export class VerUnaMascotaComponent {
   
     this.mascotasService.obtenerMascotaPorId(id).subscribe(
       (mascota: Mascota) => {
-  
         this.mascota = mascota;
+        console.log(mascota);
   
-      
+        // Inicializa el formulario con los datos de la mascota
         this.mascotaForm.patchValue({
           nombre: this.mascota.nombre,
           raza: this.mascota.raza,
           edad: this.mascota.edad,
           peso: this.mascota.peso,
           enfermedad: this.mascota.enfermedad,
-          cliente: this.mascota.cliente,
+          cliente: this.mascota.cedulaCliente,
           estado: this.mascota.estado,
           foto: this.mascota.foto
         });
@@ -89,6 +89,7 @@ export class VerUnaMascotaComponent {
       }
     );
   }
+  
   
 
   toggleEditMode(): void {
