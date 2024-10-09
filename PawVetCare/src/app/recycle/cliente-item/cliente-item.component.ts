@@ -1,4 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { Cliente } from 'src/app/model/cliente';
 import { Mascota } from 'src/app/model/mascota';
 
 @Component({
@@ -7,15 +8,15 @@ import { Mascota } from 'src/app/model/mascota';
   styleUrls: ['./cliente-item.component.css']
 })
 export class ClienteItemComponent {
-  @Input() mascotas: Mascota[] = [];
+  @Input() clientes: Cliente[] = [];
   @Input() currentPage: number = 1;
   @Input() itemsPerPage: number = 4;
   totalPages: number = 1;
   
-  mascotasPagina: Mascota[] = [];
+  mascotasPagina: Cliente[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['mascotas'] || changes['currentPage']) {
+    if (changes['clientes'] || changes['currentPage']) {
       this.updatePage();
     }
   }
@@ -24,8 +25,8 @@ export class ClienteItemComponent {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
 
-    this.mascotasPagina = this.mascotas.slice(startIndex, endIndex);
-    this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+    this.mascotasPagina = this.clientes.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.clientes.length / this.itemsPerPage);
   }
 
   changePage(direction: number): void {

@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Cliente } from 'src/app/model/cliente';
 import { Mascota } from 'src/app/model/mascota';
 
 @Component({
@@ -7,7 +8,7 @@ import { Mascota } from 'src/app/model/mascota';
   styleUrls: ['./carrusel-clientes.component.css']
 })
 export class CarruselClientesComponent {
-  @Input() mascotas: Mascota[] = [];
+  @Input() clientes: Cliente[] = [];
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
   index = 0;
   intervalId: any;
@@ -23,7 +24,7 @@ export class CarruselClientesComponent {
   }
 
   cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
+    const totalMascotas = this.clientes.length;
     this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
     if (this.carrusel) {
       this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 

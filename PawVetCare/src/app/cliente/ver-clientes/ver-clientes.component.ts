@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/model/cliente';
 import { Mascota } from 'src/app/model/mascota';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -10,40 +12,36 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 })
 export class VerClientesComponent {
   userType = 'admin'; 
-  mascotaId: number | undefined;
+  clienteId: number | undefined;
   index = 0;
   intervalId: any;
-  mascotas: Mascota[] = [];
+  clientes: Cliente[] = [];
 
-  nuevaMascota: Mascota = {
+  nuevoCliente: Cliente = {
     id: 0,
+    cedula: 0,
     nombre: '',
-    raza: '',
-    edad: 0,
-    peso: 0,
-    enfermedad: '',
-    foto: '',
-    estado: true,
-    cedulaCliente:0,
-    tratamientos: [],
+    correo: '',
+    celular: 0,
+    mascotas: [],
   };
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
   mascotaSeleccionada: Mascota | undefined;
   
 
-  constructor(private mascotasService: MascotasService, private router: Router) {} 
+  constructor(private clientesService: ClienteService, private router: Router) {} 
 
   ngOnInit(): void {
     // Se valida el tipo de usuario: admin o veterinario
     if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
+      this.clientesService.obtenerTodosClientes().subscribe((clientes: Cliente[]) => {
+        this.clientes = clientes;
       });
       console.log('Admin accediendo a las mascotas');
     } else if (this.userType === 'vet') {
-      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
+      this.clientesService.obtenerTodosClientes().subscribe((clientes: Cliente[]) => {
+        this.clientes = clientes;
       });
     }
   
@@ -57,7 +55,7 @@ export class VerClientesComponent {
   }
 
   cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
+    const totalMascotas = this.clientes.length;
     this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
     console.log(`Mostrando mascota en índice: ${this.index}`); 
     if (this.carrusel) {
@@ -78,9 +76,9 @@ export class VerClientesComponent {
     }
   
     if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotaPorId(id).subscribe(
-        (mascota: Mascota) => {
-          this.mascotaSeleccionada = mascota;
+      this.clientesService.obtenerClientePorId(id).subscribe(
+        (cliente: Cliente) => {
+          this.nuevoCliente = cliente;
           this.router.navigate(['/mascota', id]); 
         },
         (error) => {
@@ -89,9 +87,9 @@ export class VerClientesComponent {
         }
       );
     } else if (this.userType === 'vet') {
-      this.mascotasService.obtenerMascotaPorId(id).subscribe(
-        (mascota: Mascota) => {
-          this.mascotaSeleccionada = mascota;
+      this.clientesService.obtenerClientePorId(id).subscribe(
+        (cliente: Cliente) => {
+          this.nuevoCliente = cliente;
           this.router.navigate(['/mascota', id]); 
         },
         (error) => {
@@ -105,22 +103,18 @@ export class VerClientesComponent {
   
   agregarMascota(): void {
     if (this.userType === 'admin') {
-      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente); 
+      this.clientesService.agregarCliente(this.nuevoCliente); 
     }else if(this.userType === 'vet'){
-      this.mascotasService.agregarMascotaVet(this.nuevaMascota,this.nuevaMascota.cedulaCliente); 
+      this.clientesService.agregarCliente(this.nuevoCliente); 
     }
     alert('Mascota agregada exitosamente');
-    this.nuevaMascota = { 
+    this.nuevoCliente = {
       id: 0,
+      cedula: 0,
       nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,
-      cedulaCliente:0,
-      tratamientos: [],
+      correo: '',
+      celular: 0,
+      mascotas: [],
     };
   }
 }

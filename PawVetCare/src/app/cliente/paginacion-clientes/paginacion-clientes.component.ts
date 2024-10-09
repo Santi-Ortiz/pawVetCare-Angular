@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/model/cliente';
 import { Mascota } from 'src/app/model/mascota';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -13,16 +15,16 @@ export class PaginacionClientesComponent {
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 1; 
-  mascotas: Mascota[] = []; 
+  clientes: Cliente[] = []; 
 
-  constructor(private mascotasService: MascotasService, private router: Router) {}
+  constructor(private clientesService: ClienteService, private router: Router) {}
 
   ngOnInit(): void {
  
     if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotasAdmin().subscribe(
-        (mascotas: Mascota[]) => {
-          this.mascotas = mascotas;
+      this.clientesService.obtenerTodosClientes().subscribe(
+        (clientes: Cliente[]) => {
+          this.clientes = clientes;
           this.calcularTotalPaginas();  
         },
         (error) => {
@@ -30,21 +32,20 @@ export class PaginacionClientesComponent {
         }
       );
     } else if (this.userType === 'vet') {
-   
-      this.mascotasService.obtenerMascotasVet().subscribe(
-        (mascotas: Mascota[]) => {
-          this.mascotas = mascotas;
-          this.calcularTotalPaginas(); 
+      this.clientesService.obtenerTodosClientes().subscribe(
+        (clientes: Cliente[]) => {
+          this.clientes = clientes;
+          this.calcularTotalPaginas();  
         },
         (error) => {
-          console.error('Error al cargar las mascotas del vet:', error);
+          console.error('Error al cargar las mascotas del admin:', error);
         }
       );
     }
   }
   
   calcularTotalPaginas(): void {
-    this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.clientes.length / this.itemsPerPage);
   }
   
 

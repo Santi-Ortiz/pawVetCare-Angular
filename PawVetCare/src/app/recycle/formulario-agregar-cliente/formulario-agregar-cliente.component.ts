@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/model/cliente';
 import { Mascota } from 'src/app/model/mascota';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -9,43 +11,36 @@ import { MascotasService } from 'src/app/services/mascotas.service';
   styleUrls: ['./formulario-agregar-cliente.component.css']
 })
 export class FormularioAgregarClienteComponent {
-  @Input() nuevaMascota: Mascota = {
+  @Input() 
+  nuevoCliente: Cliente = {
     id: 0,
+    cedula: 0,
     nombre: '',
-    raza: '',
-    edad: 0,
-    peso: 0,
-    enfermedad: '',
-    foto: '',
-    estado: true,
-    cedulaCliente:0,
-    tratamientos: [],
+    correo: '',
+    celular: 0,
+    mascotas: [],
   };
 
-  constructor(private mascotasService: MascotasService, private router: Router) {}
+  constructor(private clienteService: ClienteService, private router: Router) {}
 
   agregarMascota(): void {
  
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
+    this.clienteService.agregarCliente(this.nuevoCliente).subscribe(
       response => {
-        alert('Mascota agregada exitosamente');
+        alert('Cliente agregado exitosamente');
         
        
-        this.nuevaMascota = {
+        this.nuevoCliente = {
           id: 0,
+          cedula: 0,
           nombre: '',
-          raza: '',
-          edad: 0,
-          peso: 0,
-          enfermedad: '',
-          foto: '',
-          estado: true,
-          cedulaCliente:0,
-          tratamientos: [],
+          correo: '',
+          celular: 0,
+          mascotas: [],
         };
   
     
-        this.router.navigate(['/mascotas/todas']);
+        this.router.navigate(['/clientes/todos']);
       },
       error => {
         console.error('Error al agregar la mascota:', error);

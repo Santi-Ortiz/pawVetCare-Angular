@@ -28,23 +28,27 @@ export class ClienteService {
     return this.http.get<Cliente[]>(`${this.apiUrl}/todos`);
   }
 
+  obtenerClientePorId(id: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.apiUrl}/find/${id}`);
+  }
+
   // Agregar un nuevo cliente
   agregarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(`${this.apiUrl}/agregar`, cliente);
   }
 
   // Actualizar información de un cliente (Admin)
-  actualizarClienteAdmin(id: number, cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrl}/update/admin/${id}`, cliente);
+  actualizarClienteAdmin(cedula: number, cliente: Cliente): Observable<Cliente> {
+    return this.http.put<Cliente>(`${this.apiUrl}/update/admin/${cedula}`, cliente);
   }
 
   // Actualizar información de un cliente (Vet)
-  actualizarClienteVet(id: number, cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrl}/update/vet/${id}`, cliente);
+  actualizarClienteVet(cedula: number, cliente: Cliente): Observable<Cliente> {
+    return this.http.put<Cliente>(`${this.apiUrl}/update/vet/${cedula}`, cliente);
   }
 
   // Eliminar un cliente
-  borrarCliente(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  borrarCliente(cedula: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${cedula}`);
   }
 }

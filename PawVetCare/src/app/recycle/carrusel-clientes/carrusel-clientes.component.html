@@ -1,27 +1,27 @@
-<div class="carrusel-container" *ngIf="mascotas.length > 0">
+<div class="carrusel-container" *ngIf="clientes.length > 0">
     <button class="carrusel-prev" (click)="cambiarMascota(-1)">
         <img src="../assets/previous.png" alt="Regreso">
     </button>
     <div class="carrusel">
-        <div class="mascota-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <div class="mascota-item" *ngFor="let cliente of clientes; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
             <div class="mascota-info">
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
-                    <label class="info-label">{{ mascota.nombre }}</label>
+                    <label class="info-label">{{ cliente.nombre }}</label>
                 </div>
                 <div class="info-itemCedula">
                     <small class="info-title">Cédula:</small>
-                    <label class="info-label">{{ mascota.raza }}</label>
+                    <label class="info-label">{{ cliente.cedula }}</label>
                 </div>
                 <div class="info-itemCorreo">
                     <small class="info-title">Correo:</small>
-                    <label class="info-label">{{ mascota.edad }}</label>
+                    <label class="info-label">{{ cliente.correo }}</label>
                 </div>
                 <div class="info-itemCelular">
                     <small class="info-title">Celular:</small>
-                    <label class="info-label">{{ mascota.peso }}</label>
+                    <label class="info-label">{{ cliente.celular }}</label>
                     </div>
-                <a class="info-button" [routerLink]="['/cliente', mascota.id]">+ Info</a>
+                <a class="info-button" [routerLink]="['/cliente', cliente.cedula]">+ Info</a>
             </div>
         </div>
     </div>

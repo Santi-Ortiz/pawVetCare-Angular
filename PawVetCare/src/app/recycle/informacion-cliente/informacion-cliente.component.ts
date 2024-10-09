@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cliente } from 'src/app/model/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -11,41 +13,28 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 export class InformacionClienteComponent {
   userType = 'admin';
 
-  @Input()
-  mascotaForm!: FormGroup;
-  @Input() mascota: any;  // Ajusta el tipo según la estructura de tu mascota
-  @Input()
-  isEditMode!: boolean;
+  @Input() cliente!: Cliente;  // Cambiar a cliente
+  @Input() mascotaForm!: FormGroup;
+  @Input() isEditMode!: boolean;
 
   constructor(
-    private fb: FormBuilder,  
-    private route: ActivatedRoute, 
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
-    private mascotasService: MascotasService  
+    private clienteService: ClienteService
   ) {
-
     this.mascotaForm = this.fb.group({
+      cedula: [''],
       nombre: [''],
-      raza: [''],
-      edad: [''],
-      peso: [''],
-      enfermedad: [''],
-      cliente: [''],
-      estado: [''],
-      foto: ['']
+      correo: [''],
+      celular: ['']
     });
-
-    // Escuchar los cambios en el formulario y actualizar el objeto mascota
-    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
-      this.mascota.estado = nuevoEstado;
-    });
-
   }
 
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
     this.isEditMode = !this.isEditMode;
-
+  
     if (this.isEditMode) {
       this.mascotaForm.enable();
       if (botonEditar) {
@@ -54,57 +43,88 @@ export class InformacionClienteComponent {
       }
       console.log('Formulario habilitado para edición');
     } else {
-      const mascotaActualizada = {
-        ...this.mascota,
+      const clienteActualizada: Cliente = {
+        ...this.cliente,
         ...this.mascotaForm.value,
-        estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
       };
+  
+     
+      console.log('Cédula enviada:', clienteActualizada.cedula);
 
-      if (this.userType === 'admin'){
-        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas/todas']); 
-      } else if(this.userType === 'vet'){
-        this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas/todas']); 
+      
+      if (!clienteActualizada.cedula) {
+        alert('ID de la mascota no está definido.');
+        return;
       }
 
-      this.mascotaForm.disable();
-      if (botonEditar) {
-        botonEditar.classList.remove('expanded');
-        botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+      if (this.userType === 'admin') {
+        this.clienteService.actualizarClienteAdmin(clienteActualizada.cedula, clienteActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el administrador:', response);
+            this.router.navigate(['/clientes/todos']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (admin):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
+      } else if (this.userType === 'vet') {
+        this.clienteService.actualizarClienteVet(clienteActualizada.cedula, clienteActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el veterinario:', response);
+            this.router.navigate(['/clientes/todos']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (vet):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
       }
+    }
+  }
+
+  finalizeEditMode(botonEditar: HTMLElement | null): void {
+    this.isEditMode = false;
+    this.mascotaForm.disable();
+    if (botonEditar) {
+      botonEditar.classList.remove('expanded');
+      botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
     }
   }
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
-    
   
+    // Verificar si el botón ya está expandido
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota && this.mascota.id !== undefined) {
-     
-        this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+      // Verificar si el cliente existe y tiene un ID válido
+      if (this.cliente && this.cliente.cedula !== undefined) {
+        this.clienteService.borrarCliente(this.cliente.cedula).subscribe(
           response => {
-            console.log('Mascota eliminada:', this.mascota?.id);
-            alert('Mascota eliminada exitosamente');
-            this.router.navigate(['/mascotas/todas']); 
+            console.log('Cliente eliminado:', this.cliente.cedula);
+            alert('Cliente eliminado exitosamente');
+            this.router.navigate(['/clientes/todos']); // Redirigir después de la eliminación
           },
           error => {
-            console.error('Error al eliminar la mascota:', error);
-            alert('Hubo un error al eliminar la mascota. Inténtalo nuevamente más tarde.');
+            console.error('Error al eliminar el cliente:', error);
+            alert('Hubo un error al eliminar el cliente. Inténtalo nuevamente más tarde.');
           }
         );
       } else {
-        console.log('Error: No se pudo eliminar la mascota');
-        alert('Error: No se encontró la mascota para eliminar.');
+        // Cliente no válido o no encontrado
+        console.log('Error: No se pudo eliminar el cliente');
+        alert('Error: No se encontró el cliente para eliminar.');
       }
     } else {
-   
-      if (botonEliminar) {
-        botonEliminar.classList.add('expanded');
-      }
+      // Si el botón no está expandido, expandirlo
+      botonEliminar?.classList.add('expanded');
     }
   }
+  
 }

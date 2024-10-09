@@ -13,7 +13,7 @@ import { Cliente } from 'src/app/model/cliente';
 })
 export class VerMascotasComponent {
 
-  userType: string | null = null;
+  userType = 'admin'; 
   cliente: Cliente | undefined;
   mascotaId: number | undefined;
   index = 0;
@@ -39,7 +39,6 @@ export class VerMascotasComponent {
   constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {} 
 
   ngOnInit(): void {
-    this.userType = this.authService.getUserRole();
     this.loadMascotas();
     this.autoMoverCarrusel();
   }

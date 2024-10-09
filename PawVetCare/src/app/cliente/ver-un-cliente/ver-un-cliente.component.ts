@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Mascota } from 'src/app/model/mascota';
+import { Cliente } from 'src/app/model/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -11,135 +12,68 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 })
 export class VerUnClienteComponent {
   userType = 'admin';
-  mascotaId: number | undefined;
-  index = 0;
-  intervalId: any;
-  mascotas: Mascota[] = [];
+  clienteId: number | undefined;
+  cliente: Cliente = {
+    id: 0,
+    cedula: 0,
+    nombre: '',
+    correo: '',
+    celular: 0,
+    mascotas: [],
+  };
 
   mascotaForm: FormGroup;
   isEditMode: boolean = false;
-
-  mascota: Mascota = {
-    id: 0,
-    nombre: '',
-    raza: '',
-    edad: 0,
-    peso: 0,
-    enfermedad: '',
-    foto: '',
-    estado: true,
-    cedulaCliente:0,
-    tratamientos: [],
-  }
-
-  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
 
   constructor(
     private fb: FormBuilder,  
     private route: ActivatedRoute, 
     private router: Router,
-    private mascotasService: MascotasService  
+    private clienteService: ClienteService  
   ) {
-
     this.mascotaForm = this.fb.group({
-      nombre: [''],
-      raza: [''],
-      edad: [''],
-      peso: [''],
-      enfermedad: [''],
-      cliente: [''],
-      estado: [''],
-      foto: ['']
+      cedula: 0,
+      nombre: '',
+      correo: '',
+      celular: 0,
     });
-
-    // Escuchar los cambios en el formulario y actualizar el objeto mascota
-    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
-      this.mascota.estado = nuevoEstado;
-    });
-
   }
 
   ngOnInit(): void {
-    let mascotaSeleccionada: Mascota | undefined;
-    if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
-      });
-    }else if(this.userType === 'vet') {
-      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
-      });
-    }
-    //console.log(this.mascotas);
-    this.autoMoverCarrusel();
-    
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    
-    if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
-        this.mascota = mascota;
+
+    if (!id) {
+      alert('ID de cliente inválido.');
+      return;
+    }
+
+    this.clienteService.obtenerClientePorId(id).subscribe(
+      (cliente: Cliente) => {
+        this.cliente = cliente;
+        console.log(cliente);
+
+        // Inicializa el formulario con los datos del cliente
         this.mascotaForm.patchValue({
-          nombre: this.mascota.nombre,
-          raza: this.mascota.raza,
-          edad: this.mascota.edad,
-          peso: this.mascota.peso,
-          enfermedad: this.mascota.enfermedad,
-          cliente: this.mascota.cedulaCliente,
-          estado: this.mascota.estado,
-          foto: this.mascota.foto
+          cedula: this.cliente.cedula,
+          nombre: this.cliente.nombre,
+          correo: this.cliente.correo,
+          celular: this.cliente.celular,
         });
+
         this.mascotaForm.disable();
-      }, () => {
-        this.mascota = {
-          id: 0,
-          nombre: '',
-          raza: '',
-          edad: 0,
-          peso: 0,
-          enfermedad: '',
-          foto: '',
-          estado: true,  
-          cedulaCliente:0,
-          tratamientos: []
-        };
-      });
-    } else if (this.userType === 'vet') {
-      this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
-        this.mascota = mascota;
-        this.mascotaForm.patchValue({
-          nombre: this.mascota.nombre,
-          raza: this.mascota.raza,
-          edad: this.mascota.edad,
-          peso: this.mascota.peso,
-          enfermedad: this.mascota.enfermedad,
-          cliente: this.mascota.cedulaCliente,
-          estado: this.mascota.estado,
-          foto: this.mascota.foto
-        });
-        this.mascotaForm.disable();
-      }, () => {
-        this.mascota = {
-          id: 0,
-          nombre: '',
-          raza: '',
-          edad: 0,
-          peso: 0,
-          enfermedad: '',
-          foto: '',
-          estado: true,  
-          cedulaCliente:0,
-          tratamientos: []
-        };
-      });
+      },
+      (error) => {
+        console.error(`Error al obtener el cliente con cedula ${id}:`, error);
+        alert(`Cliente con cedula ${id} no encontrado`);
+      }
+    );
   }
-}
 
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
-    this.isEditMode = !this.isEditMode;  
-
+    this.isEditMode = !this.isEditMode;
+  
     if (this.isEditMode) {
-     
       this.mascotaForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
@@ -147,70 +81,83 @@ export class VerUnClienteComponent {
       }
       console.log('Formulario habilitado para edición');
     } else {
-      
-      const mascotaActualizada: Mascota = {
-        ...this.mascota,  
-        ...this.mascotaForm.value, 
-        estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
+      const clienteActualizada: Cliente = {
+        ...this.cliente,
+        ...this.mascotaForm.value,
       };
+  
+     
+      console.log('Cédula enviada:', clienteActualizada.cedula);
 
-      if (this.userType === 'admin'){
-        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas/todas']); 
-      }else if(this.userType === 'vet'){
-        this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada);
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas/todas']); 
+
+      if (!clienteActualizada.cedula) {
+        alert('ID de la mascota no está definido.');
+        return;
       }
 
-      this.mascotaForm.disable();  
-      if (botonEditar) {
-        botonEditar.classList.remove('expanded');
-        botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+      if (this.userType === 'admin') {
+        this.clienteService.actualizarClienteAdmin(clienteActualizada.cedula, clienteActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el administrador:', response);
+            this.router.navigate(['/clientes/todos']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (admin):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
+      } else if (this.userType === 'vet') {
+        this.clienteService.actualizarClienteVet(clienteActualizada.cedula, clienteActualizada).subscribe(
+          response => {
+            console.log('Mascota actualizada por el veterinario:', response);
+            this.router.navigate(['/clientes/todos']);
+          },
+          error => {
+            console.error('Error al actualizar la mascota (vet):', error);
+            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+          },
+          () => {
+            this.finalizeEditMode(botonEditar);  
+          }
+        );
       }
     }
   }
+  
+  finalizeEditMode(botonEditar: HTMLElement | null): void {
+    this.isEditMode = false;
+    this.mascotaForm.disable();
+    if (botonEditar) {
+      botonEditar.classList.remove('expanded');
+      botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+    }
+  }
+  
+  
 
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
     // Si el botón ya está expandido, procede a eliminar la mascota
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.userType === 'admin' && this.mascota.id !== undefined) {
-        this.mascotasService.eliminarMascotaAdmin(this.mascota.id);  // Eliminar la mascota por ID
-        console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
-      } else if(this.userType === 'admin' && this.mascota.id !== undefined){
-        this.mascotasService.eliminarMascotaVet(this.mascota.id);  // Eliminar la mascota por ID
-        console.log('Mascota eliminada:', this.mascota.id);
-        this.router.navigate(['/mascotas/todas']);  // Redirigir a la lista de mascotas
+      if (this.userType === 'admin' && this.cliente.id !== undefined) {
+        this.clienteService.borrarCliente(this.cliente.cedula);  // Eliminar la mascota por ID
+        console.log('Cliente eliminada:', this.cliente.cedula);
+        this.router.navigate(['/clientes/todos']);  // Redirigir a la lista de mascotas
+      } else if(this.userType === 'admin' && this.cliente.cedula !== undefined){
+        this.clienteService.borrarCliente(this.cliente.cedula);  // Eliminar la mascota por ID
+        console.log('Cliente eliminada:', this.cliente.cedula);
+        this.router.navigate(['/clientes/todos']);  // Redirigir a la lista de mascotas
       } else {
-        console.log('Error: No se pudo eliminar la mascota');
+        console.log('Error: No se pudo eliminar el Cliente');
       }
     } else {
       if (botonEliminar) {
         botonEliminar.classList.add('expanded');
       }
     }
-  }
-
-  ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
-  }
-
-  cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
-    this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
-    console.log(`Mostrando mascota en índice: ${this.index}`); 
-    if (this.carrusel) {
-      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
-    }
-  }
-
-  autoMoverCarrusel(): void {
-    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
   }
   
 }
