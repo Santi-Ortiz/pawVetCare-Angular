@@ -15,7 +15,7 @@ export class AuthService {
 
   //Login
   loginAdmin(username: string, password: string): Observable<any> {
-    const url = `${this.apiUrl}/admin?cedula=${username}&password=${password}`;
+    const url = `${this.apiUrl}/admin?username=${username}&password=${password}`;
     return this.http.post(url, {}).pipe(
       tap((response: any) => {
         // Guardamos el rol y el ID del usuario en localStorage o en una variable compartida

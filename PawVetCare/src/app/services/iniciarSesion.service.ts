@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente } from '../model/cliente'; 
 import { Admin } from '../model/admin'; 
@@ -34,9 +34,11 @@ export class SesionService {
   }
 
   // Iniciar sesión de administrador
-  loginAdmin(username: string, password: string): Observable<Admin> {
-    const url = `${this.apiUrl}/admin`;
-    const params = { username, password };
-    return this.http.post<Admin>(url, null, { params });
-  }
+  loginAdmin(username: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+  
+    return this.http.post(`${this.apiUrl}/admin`, {}, { params });
+  }  
 }

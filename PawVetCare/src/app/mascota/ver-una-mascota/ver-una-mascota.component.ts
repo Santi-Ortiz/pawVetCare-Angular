@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MascotasService } from '../../services/mascotas.service';
 import { Mascota } from '../../model/mascota';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Mascota } from '../../model/mascota';
 
 export class VerUnaMascotaComponent {
   
-  userType = 'admin';
+  userType: string | null | undefined;
 
   mascotaForm: FormGroup;
   isEditMode: boolean = false;
@@ -35,7 +36,8 @@ export class VerUnaMascotaComponent {
     private fb: FormBuilder,  
     private route: ActivatedRoute, 
     private router: Router,
-    private mascotasService: MascotasService  
+    private mascotasService: MascotasService, 
+    private authService: AuthService,  
   ) {
 
     this.mascotaForm = this.fb.group({
@@ -57,6 +59,7 @@ export class VerUnaMascotaComponent {
   }
 
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); 
     const id = Number(this.route.snapshot.paramMap.get('id'));
   
     if (!id) {

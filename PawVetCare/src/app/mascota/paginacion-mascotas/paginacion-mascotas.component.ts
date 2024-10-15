@@ -2,6 +2,7 @@ import { Component , ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MascotasService } from '../../services/mascotas.service'; 
 import { Mascota } from '../../model/mascota';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-paginacion-mascotas',
@@ -10,15 +11,16 @@ import { Mascota } from '../../model/mascota';
   encapsulation: ViewEncapsulation.None
 })
 export class PaginacionMascotasComponent {
-  userType: string = 'admin';
+  userType: string | null | undefined;
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 1; 
   mascotas: Mascota[] = []; 
 
-  constructor(private mascotasService: MascotasService, private router: Router) {}
+  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); 
  
     if (this.userType === 'admin') {
       this.mascotasService.obtenerMascotasAdmin().subscribe(
