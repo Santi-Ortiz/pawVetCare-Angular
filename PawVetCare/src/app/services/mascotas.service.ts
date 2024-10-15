@@ -98,4 +98,8 @@ export class MascotasService {
   contarMascotasActivas(): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/activas`);
   }
+
+  contarTotalMascotas(): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/cantidad`)
+  }
 }
