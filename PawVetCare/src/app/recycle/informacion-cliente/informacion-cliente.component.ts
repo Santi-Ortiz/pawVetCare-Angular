@@ -13,7 +13,7 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 export class InformacionClienteComponent {
   userType = 'admin';
 
-  @Input() cliente!: Cliente;  // Cambiar a cliente
+  @Input() cliente!: Cliente;
   @Input() mascotaForm!: FormGroup;
   @Input() isEditMode!: boolean;
 

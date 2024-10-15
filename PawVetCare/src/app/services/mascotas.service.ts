@@ -13,39 +13,6 @@ export class MascotasService {
   //Springboot
   private apiUrl = 'http://localhost:8090/api/mascota';
 
-  /*constructor() {}
-
-  // Obtener todas las mascotas
-  getMascotas(): Mascota[] {
-    return this.mascotas;
-  }
-
-  // Obtener una mascota por ID
-  getMascota(id: number): Mascota | undefined {
-    return this.mascotas.find(mascota => mascota.id === id);
-  }
-
-  // Agregar una nueva mascota
-  agregarMascota(nuevaMascota: Mascota): void {
-    const maxId = this.mascotas.length > 0 ? Math.max(...this.mascotas.map(m => m.id)) : 0;
-    nuevaMascota.id = maxId + 1; 
-    this.mascotas.push(nuevaMascota);
-  }
-
-  // Actualizar una mascota existente
-  actualizarMascota(id: number, mascotaActualizada: Mascota): void {
-    const index = this.mascotas.findIndex(mascota => mascota.id === id);
-    if (index !== -1) {
-      this.mascotas[index] = { ...this.mascotas[index], ...mascotaActualizada };
-    }
-  }
-
-  // Eliminar una mascota
-  eliminarMascota(id: number): void {
-    this.mascotas = this.mascotas.filter(mascota => mascota.id !== id);
-  }*/
-
-
  //Springboot con Angular 
  
   constructor(private http: HttpClient) { }

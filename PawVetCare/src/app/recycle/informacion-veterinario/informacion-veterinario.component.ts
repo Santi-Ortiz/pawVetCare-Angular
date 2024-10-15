@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Veterinario } from 'src/app/model/veterinario';
 import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
@@ -41,6 +42,8 @@ export class InformacionVeterinarioComponent {
     }
   }
 
+  
+
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
     this.isEditMode = !this.isEditMode;
@@ -55,22 +58,21 @@ export class InformacionVeterinarioComponent {
       console.log('Formulario habilitado para edición');
     } else {
 
-      const veterinarioActualizado = {
+      const veterinarioActualizado: Veterinario = {
         ...this.veterinario,
         ...this.veterinarioForm.value,
       };
   
       if (this.veterinario) {
 
-        this.veterinarioService.updateVeterinario(veterinarioActualizado.cedula, veterinarioActualizado).subscribe(
-          response => {
-            console.log('Veterinario actualizado con éxito:', response);
-            alert('Veterinario actualizado correctamente');
-            this.router.navigate(['/veterinarios/todos']);  
+        this.veterinarioService.updateVeterinario(this.veterinario.id, veterinarioActualizado).subscribe(
+          (response: String) => {
+            console.log('Veterinario actualizado correctamente', response);
+            this.router.navigate(['/veterinarios/todos']);
           },
-          error => {
+          (error) => {
             console.error('Error al actualizar el veterinario:', error);
-            alert('Ocurrió un error al actualizar el veterinario. Inténtalo nuevamente.');
+            alert('Hubo un error al actualizar el veterinario. Inténtalo nuevamente más tarde.');
           }
         );
       }
