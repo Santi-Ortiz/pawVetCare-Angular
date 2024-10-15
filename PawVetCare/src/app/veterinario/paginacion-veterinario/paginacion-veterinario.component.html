@@ -5,7 +5,7 @@
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
     <p class="segundoTitulo">Navega por los vets:</p>
     <app-veterinario-item
-      [mascotas]="mascotas"
+      [veterinarios]="veterinarios"
       [currentPage]="currentPage"
       [itemsPerPage]="itemsPerPage">
     </app-veterinario-item>

@@ -5,7 +5,7 @@
     <div class="carrusel">
         <div class="veterinario-item" *ngFor="let veterinario of veterinarios; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
             <div class="veterinario-info">
-                <!-- <img [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre" class="veterinario-foto"> -->
+                <img [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre" class="veterinario-foto">
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
                     <label class="info-label">{{ veterinario.nombre }}</label>

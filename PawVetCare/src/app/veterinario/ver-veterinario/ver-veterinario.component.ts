@@ -33,7 +33,9 @@
     constructor(private veterinarioService: VeterinarioService, private router: Router) {} 
 
     ngOnInit(): void {
-      this.veterinarioService.getAllVeterinarios().subscribe()
+      this.veterinarioService.getAllVeterinarios().subscribe((veterinarios: Veterinario[]) => {
+        this.veterinarios = veterinarios; 
+      });
       this.autoMoverCarrusel();
     }
 
@@ -61,7 +63,7 @@
       if (!id) {
         return;
       }
-      this.veterinarioService.getVeterinarioById(id).subscribe(
+      this.veterinarioService.getVeterinarioByCedula(id).subscribe(
         (veterinario: Veterinario) => {
     
           if (veterinario) {

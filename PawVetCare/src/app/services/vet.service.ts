@@ -53,11 +53,19 @@ export class VeterinarioService {
     return this.http.get<Veterinario[]>(`${this.apiUrl}/todos`)
   }
 
-  getVeterinarioById(id: number): Observable<Veterinario> {
-    return this.http.get<Veterinario>(`${this.apiUrl}/find/${id}`)
+  getVeterinarioByCedula(cedula: number): Observable<Veterinario> {
+    return this.http.get<Veterinario>(`${this.apiUrl}/find/${cedula}`)
   }
 
   addVeterinario(veterinario: Veterinario, idVet: number): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}/agregar?idVet=${idVet}`, veterinario)
+  }
+
+  updateVeterinario(id: number, veterinario: Veterinario): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${id}`, veterinario)
+  }
+
+  deleteVeterinario(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/delete/${id}`)
   }
 }
