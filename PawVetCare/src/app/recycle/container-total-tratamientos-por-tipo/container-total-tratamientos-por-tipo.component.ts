@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Mascota } from 'src/app/model/mascota';
+import { Medicamento } from 'src/app/model/medicamento';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class ContainerTotalTratamientosPorTipoComponent {
   index = 0;
   intervalId: any;
   mascotas: Mascota[] = [];
+  medicamentos: Medicamento[] = [];
 
   nuevaMascota: Mascota = {
     id: 0,

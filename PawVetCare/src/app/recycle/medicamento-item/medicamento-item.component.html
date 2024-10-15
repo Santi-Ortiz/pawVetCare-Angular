@@ -1,11 +1,11 @@
 <div class="medicamentos-container" id="medicamentosContainer">
-    <div *ngFor="let mascota of mascotasPagina" class="medicamento-item">
+    <div *ngFor="let medicamento of medicamentoPagina" class="medicamento-item">
       <div class="medicamento-info">
-        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{mascota.nombre}}</label></div>
-        <div class="info-itemPrecioVenta"><small class="info-title">P. Venta:</small><label class="info-label">{{mascota.raza}}</label></div>
-        <div class="info-itemPrecioCompra"><small class="info-title">P. Compra:</small><label class="info-label">{{mascota.edad}}</label></div>
-        <div class="info-itemUnidadesDisponibles"><small class="info-title">Uni. Disp:</small><label class="info-label">{{mascota.peso}}</label></div>
-        <div class="info-itemUnidadesVendidas"><small class="info-title">Uni. Vend:</small><label class="info-label">{{mascota.peso}}</label></div>
+        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{medicamento.nombre}}</label></div>
+        <div class="info-itemPrecioVenta"><small class="info-title">P. Venta:</small><label class="info-label">{{medicamento.precio_venta}}</label></div>
+        <div class="info-itemPrecioCompra"><small class="info-title">P. Compra:</small><label class="info-label">{{medicamento.precio_compra}}</label></div>
+        <div class="info-itemUnidadesDisponibles"><small class="info-title">Uni. Disp:</small><label class="info-label">{{medicamento.unidades_disponibles}}</label></div>
+        <div class="info-itemUnidadesVendidas"><small class="info-title">Uni. Vend:</small><label class="info-label">{{medicamento.unidades_vendidas}}</label></div>
       </div>
     </div>
   </div>

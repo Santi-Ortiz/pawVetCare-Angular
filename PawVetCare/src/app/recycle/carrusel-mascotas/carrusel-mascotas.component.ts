@@ -15,6 +15,7 @@ export class CarruselMascotasComponent {
   intervalId: any;
 
   ngOnInit(): void {
+    console.log("Mascotas: ", this.mascotas);
     this.autoMoverCarrusel();
   }
 
@@ -25,7 +26,7 @@ export class CarruselMascotasComponent {
   }
 
   cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
+    const totalMascotas = this.mascotas.length
     this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
     if (this.carrusel) {
       this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 

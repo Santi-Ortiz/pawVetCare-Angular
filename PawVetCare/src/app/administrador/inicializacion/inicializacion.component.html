@@ -3,10 +3,10 @@
   </header>
   <section class="content">
       <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p class="segundoTitulo">Inicializa los datos de los medicamentos:</p>
+      <p class="segundoTitulo">Aquí están todos los medicamentos:</p>
       <app-container-inicializar></app-container-inicializar>
-      <p class="tercerTitulo">Medicamentos:</p>
+      <!-- <p class="tercerTitulo">Medicamentos:</p> -->
       <a routerLink="/medicamentos/todos" class="todas-button">+ Ver todos los medicamentos</a>
-      <app-carrusel-medicamentos [mascotas]="mascotas"></app-carrusel-medicamentos>
+      <app-carrusel-medicamentos [medicamentos]="medicamentos"></app-carrusel-medicamentos>
   </section>
   

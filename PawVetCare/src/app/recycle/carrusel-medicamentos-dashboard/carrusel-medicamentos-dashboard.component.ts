@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Mascota } from 'src/app/model/mascota';
+import { Medicamento } from 'src/app/model/medicamento';
 
 @Component({
   selector: 'app-carrusel-medicamentos-dashboard',
@@ -7,7 +7,7 @@ import { Mascota } from 'src/app/model/mascota';
   styleUrls: ['./carrusel-medicamentos-dashboard.component.css']
 })
 export class CarruselMedicamentosDashboardComponent {
-  @Input() mascotas: Mascota[] = [];
+  @Input() medicamentos: Medicamento[] = []; 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
   index = 0;
   intervalId: any;
@@ -22,15 +22,15 @@ export class CarruselMedicamentosDashboardComponent {
     }
   }
 
-  cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
-    this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
+  cambiarMedicamento(direccion: number): void {
+    const totalMedicamentos = this.medicamentos.length;
+    this.index = (this.index + direccion + totalMedicamentos) % totalMedicamentos; 
     if (this.carrusel) {
       this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
     }
   }
 
   autoMoverCarrusel(): void {
-    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
+    this.intervalId = setInterval(() => this.cambiarMedicamento(1), 6000);
   }
 }

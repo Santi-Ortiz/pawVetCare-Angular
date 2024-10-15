@@ -61,12 +61,23 @@ export class VerUnClienteComponent {
         });
 
         this.mascotaForm.disable();
+
+        console.log("Masotas del cliente: ", this.cliente.mascotas);
       },
       (error) => {
         console.error(`Error al obtener el cliente con cedula ${id}:`, error);
         alert(`Cliente con cedula ${id} no encontrado`);
       }
     );
+
+    // this.clienteService.obtenerMascotasCliente(this.cliente.id).subscribe(
+    //   (data: Cliente) => {
+    //     data.mascotas.forEach((mascota) => {
+    //       console.log('Mascota:', mascota);
+    //     })
+    //   }
+
+    // )
   }
 
   toggleEditMode(): void {
