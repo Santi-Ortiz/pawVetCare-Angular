@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Mascota } from '../model/mascota'; 
 import { Cliente } from '../model/cliente'; 
+import { Veterinario } from '../model/veterinario';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,17 @@ export class VeterinarioService {
   // Obtener la información de un cliente por su cédula (Veterinario)
   getClienteByCedula(cedula: number): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.apiUrl}/cliente/${cedula}`);
+  }
+
+  getAllVeterinarios(): Observable<Veterinario[]> {
+    return this.http.get<Veterinario[]>(`${this.apiUrl}/todos`)
+  }
+
+  getVeterinarioById(id: number): Observable<Veterinario> {
+    return this.http.get<Veterinario>(`${this.apiUrl}/find/${id}`)
+  }
+
+  addVeterinario(veterinario: Veterinario, idVet: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/agregar?idVet=${idVet}`, veterinario)
   }
 }

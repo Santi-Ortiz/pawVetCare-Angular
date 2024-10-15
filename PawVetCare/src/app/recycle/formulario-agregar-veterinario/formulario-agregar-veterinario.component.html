@@ -1,23 +1,23 @@
-<form (ngSubmit)="agregarMascota()" class="agregar-container">
+<form (ngSubmit)="agregarVeterinario()" class="agregar-container">
     <div class="infoadd-itemNombre">
       <small class="info-title">Nombre:</small>
-      <input [(ngModel)]="nuevaMascota.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
+      <input [(ngModel)]="nuevoVeterinario.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
     </div>
     <div class="infoadd-itemEspecialidad">
       <small class="info-title">Especialidad:</small>
-      <input [(ngModel)]="nuevaMascota.raza" name="raza" class="inputadd-text" id="raza" placeholder="Ingresa la raza" required>
+      <input [(ngModel)]="nuevoVeterinario.especialidad.id" name="especialidad" class="inputadd-text" id="raza" placeholder="Ingresa la especialidad" required>
     </div>
     <div class="infoadd-itemCedula">
       <small class="info-title">Cédula:</small>
-      <input [(ngModel)]="nuevaMascota.edad" name="edad" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required>
+      <input [(ngModel)]="nuevoVeterinario.cedula" name="cedula" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la cedula" required>
     </div>
     <div class="infoadd-itemContraseña">
       <small class="info-title">Contraseña:</small>
-      <input [(ngModel)]="nuevaMascota.peso" name="peso" type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required>
+      <input [(ngModel)]="nuevoVeterinario.contrasena" name="contraseña" class="inputadd-text" id="peso" placeholder="Ingresa la contraseña" required>
     </div>
     <div class="infoadd-itemURL">
       <small class="info-title">URL:</small>
-      <input [(ngModel)]="nuevaMascota.enfermedad" name="enfermedad" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required>
+      <input [(ngModel)]="nuevoVeterinario.foto" name="url" class="inputadd-text" id="enfermedad" placeholder="Ingresa la URL de la foto de perfil" required>
     </div>
-    <button type="submit" class="agregar-button">Agregar Mascota</button>
+    <button type="submit" class="agregar-button">Agregar Veterinario</button>
 </form>

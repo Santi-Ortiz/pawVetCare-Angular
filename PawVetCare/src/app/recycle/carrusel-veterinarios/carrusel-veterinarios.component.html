@@ -1,28 +1,28 @@
-<div class="carrusel-container" *ngIf="mascotas.length > 0">
-    <button class="carrusel-prev" (click)="cambiarMascota(-1)">
+<div class="carrusel-container" *ngIf="veterinarios.length > 0">
+    <button class="carrusel-prev" (click)="cambiarVeterinario(-1)">
         <img src="../assets/previous.png" alt="Regreso">
     </button>
     <div class="carrusel">
-        <div class="veterinario-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <div class="veterinario-item" *ngFor="let veterinario of veterinarios; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
             <div class="veterinario-info">
-                <img [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre" class="veterinario-foto">
+                <!-- <img [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre" class="veterinario-foto"> -->
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
-                    <label class="info-label">{{ mascota.nombre }}</label>
+                    <label class="info-label">{{ veterinario.nombre }}</label>
                 </div>
                 <div class="info-itemCedula">
                     <small class="info-title">Cedula:</small>
-                    <label class="info-label">{{ mascota.raza }}</label>
+                    <label class="info-label">{{ veterinario.cedula }}</label>
                 </div>
                 <div class="info-itemEspecialidad">
                     <small class="info-title">Especialidad:</small>
-                    <label class="info-label">{{ mascota.edad }}</label>
+                    <label class="info-label">{{ veterinario.especialidad }}</label>
                 </div>
-                <a class="info-button" [routerLink]="['/veterinario', mascota.id]">+ Info</a>
+                <a class="info-button" [routerLink]="['/veterinario', veterinario.id]">+ Info</a>
             </div>
         </div>
     </div>
-    <button class="carrusel-next" (click)="cambiarMascota(1)">
+    <button class="carrusel-next" (click)="cambiarVeterinario(1)">
         <img src="assets/next.png" alt="Siguiente">
     </button>
 </div>

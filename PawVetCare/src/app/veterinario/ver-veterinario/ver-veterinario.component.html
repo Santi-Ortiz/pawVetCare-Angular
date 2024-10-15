@@ -5,13 +5,13 @@
       <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
       <p class="segundoTitulo">Aquí están todos los veterinarios:</p>
       <!--Búsqueda por ID-->
-      <form (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
-          <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+      <form (ngSubmit)="buscarVet(vetId)" class="buscador-form">
+          <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
           <button type="submit" class="buscador-button">Buscar</button>
       </form>
       <!--Enlace para ver todas las mascotas-->
       <a routerLink="/veterinarios/todos" class="todas-button">+ Ver todos los veterinarios</a>
       <p class="tercerTitulo">Agrega veterinarios:</p>    
-      <app-carrusel-veterinarios [mascotas]="mascotas"></app-carrusel-veterinarios>
+      <app-carrusel-veterinarios [veterinarios]="veterinarios"></app-carrusel-veterinarios>
       <app-formulario-agregar-veterinario></app-formulario-agregar-veterinario>      
   </section>

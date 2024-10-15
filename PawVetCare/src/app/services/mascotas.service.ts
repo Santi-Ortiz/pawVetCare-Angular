@@ -95,10 +95,12 @@ export class MascotasService {
     return this.http.put<string>(`${this.apiUrl}/update/ad/${id}`, mascota);
   }
 
+  // Cuenta el total de mascotas activas en la veterinaria
   contarMascotasActivas(): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/activas`);
   }
 
+  // Cuenta el total de mascotas en la veterinaria
   contarTotalMascotas(): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/cantidad`)
   }
