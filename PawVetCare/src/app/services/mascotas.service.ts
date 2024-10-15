@@ -94,4 +94,8 @@ export class MascotasService {
   actualizarMascotaAdmin(id: number, mascota: Mascota): Observable<string> {
     return this.http.put<string>(`${this.apiUrl}/update/ad/${id}`, mascota);
   }
+
+  contarMascotasActivas(): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/activas`);
+  }
 }
