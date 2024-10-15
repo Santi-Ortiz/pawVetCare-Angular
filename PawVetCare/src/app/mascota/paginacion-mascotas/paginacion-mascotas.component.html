@@ -13,7 +13,10 @@
   <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
   <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
   <p class="segundoTitulo">Navega por las mascotas:</p>
-  
+  <form class="buscador-form">
+    <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
+    <button type="submit" class="buscador-button">Buscar</button>
+  </form>
   <app-mascota-item
     [mascotas]="mascotas"
     [currentPage]="currentPage"
