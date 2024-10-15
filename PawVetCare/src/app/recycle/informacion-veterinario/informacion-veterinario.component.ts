@@ -56,7 +56,7 @@ export class InformacionVeterinarioComponent {
   
       if (this.veterinario) {
 
-        this.veterinarioService.updateVeterinario(veterinarioActualizado.id, veterinarioActualizado).subscribe(
+        this.veterinarioService.updateVeterinario(veterinarioActualizado.cedula, veterinarioActualizado).subscribe(
           response => {
             console.log('Veterinario actualizado con éxito:', response);
             alert('Veterinario actualizado correctamente');
