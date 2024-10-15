@@ -1,21 +1,39 @@
+<!-- Condicional para mostrar el encabezado según el tipo de usuario -->
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <header *ngIf="userType === 'vet'">
-    <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
-  </header>
-  <section class = "content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-      <p class="segundoTitulo">Aquí están todos los clientes:</p>
-      <!--Búsqueda por ID-->
-      <form (ngSubmit)="buscarMascota(clienteId)" class="buscador-form">
-          <input [(ngModel)]="clienteId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
-          <button type="submit" class="buscador-button">Buscar</button>
-      </form>
-      <!--Enlace para ver todas las mascotas-->
-      <a routerLink="/clientes/todos" class="todas-button">+ Ver todos los clientes</a>
-      <p class="tercerTitulo">Agrega clientes:</p>    
-      <app-carrusel-clientes [clientes]="clientes"></app-carrusel-clientes>
-      <app-formulario-agregar-cliente></app-formulario-agregar-cliente>      
-  </section>
+  <!-- Carga el componente del header específico para el administrador -->
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+</header>
+<header *ngIf="userType === 'vet'">
+  <!-- Carga el componente del header específico para el veterinario -->
+  <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
+</header>
+
+<!-- Sección principal del contenido -->
+<section class="content">
+  <!-- Mensaje de saludo específico para el tipo de usuario -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+  
+  <!-- Subtítulo que indica la lista de clientes -->
+  <p class="segundoTitulo">Aquí están todos los clientes:</p>
+  
+  <!-- Formulario de búsqueda por ID del cliente -->
+  <form (ngSubmit)="buscarMascota(clienteId)" class="buscador-form">
+      <!-- Campo de entrada vinculado a la variable 'clienteId' mediante ngModel -->
+      <input [(ngModel)]="clienteId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+      <!-- Botón para enviar el formulario -->
+      <button type="submit" class="buscador-button">Buscar</button>
+  </form>
+
+  <!-- Enlace que lleva a la página que muestra todos los clientes -->
+  <a routerLink="/clientes/todos" class="todas-button">+ Ver todos los clientes</a>
+
+  <!-- Subtítulo para la sección de agregar nuevos clientes -->
+  <p class="tercerTitulo">Agrega clientes:</p>
+
+  <!-- Componente que muestra un carrusel de clientes (recibe la lista de clientes como input) -->
+  <app-carrusel-clientes [clientes]="clientes"></app-carrusel-clientes>
+
+  <!-- Componente que incluye el formulario para agregar un nuevo cliente -->
+  <app-formulario-agregar-cliente></app-formulario-agregar-cliente>      
+</section>

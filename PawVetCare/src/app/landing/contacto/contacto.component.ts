@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./contacto.component.css']
 })
 export class ContactoComponent {
-
+  // Aquí puedes agregar propiedades y métodos para manejar la lógica del formulario de contacto.
 }

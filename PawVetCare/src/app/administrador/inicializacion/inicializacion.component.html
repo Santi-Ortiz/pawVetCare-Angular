@@ -1,12 +1,23 @@
+<!-- Este bloque solo se muestra si el usuario es de tipo 'admin' -->
 <header *ngIf="userType === 'admin'">
+    <!-- Componente personalizado que muestra el header para usuarios administradores de mascotas -->
     <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p class="segundoTitulo">Aquí están todos los medicamentos:</p>
-      <app-container-inicializar></app-container-inicializar>
-      <!-- <p class="tercerTitulo">Medicamentos:</p> -->
-      <a routerLink="/medicamentos/todos" class="todas-button">+ Ver todos los medicamentos</a>
-      <app-carrusel-medicamentos [medicamentos]="medicamentos"></app-carrusel-medicamentos>
-  </section>
-  
+</header>
+
+<!-- Sección principal del contenido -->
+<section class="content">
+    <!-- Este párrafo solo se muestra si el usuario es de tipo 'admin' -->
+    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+
+    <!-- Título que se muestra a todos los usuarios -->
+    <p class="segundoTitulo">Aquí están todos los medicamentos:</p>
+
+    <!-- Componente que inicializa el contenedor principal de los medicamentos -->
+    <app-container-inicializar></app-container-inicializar>
+
+    <!-- Enlace que lleva a la página que muestra todos los medicamentos disponibles -->
+    <a routerLink="/medicamentos/todos" class="todas-button">+ Ver todos los medicamentos</a>
+
+    <!-- Carrusel que muestra los medicamentos, pasando la variable 'medicamentos' como input -->
+    <app-carrusel-medicamentos [medicamentos]="medicamentos"></app-carrusel-medicamentos>
+</section>

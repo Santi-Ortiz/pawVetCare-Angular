@@ -1,17 +1,37 @@
+<!-- Renderiza el encabezado según el tipo de usuario -->
+<!-- Si el tipo de usuario es 'admin', muestra el componente de encabezado para el administrador -->
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <header *ngIf="userType === 'vet'">
-    <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-      <p class="segundoTitulo">Aquí está la información del cliente:</p>
-      <p class="tercerTitulo">Sus mascotas:</p>
-      <app-informacion-cliente [mascotaForm]="mascotaForm" [cliente]="cliente" [isEditMode]="isEditMode"></app-informacion-cliente>
-      <div *ngIf="cliente.mascotas && cliente.mascotas.length > 0">
-        <app-carrusel-mascotas [mascotas]="cliente.mascotas"></app-carrusel-mascotas>
-      </div>
-    </section>
-    
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas> <!-- El encabezado recibe la propiedad 'userType' con valor 'admin' -->
+</header>
+
+<!-- Si el tipo de usuario es 'vet', muestra el componente de encabezado para el veterinario -->
+<header *ngIf="userType === 'vet'">
+  <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas> <!-- El encabezado recibe la propiedad 'userType' con valor 'vet' -->
+</header>
+
+<!-- Sección principal de contenido -->
+<section class="content">
+  
+  <!-- Muestra un mensaje personalizado según el tipo de usuario -->
+  <!-- Si el tipo de usuario es 'admin', muestra el mensaje de bienvenida para el administrador -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  
+  <!-- Si el tipo de usuario es 'vet', muestra el mensaje de bienvenida para el veterinario -->
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+  
+  <!-- Título secundario que se muestra siempre -->
+  <p class="segundoTitulo">Aquí está la información del cliente:</p>
+  
+  <!-- Título para indicar la lista de mascotas -->
+  <p class="tercerTitulo">Sus mascotas:</p>
+
+  <!-- Componente que muestra la información del cliente y permite la edición -->
+  <!-- Se pasan las propiedades 'mascotaForm', 'cliente' e 'isEditMode' al componente de información del cliente -->
+  <app-informacion-cliente [mascotaForm]="mascotaForm" [cliente]="cliente" [isEditMode]="isEditMode"></app-informacion-cliente>
+
+  <!-- Si el cliente tiene mascotas (al menos una), se muestra el componente de carrusel de mascotas -->
+  <div *ngIf="cliente.mascotas && cliente.mascotas.length > 0">
+    <app-carrusel-mascotas [mascotas]="cliente.mascotas"></app-carrusel-mascotas> <!-- Se pasa la lista de mascotas al componente de carrusel -->
+  </div>
+  
+</section>

@@ -1,17 +1,25 @@
+<!-- Encabezado que se muestra solo si el tipo de usuario es 'admin' -->
 <header *ngIf="userType === 'admin'">
+    <!-- Componente del encabezado específico para administradores -->
     <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p class="segundoTitulo">Aquí están las KPI's:</p>
-      <app-container-total-tratamientos></app-container-total-tratamientos>
-      <app-container-total-tratamientos-por-tipo></app-container-total-tratamientos-por-tipo>
-      <app-container-cantidad-veterinarios-activos></app-container-cantidad-veterinarios-activos>
-      <app-container-cantidad-veterinarios-inactivos></app-container-cantidad-veterinarios-inactivos>
-      <app-container-cantidad-mascotas-totales></app-container-cantidad-mascotas-totales>
-      <app-container-cantidad-mascotas-activas></app-container-cantidad-mascotas-activas>
-      <app-container-ventas-totales></app-container-ventas-totales>
-      <app-container-ganancias-totales></app-container-ganancias-totales>
-      <app-container-top-3-tratamientos></app-container-top-3-tratamientos>
-  </section>
-  
+</header>
+
+<!-- Sección principal que contiene el contenido para los administradores -->
+<section class="content">
+    <!-- Mensaje de saludo que solo se muestra si el usuario es 'admin' -->
+    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+    
+    <!-- Título para la sección de KPIs -->
+    <p class="segundoTitulo">Aquí están las KPI's:</p>
+    
+    <!-- Componentes que muestran diferentes métricas y KPIs para el administrador -->
+    <app-container-total-tratamientos></app-container-total-tratamientos> <!-- Total de tratamientos -->
+    <app-container-total-tratamientos-por-tipo></app-container-total-tratamientos-por-tipo> <!-- Tratamientos por tipo -->
+    <app-container-cantidad-veterinarios-activos></app-container-cantidad-veterinarios-activos> <!-- Veterinarios activos -->
+    <app-container-cantidad-veterinarios-inactivos></app-container-cantidad-veterinarios-inactivos> <!-- Veterinarios inactivos -->
+    <app-container-cantidad-mascotas-totales></app-container-cantidad-mascotas-totales> <!-- Total de mascotas -->
+    <app-container-cantidad-mascotas-activas></app-container-cantidad-mascotas-activas> <!-- Mascotas activas -->
+    <app-container-ventas-totales></app-container-ventas-totales> <!-- Ventas totales -->
+    <app-container-ganancias-totales></app-container-ganancias-totales> <!-- Ganancias totales -->
+    <app-container-top-3-tratamientos></app-container-top-3-tratamientos> <!-- Top 3 tratamientos -->
+</section>

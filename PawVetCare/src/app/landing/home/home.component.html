@@ -1,18 +1,26 @@
-<app-header-home></app-header-home>
-<section class="content">
-    <p class="primerTitulo">¡El amor tiene cuatro patas!</p>
-    <p class="primerSubtitulo">Sabemos lo importante que es para ti tener un segundo hogar donde tu mascota sea el centro de todo</p>
+<app-header-home></app-header-home> <!-- Componente de encabezado para la página de inicio -->
+
+<section class="content"> <!-- Inicio de la sección principal del contenido -->
+    <p class="primerTitulo">¡El amor tiene cuatro patas!</p> <!-- Título principal -->
+    <p class="primerSubtitulo">Sabemos lo importante que es para ti tener un segundo hogar donde tu mascota sea el centro de todo</p> <!-- Subtítulo que enfatiza la importancia de las mascotas -->
+    
+    <!-- Botones de acción para registrar una mascota o iniciar sesión -->
     <a class="cuidarButton" th:href="@{/registro}" type="button">Quiero cuidar a mi mascota</a>
     <a class="yaSoyButton" th:href="@{/iniciarSesion/sesiones}">YA SOY PetVetCitizen</a>
+    
+    <!-- Imágenes de portada de mascotas -->
     <img class="perroPortadaRosa" src="../assets/goldenPortadaRosa.png" alt="Perro Principal Rosa">
     <img class="perroPortada" src="../assets/goldenPortada.png" alt="Perro Principal">
     <img class="gatoPortadaAzul" src="../assets/gatoPortadaAzul.png" alt="Gato Principal Azul">
     <img class="gatoPortada" src="../assets/gatoPortada.png" alt="Gato Principal">
-    <div class="container-cita">
-        <img class="comillas1" src="../assets/comillas.png" alt="Comillas Arriba">
-        <p class="cita">Nombrada la mejor clínica veterinaria de Latinoamérica por la Revista PetCare, nuestro compromiso con el cuidado y bienestar de tus mascotas es insuperable.</p>
-        <img class="comillas2" src="../assets/comillas.png" alt="Comillas Abajo">
-        <p class="nClientes">+500 PetFamilies contentas</p>
+
+    <div class="container-cita"> <!-- Contenedor para cita y testimonios -->
+        <img class="comillas1" src="../assets/comillas.png" alt="Comillas Arriba"> <!-- Comillas de apertura -->
+        <p class="cita">Nombrada la mejor clínica veterinaria de Latinoamérica por la Revista PetCare, nuestro compromiso con el cuidado y bienestar de tus mascotas es insuperable.</p> <!-- Cita de testimonio -->
+        <img class="comillas2" src="../assets/comillas.png" alt="Comillas Abajo"> <!-- Comillas de cierre -->
+        <p class="nClientes">+500 PetFamilies contentas</p> <!-- Número de clientes satisfechos -->
+        
+        <!-- Imágenes de clientes -->
         <img class="cliente1" src="../assets/cliente1.png" alt="Cliente 1">
         <img class="cliente2" src="../assets/cliente2.png" alt="Cliente 2">
         <img class="cliente3" src="../assets/cliente3.png" alt="Cliente 3">
@@ -25,81 +33,115 @@
         <img class="cliente10" src="../assets/cliente10.png" alt="Cliente 10">
         <img class="cliente11" src="../assets/cliente11.png" alt="Cliente 11">
     </div>
-    <div class="container-servicios">
-        <img class="fondoServicios" src="../assets/fondoServicios.png" alt="Fondo Servicios">
-        <p class="segundoTitulo">Servicios</p>
+
+    <div class="container-servicios"> <!-- Contenedor para servicios ofrecidos -->
+        <img class="fondoServicios" src="../assets/fondoServicios.png" alt="Fondo Servicios"> <!-- Imagen de fondo para servicios -->
+        <p class="segundoTitulo">Servicios</p> <!-- Título para la sección de servicios -->
+        
+        <!-- Descripción de los servicios -->
         <div class="image-container">
             <img src="../assets/hospitalizacion.png" alt="Hospitalización">
             <div class="service-title">Nuestro servicio de hospitalización asegura que 
                 tu mascota reciba el mejor cuidado posible durante su estancia. Contamos con instalaciones 
                 modernas y personal capacitado para atender cualquier necesidad médica las 24 horas del día.</div>
         </div>
+        
         <div class="image-container">
             <img src="../assets/tratamientos.png" alt="Tratamientos">
             <div class="service-title">Ofrecemos tratamientos especializados para diversas condiciones de salud. 
                 Nuestro equipo veterinario está preparado para proporcionar desde cuidados preventivos hasta terapias avanzadas, 
                 garantizando el bienestar de tu mascota.</div>
         </div>
+        
         <div class="image-container">
             <img src="../assets/guarderia.png" alt="Guardería">
             <div class="service-title">En nuestra guardería, tu mascota encontrará un lugar seguro y divertido donde 
                 podrá socializar y jugar mientras tú estás fuera. Ofrecemos atención personalizada y un ambiente acogedor 
                 para que se sienta como en casa.</div>
         </div>
+
         <div class="image-container">
-            <img src="../assets/spa.png" alt="SPA">
+            <img src="../assets/SPA.png" alt="SPA">
             <div class="service-title">Nuestro SPA para mascotas ofrece una variedad de tratamientos relajantes y embellecedores. 
                 Desde baños y cortes de pelo hasta masajes, aseguramos que tu mascota disfrute de una experiencia de lujo y bienestar.</div>
         </div>
+
         <div class="image-container">
             <img src="../assets/transporte.png" alt="Transporte">
             <div class="service-title">Contamos con un servicio de transporte seguro y cómodo para tu mascota. Ya sea para visitas al veterinario o traslados a nuestra guardería, nuestro equipo se asegura de que tu mascota viaje con la máxima seguridad y comodidad.</div>
         </div>
     </div>
-    <div class="container-equipo">
-        <p class="tercerTitulo">¡Nuestros miembros principales del equipo!</p>
+
+    <div class="container-equipo"> <!-- Contenedor para el equipo -->
+        <p class="tercerTitulo">¡Nuestros miembros principales del equipo!</p> <!-- Título para la sección del equipo -->
+        
+        <!-- Imágenes de mascotas del equipo -->
         <img class="circuloMascota1" src="../assets/circuloMascota1.png" alt="Mascota 1">
         <img class="circuloMascota2" src="../assets/circuloMascota2.png" alt="Mascota 2">
         <img class="circuloMascota3" src="../assets/circuloMascota3.png" alt="Mascota 3">
-        <p class="cuartoTitulo">Además de nuestro equipo médico</p>
+        
+        <p class="cuartoTitulo">Además de nuestro equipo médico</p> <!-- Subtítulo -->
+        
+        <!-- Detalles del equipo médico -->
         <div class="containerEquipo1">
             <p class="medico1">Dr. Alejandro Espitia Ramírez<br>PhD en Clínica Médica y Quirúrjica de Pequeños Animales<br>Universidad de La Salle</p>
-            <img class="medico1img" src="../assets/medico1.png" alt="Medico 1">
-            <img class="medico1huella" src="../assets/huella.png" alt="Huella 1">
+            <img class="medico1img" src="../assets/medico1.png" alt="Medico 1"> <!-- Imagen del médico -->
+            <img class="medico1huella" src="../assets/huella.png" alt="Huella 1"> <!-- Huella decorativa -->
         </div>
+
         <div class="containerEquipo2">
             <p class="medico2">Dra. Manuela Barragán León<br>Veterinary Preventive Medicine, Epidemiology, and Public Health<br>Stanford University</p>
             <img class="medico2img" src="../assets/medico2.png" alt="Medico 2">
             <img class="medico2huella" src="../assets/huella.png" alt="Huella 2">
         </div>
+
         <div class="containerEquipo3">
             <p class="medico3">Dr. Christopher Varón Sánchez<br>Master Ciencias veterinarias/Ciencias clínicas veterinarias, general<br>Universidad de Antioquía</p>
             <img class="medico3img" src="../assets/medico3.png" alt="Medico 3">
             <img class="medico3huella" src="../assets/huella.png" alt="Huella 3">
         </div>
     </div>
-    <div class="container-blog">
-        <p class="quintoTitulo">Blog del día</p>
-        <p class="segundoSubtitulo">En esta sección encontrarás una variedad de videos relacionados con el fascinante mundo de las mascotas. Desde consejos prácticos sobre adopción y cuidados básicos hasta información detallada sobre salud y bienestar, nuestro contenido está diseñado para ayudarte a crear el mejor entorno posible para tu amigo peludo. ¡Todo lo que necesitas para asegurarte de que cada día con tu mascota sea especial y lleno de amor!</p>
-        <img class="barraBlog" src="../assets/barraBlog.png" alt="Barra">
+
+    <div class="container-blog"> <!-- Contenedor para el blog -->
+        <p class="quintoTitulo">Blog del día</p> <!-- Título del blog -->
+        <p class="segundoSubtitulo">En esta sección encontrarás una variedad de videos relacionados con el fascinante mundo de las mascotas. Desde consejos prácticos sobre adopción y cuidados básicos hasta información detallada sobre salud y bienestar, nuestro contenido está diseñado para ayudarte a crear el mejor entorno posible para tu amigo peludo. ¡Todo lo que necesitas para asegurarte de que cada día con tu mascota sea especial y lleno de amor!</p> <!-- Descripción del contenido del blog -->
+        <img class="barraBlog" src="../assets/barraBlog.png" alt="Barra"> <!-- Barra decorativa para la sección del blog -->
+        
+        <!-- Contenedor para video del blog -->
         <div class="video-container">
-            <iframe class="videoBlog" src="https://www.youtube.com/embed/CTN4vWr1i6A?si=GUFUlFv3aw04xlHO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="videoBlog" src="https://www.youtube.com/embed/CTN4vWr1i6A?si=GUFUlFv3aw04xlHO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <!-- Video de YouTube -->
         </div>
     </div>
-    <div class="container-satisfechos">
-        <p class="sextoTitulo">Nuestros Pets satisfechos:</p>
-        <img class="satisfecho1img" src="../assets/satisfecho1.png" alt="Satisfechos 1">
-        <img class="satisfecho2img" src="../assets/satisfecho2.png" alt="Satisfechos 2">
-        <img class="satisfecho3img" src="../assets/satisfecho3.png" alt="Satisfechos 3">
-        <img class="satisfecho4img" src="../assets/satisfecho4.png" alt="Satisfechos 4">
-        <img class="satisfecho5img" src="../assets/satisfecho5.png" alt="Satisfechos 5">
-        <img class="satisfecho6img" src="../assets/satisfecho6.png" alt="Satisfechos 6">
-    </div>
-    <div class="container-enganche">
-        <p class="septimoTitulo">¡Sé un PetVetCitizen ya!</p>
-        <img class="enganche1img" src="../assets/enganche1.png" alt="Enganche 1">
-        <img class="enganche2img" src="../assets/enganche2.png" alt="Enganche 2">
-        <a class="buttonUltimoCuidar" th:href="@{/registro}" type="button">Cuidar ya a mi mascota</a>
 
+    <div class="container-satisfechos"> <!-- Contenedor para mascotas satisfechas -->
+        <p class="sextoTitulo">Nuestros Pets satisfechos</p> <!-- Título para mascotas satisfechas -->
+        <p class="terceraSubtitulo">Vemos a nuestras mascotas felices como nunca antes</p> <!-- Subtítulo -->
+        
+        <!-- Carrusel de imágenes de mascotas -->
+        <div class="carousel">
+            <img class="mascota1" src="../assets/mascota1.png" alt="Mascota Satisfecha 1">
+            <img class="mascota2" src="../assets/mascota2.png" alt="Mascota Satisfecha 2">
+            <img class="mascota3" src="../assets/mascota3.png" alt="Mascota Satisfecha 3">
+            <img class="mascota4" src="../assets/mascota4.png" alt="Mascota Satisfecha 4">
+            <img class="mascota5" src="../assets/mascota5.png" alt="Mascota Satisfecha 5">
+        </div>
+    </div>
+
+    <div class="contacto"> <!-- Sección de contacto -->
+        <p class="contactoTitulo">¡Contáctanos!</p> <!-- Título de contacto -->
+        <p class="contactoSubtitulo">Escríbenos tus dudas, sugerencias o comentarios a través de nuestras redes sociales, estamos aquí para ayudarte.</p> <!-- Subtítulo de contacto -->
+        
+        <!-- Iconos de redes sociales -->
+        <a href="https://www.instagram.com/petvet/" target="_blank">
+            <img class="iconoInstagram" src="../assets/iconoInstagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/PetVetColombia" target="_blank">
+            <img class="iconoFacebook" src="../assets/iconoFacebook.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com/PetVetColombia" target="_blank">
+            <img class="iconoTwitter" src="../assets/iconoTwitter.png" alt="Twitter">
+        </a>
     </div>
 </section>
+
+<app-footer></app-footer> <!-- Componente de pie de página -->

@@ -1,21 +1,35 @@
+<!-- Mostrar el header para administradores si el tipo de usuario es 'admin' -->
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <header *ngIf="userType === 'vet'">
-    <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-    <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
-    <p class="segundoTitulo">Navega por los clientes:</p>
-    <form class="buscador-form">
+  <!-- Componente personalizado para el header de administradores -->
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+</header>
+
+<!-- Mostrar el header para veterinarios si el tipo de usuario es 'vet' -->
+<header *ngIf="userType === 'vet'">
+  <!-- Componente personalizado para el header de veterinarios -->
+  <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
+</header>
+
+<!-- Sección principal del contenido -->
+<section class="content">
+  <!-- Mostrar saludo personalizado según el tipo de usuario -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+  <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
+
+  <!-- Subtítulo común para todos los usuarios -->
+  <p class="segundoTitulo">Navega por los clientes:</p>
+
+  <!-- Formulario para buscar clientes por nombre -->
+  <form class="buscador-form">
       <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
       <button type="submit" class="buscador-button">Buscar</button>
-    </form>
-    <app-cliente-item
-      [clientes]="clientes"
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage">
-    </app-cliente-item>
-  </section>
+  </form>
+
+  <!-- Componente que muestra la lista de clientes, con paginación -->
+  <app-cliente-item
+[clientes]="clientes"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage">
+  </app-cliente-item>
+</section>
