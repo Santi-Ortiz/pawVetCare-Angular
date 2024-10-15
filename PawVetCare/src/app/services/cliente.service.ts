@@ -19,9 +19,10 @@ export class ClienteService {
   }
 
   // Obtener todas las mascotas de un cliente
-  obtenerMascotasCliente(idCliente: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.apiUrl}/mascotas/${idCliente}`);
+  obtenerMascotasCliente(idCliente: number): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(`${this.apiUrl}/mascotas/${idCliente}`);
   }
+
 
   // Obtener todos los clientes
   obtenerTodosClientes(): Observable<Cliente[]> {

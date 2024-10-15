@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-iniciar-administrador',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./iniciar-administrador.component.css']
 })
 export class IniciarAdministradorComponent {
-
+  
 }

@@ -4,6 +4,9 @@
 <header *ngIf="userType === 'vet'">
   <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
 </header>
+<header *ngIf="userType === 'cliente'">
+  <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
+</header>
 
 <section class="content">
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>

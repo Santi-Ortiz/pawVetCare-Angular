@@ -1,17 +1,18 @@
 <div class="container-login">
     <p class="subTitulo">¡Soy Admin!</p>
     <p class="subTitulo2">Ingresa tus datos</p>
-    <form th:action="@{/iniciarSesion/adminform}" method="post">
-        <div class="form-group">
-            <label for="id">Usuario</label>
-            <input type="text" id="username" name="username" placeholder="Ej. admin" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Ver mis mascotas">
-        </div>
+    <form (ngSubmit)="loginAdmin()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" [(ngModel)]="admin.username" placeholder="Ej. admin" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" [(ngModel)]="admin.password" placeholder="Ingresa tu contraseña" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Ver mis mascotas" [disabled]="!loginForm.form.valid">
+      </div>
     </form>
-</div>
+  </div>
+  

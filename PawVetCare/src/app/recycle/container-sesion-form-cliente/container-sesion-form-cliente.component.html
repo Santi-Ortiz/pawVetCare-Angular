@@ -1,14 +1,15 @@
 <div class="container-login">
     <p class="subTitulo">¡Ya cuido a mi mascota!</p>
     <p class="subTitulo2">Ingresa tu cédula</p>
-    <form th:action="@{/iniciarSesion/form}" method="post">
-        <div class="form-group">
-            <label for="id">Cédula</label>
-            <input type="text" id="id" name="id" placeholder="Ej. 101234567" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Ver mis mascotas">
-        </div>
+    <form (ngSubmit)="loginCliente()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="id">Cédula</label>
+        <input type="text" id="id" name="id" [(ngModel)]="id" placeholder="Ej. 101234567" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Ver mis mascotas">
+      </div>
     </form>
-</div>
-<a class="noButton" routerLink="/registro">No tengo cuenta</a>
+  </div>
+  <a class="noButton" routerLink="/registro">No tengo cuenta</a>
+  

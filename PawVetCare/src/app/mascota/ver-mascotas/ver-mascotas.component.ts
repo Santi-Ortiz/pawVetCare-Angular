@@ -13,12 +13,14 @@ import { Cliente } from 'src/app/model/cliente';
 })
 export class VerMascotasComponent {
 
-  userType = 'admin'; 
+  userType: string | null | undefined;
   cliente: Cliente | undefined;
   mascotaId: number | undefined;
   index = 0;
   intervalId: any;
   mascotas: Mascota[] = [];
+  
+  
 
   nuevaMascota: Mascota = {
     id: 0,
@@ -34,14 +36,17 @@ export class VerMascotasComponent {
   };
 
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
-  clienteService: any;
 
-  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {} 
+  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService, private clienteService: ClienteService) {} 
 
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); 
+    console.log("El userType es: ", this.userType);
+
     this.loadMascotas();
     this.autoMoverCarrusel();
   }
+  
 
   loadMascotas(): void {
     if (this.userType === 'admin') {
@@ -64,14 +69,20 @@ export class VerMascotasComponent {
       );
     } else if (this.userType === 'cliente') {
       const idCliente = this.authService.getUserId(); 
-      this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
-        (data: Mascota[]) => {
-          this.mascotas = data;
-        },
-        (error: any) => {
-          console.error('Error al obtener mascotas del cliente', error);
-        }
-      );
+
+      // Aquí el valor puede ser null, así que verifica antes de hacer la llamada
+      if (idCliente !== null) {
+        this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
+          (data: Mascota[]) => {
+            this.mascotas = data;
+          },
+          (error: any) => {
+            console.error('Error al obtener mascotas del cliente', error);
+          }
+        );
+      } else {
+        console.error('El ID del cliente es nulo.');
+      }
     }
   }
 
