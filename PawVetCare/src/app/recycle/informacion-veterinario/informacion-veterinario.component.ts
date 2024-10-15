@@ -35,6 +35,12 @@ export class InformacionVeterinarioComponent {
 
   }
 
+  ngOnInit(): void {
+    if (this.veterinario) {
+      this.veterinarioForm.patchValue(this.veterinario);
+    }
+  }
+
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
     this.isEditMode = !this.isEditMode;
@@ -60,7 +66,7 @@ export class InformacionVeterinarioComponent {
           response => {
             console.log('Veterinario actualizado con éxito:', response);
             alert('Veterinario actualizado correctamente');
-            this.router.navigate(['/veterinario/todos']);  
+            this.router.navigate(['/veterinarios/todos']);  
           },
           error => {
             console.error('Error al actualizar el veterinario:', error);
@@ -90,7 +96,7 @@ export class InformacionVeterinarioComponent {
           response => {
             console.log('Veterinario eliminado:', this.veterinario?.id);
             alert('Veterinario eliminado exitosamente');
-            this.router.navigate(['/veterinario/todos']);  
+            this.router.navigate(['/veterinarios/todos']);  
           },
           error => {
             console.error('Error al eliminar el veterinario:', error);

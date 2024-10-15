@@ -103,7 +103,7 @@ export class VerUnVeterinarioComponent {
             console.error('Error al actualizar el veterinario:', error);
           });     
         console.log('Veterinario actualizado:', veterinarioActualizado);
-        this.router.navigate(['/veterinario/todos']); 
+        this.router.navigate(['/veterinarios/todos']); 
       }
 
       this.veterinarioForm.disable();  
@@ -123,7 +123,7 @@ export class VerUnVeterinarioComponent {
           this.veterinarioService.deleteVeterinario(this.veterinario.id).subscribe(
             response => {
               console.log('Mascota eliminada por el admin:', response);
-              this.router.navigate(['/veterinario/todos']);  
+              this.router.navigate(['/veterinarios/todos']);  
             },
             error => {
               console.error('Error al eliminar el veterinario:', error);

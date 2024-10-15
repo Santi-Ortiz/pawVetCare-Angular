@@ -44,7 +44,7 @@ export class FormularioAgregarVeterinarioComponent {
         };
   
        
-        this.router.navigate(['/veterinario/todos']);
+        this.router.navigate(['/veterinarios/todos']);
       },
       error => {
         console.error('Error al agregar el veterinario:', error);
