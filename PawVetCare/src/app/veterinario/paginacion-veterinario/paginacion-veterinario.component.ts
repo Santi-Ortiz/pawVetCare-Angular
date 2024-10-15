@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Mascota } from 'src/app/model/mascota';
-import { MascotasService } from 'src/app/services/mascotas.service';
+import { Veterinario } from 'src/app/model/veterinario';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
   selector: 'app-paginacion-veterinario',
@@ -13,28 +13,18 @@ export class PaginacionVeterinarioComponent {
   currentPage: number = 1;
   itemsPerPage: number = 4;
   totalPages: number = 1; 
-  mascotas: Mascota[] = []; 
+  veterinarios: Veterinario[] = []; 
 
-  constructor(private mascotasService: MascotasService, private router: Router) {}
+  constructor(private veterinarioService: VeterinarioService, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.userType === 'admin') {
-      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
-        console.log(this.mascotas);  
-        this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
+      this.veterinarioService.getAllVeterinarios().subscribe((veterinarios: Veterinario[]) => {
+        this.veterinarios = veterinarios;
+        console.log(this.veterinarios);  
+        this.totalPages = Math.ceil(this.veterinarios.length / this.itemsPerPage);
       }, (error: any) => {
-        console.error('Error al cargar las mascotas:', error);  
+        console.error('Error al cargar los veterinarios:', error);  
       });
-    }else if (this.userType === 'vet') {
-      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas;
-        console.log(this.mascotas);  
-        this.totalPages = Math.ceil(this.mascotas.length / this.itemsPerPage);
-      }, (error: any) => {
-        console.error('Error al cargar las mascotas:', error);  
-      });
-    }
   }
   
 

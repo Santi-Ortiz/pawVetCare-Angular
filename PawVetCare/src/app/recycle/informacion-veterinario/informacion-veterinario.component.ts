@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MascotasService } from 'src/app/services/mascotas.service';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
   selector: 'app-informacion-veterinario',
@@ -12,8 +12,8 @@ export class InformacionVeterinarioComponent {
   userType = 'admin';
 
   @Input()
-  mascotaForm!: FormGroup;
-  @Input() mascota: any;  
+  veterinarioForm!: FormGroup;
+  @Input() veterinario: any;  
   @Input()
   isEditMode!: boolean;
 
@@ -21,23 +21,16 @@ export class InformacionVeterinarioComponent {
     private fb: FormBuilder,  
     private route: ActivatedRoute, 
     private router: Router,
-    private mascotasService: MascotasService  
+    private veterinarioService: VeterinarioService  
   ) {
 
-    this.mascotaForm = this.fb.group({
+    this.veterinarioForm = this.fb.group({
       nombre: [''],
-      raza: [''],
-      edad: [''],
-      peso: [''],
-      enfermedad: [''],
-      cliente: [''],
-      estado: [''],
-      foto: ['']
-    });
-
-   
-    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
-      this.mascota.estado = nuevoEstado;
+      cedula: [''],
+      contrasena: [''],
+      foto: [''],
+      especialidad: [''],
+      tratamientos: ['']
     });
 
   }
@@ -48,7 +41,7 @@ export class InformacionVeterinarioComponent {
   
     if (this.isEditMode) {
 
-      this.mascotaForm.enable();
+      this.veterinarioForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
@@ -56,29 +49,28 @@ export class InformacionVeterinarioComponent {
       console.log('Formulario habilitado para edición');
     } else {
 
-      const mascotaActualizada = {
-        ...this.mascota,
-        ...this.mascotaForm.value,
-        estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
+      const veterinarioActualizado = {
+        ...this.veterinario,
+        ...this.veterinarioForm.value,
       };
   
-      if (this.mascota) {
+      if (this.veterinario) {
 
-        this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada).subscribe(
+        this.veterinarioService.updateVeterinario(veterinarioActualizado.cedula, veterinarioActualizado).subscribe(
           response => {
-            console.log('Mascota actualizada con éxito:', response);
-            alert('Mascota actualizada correctamente');
-            this.router.navigate(['/mascotas/todas']);  
+            console.log('Veterinario actualizado con éxito:', response);
+            alert('Veterinario actualizado correctamente');
+            this.router.navigate(['/veterinario/todos']);  
           },
           error => {
-            console.error('Error al actualizar la mascota:', error);
-            alert('Ocurrió un error al actualizar la mascota. Inténtalo nuevamente.');
+            console.error('Error al actualizar el veterinario:', error);
+            alert('Ocurrió un error al actualizar el veterinario. Inténtalo nuevamente.');
           }
         );
       }
   
   
-      this.mascotaForm.disable();
+      this.veterinarioForm.disable();
       if (botonEditar) {
         botonEditar.classList.remove('expanded');
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
@@ -92,22 +84,22 @@ export class InformacionVeterinarioComponent {
     
     
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota && this.mascota.id !== undefined) {
+      if (this.veterinario && this.veterinario.id !== undefined) {
        
-        this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+        this.veterinarioService.deleteVeterinario(this.veterinario.id).subscribe(
           response => {
-            console.log('Mascota eliminada:', this.mascota?.id);
-            alert('Mascota eliminada exitosamente');
-            this.router.navigate(['/mascotas/todas']);  
+            console.log('Veterinario eliminado:', this.veterinario?.id);
+            alert('Veterinario eliminado exitosamente');
+            this.router.navigate(['/veterinario/todos']);  
           },
           error => {
-            console.error('Error al eliminar la mascota:', error);
-            alert('Hubo un error al eliminar la mascota. Inténtalo nuevamente más tarde.');
+            console.error('Error al eliminar el veterinario:', error);
+            alert('Hubo un error al eliminar el veterinario. Inténtalo nuevamente más tarde.');
           }
         );
       } else {
-        console.log('Error: No se pudo eliminar la mascota');
-        alert('Error: No se encontró la mascota para eliminar.');
+        console.log('Error: No se pudo eliminar  el veterinario');
+        alert('Error: No se encontró el veterinario para eliminar.');
       }
     } else {
       

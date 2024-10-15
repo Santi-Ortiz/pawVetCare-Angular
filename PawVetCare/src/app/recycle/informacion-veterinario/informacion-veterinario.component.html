@@ -1,5 +1,5 @@
 <div class="container-informacion">
-    <form [formGroup]="mascotaForm" class="containerVeterinario">    
+    <form [formGroup]="veterinarioForm" class="containerVeterinario">    
       <p class="tituloEditar">Editar</p>
       <p class="tituloEliminar">Eliminar</p>
       
@@ -10,20 +10,20 @@
   
       <div class="info-itemCedula">
         <small class="info-title">Cédula:</small>
-        <input class="info-label" formControlName="raza">
+        <input class="info-label" formControlName="cedula">
       </div>
   
       <div class="info-itemEspecialidad">
         <small class="info-title">Especialidad:</small>
-        <input class="info-label" formControlName="edad">
+        <input class="info-label" formControlName="especialidad">
       </div>
   
       <div class="info-itemFoto">
         <small class="info-title">URL Foto:</small>
-        <input class="info-label" formControlName="peso">
+        <input class="info-label" formControlName="foto">
       </div>
 
-      <img class="veterinarioimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">
+      <img class="veterinarioimg" [src]="veterinarioForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto del veterinario">
   
       <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
         <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">

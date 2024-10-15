@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Mascota } from 'src/app/model/mascota';
-import { MascotasService } from 'src/app/services/mascotas.service';
+import { Veterinario } from 'src/app/model/veterinario';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
   selector: 'app-ver-un-veterinario',
@@ -12,43 +12,36 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 export class VerUnVeterinarioComponent {
   userType = 'admin';
 
-  mascotaForm: FormGroup;
+  veterinarioForm: FormGroup;
   isEditMode: boolean = false;
 
-  mascota: Mascota = {
+  veterinario: Veterinario = {
     id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,
-      cedulaCliente:0,
-      tratamientos: [],
+    cedula: 0,
+    contrasena: '',
+    foto: '',
+    nombre: '',
+    especialidad: {
+      id: 0,
+      nombreEspecialidad: '',
+    },
+    tratamientos: [],
   }
 
   constructor(
     private fb: FormBuilder,  
     private route: ActivatedRoute, 
     private router: Router,
-    private mascotasService: MascotasService  
+    private veterinarioService: VeterinarioService  
   ) {
 
-    this.mascotaForm = this.fb.group({
+    this.veterinarioForm = this.fb.group({
       nombre: [''],
-      raza: [''],
-      edad: [''],
-      peso: [''],
-      enfermedad: [''],
-      cliente: [''],
-      estado: [''],
-      foto: ['']
-    });
-
-    // Escuchar los cambios en el formulario y actualizar el objeto mascota
-    this.mascotaForm.get('estado')?.valueChanges.subscribe((nuevoEstado: boolean) => {
-      this.mascota.estado = nuevoEstado;
+      cedula: [''],
+      contrasena: [''],
+      foto: [''],
+      especialidad: [''],
+      tratamientos: ['']
     });
 
   }
@@ -57,31 +50,29 @@ export class VerUnVeterinarioComponent {
     
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
-      this.mascota = mascota;
-      this.mascotaForm.patchValue({
-        nombre: this.mascota.nombre,
-        raza: this.mascota.raza,
-        edad: this.mascota.edad,
-        peso: this.mascota.peso,
-        enfermedad: this.mascota.enfermedad,
-        cliente: this.mascota.cedulaCliente,
-        estado: this.mascota.estado,
-        foto: this.mascota.foto
+    this.veterinarioService.getVeterinarioByCedula(id).subscribe((veterinario: Veterinario) => {
+      this.veterinario = veterinario;
+      this.veterinarioForm.patchValue({
+        nombre: this.veterinario.nombre,
+        cedula: this.veterinario.cedula,
+        contrasena: this.veterinario.contrasena,
+        foto: this.veterinario.foto,
+        especialidad: this.veterinario.especialidad,
+        tratamientos: this.veterinario.tratamientos
       });
-      this.mascotaForm.disable();
+      this.veterinarioForm.disable();
     }, () => {
-      this.mascota = {
+      this.veterinario = {
         id: 0,
-        nombre: '',
-        raza: '',
-        edad: 0,
-        peso: 0,
-        enfermedad: '',
+        cedula: 0,
+        contrasena: '',
         foto: '',
-        estado: true,  
-        cedulaCliente:0,
-        tratamientos: []
+        nombre: '',
+        especialidad: {
+          id: 0,
+          nombreEspecialidad: '',
+        },
+        tratamientos: [],
       };
     });
   }
@@ -92,7 +83,7 @@ export class VerUnVeterinarioComponent {
 
     if (this.isEditMode) {
      
-      this.mascotaForm.enable();
+      this.veterinarioForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
@@ -100,35 +91,22 @@ export class VerUnVeterinarioComponent {
       console.log('Formulario habilitado para edición');
     } else {
       
-      const mascotaActualizada: Mascota = {
-        ...this.mascota,  
-        ...this.mascotaForm.value, 
-        estado: this.mascotaForm.get('estado')?.value === 'true' || this.mascotaForm.get('estado')?.value === true
+      const veterinarioActualizado: Veterinario = {
+        ...this.veterinario,  
+        ...this.veterinarioForm.value
       };
 
-      if (this.mascota) {
-        if (this.userType === 'admin') {
-          this.mascotasService.actualizarMascotaAdmin(mascotaActualizada.id, mascotaActualizada).subscribe(response => {
-            console.log('Mascota actualizada por el administrador:', response);
-            // Aquí puedes agregar cualquier lógica adicional, como mostrar una notificación
+      if (this.veterinario) {
+          this.veterinarioService.updateVeterinario(veterinarioActualizado.id, veterinarioActualizado).subscribe(response => {
+            console.log('Veterinario actualizado:', response);
           }, error => {
-            console.error('Error al actualizar la mascota (admin):', error);
-            // Manejo de errores
-          });
-        } else if (this.userType === 'vet') {
-          this.mascotasService.actualizarMascotaVet(mascotaActualizada.id, mascotaActualizada).subscribe(response => {
-            console.log('Mascota actualizada por el veterinario:', response);
-            // Aquí puedes agregar cualquier lógica adicional, como mostrar una notificación
-          }, error => {
-            console.error('Error al actualizar la mascota (vet):', error);
-            // Manejo de errores
-          });
-        }        
-        console.log('Mascota actualizada:', mascotaActualizada);
-        this.router.navigate(['/mascotas/todas']); 
+            console.error('Error al actualizar el veterinario:', error);
+          });     
+        console.log('Veterinario actualizado:', veterinarioActualizado);
+        this.router.navigate(['/veterinario/todos']); 
       }
 
-      this.mascotaForm.disable();  
+      this.veterinarioForm.disable();  
       if (botonEditar) {
         botonEditar.classList.remove('expanded');
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
@@ -140,31 +118,19 @@ export class VerUnVeterinarioComponent {
     const botonEliminar = document.getElementById('eliminarBtn');
     
     if (botonEliminar?.classList.contains('expanded')) {
-      if (this.mascota && this.mascota.id !== undefined) {
+      if (this.veterinario && this.veterinario.id !== undefined) {
     
-        if (this.userType === 'admin') {
-          this.mascotasService.eliminarMascotaAdmin(this.mascota.id).subscribe(
+          this.veterinarioService.deleteVeterinario(this.veterinario.id).subscribe(
             response => {
               console.log('Mascota eliminada por el admin:', response);
-              this.router.navigate(['/mascotas/todas']);  
+              this.router.navigate(['/veterinario/todos']);  
             },
             error => {
-              console.error('Error al eliminar la mascota (admin):', error);
+              console.error('Error al eliminar el veterinario:', error);
             }
           );
-        } else if (this.userType === 'vet') {
-          this.mascotasService.eliminarMascotaVet(this.mascota.id).subscribe(
-            response => {
-              console.log('Mascota eliminada por el veterinario:', response);
-              this.router.navigate(['/mascotas/todas']); 
-            },
-            error => {
-              console.error('Error al eliminar la mascota (vet):', error);
-            }
-          );
-        }
       } else {
-        console.log('Error: No se pudo eliminar la mascota');
+        console.log('Error: No se pudo eliminar el veterinario');
       }
     } else {
       if (botonEliminar) {

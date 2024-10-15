@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Mascota } from 'src/app/model/mascota';
-import { MascotasService } from 'src/app/services/mascotas.service';
+import { Veterinario } from 'src/app/model/veterinario';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
   selector: 'app-formulario-agregar-veterinario',
@@ -9,46 +9,46 @@ import { MascotasService } from 'src/app/services/mascotas.service';
   styleUrls: ['./formulario-agregar-veterinario.component.css']
 })
 export class FormularioAgregarVeterinarioComponent {
-  @Input() nuevaMascota: Mascota = {
+  @Input() nuevoVeterinario: Veterinario = {
     id: 0,
-    nombre: '',
-    raza: '',
-    edad: 0,
-    peso: 0,
-    enfermedad: '',
+    cedula: 0,
+    contrasena: '',
     foto: '',
-    estado: true,
-    cedulaCliente:0,
+    nombre: '',
+    especialidad: { 
+      id: 0,
+      nombreEspecialidad: '',
+    },
     tratamientos: [],
-  };
+  }
 
-  constructor(private mascotasService: MascotasService, private router: Router) {}
+  constructor(private veterinarioService: VeterinarioService, private router: Router) {}
 
-  agregarMascota(): void {
+  agregarVeterinario(): void {
     
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
+    this.veterinarioService.addVeterinario(this.nuevoVeterinario, this.nuevoVeterinario.cedula).subscribe(
       response => {
-        alert('Mascota agregada exitosamente');
+        alert('Veterinario agregado exitosamente');
        
-        this.nuevaMascota = {
+        this.nuevoVeterinario = {
           id: 0,
-          nombre: '',
-          raza: '',
-          edad: 0,
-          peso: 0,
-          enfermedad: '',
+          cedula: 0,
+          contrasena: '',
           foto: '',
-          estado: true,
-          cedulaCliente:0,
+          nombre: '',
+          especialidad: {
+            id: 0,
+            nombreEspecialidad: '',
+          },
           tratamientos: [],
         };
   
        
-        this.router.navigate(['/mascotas/todas']);
+        this.router.navigate(['/veterinario/todos']);
       },
       error => {
-        console.error('Error al agregar la mascota:', error);
-        alert('Ocurrió un error al agregar la mascota. Inténtalo nuevamente.');
+        console.error('Error al agregar el veterinario:', error);
+        alert('Ocurrió un error al agregar el veterinario. Inténtalo nuevamente.');
       }
     );
   }
