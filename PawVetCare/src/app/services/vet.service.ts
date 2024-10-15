@@ -61,11 +61,11 @@ export class VeterinarioService {
     return this.http.post<string>(`${this.apiUrl}/agregar?idVet=${idVet}`, veterinario)
   }
 
-  updateVeterinario(cedula: number, veterinario: Veterinario): Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/update/${cedula}`, veterinario);
+  updateVeterinario(id: number, veterinario: Veterinario): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${id}`, veterinario);
   }
 
-  deleteVeterinario(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/delete/${id}`)
+  deleteVeterinario(cedula: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${cedula}`);
   }
 }

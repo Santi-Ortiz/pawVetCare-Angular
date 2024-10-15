@@ -94,9 +94,10 @@ export class InformacionVeterinarioComponent {
     if (botonEliminar?.classList.contains('expanded')) {
       if (this.veterinario && this.veterinario.id !== undefined) {
        
-        this.veterinarioService.deleteVeterinario(this.veterinario.id).subscribe(
-          response => {
-            console.log('Veterinario eliminado:', this.veterinario?.id);
+        this.veterinarioService.deleteVeterinario(this.veterinario.cedula).subscribe(
+          (response) => {
+            console.log('Veterinario eliminado:', this.veterinario?.cedula);
+            console.log('Veterinario actualizado correctamente', response);
             alert('Veterinario eliminado exitosamente');
             this.router.navigate(['/veterinarios/todos']);  
           },
