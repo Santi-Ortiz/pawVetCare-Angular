@@ -22,9 +22,23 @@ export class MedicamentoService {
         return this.http.get<Medicamento>(`${this.apiUrl}/find/${id}`)
     }
 
+    // Borrar un medicamento
     borrarMedicamento(id: number): Observable<void>{
         return this.http.delete<void>(`${this.apiUrl}/delete/${id}`)
     }
 
+    // Obtener ventas totales de la veterinaria
+    obtenerVentasTotales(): Observable<number>{
+        return this.http.get<number>(`${this.apiUrl}/ventas-totales`);
+    }
 
+    // Obtener ganancias totales/netas de la veterinaria
+    obtenerGananciasTotales(): Observable<number>{
+        return this.http.get<number>(`${this.apiUrl}/ganancias-totales`);
+    }
+
+    // Obtener costos totales de la veterinaria
+    obtenerCostosTotales(): Observable<number>{
+        return this.http.get<number>(`${this.apiUrl}/costos-totales`);
+    }
 }
