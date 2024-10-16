@@ -18,9 +18,9 @@
   <p class="segundoTitulo">Aquí están todos los clientes:</p>
   
   <!-- Formulario de búsqueda por ID del cliente -->
-  <form (ngSubmit)="buscarMascota(clienteId)" class="buscador-form">
+  <form (ngSubmit)="buscarCliente(cedulaCliente)" class="buscador-form">
       <!-- Campo de entrada vinculado a la variable 'clienteId' mediante ngModel -->
-      <input [(ngModel)]="clienteId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+      <input [(ngModel)]="cedulaCliente" name="id" class="buscador-input" placeholder="Buscar por cédula" required>
       <!-- Botón para enviar el formulario -->
       <button type="submit" class="buscador-button">Buscar</button>
   </form>

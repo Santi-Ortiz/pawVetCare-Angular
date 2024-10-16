@@ -14,7 +14,7 @@ import { MascotasService } from 'src/app/services/mascotas.service'; // Servicio
 })
 export class VerClientesComponent {
   userType = 'admin'; // Define si el usuario es admin o veterinario
-  clienteId: number | undefined; // ID del cliente que se buscará
+  cedulaCliente: number | undefined; // ID del cliente que se buscará
   index = 0; // Índice inicial del carrusel de clientes
   intervalId: any; // Almacena el identificador del intervalo del carrusel automático
   clientes: Cliente[] = []; // Lista de clientes
@@ -79,36 +79,36 @@ export class VerClientesComponent {
     this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
   }
 
-  // Método para buscar una mascota o cliente por su ID
-  buscarMascota(mascotaId: number | undefined): void {
-    const id = Number(mascotaId); // Convierte el ID a número
+  // Método para buscar una mascota o cliente por su cedula
+  buscarCliente(cedulaCliente: number | undefined): void {
+    const cedula = Number(cedulaCliente); // Convierte la cédula a número
   
-    if (!id) { // Si el ID es inválido, muestra un mensaje de error
-      alert('ID de mascota inválido.');
+    if (!cedula) { // Si la cédula es inválido, muestra un mensaje de error
+      alert('Cedula de cliente inválida.');
       return;
     }
   
-    // Si el usuario es admin, realiza la búsqueda de cliente por ID
+    // Si el usuario es admin, realiza la búsqueda de cliente por cedula
     if (this.userType === 'admin') {
-      this.clientesService.obtenerClientePorId(id).subscribe(
+      this.clientesService.obtenerClientePorCedula(cedula).subscribe(
         (cliente: Cliente) => {
           this.nuevoCliente = cliente; // Asigna el cliente encontrado
-          this.router.navigate(['/mascota', id]); // Navega a la página de la mascota con ese ID
+          this.router.navigate(['/cliente', cedula]); // Navega a la página del cliente con esa cédula
         },
-        (error) => { // Muestra error si no se encuentra la mascota
-          console.error(`Error al obtener la mascota para admin con ID ${id}:`, error);
-          alert(`Mascota con ID ${id} no encontrada`);
+        (error) => { // Muestra error si no se encuentra el cliente
+          console.error(`Error al obtener la mascota para admin con ID ${cedula}:`, error);
+          alert(`Mascota con ID ${cedula} no encontrada`);
         }
       );
     } else if (this.userType === 'vet') { // Lo mismo para veterinarios
-      this.clientesService.obtenerClientePorId(id).subscribe(
+      this.clientesService.obtenerClientePorCedula(cedula).subscribe(
         (cliente: Cliente) => {
           this.nuevoCliente = cliente;
-          this.router.navigate(['/mascota', id]); 
+          this.router.navigate(['/cliente', cedula]); 
         },
         (error) => {
-          console.error(`Error al obtener la mascota para vet con ID ${id}:`, error);
-          alert(`Mascota con ID ${id} no encontrada`);
+          console.error(`Error al obtener la cédula para vet con cedula ${cedula}:`, error);
+          alert(`Cliente con cedula ${cedula} no encontrada`);
         }
       );
     }

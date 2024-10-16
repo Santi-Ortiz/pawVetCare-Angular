@@ -29,10 +29,15 @@ export class ClienteService {
     return this.http.get<Cliente[]>(`${this.apiUrl}/todos`);
   }
 
+  // Obtener un cliente por su ID
   obtenerClientePorId(id: number): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.apiUrl}/find/${id}`);
   }
 
+  // Obtener un cliente por su cédula
+  obtenerClientePorCedula(cedula: number): Observable<Cliente> {
+    return this.http.get<Cliente>(`${this.apiUrl}/find/cedula/${cedula}`);
+  }
   // Agregar un nuevo cliente
   agregarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(`${this.apiUrl}/agregar`, cliente);

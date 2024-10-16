@@ -6,7 +6,7 @@
       <p class="segundoTitulo">Aquí están todos los veterinarios:</p>
       <!--Búsqueda por ID-->
       <form (ngSubmit)="buscarVet(vetId)" class="buscador-form">
-          <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+          <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por nombre" required>
           <button type="submit" class="buscador-button">Buscar</button>
       </form>
       <!--Enlace para ver todas las mascotas-->
