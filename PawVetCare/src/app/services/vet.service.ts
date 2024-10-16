@@ -68,4 +68,16 @@ export class VeterinarioService {
   deleteVeterinario(cedula: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${cedula}`);
   }
+
+  contarVeterinarios(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/total`);
+  }
+
+  contarVeterinariosActivos(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/activos`);
+  }
+
+  contarVeterinariosInactivos(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/inactivos`);
+  }
 }

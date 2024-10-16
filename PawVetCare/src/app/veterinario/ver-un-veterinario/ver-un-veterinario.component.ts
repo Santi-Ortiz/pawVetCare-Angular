@@ -21,6 +21,7 @@ export class VerUnVeterinarioComponent {
     contrasena: '',
     foto: '',
     nombre: '',
+    estado: false,
     especialidad: {
       id: 0,
       nombreEspecialidad: '',
@@ -40,6 +41,7 @@ export class VerUnVeterinarioComponent {
       cedula: [''],
       contrasena: [''],
       foto: [''],
+      estado: false,
       especialidad: [''],
       tratamientos: ['']
     });
@@ -68,6 +70,7 @@ export class VerUnVeterinarioComponent {
         contrasena: '',
         foto: '',
         nombre: '',
+        estado: false,
         especialidad: {
           id: 0,
           nombreEspecialidad: '',
@@ -99,6 +102,7 @@ export class VerUnVeterinarioComponent {
       if (this.veterinario) {
           this.veterinarioService.updateVeterinario(veterinarioActualizado.id, veterinarioActualizado).subscribe(response => {
             console.log('Veterinario actualizado:', response);
+            alert('Veterinario actualizado exitosamente');
           }, error => {
             console.error('Error al actualizar el veterinario:', error);
           });     

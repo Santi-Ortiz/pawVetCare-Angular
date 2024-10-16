@@ -15,6 +15,7 @@ export class FormularioAgregarVeterinarioComponent {
     contrasena: '',
     foto: '',
     nombre: '',
+    estado: false,
     especialidad: { 
       id: 0,
       nombreEspecialidad: '',
@@ -36,6 +37,7 @@ export class FormularioAgregarVeterinarioComponent {
           contrasena: '',
           foto: '',
           nombre: '',
+          estado: false,
           especialidad: {
             id: 0,
             nombreEspecialidad: '',

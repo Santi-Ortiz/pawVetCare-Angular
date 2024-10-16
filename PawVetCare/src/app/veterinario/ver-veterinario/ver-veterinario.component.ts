@@ -21,6 +21,7 @@
       contrasena: '',
       foto: '',
       nombre: '',
+      estado: false,
       especialidad: {
         id: 0,
         nombreEspecialidad: '',
@@ -100,6 +101,7 @@
         contrasena: '',
         foto: '',
         nombre: '',
+        estado: false,
         especialidad: {
           id: 0,
           nombreEspecialidad: '',
