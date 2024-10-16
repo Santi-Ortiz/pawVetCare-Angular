@@ -4,6 +4,10 @@
   <section class="content">
     <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
     <p class="segundoTitulo">Navega por los vets:</p>
+    <form (ngSubmit)="buscarVet(vetCedula)" class="buscador-form">
+      <input [(ngModel)]="vetCedula" name="id" class="buscador-input" placeholder="Buscar por cédula" required>
+      <button type="submit" class="buscador-button">Buscar</button>
+  </form>
     <app-veterinario-item
       [veterinarios]="veterinarios"
       [currentPage]="currentPage"

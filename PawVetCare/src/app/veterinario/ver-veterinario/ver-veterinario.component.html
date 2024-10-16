@@ -5,8 +5,8 @@
       <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
       <p class="segundoTitulo">Aquí están todos los veterinarios:</p>
       <!--Búsqueda por ID-->
-      <form (ngSubmit)="buscarVet(vetId)" class="buscador-form">
-          <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por nombre" required>
+      <form (ngSubmit)="buscarVet(vetCedula)" class="buscador-form">
+          <input [(ngModel)]="vetCedula" name="id" class="buscador-input" placeholder="Buscar por cédula" required>
           <button type="submit" class="buscador-button">Buscar</button>
       </form>
       <!--Enlace para ver todas las mascotas-->

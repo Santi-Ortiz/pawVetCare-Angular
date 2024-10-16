@@ -14,6 +14,7 @@ export class PaginacionVeterinarioComponent {
   itemsPerPage: number = 4;
   totalPages: number = 1; 
   veterinarios: Veterinario[] = []; 
+  vetCedula: number | undefined;
 
   constructor(private veterinarioService: VeterinarioService, private router: Router) {}
 
@@ -25,6 +26,27 @@ export class PaginacionVeterinarioComponent {
       }, (error: any) => {
         console.error('Error al cargar los veterinarios:', error);  
       });
+  }
+
+  buscarVet(vetCedula: number | undefined): void {
+    const cedula = Number(vetCedula);
+    if (!cedula) {
+      return;
+    }
+    this.veterinarioService.getVeterinarioByCedula(cedula).subscribe(
+      (veterinario: Veterinario) => {
+  
+        if (veterinario) {
+          this.router.navigate(['/veterinario', cedula]);
+        } else {
+          alert(`Veterinario con cédula ${cedula} no encontrado`);
+        }
+      },
+      (error) => {
+        console.error('Error al buscar el veterinario:', error);
+        alert(`Error al buscar el veterinario con cédula ${cedula}`);
+      }
+    );
   }
   
 

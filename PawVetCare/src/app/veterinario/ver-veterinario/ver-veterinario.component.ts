@@ -13,7 +13,7 @@
     index = 0;
     intervalId: any;
     veterinarios: Veterinario[] = [];
-    vetId: number | undefined;
+    vetCedula: number | undefined;
 
     nuevoVeterinario: Veterinario = {
       id: 0,
@@ -59,23 +59,23 @@
       this.intervalId = setInterval(() => this.cambiarVet(1), 6000);
     }
 
-    buscarVet(vetId: number | undefined): void {
-      const id = Number(vetId);
-      if (!id) {
+    buscarVet(vetCedula: number | undefined): void {
+      const cedula = Number(vetCedula);
+      if (!cedula) {
         return;
       }
-      this.veterinarioService.getVeterinarioByCedula(id).subscribe(
+      this.veterinarioService.getVeterinarioByCedula(cedula).subscribe(
         (veterinario: Veterinario) => {
     
           if (veterinario) {
-            this.router.navigate(['/veterinario', id]);
+            this.router.navigate(['/veterinario', cedula]);
           } else {
-            alert(`Veterinario con ID ${id} no encontrado`);
+            alert(`Veterinario con cédula ${cedula} no encontrado`);
           }
         },
         (error) => {
           console.error('Error al buscar el veterinario:', error);
-          alert(`Error al buscar el veterinario con ID ${id}`);
+          alert(`Error al buscar el veterinario con cédula ${cedula}`);
         }
       );
     }
