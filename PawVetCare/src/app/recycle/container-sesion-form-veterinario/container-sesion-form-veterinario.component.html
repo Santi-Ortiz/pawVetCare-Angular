@@ -1,17 +1,19 @@
-<div class="container-login">
-    <p class="subTitulo">¡Soy Vet!</p>
-    <p class="subTitulo2">Ingresa tus datos</p>
-    <form (ngSubmit)="loginVet()" #vetForm="ngForm">
-        <div class="form-group">
-            <label for="cedula">Cédula</label>
-            <input type="number" id="cedula" name="cedula" [(ngModel)]="vet.cedula" placeholder="Ej. 123456" required>
+<div class="container-login"> <!-- Contenedor principal para el formulario de inicio de sesión del veterinario -->
+    <p class="subTitulo">¡Soy Vet!</p> <!-- Título que indica que el usuario es un veterinario -->
+    <p class="subTitulo2">Ingresa tus datos</p> <!-- Subtítulo que solicita al usuario que ingrese sus datos -->
+
+    <!-- Formulario que se envía al llamar a la función loginVet() cuando se envía -->
+    <form (ngSubmit)="loginVet()" #vetForm="ngForm"> 
+        <div class="form-group"> <!-- Contenedor para el campo de entrada de la cédula -->
+            <label for="cedula">Cédula</label> <!-- Etiqueta para el campo de cédula -->
+            <input type="number" id="cedula" name="cedula" [(ngModel)]="vet.cedula" placeholder="Ej. 123456" required> <!-- Campo de entrada para la cédula del veterinario, vinculado a la propiedad vet.cedula -->
         </div>
-        <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" [(ngModel)]="vet.password" placeholder="Ingresa tu contraseña" required>
+        <div class="form-group"> <!-- Contenedor para el campo de entrada de la contraseña -->
+            <label for="password">Contraseña</label> <!-- Etiqueta para el campo de contraseña -->
+            <input type="password" id="password" name="password" [(ngModel)]="vet.password" placeholder="Ingresa tu contraseña" required> <!-- Campo de entrada para la contraseña, vinculado a la propiedad vet.password -->
         </div>
-        <div class="form-group">
-            <input type="submit" value="Ver mis mascotas" [disabled]="!vetForm.form.valid">
+        <div class="form-group"> <!-- Contenedor para el botón de envío -->
+            <input type="submit" value="Ver mis mascotas" [disabled]="!vetForm.form.valid"> <!-- Botón de envío que se habilita solo si el formulario es válido -->
         </div>
     </form>
 </div>

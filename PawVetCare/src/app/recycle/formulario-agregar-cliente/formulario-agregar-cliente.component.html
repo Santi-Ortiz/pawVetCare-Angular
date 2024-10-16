@@ -1,19 +1,50 @@
-<form (ngSubmit)="agregarMascota()" class="agregar-container">
-    <div class="infoadd-itemNombre">
-        <small class="info-title">Nombre:</small>
-        <input [(ngModel)]="nuevoCliente.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
+<form (ngSubmit)="agregarMascota()" class="agregar-container"> <!-- Formulario para agregar un nuevo cliente -->
+    <div class="infoadd-itemNombre"> <!-- Contenedor para el campo de nombre -->
+        <small class="info-title">Nombre:</small> <!-- Etiqueta para el campo de nombre -->
+        <input 
+            [(ngModel)]="nuevoCliente.nombre"
+            name="nombre"
+            class="inputadd-text" 
+            id="nombre" 
+            placeholder="Ingresa el nombre" 
+            required 
+        >
     </div>
-    <div class="infoadd-itemCedula">
-        <small class="info-title">Cédula:</small>
-        <input [(ngModel)]="nuevoCliente.cedula" name="cedula" class="number" class="inputadd-text" id="cedula" placeholder="Ingresa la cédula" required>
+    <div class="infoadd-itemCedula"> <!-- Contenedor para el campo de cédula -->
+        <small class="info-title">Cédula:</small> <!-- Etiqueta para el campo de cédula -->
+        <input 
+            [(ngModel)]="nuevoCliente.cedula" 
+            name="cedula" 
+            type="number" 
+            class="inputadd-text" 
+            id="cedula" 
+            placeholder="Ingresa la cédula" 
+            required
+        >
     </div>
-    <div class="infoadd-itemCorreo">
-        <small class="info-title">Correo:</small>
-        <input [(ngModel)]="nuevoCliente.correo" name="correo" type="inputadd-text" class="inputadd-text" id="correo" placeholder="Ingresa el correo" required>
+    <div class="infoadd-itemCorreo"> <!-- Contenedor para el campo de correo -->
+        <small class="info-title">Correo:</small> <!-- Etiqueta para el campo de correo -->
+        <input 
+            [(ngModel)]="nuevoCliente.correo"
+            name="correo" 
+            type="email"  
+            class="inputadd-text"  
+            id="correo"  
+            placeholder="Ingresa el correo"  
+            required  
+        >
     </div>
-    <div class="infoadd-itemCelular">
-        <small class="info-title">Celular:</small>
-        <input [(ngModel)]="nuevoCliente.celular" name="celular" type="number" class="inputadd-text" id="celular" placeholder="Ingresa el celular" required>
+    <div class="infoadd-itemCelular"> <!-- Contenedor para el campo de celular -->
+        <small class="info-title">Celular:</small> <!-- Etiqueta para el campo de celular -->
+        <input 
+            [(ngModel)]="nuevoCliente.celular"
+            name="celular"
+            type="tel"
+            class="inputadd-text"
+            id="celular"
+            placeholder="Ingresa el celular"
+            required
+        >
     </div>
-    <button type="submit" class="agregar-button">Agregar Cliente</button>
+    <button type="submit" class="agregar-button">Agregar Cliente</button> <!-- Botón para enviar el formulario -->
 </form>

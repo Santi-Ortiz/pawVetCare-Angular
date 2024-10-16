@@ -1,16 +1,31 @@
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-    <p class="segundoTitulo">Todos los medicamentos:</p>
-    <form class="buscador-form">
-        <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
-        <button type="submit" class="buscador-button">Buscar</button>
-    </form>
-    <app-medicamento-item
-      [medicamentos]="medicamentos"
-      [currentPage]="currentPage"
-      [itemsPerPage]="itemsPerPage">
-    </app-medicamento-item>
-  </section>
+  <!-- Muestra este encabezado solo si el usuario es 'admin' -->
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+  <!-- Componente personalizado que maneja el encabezado para los administradores -->
+</header>
+
+<section class="content">
+  <!-- Contenido principal de la página -->
+  
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <!-- Muestra este saludo solo si el usuario es un administrador -->
+  
+  <p class="segundoTitulo">Todos los medicamentos:</p>
+  <!-- Título de la sección que indica que se listarán todos los medicamentos -->
+
+  <form class="buscador-form">
+    <!-- Formulario simple para buscar medicamentos por nombre -->
+    <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
+    <!-- Campo de entrada donde el usuario puede ingresar el nombre del medicamento para buscar -->
+    
+    <button type="submit" class="buscador-button">Buscar</button>
+    <!-- Botón para enviar el formulario y realizar la búsqueda -->
+  </form>
+
+  <!-- Componente personalizado que muestra la lista de medicamentos -->
+  <app-medicamento-item
+    [medicamentos]="medicamentos"
+    [currentPage]="currentPage"
+    [itemsPerPage]="itemsPerPage">
+  </app-medicamento-item>
+</section>

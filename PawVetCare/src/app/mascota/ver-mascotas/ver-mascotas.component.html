@@ -1,35 +1,41 @@
-<header *ngIf="userType === 'admin'">
+<!-- Header específico según el rol del usuario -->
+<header *ngIf="userType === 'admin'"> <!-- Muestra el header específico para administradores -->
   <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
 </header>
-<header *ngIf="userType === 'vet'">
+<header *ngIf="userType === 'vet'"> <!-- Muestra el header específico para veterinarios -->
   <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
 </header>
-<header *ngIf="userType === 'cliente'">
+<header *ngIf="userType === 'cliente'"> <!-- Muestra el header específico para clientes -->
   <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
 </header>
 
 <section class="content">
-    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-    <p *ngIf="userType === 'cliente'" class="primerTitulo">Hola, username</p>
-    <p class="segundoTitulo">Aquí están todas las mascotas:</p>
+  <!-- Saludo específico según el tipo de usuario -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p> <!-- Saludo para admin -->
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p> <!-- Saludo para veterinario -->
+  <p *ngIf="userType === 'cliente'" class="primerTitulo">Hola, username</p> <!-- Saludo para cliente con nombre de usuario -->
+  
+  <!-- Título de sección -->
+  <p class="segundoTitulo">Aquí están todas las mascotas:</p>
 
-    <!-- Búsqueda por ID, se oculta para cliente -->
-    <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
-      <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
-      <button type="submit" class="buscador-button">Buscar</button>
+  <!-- Formulario de búsqueda de mascota por ID (solo para admin y vet) -->
+  <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
+    <!-- Campo de entrada para buscar por ID -->
+    <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
+    <!-- Botón para realizar la búsqueda -->
+    <button type="submit" class="buscador-button">Buscar</button>
   </form>
 
-    <!-- Enlace para ver todas las mascotas -->
-    <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
+  <!-- Enlace para ver todas las mascotas, disponible para todos los roles -->
+  <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
 
-    <!-- Texto condicional para agregar mascotas o contacto -->
-    <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Agrega mascotas:</p>
-    <p *ngIf="userType === 'cliente'" class="tercerTitulo">Para más información, contacta a tu Vet</p>
+  <!-- Texto condicional según el tipo de usuario -->
+  <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Agrega mascotas:</p> <!-- Texto para admin y vet -->
+  <p *ngIf="userType === 'cliente'" class="tercerTitulo">Para más información, contacta a tu Vet</p> <!-- Texto para cliente -->
 
-    <!-- Carrusel de mascotas -->
-    <app-carrusel-mascotas [mascotas]="mascotas" [marginTop]="'120px'" [left]="'88px'"></app-carrusel-mascotas>
+  <!-- Carrusel de mascotas (componente personalizado que recibe una lista de mascotas) -->
+  <app-carrusel-mascotas [mascotas]="mascotas" [marginTop]="'120px'" [left]="'88px'"></app-carrusel-mascotas>
 
-    <!-- Formulario de agregar mascota solo para admins y vets -->
-    <app-formulario-agregar-mascota *ngIf="userType !== 'cliente'"></app-formulario-agregar-mascota>
+  <!-- Formulario para agregar mascotas, solo visible para admin y vet -->
+  <app-formulario-agregar-mascota *ngIf="userType !== 'cliente'"></app-formulario-agregar-mascota>
 </section>

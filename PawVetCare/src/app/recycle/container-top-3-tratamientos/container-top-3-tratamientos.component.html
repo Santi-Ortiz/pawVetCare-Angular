@@ -1,5 +1,9 @@
+<!-- Contenedor principal para la sección de inicialización -->
 <div class="container-inicializar">
-    <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
-    <app-carrusel-top-medicamentos [mascotas]="mascotas"></app-carrusel-top-medicamentos>
-  </div>
+  <!-- Subtítulo que indica la información mostrada sobre tratamientos por tipo de medicamento -->
+  <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
   
+  <!-- Componente personalizado que muestra un carrusel con los medicamentos -->
+  <!-- Se le pasa la propiedad 'mascotas' que contiene la información necesaria para el carrusel -->
+  <app-carrusel-top-medicamentos [mascotas]="mascotas"></app-carrusel-top-medicamentos>
+</div>

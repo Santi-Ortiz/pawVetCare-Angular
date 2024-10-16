@@ -1,27 +1,26 @@
 import { Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import {Mascota} from '../../model/mascota';
-import {MascotasService} from '../../services/mascotas.service';
-import {ClienteService} from '../../services/cliente.service';
+import { Mascota } from '../../model/mascota';
+import { MascotasService } from '../../services/mascotas.service';
+import { ClienteService } from '../../services/cliente.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cliente } from 'src/app/model/cliente';
 
 @Component({
-  selector: 'app-ver-mascotas',
-  templateUrl: './ver-mascotas.component.html',
-  styleUrls: ['./ver-mascotas.component.css']
+  selector: 'app-ver-mascotas', // Define el selector que se utilizará en el HTML para este componente
+  templateUrl: './ver-mascotas.component.html', // Ruta del archivo de plantilla HTML para el componente
+  styleUrls: ['./ver-mascotas.component.css'] // Ruta del archivo de estilos CSS para este componente
 })
 export class VerMascotasComponent {
-
-  userType: string | null | undefined;
-  cliente: Cliente | undefined;
-  mascotaId: number | undefined;
-  index = 0;
-  intervalId: any;
-  mascotas: Mascota[] = [];
   
-  
+  userType: string | null | undefined; // Variable para almacenar el tipo de usuario (admin, vet, cliente, etc.)
+  cliente: Cliente | undefined; // Variable para almacenar el cliente actual
+  mascotaId: number | undefined; // Variable para almacenar el ID de la mascota seleccionada
+  index = 0; // Índice actual del carrusel de mascotas
+  intervalId: any; // ID del intervalo para controlar el desplazamiento automático del carrusel
+  mascotas: Mascota[] = []; // Arreglo que contiene la lista de mascotas
 
+  // Objeto de tipo Mascota que representa una nueva mascota que puede ser agregada
   nuevaMascota: Mascota = {
     id: 0,
     nombre: '',
@@ -31,102 +30,121 @@ export class VerMascotasComponent {
     enfermedad: '',
     foto: '',
     estado: true,
-    cedulaCliente:0,
+    cedulaCliente: 0,
     tratamientos: [],
   };
 
-  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined; // Referencia al elemento del carrusel en la plantilla HTML
 
-  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService, private clienteService: ClienteService) {} 
+  // Constructor que inyecta los servicios necesarios
+  constructor(
+    private mascotasService: MascotasService, // Servicio para obtener y gestionar mascotas
+    private router: Router, // Servicio de enrutamiento para navegar entre páginas
+    private authService: AuthService, // Servicio de autenticación para obtener información del usuario
+    private clienteService: ClienteService // Servicio para obtener información del cliente
+  ) {}
 
+  // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
-    this.userType = this.authService.getUserRole(); 
-    console.log("El userType es: ", this.userType);
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType); // Imprime el tipo de usuario en la consola
 
-    this.loadMascotas();
-    this.autoMoverCarrusel();
+    this.loadMascotas(); // Carga las mascotas según el tipo de usuario
+    this.autoMoverCarrusel(); // Activa el desplazamiento automático del carrusel
   }
-  
 
+  // Método para cargar las mascotas según el rol del usuario
   loadMascotas(): void {
     if (this.userType === 'admin') {
+      // Si el usuario es administrador, carga todas las mascotas
       this.mascotasService.obtenerMascotasAdmin().subscribe(
         (data: Mascota[]) => {
-          this.mascotas = data;
+          this.mascotas = data; // Asigna las mascotas obtenidas al arreglo
         },
         (error) => {
-          console.error('Error al obtener mascotas del administrador', error);
+          console.error('Error al obtener mascotas del administrador', error); // Maneja el error
         }
       );
     } else if (this.userType === 'vet') {
+      // Si el usuario es veterinario, carga solo las mascotas que puede gestionar
       this.mascotasService.obtenerMascotasVet().subscribe(
         (data: Mascota[]) => {
-          this.mascotas = data;
+          this.mascotas = data; // Asigna las mascotas obtenidas al arreglo
         },
         (error) => {
-          console.error('Error al obtener mascotas del veterinario', error);
+          console.error('Error al obtener mascotas del veterinario', error); // Maneja el error
         }
       );
     } else if (this.userType === 'cliente') {
-      const idCliente = this.authService.getUserId(); 
+      // Si el usuario es un cliente, carga las mascotas asociadas a ese cliente
+      const idCliente = this.authService.getUserId(); // Obtiene el ID del cliente autenticado
 
-      // Aquí el valor puede ser null, así que verifica antes de hacer la llamada
       if (idCliente !== null) {
+        // Verifica que el ID del cliente no sea nulo
         this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
           (data: Mascota[]) => {
-            this.mascotas = data;
+            this.mascotas = data; // Asigna las mascotas obtenidas al arreglo
           },
           (error: any) => {
-            console.error('Error al obtener mascotas del cliente', error);
+            console.error('Error al obtener mascotas del cliente', error); // Maneja el error
           }
         );
       } else {
-        console.error('El ID del cliente es nulo.');
+        console.error('El ID del cliente es nulo.'); // Maneja el caso en que no haya un ID válido
       }
     }
   }
 
+  // Método que se ejecuta al destruir el componente, detiene el intervalo del carrusel
   ngOnDestroy(): void {
     if (this.intervalId) {
-      clearInterval(this.intervalId);
+      clearInterval(this.intervalId); // Detiene el intervalo de desplazamiento automático del carrusel
     }
   }
 
+  // Método para cambiar la mascota visible en el carrusel
   cambiarMascota(direccion: number): void {
-    const totalMascotas = this.mascotas.length;
-    this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
-    console.log(`Mostrando mascota en índice: ${this.index}`); 
+    const totalMascotas = this.mascotas.length; // Obtiene el número total de mascotas
+    this.index = (this.index + direccion + totalMascotas) % totalMascotas; // Calcula el nuevo índice circularmente
+    console.log(`Mostrando mascota en índice: ${this.index}`); // Imprime el índice actual en la consola
     if (this.carrusel) {
-      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
+      // Si el carrusel está definido, mueve el carrusel horizontalmente
+      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; // Cambia la posición del carrusel
     }
   }
 
+  // Método para activar el desplazamiento automático del carrusel cada 6 segundos
   autoMoverCarrusel(): void {
-    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
+    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000); // Cambia la mascota cada 6 segundos
   }
 
+  // Método para buscar una mascota por su ID
   buscarMascota(mascotaId: number | undefined): void {
-    const id = Number(mascotaId);
+    const id = Number(mascotaId); // Convierte el ID de la mascota a número
     if (!id) {
-      return;
+      return; // Si no hay ID, sale del método
     }
-    const mascota = this.mascotasService.obtenerMascotaPorId(id);
+    const mascota = this.mascotasService.obtenerMascotaPorId(id); // Busca la mascota por ID
     if (mascota) {
-      this.router.navigate(['/mascota', id]);
+      this.router.navigate(['/mascota', id]); // Navega a la página de detalles de la mascota
     } else {
-      alert(`Mascota con ID ${id} no encontrada`);
+      alert(`Mascota con ID ${id} no encontrada`); // Muestra una alerta si la mascota no fue encontrada
     }
   }
-  
+
+  // Método para agregar una nueva mascota
   agregarMascota(): void {
     if (this.nuevaMascota.cedulaCliente === undefined) {
+      // Verifica que la cédula del cliente esté asignada
       alert('Por favor, asigna un cliente válido antes de agregar la mascota.');
-      return;
+      return; // Si no está, sale del método
     }
-    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota,this.nuevaMascota.cedulaCliente).subscribe(
+    // Llama al servicio para agregar la nueva mascota, pasando los datos de la mascota y la cédula del cliente
+    this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cedulaCliente).subscribe(
       (response) => {
-        alert('Mascota agregada exitosamente');
+        alert('Mascota agregada exitosamente'); // Muestra una alerta de éxito
 
+        // Reinicia los campos del formulario de la nueva mascota
         this.nuevaMascota = {
           id: 0,
           nombre: '',
@@ -136,14 +154,14 @@ export class VerMascotasComponent {
           enfermedad: '',
           foto: '',
           estado: true,
-          cedulaCliente:0,
+          cedulaCliente: 0,
           tratamientos: [],
         };
-        this.loadMascotas();
+        this.loadMascotas(); // Recarga la lista de mascotas después de agregar una nueva
       },
       (error) => {
-        alert('Error al agregar la mascota. Por favor, intenta de nuevo.');
+        alert('Error al agregar la mascota. Por favor, intenta de nuevo.'); // Muestra una alerta de error
       }
     );
-  }  
+  }
 }

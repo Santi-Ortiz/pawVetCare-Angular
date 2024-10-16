@@ -1,17 +1,35 @@
+<!-- Encabezado que solo se muestra si el usuario es un administrador -->
 <header *ngIf="userType === 'admin'">
+    <!-- Componente específico para el encabezado del administrador de mascotas -->
     <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <section class = "content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p class="segundoTitulo">Aquí están todos los veterinarios:</p>
-      <!--Búsqueda por ID-->
-      <form (ngSubmit)="buscarVet(vetId)" class="buscador-form">
-          <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por nombre" required>
-          <button type="submit" class="buscador-button">Buscar</button>
-      </form>
-      <!--Enlace para ver todas las mascotas-->
-      <a routerLink="/veterinarios/todos" class="todas-button">+ Ver todos los veterinarios</a>
-      <p class="tercerTitulo">Agrega veterinarios:</p>    
-      <app-carrusel-veterinarios [veterinarios]="veterinarios"></app-carrusel-veterinarios>
-      <app-formulario-agregar-veterinario></app-formulario-agregar-veterinario>      
-  </section>
+</header>
+
+<!-- Sección principal del contenido -->
+<section class="content">
+    <!-- Mensaje de bienvenida solo visible para administradores -->
+    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+    
+    <!-- Título que introduce la lista de veterinarios -->
+    <p class="segundoTitulo">Aquí están todos los veterinarios:</p>
+    
+    <!-- Formulario para buscar veterinarios por ID -->
+    <form (ngSubmit)="buscarVet(vetId)" class="buscador-form">
+        <!-- Campo de entrada que se vincula a la variable 'vetId' -->
+        <input [(ngModel)]="vetId" name="id" class="buscador-input" placeholder="Buscar por nombre" required>
+        
+        <!-- Botón para enviar la búsqueda -->
+        <button type="submit" class="buscador-button">Buscar</button>
+    </form>
+    
+    <!-- Enlace que redirige a la vista de todos los veterinarios -->
+    <a routerLink="/veterinarios/todos" class="todas-button">+ Ver todos los veterinarios</a>
+    
+    <!-- Título que introduce la sección para agregar veterinarios -->
+    <p class="tercerTitulo">Agrega veterinarios:</p>    
+    
+    <!-- Componente que muestra un carrusel de veterinarios -->
+    <app-carrusel-veterinarios [veterinarios]="veterinarios"></app-carrusel-veterinarios>
+    
+    <!-- Componente para agregar un nuevo veterinario -->
+    <app-formulario-agregar-veterinario></app-formulario-agregar-veterinario>      
+</section>

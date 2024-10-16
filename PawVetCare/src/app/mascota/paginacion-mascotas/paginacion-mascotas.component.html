@@ -1,22 +1,48 @@
+<!-- El siguiente bloque de código define un header que se muestra solo si el tipo de usuario es 'admin'. 
+*ngIf es una directiva estructural que renderiza el contenido solo cuando la condición es verdadera. -->
 <header *ngIf="userType === 'admin'">
+  <!-- Se incluye el componente app-header-admin-mascotas, y se le pasa el valor 'admin' como 
+       el atributo [userType] para que se configure de manera específica para los administradores. -->
   <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
 </header>
+
+<!-- Este header se mostrará solo si el usuario es un veterinario ('vet'). El comportamiento es similar
+     al anterior, pero el valor de [userType] es 'vet'. -->
 <header *ngIf="userType === 'vet'">
   <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
 </header>
+
+<!-- Este header se mostrará solo si el usuario es un cliente ('cliente'). -->
 <header *ngIf="userType === 'cliente'">
   <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
 </header>
 
+<!-- Sección principal de contenido donde se muestran diferentes mensajes según el tipo de usuario. -->
 <section class="content">
+  <!-- Muestra el saludo "Hola, admin" solo si el usuario es un administrador. -->
   <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+
+  <!-- Muestra el saludo "Hola, vet" solo si el usuario es un veterinario. -->
   <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+
+  <!-- Muestra un mensaje personalizado para los clientes. -->
   <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
+
+  <!-- Este título siempre se muestra, independientemente del tipo de usuario. -->
   <p class="segundoTitulo">Navega por las mascotas:</p>
+
+  <!-- Formulario para buscar mascotas por nombre. 
+       - El campo de entrada es obligatorio gracias al atributo 'required'.
+       - El botón envía el formulario para realizar la búsqueda. -->
   <form class="buscador-form">
     <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
     <button type="submit" class="buscador-button">Buscar</button>
   </form>
+
+  <!-- Componente app-mascota-item que recibe dos propiedades: 
+       - mascotas: una lista de mascotas.
+       - currentPage: la página actual en la que se encuentra el usuario en el paginador.
+       - itemsPerPage: cuántos elementos se muestran por página. -->
   <app-mascota-item
     [mascotas]="mascotas"
     [currentPage]="currentPage"

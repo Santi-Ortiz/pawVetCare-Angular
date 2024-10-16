@@ -1,31 +1,53 @@
 <div class="carrusel-container" *ngIf="clientes.length > 0">
+    <!-- Verifica si hay clientes disponibles; si hay, muestra el carrusel -->
+
+    <!-- Botón de navegación para retroceder en el carrusel -->
     <button class="carrusel-prev" (click)="cambiarMascota(-1)">
-        <img src="../assets/previous.png" alt="Regreso">
+        <img src="../assets/previous.png" alt="Regreso"> <!-- Imagen de botón de regreso -->
     </button>
+
+    <!-- Contenedor del carrusel que muestra información de los clientes -->
     <div class="carrusel">
-        <div class="mascota-item" *ngFor="let cliente of clientes; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <!-- Itera sobre la lista de clientes, mostrando un cliente a la vez -->
+        <div class="mascota-item" *ngFor="let cliente of clientes; let i = index" 
+             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+             <!-- Se utiliza 'ngStyle' para mostrar solo el cliente que coincide con el índice actual -->
+            
+            <!-- Contenedor de la información de cada cliente -->
             <div class="mascota-info">
+                
+                <!-- Muestra el nombre del cliente -->
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
                     <label class="info-label">{{ cliente.nombre }}</label>
                 </div>
+                
+                <!-- Muestra la cédula del cliente -->
                 <div class="info-itemCedula">
                     <small class="info-title">Cédula:</small>
                     <label class="info-label">{{ cliente.cedula }}</label>
                 </div>
+
+                <!-- Muestra el correo del cliente -->
                 <div class="info-itemCorreo">
                     <small class="info-title">Correo:</small>
                     <label class="info-label">{{ cliente.correo }}</label>
                 </div>
+
+                <!-- Muestra el celular del cliente -->
                 <div class="info-itemCelular">
                     <small class="info-title">Celular:</small>
                     <label class="info-label">{{ cliente.celular }}</label>
-                    </div>
+                </div>
+
+                <!-- Enlace a más información del cliente usando routerLink -->
                 <a class="info-button" [routerLink]="['/cliente', cliente.cedula]">+ Info</a>
             </div>
         </div>
     </div>
+
+    <!-- Botón de navegación para avanzar en el carrusel -->
     <button class="carrusel-next" (click)="cambiarMascota(1)">
-        <img src="assets/next.png" alt="Siguiente">
+        <img src="assets/next.png" alt="Siguiente"> <!-- Imagen de botón siguiente -->
     </button>
 </div>

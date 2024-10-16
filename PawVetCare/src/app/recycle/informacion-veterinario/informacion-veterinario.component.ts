@@ -1,30 +1,30 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Veterinario } from 'src/app/model/veterinario';
-import { VeterinarioService } from 'src/app/services/vet.service';
+import { Veterinario } from 'src/app/model/veterinario'; // Importa el modelo 'Veterinario'
+import { VeterinarioService } from 'src/app/services/vet.service'; // Servicio para realizar operaciones relacionadas con 'Veterinario'
 
 @Component({
-  selector: 'app-informacion-veterinario',
-  templateUrl: './informacion-veterinario.component.html',
-  styleUrls: ['./informacion-veterinario.component.css']
+  selector: 'app-informacion-veterinario', // Define el selector del componente
+  templateUrl: './informacion-veterinario.component.html', // Enlaza el archivo de plantilla HTML
+  styleUrls: ['./informacion-veterinario.component.css'] // Enlaza el archivo CSS para los estilos
 })
 export class InformacionVeterinarioComponent {
+  // Define el tipo de usuario, aquí se establece como 'admin'
   userType = 'admin';
 
-  @Input()
-  veterinarioForm!: FormGroup;
-  @Input() veterinario: any;  
-  @Input()
-  isEditMode!: boolean;
+  // Input para recibir datos desde el componente padre
+  @Input() veterinarioForm!: FormGroup; // Formulario reactivo del veterinario
+  @Input() veterinario: any;  // Objeto que contiene los datos del veterinario
+  @Input() isEditMode!: boolean;  // Controla si el formulario está en modo edición
 
   constructor(
-    private fb: FormBuilder,  
-    private route: ActivatedRoute, 
-    private router: Router,
-    private veterinarioService: VeterinarioService  
+    private fb: FormBuilder,  // Servicio para construir el formulario reactivo
+    private route: ActivatedRoute, // Servicio para obtener la información de la ruta activa
+    private router: Router, // Servicio para navegar entre rutas
+    private veterinarioService: VeterinarioService  // Servicio personalizado para gestionar veterinarios
   ) {
-
+    // Inicialización del formulario con campos vacíos
     this.veterinarioForm = this.fb.group({
       nombre: [''],
       cedula: [''],
@@ -33,23 +33,23 @@ export class InformacionVeterinarioComponent {
       especialidad: [''],
       tratamientos: ['']
     });
-
   }
 
+  // Se ejecuta cuando el componente es inicializado
   ngOnInit(): void {
+    // Si hay un veterinario disponible, sus valores se asignan al formulario
     if (this.veterinario) {
       this.veterinarioForm.patchValue(this.veterinario);
     }
   }
 
-  
-
+  // Método para alternar el modo edición
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');
-    this.isEditMode = !this.isEditMode;
-  
-    if (this.isEditMode) {
+    this.isEditMode = !this.isEditMode; // Invierte el estado del modo edición
 
+    if (this.isEditMode) {
+      // Si el formulario está en modo edición, habilita los campos y cambia el botón
       this.veterinarioForm.enable();
       if (botonEditar) {
         botonEditar.classList.add('expanded');
@@ -57,18 +57,18 @@ export class InformacionVeterinarioComponent {
       }
       console.log('Formulario habilitado para edición');
     } else {
-
+      // Si se desactiva el modo edición, guarda los cambios y deshabilita el formulario
       const veterinarioActualizado: Veterinario = {
         ...this.veterinario,
-        ...this.veterinarioForm.value,
+        ...this.veterinarioForm.value, // Combina los valores del formulario con el objeto existente
       };
-  
-      if (this.veterinario) {
 
+      if (this.veterinario) {
+        // Actualiza el veterinario utilizando el servicio correspondiente
         this.veterinarioService.updateVeterinario(this.veterinario.id, veterinarioActualizado).subscribe(
           (response: String) => {
             console.log('Veterinario actualizado correctamente', response);
-            this.router.navigate(['/veterinarios/todos']);
+            this.router.navigate(['/veterinarios/todos']); // Redirige a la lista de veterinarios
           },
           (error) => {
             console.error('Error al actualizar el veterinario:', error);
@@ -76,30 +76,29 @@ export class InformacionVeterinarioComponent {
           }
         );
       }
-  
-  
-      this.veterinarioForm.disable();
+
+      this.veterinarioForm.disable(); // Deshabilita el formulario tras guardar los cambios
       if (botonEditar) {
         botonEditar.classList.remove('expanded');
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
       }
     }
   }
-  
 
+  // Método para alternar el estado del botón eliminar y eliminar al veterinario
   toggleEliminar(): void {
     const botonEliminar = document.getElementById('eliminarBtn');
     
-    
     if (botonEliminar?.classList.contains('expanded')) {
+      // Si el botón está expandido, realiza la acción de eliminar
       if (this.veterinario && this.veterinario.id !== undefined) {
-       
+        // Elimina el veterinario utilizando el servicio correspondiente
         this.veterinarioService.deleteVeterinario(this.veterinario.cedula).subscribe(
           (response) => {
             console.log('Veterinario eliminado:', this.veterinario?.cedula);
             console.log('Veterinario actualizado correctamente', response);
             alert('Veterinario eliminado exitosamente');
-            this.router.navigate(['/veterinarios/todos']);  
+            this.router.navigate(['/veterinarios/todos']);  // Redirige a la lista de veterinarios
           },
           error => {
             console.error('Error al eliminar el veterinario:', error);
@@ -107,15 +106,14 @@ export class InformacionVeterinarioComponent {
           }
         );
       } else {
-        console.log('Error: No se pudo eliminar  el veterinario');
+        console.log('Error: No se pudo eliminar el veterinario');
         alert('Error: No se encontró el veterinario para eliminar.');
       }
     } else {
-      
+      // Si el botón no está expandido, solo cambia su estado visual
       if (botonEliminar) {
         botonEliminar.classList.add('expanded');
       }
     }
   }
-  
 }
