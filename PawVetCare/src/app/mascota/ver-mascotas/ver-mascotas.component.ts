@@ -12,15 +12,16 @@ import { Cliente } from 'src/app/model/cliente';
   styleUrls: ['./ver-mascotas.component.css'] // Ruta del archivo de estilos CSS para este componente
 })
 export class VerMascotasComponent {
-  
-  userType: string | null | undefined; // Variable para almacenar el tipo de usuario (admin, vet, cliente, etc.)
-  cliente: Cliente | undefined; // Variable para almacenar el cliente actual
-  mascotaId: number | undefined; // Variable para almacenar el ID de la mascota seleccionada
-  index = 0; // Índice actual del carrusel de mascotas
-  intervalId: any; // ID del intervalo para controlar el desplazamiento automático del carrusel
-  mascotas: Mascota[] = []; // Arreglo que contiene la lista de mascotas
 
-  // Objeto de tipo Mascota que representa una nueva mascota que puede ser agregada
+  userType: string | null | undefined;
+  cliente: Cliente | undefined;
+  mascotaName: string = "";
+  index = 0;
+  intervalId: any;
+  mascotas: Mascota[] = [];
+  
+  
+
   nuevaMascota: Mascota = {
     id: 0,
     nombre: '',
@@ -118,18 +119,20 @@ export class VerMascotasComponent {
     this.intervalId = setInterval(() => this.cambiarMascota(1), 6000); // Cambia la mascota cada 6 segundos
   }
 
-  // Método para buscar una mascota por su ID
-  buscarMascota(mascotaId: number | undefined): void {
-    const id = Number(mascotaId); // Convierte el ID de la mascota a número
-    if (!id) {
-      return; // Si no hay ID, sale del método
-    }
-    const mascota = this.mascotasService.obtenerMascotaPorId(id); // Busca la mascota por ID
-    if (mascota) {
-      this.router.navigate(['/mascota', id]); // Navega a la página de detalles de la mascota
-    } else {
-      alert(`Mascota con ID ${id} no encontrada`); // Muestra una alerta si la mascota no fue encontrada
-    }
+  buscarMascota(mascotaName: string): void {
+    this.mascotasService.obtenerMascotaPorNombre(mascotaName).subscribe(
+      (mascota) => {
+        if (mascota) {
+          // Redirige a la página de detalles de la mascota si se encuentra
+          this.router.navigate(['/mascota', mascota.id]);
+        } else {
+          console.log('Mascota no encontrada');
+        }
+      },
+      (error) => {
+        console.error('Error al buscar la mascota:', error);
+      }
+    );
   }
 
   // Método para agregar una nueva mascota

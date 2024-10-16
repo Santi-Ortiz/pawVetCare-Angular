@@ -11,13 +11,13 @@ import { VeterinarioService } from 'src/app/services/vet.service'; // Importa el
   styleUrls: ['./paginacion-veterinario.component.css'] // Archivo CSS asociado a este componente
 })
 export class PaginacionVeterinarioComponent {
-  userType: string = 'admin'; // Variable que indica el tipo de usuario, inicializada como 'admin'
-  currentPage: number = 1; // Página actual de la paginación, iniciando en 1
-  itemsPerPage: number = 4; // Número de elementos a mostrar por página
-  totalPages: number = 1; // Total de páginas calculadas
-  veterinarios: Veterinario[] = []; // Arreglo para almacenar la lista de veterinarios
+  userType: string = 'admin';
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 1; 
+  veterinarios: Veterinario[] = []; 
+  vetCedula: number | undefined;
 
-  // Constructor que inyecta el servicio de veterinarios y el router para la navegación
   constructor(private veterinarioService: VeterinarioService, private router: Router) {}
 
   // Método de ciclo de vida que se ejecuta al inicializar el componente
@@ -34,7 +34,28 @@ export class PaginacionVeterinarioComponent {
       });
   }
 
-  // Método para cambiar la página actual en la paginación
+  buscarVet(vetCedula: number | undefined): void {
+    const cedula = Number(vetCedula);
+    if (!cedula) {
+      return;
+    }
+    this.veterinarioService.getVeterinarioByCedula(cedula).subscribe(
+      (veterinario: Veterinario) => {
+  
+        if (veterinario) {
+          this.router.navigate(['/veterinario', cedula]);
+        } else {
+          alert(`Veterinario con cédula ${cedula} no encontrado`);
+        }
+      },
+      (error) => {
+        console.error('Error al buscar el veterinario:', error);
+        alert(`Error al buscar el veterinario con cédula ${cedula}`);
+      }
+    );
+  }
+  
+
   changePage(direction: number): void {
     const newPage = this.currentPage + direction; // Calcula la nueva página según la dirección (puede ser -1 o +1)
     // Verifica que la nueva página esté dentro de los límites

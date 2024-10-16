@@ -18,16 +18,14 @@
   <!-- Título de sección -->
   <p class="segundoTitulo">Aquí están todas las mascotas:</p>
 
-  <!-- Formulario de búsqueda de mascota por ID (solo para admin y vet) -->
-  <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaId)" class="buscador-form">
-    <!-- Campo de entrada para buscar por ID -->
-    <input [(ngModel)]="mascotaId" name="id" class="buscador-input" placeholder="Buscar por ID" required>
-    <!-- Botón para realizar la búsqueda -->
-    <button type="submit" class="buscador-button">Buscar</button>
+    <!-- Búsqueda por ID, se oculta para cliente -->
+    <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaName)" class="buscador-form">
+      <input [(ngModel)]="mascotaName" name="mascotaName" class="buscador-input" placeholder="Buscar por nombre" required>
+      <button type="submit" class="buscador-button">Buscar</button>
   </form>
-
-  <!-- Enlace para ver todas las mascotas, disponible para todos los roles -->
-  <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
+  
+    <!-- Enlace para ver todas las mascotas -->
+    <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
 
   <!-- Texto condicional según el tipo de usuario -->
   <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Agrega mascotas:</p> <!-- Texto para admin y vet -->

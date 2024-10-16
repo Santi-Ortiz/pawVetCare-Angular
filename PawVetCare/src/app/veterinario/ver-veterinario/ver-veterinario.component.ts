@@ -4,34 +4,31 @@ import { Router } from '@angular/router';
 import { Veterinario } from 'src/app/model/veterinario';
 import { VeterinarioService } from 'src/app/services/vet.service';
 
-// Decorador del componente que define su selector, plantilla y estilos
-@Component({
-  selector: 'app-ver-veterinario', // Selector que se utiliza para referirse a este componente en otros templates
-  templateUrl: './ver-veterinario.component.html', // Ruta al archivo de plantilla HTML
-  styleUrls: ['./ver-veterinario.component.css'] // Ruta a los estilos CSS específicos del componente
-})
-export class VerVeterinarioComponent {
-  // Propiedades del componente
-  userType = 'admin'; // Tipo de usuario (admin)
-  index = 0; // Índice actual del veterinario mostrado en el carrusel
-  intervalId: any; // ID del intervalo para auto-mover el carrusel
-  veterinarios: Veterinario[] = []; // Arreglo para almacenar la lista de veterinarios
-  vetId: number | undefined; // ID del veterinario a buscar
+  @Component({
+    selector: 'app-ver-veterinario',
+    templateUrl: './ver-veterinario.component.html',
+    styleUrls: ['./ver-veterinario.component.css']
+  })
+  export class VerVeterinarioComponent {
+    userType = 'admin'; 
+    index = 0;
+    intervalId: any;
+    veterinarios: Veterinario[] = [];
+    vetCedula: number | undefined;
 
-  // Objeto para almacenar información de un nuevo veterinario
-  nuevoVeterinario: Veterinario = {
-    id: 0,
-    cedula: 0,
-    contrasena: '',
-    foto: '',
-    nombre: '',
-    estado: false,
-    especialidad: {
+    nuevoVeterinario: Veterinario = {
       id: 0,
-      nombreEspecialidad: '',
-    },
-    tratamientos: [],
-  }
+      cedula: 0,
+      contrasena: '',
+      foto: '',
+      nombre: '',
+      estado: false,
+      especialidad: {
+        id: 0,
+        nombreEspecialidad: '',
+      },
+      tratamientos: [],
+    }
 
   // Decorador ViewChild para acceder al elemento del carrusel
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
@@ -74,62 +71,55 @@ export class VerVeterinarioComponent {
     this.intervalId = setInterval(() => this.cambiarVet(1), 6000);
   }
 
-  // Método para buscar un veterinario por su cédula
-  buscarVet(vetId: number | undefined): void {
-    const id = Number(vetId); // Convierte el ID a número
-    if (!id) {
-      return; // Sale del método si el ID es inválido
-    }
-    // Llama al servicio para obtener el veterinario por su cédula
-    this.veterinarioService.getVeterinarioByCedula(id).subscribe(
-      (veterinario: Veterinario) => {
-        // Si se encuentra el veterinario, navega a su página
-        if (veterinario) {
-          this.router.navigate(['/veterinario', id]);
-        } else {
-          // Muestra un mensaje de alerta si no se encuentra
-          alert(`Veterinario con ID ${id} no encontrado`);
+    buscarVet(vetCedula: number | undefined): void {
+      const cedula = Number(vetCedula);
+      if (!cedula) {
+        return;
+      }
+      this.veterinarioService.getVeterinarioByCedula(cedula).subscribe(
+        (veterinario: Veterinario) => {
+    
+          if (veterinario) {
+            this.router.navigate(['/veterinario', cedula]);
+          } else {
+            alert(`Veterinario con cédula ${cedula} no encontrado`);
+          }
+        },
+        (error) => {
+          console.error('Error al buscar el veterinario:', error);
+          alert(`Error al buscar el veterinario con cédula ${cedula}`);
         }
-      },
-      (error) => {
-        // Manejo de errores en caso de fallo en la búsqueda
-        console.error('Error al buscar el veterinario:', error);
-        alert(`Error al buscar el veterinario con ID ${id}`);
-      }
-    );
-  }
-
-  // Método para agregar un nuevo veterinario
-  agregarVeterinario(): void {
-    // Llama al servicio para agregar el nuevo veterinario
-    this.veterinarioService.addVeterinario(this.nuevoVeterinario, this.nuevoVeterinario.cedula).subscribe(
-      (response: string) => {
-        alert('Veterinario agregado exitosamente'); // Mensaje de éxito
-        this.resetFormularioVeterinario(); // Resetea el formulario
-      },
-      (error) => {
-        // Manejo de errores al agregar el veterinario
-        console.error('Error al agregar veterinario:', error);
-        alert('Error al agregar veterinario');
-      }
-    );
-  }
-
-  // Método para reiniciar el formulario de nuevo veterinario
-  resetFormularioVeterinario(): void {
-    // Resetea el objeto nuevoVeterinario a su estado inicial
-    this.nuevoVeterinario = {
-      id: 0,
-      cedula: 0,
-      contrasena: '',
-      foto: '',
-      nombre: '',
-      estado: false,
-      especialidad: {
-        id: 0,
-        nombreEspecialidad: '',
-      },
-      tratamientos: [],
+      );
     }
+    
+    
+    agregarVeterinario(): void {
+      this.veterinarioService.addVeterinario(this.nuevoVeterinario,this.nuevoVeterinario.cedula).subscribe(
+        (response: string) => {
+          alert('Veterinario agregado exitosamente');
+          this.resetFormularioVeterinario();  
+        },
+        (error) => {
+          console.error('Error al agregar veterinario:', error);
+          alert('Error al agregar veterinario');
+        }
+      );
+    }
+    
+    resetFormularioVeterinario(): void {
+      this.nuevoVeterinario = {
+        id: 0,
+        cedula: 0,
+        contrasena: '',
+        foto: '',
+        nombre: '',
+        estado: false,
+        especialidad: {
+          id: 0,
+          nombreEspecialidad: '',
+        },
+        tratamientos: [],
+      }
+    }
+    
   }
-}

@@ -10,6 +10,10 @@
   <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
   <!-- Título secundario para la sección de veterinarios -->
   <p class="segundoTitulo">Navega por los vets:</p>
+    <form (ngSubmit)="buscarVet(vetCedula)" class="buscador-form">
+      <input [(ngModel)]="vetCedula" name="id" class="buscador-input" placeholder="Buscar por cédula" required>
+      <button type="submit" class="buscador-button">Buscar</button>
+  </form>
   
   <!-- Componente que muestra la lista de veterinarios, pasando las propiedades necesarias -->
   <app-veterinario-item
