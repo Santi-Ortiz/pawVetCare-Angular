@@ -15,7 +15,7 @@ export class VerMascotasComponent {
 
   userType: string | null | undefined;
   cliente: Cliente | undefined;
-  mascotaId: number | undefined;
+  mascotaName: string = "";
   index = 0;
   intervalId: any;
   mascotas: Mascota[] = [];
@@ -105,17 +105,20 @@ export class VerMascotasComponent {
     this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
   }
 
-  buscarMascota(mascotaId: number | undefined): void {
-    const id = Number(mascotaId);
-    if (!id) {
-      return;
-    }
-    const mascota = this.mascotasService.obtenerMascotaPorId(id);
-    if (mascota) {
-      this.router.navigate(['/mascota', id]);
-    } else {
-      alert(`Mascota con ID ${id} no encontrada`);
-    }
+  buscarMascota(mascotaName: string): void {
+    this.mascotasService.obtenerMascotaPorNombre(mascotaName).subscribe(
+      (mascota) => {
+        if (mascota) {
+          // Redirige a la página de detalles de la mascota si se encuentra
+          this.router.navigate(['/mascota', mascota.id]);
+        } else {
+          console.log('Mascota no encontrada');
+        }
+      },
+      (error) => {
+        console.error('Error al buscar la mascota:', error);
+      }
+    );
   }
   
   agregarMascota(): void {
