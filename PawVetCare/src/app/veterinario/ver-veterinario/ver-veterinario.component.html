@@ -1,4 +1,6 @@
+<!-- Encabezado que solo se muestra si el usuario es un administrador -->
 <header *ngIf="userType === 'admin'">
+    <!-- Componente específico para el encabezado del administrador de mascotas -->
     <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
   </header>
   <section class = "content">

@@ -1,16 +1,54 @@
+<!-- Contenedor principal para los medicamentos -->
 <div class="medicamentos-container" id="medicamentosContainer">
-    <div *ngFor="let medicamento of medicamentoPagina" class="medicamento-item">
-      <div class="medicamento-info">
-        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{medicamento.nombre}}</label></div>
-        <div class="info-itemPrecioVenta"><small class="info-title">P. Venta:</small><label class="info-label">{{medicamento.precio_venta}}</label></div>
-        <div class="info-itemPrecioCompra"><small class="info-title">P. Compra:</small><label class="info-label">{{medicamento.precio_compra}}</label></div>
-        <div class="info-itemUnidadesDisponibles"><small class="info-title">Uni. Disp:</small><label class="info-label">{{medicamento.unidades_disponibles}}</label></div>
-        <div class="info-itemUnidadesVendidas"><small class="info-title">Uni. Vend:</small><label class="info-label">{{medicamento.unidades_vendidas}}</label></div>
+
+  <!-- Recorre la lista de medicamentos de la página actual y los muestra uno por uno -->
+  <div *ngFor="let medicamento of medicamentoPagina" class="medicamento-item">
+    
+    <!-- Contenedor de información de un medicamento -->
+    <div class="medicamento-info">
+
+      <!-- Nombre del medicamento -->
+      <div class="info-itemNombre">
+        <small class="info-title">Nombre:</small>
+        <label class="info-label">{{medicamento.nombre}}</label> <!-- Muestra el nombre del medicamento -->
       </div>
+
+      <!-- Precio de venta del medicamento -->
+      <div class="info-itemPrecioVenta">
+        <small class="info-title">P. Venta:</small>
+        <label class="info-label">{{medicamento.precio_venta}}</label> <!-- Muestra el precio de venta del medicamento -->
+      </div>
+
+      <!-- Precio de compra del medicamento -->
+      <div class="info-itemPrecioCompra">
+        <small class="info-title">P. Compra:</small>
+        <label class="info-label">{{medicamento.precio_compra}}</label> <!-- Muestra el precio de compra del medicamento -->
+      </div>
+
+      <!-- Unidades disponibles del medicamento -->
+      <div class="info-itemUnidadesDisponibles">
+        <small class="info-title">Uni. Disp:</small>
+        <label class="info-label">{{medicamento.unidades_disponibles}}</label> <!-- Muestra las unidades disponibles del medicamento -->
+      </div>
+
+      <!-- Unidades vendidas del medicamento -->
+      <div class="info-itemUnidadesVendidas">
+        <small class="info-title">Uni. Vend:</small>
+        <label class="info-label">{{medicamento.unidades_vendidas}}</label> <!-- Muestra las unidades vendidas del medicamento -->
+      </div>
+
     </div>
   </div>
-  <div class="pagination">
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
-    <span>Pagina {{currentPage}} de {{totalPages}}</span>
-    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>
+
+<!-- Controles de paginación para navegar entre páginas de medicamentos -->
+<div class="pagination">
+  <!-- Botón para ir a la página anterior. Deshabilitado si se está en la primera página -->
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+
+  <!-- Muestra el número de la página actual y el total de páginas -->
+  <span>Pagina {{currentPage}} de {{totalPages}}</span>
+
+  <!-- Botón para ir a la página siguiente. Deshabilitado si se está en la última página -->
+  <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
 </div>

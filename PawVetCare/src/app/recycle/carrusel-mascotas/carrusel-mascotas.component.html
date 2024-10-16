@@ -1,38 +1,69 @@
-<div class="carrusel-container" [ngStyle]="{'margin-top': marginTop, 'left': left}"  *ngIf="mascotas.length > 0">
+<div class="carrusel-container" [ngStyle]="{'margin-top': marginTop, 'left': left}" *ngIf="mascotas.length > 0">
+    <!-- Contenedor principal del carrusel. Se aplican estilos dinámicos para 'margin-top' y 'left'. 
+         Solo se muestra si hay al menos una mascota en la lista. -->
+
     <button class="carrusel-prev" (click)="cambiarMascota(-1)">
-        <img src="../assets/previous.png" alt="Regreso">
+        <!-- Botón para retroceder en el carrusel. Al hacer clic, se llama a 'cambiarMascota' con -1 como argumento. -->
+        <img src="../assets/previous.png" alt="Regreso"> <!-- Imagen del botón de retroceso -->
     </button>
+
     <div class="carrusel" #carrusel>
-        <div class="mascota-item" *ngFor="let mascota of mascotas; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <!-- Contenedor que contiene los elementos de las mascotas. Se hace referencia a él mediante 'carrusel'. -->
+
+        <div class="mascota-item" *ngFor="let mascota of mascotas; let i = index" 
+             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <!-- Genera un elemento para cada mascota en la lista. Solo se muestra el elemento correspondiente al índice actual. -->
+
             <div class="mascota-info">
+                <!-- Contenedor para la información de cada mascota. -->
+                
                 <img [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre" class="mascota-foto">
+                <!-- Muestra la foto de la mascota. El atributo 'alt' se utiliza para proporcionar un texto alternativo. -->
+
                 <img *ngIf="mascota?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
+                <!-- Imagen que indica el estado inactivo de la mascota. Se muestra solo si el estado es falso. -->
+
                 <img *ngIf="mascota?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
+                <!-- Imagen que indica el estado activo de la mascota. Se muestra solo si el estado es verdadero. -->
+
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
                     <label class="info-label">{{ mascota.nombre }}</label>
+                    <!-- Muestra el nombre de la mascota. -->
                 </div>
+
                 <div class="info-itemRaza">
                     <small class="info-title">Raza:</small>
                     <label class="info-label">{{ mascota.raza }}</label>
+                    <!-- Muestra la raza de la mascota. -->
                 </div>
+
                 <div class="info-itemEdad">
                     <small class="info-title">Edad:</small>
                     <label class="info-label">{{ mascota.edad }}</label>
+                    <!-- Muestra la edad de la mascota. -->
                 </div>
+
                 <div class="info-itemPeso">
                     <small class="info-title">Peso:</small>
                     <label class="info-label">{{ mascota.peso }} kg</label>
+                    <!-- Muestra el peso de la mascota seguido de 'kg'. -->
                 </div>
+
                 <div class="info-itemEnfermedad">
                     <small class="info-title">Enfermedad:</small>
                     <label class="info-label">{{ mascota.enfermedad }}</label>
+                    <!-- Muestra la enfermedad de la mascota. -->
                 </div>
+
                 <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
+                <!-- Enlace que redirige a la página de información detallada de la mascota usando su ID. -->
             </div>
         </div>
     </div>
+
     <button class="carrusel-next" (click)="cambiarMascota(1)">
-        <img src="assets/next.png" alt="Siguiente">
+        <!-- Botón para avanzar en el carrusel. Al hacer clic, se llama a 'cambiarMascota' con 1 como argumento. -->
+        <img src="assets/next.png" alt="Siguiente"> <!-- Imagen del botón de avance -->
     </button>
 </div>

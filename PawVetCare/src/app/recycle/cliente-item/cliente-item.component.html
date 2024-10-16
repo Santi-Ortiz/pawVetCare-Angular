@@ -1,16 +1,39 @@
 <div class="clientes-container" id="clientesContainer">
-    <div *ngFor="let mascota of mascotasPagina" class="cliente-item">
-      <div class="cliente-info">
-        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{mascota.nombre}}</label></div>
-        <div class="info-itemCedula"><small class="info-title">Cédula:</small><label class="info-label">{{mascota.cedula}}</label></div>
-        <div class="info-itemCorreo"><small class="info-title">Correo:</small><label class="info-label">{{mascota.correo}}</label></div>
-        <div class="info-itemCelular"><small class="info-title">Celular:</small><label class="info-label">{{mascota.celular}}</label></div>
-        <a class="info-button" [routerLink]="['/cliente', mascota.cedula]">+ Info</a>
+  <!-- Se recorre la lista de mascotas en la página actual y se crea un elemento para cada mascota -->
+  <div *ngFor="let mascota of mascotasPagina" class="cliente-item">
+    <div class="cliente-info">
+      <!-- Información del nombre de la mascota -->
+      <div class="info-itemNombre">
+        <small class="info-title">Nombre:</small>
+        <label class="info-label">{{mascota.nombre}}</label> <!-- Muestra el nombre de la mascota -->
       </div>
+      <!-- Información de la cédula de la mascota -->
+      <div class="info-itemCedula">
+        <small class="info-title">Cédula:</small>
+        <label class="info-label">{{mascota.cedula}}</label> <!-- Muestra la cédula de la mascota -->
+      </div>
+      <!-- Información del correo de la mascota -->
+      <div class="info-itemCorreo">
+        <small class="info-title">Correo:</small>
+        <label class="info-label">{{mascota.correo}}</label> <!-- Muestra el correo de la mascota -->
+      </div>
+      <!-- Información del celular de la mascota -->
+      <div class="info-itemCelular">
+        <small class="info-title">Celular:</small>
+        <label class="info-label">{{mascota.celular}}</label> <!-- Muestra el celular de la mascota -->
+      </div>
+      <!-- Botón para más información, redirige a la página del cliente específico -->
+      <a class="info-button" [routerLink]="['/cliente', mascota.cedula]">+ Info</a>
     </div>
   </div>
-  <div class="pagination">
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
-    <span>Pagina {{currentPage}} de {{totalPages}}</span>
-    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>
+
+<!-- Contenedor para la paginación -->
+<div class="pagination">
+  <!-- Botón para cambiar a la página anterior, deshabilitado si está en la primera página -->
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+  <!-- Muestra el número de la página actual y el total de páginas -->
+  <span>Página {{currentPage}} de {{totalPages}}</span>
+  <!-- Botón para cambiar a la siguiente página, deshabilitado si está en la última página -->
+  <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
 </div>

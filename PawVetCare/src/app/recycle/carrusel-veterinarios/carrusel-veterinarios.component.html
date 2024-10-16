@@ -1,30 +1,56 @@
 <div class="carrusel-container" *ngIf="veterinarios.length > 0">
+    <!-- Contenedor principal del carrusel, que solo se muestra si hay veterinarios disponibles -->
+    
     <button class="carrusel-prev" (click)="cambiarVeterinario(-1)">
+        <!-- Botón para retroceder al veterinario anterior -->
         <img src="../assets/previous.png" alt="Regreso">
     </button>
+    
     <div class="carrusel">
-        <div class="veterinario-item" *ngFor="let veterinario of veterinarios; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <!-- Contenedor del carrusel que contiene los elementos de veterinarios -->
+        
+        <div class="veterinario-item" *ngFor="let veterinario of veterinarios; let i = index" 
+             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <!-- Itera sobre la lista de veterinarios y muestra solo el veterinario correspondiente al índice actual -->
+            
             <div class="veterinario-info">
+                <!-- Contenedor para la información del veterinario -->
+                
                 <img [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre" class="veterinario-foto">
+                <!-- Imagen del veterinario, cuyo src se asigna dinámicamente a partir de la propiedad 'foto' -->
+                
                 <img *ngIf="veterinario?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
+                <!-- Muestra un ícono indicando que el veterinario está inactivo si 'estado' es falso -->
+                
                 <img *ngIf="veterinario?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
+                <!-- Muestra un ícono indicando que el veterinario está activo si 'estado' es verdadero -->
+                
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
                     <label class="info-label">{{ veterinario.nombre }}</label>
+                    <!-- Muestra el nombre del veterinario -->
                 </div>
+                
                 <div class="info-itemCedula">
                     <small class="info-title">Cedula:</small>
                     <label class="info-label">{{ veterinario.cedula }}</label>
+                    <!-- Muestra la cédula del veterinario -->
                 </div>
+                
                 <div class="info-itemEspecialidad">
                     <small class="info-title">Especialidad:</small>
                     <label class="info-label">{{ veterinario.especialidad }}</label>
+                    <!-- Muestra la especialidad del veterinario -->
                 </div>
+                
                 <a class="info-button" [routerLink]="['/veterinario', veterinario.cedula]">+ Info</a>
+                <!-- Enlace que redirige a una página con más información sobre el veterinario, usando su cédula -->
             </div>
         </div>
     </div>
+    
     <button class="carrusel-next" (click)="cambiarVeterinario(1)">
+        <!-- Botón para avanzar al siguiente veterinario -->
         <img src="assets/next.png" alt="Siguiente">
     </button>
 </div>

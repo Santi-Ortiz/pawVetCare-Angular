@@ -1,41 +1,50 @@
 <div class="container-informacion">
+  <!-- Formulario que utiliza el grupo de controles de formulario 'mascotaForm' -->
   <form [formGroup]="mascotaForm" class="containerMascota">    
     <p class="tituloEditar">Editar</p>
     <p class="tituloEliminar">Eliminar</p>
     
+    <!-- Campo para ingresar el nombre de la mascota -->
     <div class="info-item">
       <small class="info-title">Nombre:</small>
       <input class="info-label" formControlName="nombre">
     </div>
 
+    <!-- Imagen que indica el estado de la mascota: inactivo o activo -->
     <img *ngIf="mascota?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
     <img *ngIf="mascota?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
 
+    <!-- Campo para ingresar la raza de la mascota -->
     <div class="info-itemRaza">
       <small class="info-title">Raza:</small>
       <input class="info-label" formControlName="raza">
     </div>
 
+    <!-- Campo para ingresar la edad de la mascota -->
     <div class="info-itemEdad">
       <small class="info-title">Edad:</small>
       <input class="info-label" formControlName="edad">
     </div>
 
+    <!-- Campo para ingresar el peso de la mascota -->
     <div class="info-itemPeso">
       <small class="info-title">Peso:</small>
       <input class="info-label" formControlName="peso">
     </div>
 
+    <!-- Campo para ingresar la enfermedad de la mascota -->
     <div class="info-itemEnfermedad">
       <small class="info-title">Enfermedad:</small>
       <input class="info-label" formControlName="enfermedad">
     </div>
 
+    <!-- Campo para ingresar el documento del dueño (cédula) -->
     <div class="info-itemDueño">
       <small class="info-title">Dueño C.C.:</small>
       <input class="info-label" formControlName="cliente">
     </div>
 
+    <!-- Campo para seleccionar el estado de la mascota -->
     <div class="info-itemEstado">
       <small class="info-title">Estado:</small>
       <select id="state" class="info-select" formControlName="estado">
@@ -44,6 +53,7 @@
       </select>
     </div>
 
+    <!-- Campo para ingresar la URL de la foto de la mascota -->
     <div class="info-itemFoto">
       <small class="info-title">URL Foto:</small>
       <input class="info-label" formControlName="foto">
@@ -52,6 +62,7 @@
     <!-- Mostrar la imagen de la mascota o una imagen de error si no se encuentra la URL -->
     <img class="mascotaimg" [src]="mascotaForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto de la mascota">    
 
+    <!-- Botón para editar o guardar información, visible para administradores y veterinarios -->
     <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
       <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">
         <span class="icon">✎</span>
@@ -60,7 +71,7 @@
     </div>
   </form>
 
-  <!-- Botón para eliminar -->
+  <!-- Botón para eliminar, visible para administradores y veterinarios -->
   <form *ngIf="userType === 'admin' || userType === 'vet'">
     <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()">
       <span class="icon">x</span>

@@ -1,15 +1,15 @@
-<form class="dar-medicamento-container">
-    <div class="infoadd-itemMedicamento">
-      <small class="info-title">Medicamento:</small>
-      <select name="medicamento" class="inputadd-text" required>
-        <option>ACOLAN</option>
-        <option>ACTIONIS</option>
-        <option>ACUIMIX</option>
-      </select>
-    </div>
-    <div class="infoadd-itemCantidad">
-        <small class="info-title">Cantidad:</small>
-        <input name="cantidad" type="number" class="inputadd-text" id="cantidad" placeholder="Ingresa la cantidad" required min="1" onkeydown="return false">
-    </div>
-    <button type="submit" class="dar-button">Dar Medicamento</button>
+<form class="dar-medicamento-container"> <!-- Contenedor principal del formulario para dar medicamentos. -->
+  <div class="infoadd-itemMedicamento"> <!-- Sección para seleccionar el medicamento. -->
+    <small class="info-title">Medicamento:</small> <!-- Etiqueta que indica el campo de medicamento. -->
+    <select name="medicamento" class="inputadd-text" required> <!-- Lista desplegable para seleccionar un medicamento; es un campo obligatorio. -->
+      <option>ACOLAN</option> <!-- Opción de medicamento: ACOLAN. -->
+      <option>ACTIONIS</option> <!-- Opción de medicamento: ACTIONIS. -->
+      <option>ACUIMIX</option> <!-- Opción de medicamento: ACUIMIX. -->
+    </select>
+  </div>
+  <div class="infoadd-itemCantidad"> <!-- Sección para ingresar la cantidad del medicamento. -->
+      <small class="info-title">Cantidad:</small> <!-- Etiqueta que indica el campo de cantidad. -->
+      <input name="cantidad" type="number" class="inputadd-text" id="cantidad" placeholder="Ingresa la cantidad" required min="1" onkeydown="return false"> <!-- Campo de entrada para la cantidad; es un campo obligatorio, solo permite números y no permite valores menores a 1. -->
+  </div>
+  <button type="submit" class="dar-button">Dar Medicamento</button> <!-- Botón para enviar el formulario y dar el medicamento. -->
 </form>

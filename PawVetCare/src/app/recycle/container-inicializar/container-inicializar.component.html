@@ -1,12 +1,12 @@
-<div class="container-inicializar">
-    <p class="subTitulo">Sube el archivo excel</p>
+<div class="container-inicializar"> <!-- Contenedor principal que agrupa los elementos para subir un archivo Excel -->
+    <p class="subTitulo">Sube el archivo excel</p> <!-- Subtítulo que indica al usuario que debe subir un archivo Excel -->
     
     <!-- Campo para subir archivo -->
-    <div class="container">
-        <input type="file" (change)="onFileSelected($event)" accept=".xlsx" class="file-input">
+    <div class="container"> <!-- Contenedor para alinear el campo de entrada del archivo -->
+        <input type="file" (change)="onFileSelected($event)" accept=".xlsx" class="file-input"> <!-- Campo de entrada de tipo archivo que permite al usuario seleccionar un archivo Excel. -->
+        <!-- (change) se usa para detectar cuando un archivo es seleccionado y llama a la función onFileSelected -->
     </div>
     
     <!-- Botón para subir archivo -->
-    <button class="subir-btn" (click)="onUpload()">Subir</button>
-  </div>
-  
+    <button class="subir-btn" (click)="onUpload()">Subir</button> <!-- Botón que activa la función onUpload al hacer clic, para procesar el archivo subido -->
+</div>

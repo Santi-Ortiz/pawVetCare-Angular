@@ -1,20 +1,66 @@
+<!-- Contenedor principal que agrupa todas las mascotas -->
 <div class="mascotas-container" id="mascotasContainer">
-    <div *ngFor="let mascota of mascotasPagina" class="mascota-item">
-      <div class="mascota-info">
-        <img class="mascota-foto" [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre">
-        <img class="estadoimg" [src]="'/assets/' + (mascota.estado ? 'check' : 'wrong') + '.png'" [alt]="'Estado ' + (mascota.estado ? 'Activo' : 'Inactivo')" class="estadoimg">
-        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{mascota.nombre}}</label></div>
-        <div class="info-itemRaza"><small class="info-title">Raza:</small><label class="info-label">{{mascota.raza}}</label></div>
-        <div class="info-itemEdad"><small class="info-title">Edad:</small><label class="info-label">{{mascota.edad}}</label></div>
-        <div class="info-itemPeso"><small class="info-title">Peso:</small><label class="info-label">{{mascota.peso}}</label></div>
-        <div class="info-itemEnfermedad"><small class="info-title">Enfermedad:</small><label class="info-label">{{mascota.enfermedad}}</label></div>
-        <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
-      </div>
-    </div>
-  </div>
-  <div class="pagination">
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
-    <span>Pagina {{currentPage}} de {{totalPages}}</span>
-    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
-</div>
   
+  <!-- Recorre la lista de mascotas de la página actual y genera un bloque para cada mascota -->
+  <div *ngFor="let mascota of mascotasPagina" class="mascota-item">
+
+    <!-- Contenedor de la información de cada mascota -->
+    <div class="mascota-info">
+
+      <!-- Imagen de la mascota, con la fuente dinámica dependiendo del objeto 'mascota' -->
+      <img class="mascota-foto" [src]="mascota.foto" [alt]="'Foto de ' + mascota.nombre">
+      
+      <!-- Imagen que muestra el estado de la mascota (activo o inactivo) de forma visual -->
+      <img class="estadoimg" [src]="'/assets/' + (mascota.estado ? 'check' : 'wrong') + '.png'" 
+           [alt]="'Estado ' + (mascota.estado ? 'Activo' : 'Inactivo')" class="estadoimg">
+      
+      <!-- Nombre de la mascota -->
+      <div class="info-itemNombre">
+        <small class="info-title">Nombre:</small>
+        <label class="info-label">{{mascota.nombre}}</label>
+      </div>
+
+      <!-- Raza de la mascota -->
+      <div class="info-itemRaza">
+        <small class="info-title">Raza:</small>
+        <label class="info-label">{{mascota.raza}}</label>
+      </div>
+
+      <!-- Edad de la mascota -->
+      <div class="info-itemEdad">
+        <small class="info-title">Edad:</small>
+        <label class="info-label">{{mascota.edad}}</label>
+      </div>
+
+      <!-- Peso de la mascota -->
+      <div class="info-itemPeso">
+        <small class="info-title">Peso:</small>
+        <label class="info-label">{{mascota.peso}}</label>
+      </div>
+
+      <!-- Información de enfermedad de la mascota -->
+      <div class="info-itemEnfermedad">
+        <small class="info-title">Enfermedad:</small>
+        <label class="info-label">{{mascota.enfermedad}}</label>
+      </div>
+
+      <!-- Enlace para más información sobre la mascota, redirige a la página específica de la mascota -->
+      <a class="info-button" [routerLink]="['/mascota', mascota.id]">+ Info</a>
+
+    </div> <!-- Cierra el contenedor de información de la mascota -->
+
+  </div> <!-- Cierra el bloque de cada mascota en el *ngFor -->
+
+</div> <!-- Cierra el contenedor principal de todas las mascotas -->
+
+<!-- Paginación para cambiar entre páginas de mascotas -->
+<div class="pagination">
+  <!-- Botón para ir a la página anterior, deshabilitado si ya estás en la primera página -->
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+
+  <!-- Muestra la página actual y el número total de páginas -->
+  <span>Página {{currentPage}} de {{totalPages}}</span>
+
+  <!-- Botón para ir a la página siguiente, deshabilitado si ya estás en la última página -->
+  <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>

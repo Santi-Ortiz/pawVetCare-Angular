@@ -1,7 +1,8 @@
-  import { Component, ElementRef, ViewChild } from '@angular/core';
-  import { Router } from '@angular/router';
-  import { Veterinario } from 'src/app/model/veterinario';
-  import { VeterinarioService } from 'src/app/services/vet.service';
+// Importación de módulos y servicios necesarios para el componente
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Veterinario } from 'src/app/model/veterinario';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
   @Component({
     selector: 'app-ver-veterinario',
@@ -29,35 +30,46 @@
       tratamientos: [],
     }
 
-    @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+  // Decorador ViewChild para acceder al elemento del carrusel
+  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
 
-    constructor(private veterinarioService: VeterinarioService, private router: Router) {} 
+  // Constructor donde se inyectan los servicios necesarios
+  constructor(private veterinarioService: VeterinarioService, private router: Router) {} 
 
-    ngOnInit(): void {
-      this.veterinarioService.getAllVeterinarios().subscribe((veterinarios: Veterinario[]) => {
-        this.veterinarios = veterinarios; 
-      });
-      this.autoMoverCarrusel();
+  // Método que se ejecuta al inicializar el componente
+  ngOnInit(): void {
+    // Obtiene todos los veterinarios a través del servicio
+    this.veterinarioService.getAllVeterinarios().subscribe((veterinarios: Veterinario[]) => {
+      this.veterinarios = veterinarios; // Almacena la lista de veterinarios obtenida
+    });
+    this.autoMoverCarrusel(); // Inicia el movimiento automático del carrusel
+  }
+
+  // Método que se ejecuta al destruir el componente
+  ngOnDestroy(): void {
+    // Limpia el intervalo si existe
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
+  }
 
-    ngOnDestroy(): void {
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-      }
+  // Método para cambiar el veterinario mostrado en el carrusel
+  cambiarVet(direccion: number): void {
+    const totalVeterinarios = this.veterinarios.length; // Total de veterinarios disponibles
+    // Calcula el nuevo índice asegurando que se mantenga dentro del rango
+    this.index = (this.index + direccion + totalVeterinarios) % totalVeterinarios; 
+    console.log(`Mostrando veterinario en índice: ${this.index}`); 
+    // Aplica la transformación CSS al carrusel para mostrar el veterinario correcto
+    if (this.carrusel) {
+      this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
     }
+  }
 
-    cambiarVet(direccion: number): void {
-      const totalVeterinarios = this.veterinarios.length;
-      this.index = (this.index + direccion + totalVeterinarios) % totalVeterinarios; 
-      console.log(`Mostrando veterinario en índice: ${this.index}`); 
-      if (this.carrusel) {
-        this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
-      }
-    }
-
-    autoMoverCarrusel(): void {
-      this.intervalId = setInterval(() => this.cambiarVet(1), 6000);
-    }
+  // Método para mover automáticamente el carrusel cada cierto tiempo
+  autoMoverCarrusel(): void {
+    // Establece un intervalo que cambia el veterinario cada 6000 milisegundos (6 segundos)
+    this.intervalId = setInterval(() => this.cambiarVet(1), 6000);
+  }
 
     buscarVet(vetCedula: number | undefined): void {
       const cedula = Number(vetCedula);

@@ -1,30 +1,53 @@
 <div class="carrusel-container" *ngIf="medicamentos.length > 0">
+    <!-- Contenedor principal del carrusel. Solo se muestra si hay medicamentos disponibles. -->
+    
     <button class="carrusel-prev" (click)="cambiarMedicamento(-1)">
+        <!-- Botón para mostrar el medicamento anterior. Al hacer clic, llama al método cambiarMedicamento con argumento -1. -->
         <img src="../assets/previous.png" alt="Regreso">
+        <!-- Imagen que representa la acción de volver o retroceder en el carrusel. -->
     </button>
+    
     <div class="carrusel">
-        <div class="medicamento-item" *ngFor="let medicamento of medicamentos; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+        <!-- Contenedor del carrusel donde se muestran los medicamentos. -->
+        
+        <div class="medicamento-item" *ngFor="let medicamento of medicamentos; let i = index" 
+             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <!-- Directiva *ngFor que itera sobre el array de medicamentos, creando un elemento por cada medicamento. 
+                 Se utiliza ngStyle para mostrar solo el medicamento que coincide con el índice actual (index). -->
+                 
             <div class="medicamento-info">
+                <!-- Contenedor para la información de cada medicamento. -->
+                
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
                     <label class="info-label">{{ medicamento.nombre }}</label>
+                    <!-- Muestra el nombre del medicamento. -->
                 </div>
+                
                 <div class="info-itemPrecioVenta">
                     <small class="info-title">P. venta:</small>
                     <label class="info-label">{{ medicamento.precio_venta }}</label>
+                    <!-- Muestra el precio de venta del medicamento. -->
                 </div>
+                
                 <div class="info-itemPrecioCompra">
                     <small class="info-title">P. compra:</small>
                     <label class="info-label">{{ medicamento.precio_compra }}</label>
+                    <!-- Muestra el precio de compra del medicamento. -->
                 </div>
+                
                 <div class="info-itemCantidad">
                     <small class="info-title">Cant. Tratamientos:</small>
                     <label class="info-label">{{ medicamento.unidades_disponibles }}</label>
+                    <!-- Muestra la cantidad de tratamientos disponibles del medicamento. -->
                 </div>
             </div>
         </div>
     </div>
+    
     <button class="carrusel-next" (click)="cambiarMedicamento(1)">
+        <!-- Botón para mostrar el siguiente medicamento. Al hacer clic, llama al método cambiarMedicamento con argumento 1. -->
         <img src="assets/next.png" alt="Siguiente">
+        <!-- Imagen que representa la acción de avanzar o ir hacia adelante en el carrusel. -->
     </button>
 </div>

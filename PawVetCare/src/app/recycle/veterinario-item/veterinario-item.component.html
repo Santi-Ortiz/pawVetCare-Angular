@@ -1,18 +1,51 @@
+<!-- Contenedor principal para mostrar la lista de veterinarios -->
 <div class="veterinarios-container" id="veterinariosContainer">
-    <div *ngFor="let veterinario of veterinariosPagina" class="veterinario-item">
+
+  <!-- Directiva *ngFor para iterar sobre el array de veterinariosPagina y generar un elemento por cada veterinario -->
+  <div *ngFor="let veterinario of veterinariosPagina" class="veterinario-item">
+
+      <!-- Sección con la información del veterinario -->
       <div class="veterinario-info">
-        <img class="veterinario-foto" [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre">
-        <img class="estadoimg" [src]="'/assets/' + (veterinario.estado ? 'check' : 'wrong') + '.png'" [alt]="'Estado ' + (veterinario.estado ? 'Activo' : 'Inactivo')" class="estadoimg">
-        <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{veterinario.nombre}}</label></div>
-        <div class="info-itemCedula"><small class="info-title">Cédula:</small><label class="info-label">{{veterinario.cedula}}</label></div>
-        <div class="info-itemEspecialidad"><small class="info-title">Especialidad:</small><label class="info-label">{{veterinario.especialidad}}</label></div>
-        <a class="info-button" [routerLink]="['/veterinario', veterinario.cedula]">+ Info</a>
+
+          <!-- Imagen del veterinario obtenida dinámicamente desde su propiedad 'foto'. Se establece un texto alternativo personalizado -->
+          <img class="veterinario-foto" [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre">
+
+          <!-- Imagen que muestra el estado del veterinario (activo/inactivo), con un ícono personalizado ('check' para activo y 'wrong' para inactivo) -->
+          <img class="estadoimg" [src]="'/assets/' + (veterinario.estado ? 'check' : 'wrong') + '.png'" [alt]="'Estado ' + (veterinario.estado ? 'Activo' : 'Inactivo')" class="estadoimg">
+
+          <!-- Sección que muestra el nombre del veterinario -->
+          <div class="info-itemNombre">
+              <small class="info-title">Nombre:</small>
+              <label class="info-label">{{veterinario.nombre}}</label>
+          </div>
+
+          <!-- Sección que muestra la cédula del veterinario -->
+          <div class="info-itemCedula">
+              <small class="info-title">Cédula:</small>
+              <label class="info-label">{{veterinario.cedula}}</label>
+          </div>
+
+          <!-- Sección que muestra la especialidad del veterinario -->
+          <div class="info-itemEspecialidad">
+              <small class="info-title">Especialidad:</small>
+              <label class="info-label">{{veterinario.especialidad}}</label>
+          </div>
+
+          <!-- Enlace para ver más información del veterinario, usando el parámetro 'cedula' para la navegación -->
+          <a class="info-button" [routerLink]="['/veterinario', veterinario.cedula]">+ Info</a>
       </div>
-    </div>
+
   </div>
-<div class="pagination">
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
-    <span>Pagina {{currentPage}} de {{totalPages}}</span>
-    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
 </div>
-  
+
+<!-- Controles de paginación para navegar entre las diferentes páginas de veterinarios -->
+<div class="pagination">
+  <!-- Botón para ir a la página anterior, se desactiva si estamos en la primera página -->
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">Anterior</button>
+
+  <!-- Indicador que muestra el número de la página actual y el total de páginas -->
+  <span>Pagina {{currentPage}} de {{totalPages}}</span>
+
+  <!-- Botón para ir a la página siguiente, se desactiva si estamos en la última página -->
+  <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</div>

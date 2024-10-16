@@ -1,42 +1,41 @@
-<div class="container-informacion">
-    <form [formGroup]="mascotaForm" class="containerCliente">    
-      <p class="tituloEditar">Editar</p>
-      <p class="tituloEliminar">Eliminar</p>
-      
-      <div class="info-item">
-        <small class="info-title">Nombre:</small>
-        <input class="info-label" formControlName="nombre">
-      </div>
-  
-      <div class="info-itemCedula">
-        <small class="info-title">Cédula:</small>
-        <input class="info-label" formControlName="cedula">
-      </div>
-  
-      <div class="info-itemCorreo">
-        <small class="info-title">Correo:</small>
-        <input class="info-label" formControlName="correo">
-      </div>
-  
-      <div class="info-itemCelular">
-        <small class="info-title">Celular:</small>
-        <input class="info-label" formControlName="celular">
-      </div>
-  
-      <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones">
-        <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()">
-          <span class="icon">✎</span>
-          <span class="text">{{ isEditMode ? 'Guardar' : 'Editar todo' }}</span>
-        </button>
-      </div>
-    </form>
-  
-    <!-- Botón para eliminar -->
-    <form *ngIf="userType === 'admin' || userType === 'vet'">
-      <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()">
-        <span class="icon">x</span>
-        <span class="text">Eliminar</span>
+<div class="container-informacion"> <!-- Contenedor principal para la información de la mascota -->
+  <form [formGroup]="mascotaForm" class="containerCliente"> <!-- Formulario vinculado a un FormGroup de Angular llamado mascotaForm -->
+    <p class="tituloEditar">Editar</p> <!-- Título para la sección de edición -->
+    <p class="tituloEliminar">Eliminar</p> <!-- Título para la sección de eliminación -->
+    
+    <div class="info-item"> <!-- Contenedor para el campo de nombre -->
+      <small class="info-title">Nombre:</small> <!-- Etiqueta para el campo de nombre -->
+      <input class="info-label" formControlName="nombre"> <!-- Campo de entrada para el nombre vinculado al FormControl 'nombre' -->
+    </div>
+
+    <div class="info-itemCedula"> <!-- Contenedor para el campo de cédula -->
+      <small class="info-title">Cédula:</small> <!-- Etiqueta para el campo de cédula -->
+      <input class="info-label" formControlName="cedula"> <!-- Campo de entrada para la cédula vinculado al FormControl 'cedula' -->
+    </div>
+
+    <div class="info-itemCorreo"> <!-- Contenedor para el campo de correo -->
+      <small class="info-title">Correo:</small> <!-- Etiqueta para el campo de correo -->
+      <input class="info-label" formControlName="correo"> <!-- Campo de entrada para el correo vinculado al FormControl 'correo' -->
+    </div>
+
+    <div class="info-itemCelular"> <!-- Contenedor para el campo de celular -->
+      <small class="info-title">Celular:</small> <!-- Etiqueta para el campo de celular -->
+      <input class="info-label" formControlName="celular"> <!-- Campo de entrada para el celular vinculado al FormControl 'celular' -->
+    </div>
+
+    <div *ngIf="userType === 'admin' || userType === 'vet'" class="container-botones"> <!-- Contenedor de botones que se muestra solo si el usuario es admin o veterinario -->
+      <button class="editar-btn" id="editarBtn" type="button" (click)="toggleEditMode()"> <!-- Botón para editar o guardar cambios -->
+        <span class="icon">✎</span> <!-- Icono para el botón de editar -->
+        <span class="text">{{ isEditMode ? 'Guardar' : 'Editar todo' }}</span> <!-- Texto que cambia dependiendo del modo de edición -->
       </button>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+
+  <!-- Botón para eliminar, solo visible para admin o veterinarios -->
+  <form *ngIf="userType === 'admin' || userType === 'vet'"> <!-- Formulario para el botón de eliminar -->
+    <button *ngIf="userType === 'admin' || userType === 'vet'" class="eliminar-btn" id="eliminarBtn" type="button" (click)="toggleEliminar()"> <!-- Botón para eliminar información -->
+      <span class="icon">x</span> <!-- Icono para el botón de eliminar -->
+      <span class="text">Eliminar</span> <!-- Texto para el botón de eliminar -->
+    </button>
+  </form>
+</div>

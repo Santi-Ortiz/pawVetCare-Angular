@@ -1,20 +1,31 @@
+<!-- Sección del encabezado que varía según el tipo de usuario -->
 <header *ngIf="userType === 'admin'">
+  <!-- Muestra el encabezado específico para administradores -->
   <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
 </header>
 <header *ngIf="userType === 'vet'">
+  <!-- Muestra el encabezado específico para veterinarios -->
   <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
 </header>
 <header *ngIf="userType === 'cliente'">
+  <!-- Muestra el encabezado específico para clientes -->
   <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
 </header>
 
+<!-- Sección del contenido principal -->
 <section class="content">
-    <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-    <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
-    <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
-    <p class="segundoTitulo">Aquí está la información de la mascota:</p>
-    <p class="tercerTitulo">Dar tratamiento:</p>
-    <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
-    <app-formulario-dar-tratamiento *ngIf="userType !== 'cliente'"></app-formulario-dar-tratamiento>
-  </section>
-  
+  <!-- Mensajes personalizados dependiendo del tipo de usuario -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <p *ngIf="userType === 'vet'" class="primerTitulo">Hola, vet</p>
+  <p *ngIf="userType === 'cliente'" class="primerTitulo">¡Gracias por confiar en nosotros!</p>
+
+  <!-- Títulos adicionales para todos los usuarios -->
+  <p class="segundoTitulo">Aquí está la información de la mascota:</p>
+  <p class="tercerTitulo">Dar tratamiento:</p>
+
+  <!-- Componente que muestra la información de la mascota y el formulario de edición si está en modo de edición -->
+  <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
+
+  <!-- Formulario para dar tratamiento, visible solo si el usuario no es cliente -->
+  <app-formulario-dar-tratamiento *ngIf="userType !== 'cliente'"></app-formulario-dar-tratamiento>
+</section>

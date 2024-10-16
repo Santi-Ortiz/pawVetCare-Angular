@@ -1,38 +1,38 @@
-<form (ngSubmit)="agregarMascota()" class="agregar-container">
-    <div class="infoadd-itemNombre">
-      <small class="info-title">Nombre:</small>
-      <input [(ngModel)]="nuevaMascota.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
-    </div>
-    <div class="infoadd-itemRaza">
-      <small class="info-title">Raza:</small>
-      <input [(ngModel)]="nuevaMascota.raza" name="raza" class="inputadd-text" id="raza" placeholder="Ingresa la raza" required>
-    </div>
-    <div class="infoadd-itemEdad">
-      <small class="info-title">Edad:</small>
-      <input [(ngModel)]="nuevaMascota.edad" name="edad" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required>
-    </div>
-    <div class="infoadd-itemPeso">
-      <small class="info-title">Peso:</small>
-      <input [(ngModel)]="nuevaMascota.peso" name="peso" type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required>
-    </div>
-    <div class="infoadd-itemEnfermedad">
-      <small class="info-title">Enfermedad:</small>
-      <input [(ngModel)]="nuevaMascota.enfermedad" name="enfermedad" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required>
-    </div>
-    <div class="infoadd-itemDueño">
-      <small class="info-title">Dueño C.C.:</small>
-      <input [(ngModel)]="nuevaMascota.cedulaCliente" name="cliente" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula" required>
-    </div>
-    <div class="infoadd-itemEstado">
-      <small class="info-title">Estado:</small>
-      <select [(ngModel)]="nuevaMascota.estado" name="estado" class="inputadd-text" required>
-        <option [value]="true">Activo</option>
-        <option [value]="false">Inactivo</option>
+<form (ngSubmit)="agregarMascota()" class="agregar-container"> <!-- Inicia el formulario y maneja el evento de envío con la función agregarMascota() -->
+  <div class="infoadd-itemNombre"> <!-- Contenedor para el campo del nombre -->
+      <small class="info-title">Nombre:</small> <!-- Etiqueta del campo para el nombre -->
+      <input [(ngModel)]="nuevaMascota.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required> <!-- Campo de entrada para el nombre de la mascota, vinculado a nuevaMascota.nombre -->
+  </div>
+  <div class="infoadd-itemRaza"> <!-- Contenedor para el campo de la raza -->
+      <small class="info-title">Raza:</small> <!-- Etiqueta del campo para la raza -->
+      <input [(ngModel)]="nuevaMascota.raza" name="raza" class="inputadd-text" id="raza" placeholder="Ingresa la raza" required> <!-- Campo de entrada para la raza de la mascota, vinculado a nuevaMascota.raza -->
+  </div>
+  <div class="infoadd-itemEdad"> <!-- Contenedor para el campo de la edad -->
+      <small class="info-title">Edad:</small> <!-- Etiqueta del campo para la edad -->
+      <input [(ngModel)]="nuevaMascota.edad" name="edad" type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required> <!-- Campo de entrada numérico para la edad de la mascota, vinculado a nuevaMascota.edad -->
+  </div>
+  <div class="infoadd-itemPeso"> <!-- Contenedor para el campo del peso -->
+      <small class="info-title">Peso:</small> <!-- Etiqueta del campo para el peso -->
+      <input [(ngModel)]="nuevaMascota.peso" name="peso" type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required> <!-- Campo de entrada numérico para el peso de la mascota, vinculado a nuevaMascota.peso -->
+  </div>
+  <div class="infoadd-itemEnfermedad"> <!-- Contenedor para el campo de la enfermedad -->
+      <small class="info-title">Enfermedad:</small> <!-- Etiqueta del campo para la enfermedad -->
+      <input [(ngModel)]="nuevaMascota.enfermedad" name="enfermedad" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required> <!-- Campo de entrada para la enfermedad de la mascota, vinculado a nuevaMascota.enfermedad -->
+  </div>
+  <div class="infoadd-itemDueño"> <!-- Contenedor para el campo del dueño -->
+      <small class="info-title">Dueño C.C.:</small> <!-- Etiqueta del campo para la cédula del dueño -->
+      <input [(ngModel)]="nuevaMascota.cedulaCliente" name="cliente" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula" required> <!-- Campo de entrada para la cédula del dueño, vinculado a nuevaMascota.cedulaCliente -->
+  </div>
+  <div class="infoadd-itemEstado"> <!-- Contenedor para el campo del estado -->
+      <small class="info-title">Estado:</small> <!-- Etiqueta del campo para el estado -->
+      <select [(ngModel)]="nuevaMascota.estado" name="estado" class="inputadd-text" required> <!-- Desplegable para seleccionar el estado de la mascota, vinculado a nuevaMascota.estado -->
+          <option [value]="true">Activo</option> <!-- Opción para estado activo -->
+          <option [value]="false">Inactivo</option> <!-- Opción para estado inactivo -->
       </select>
-    </div>
-    <div class="infoadd-itemURL">
-      <small class="info-title">URL:</small>
-      <input [(ngModel)]="nuevaMascota.foto" name="foto" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto" required>
-    </div>
-    <button type="submit" class="agregar-button">Agregar Mascota</button>
+  </div>
+  <div class="infoadd-itemURL"> <!-- Contenedor para el campo de la URL -->
+      <small class="info-title">URL:</small> <!-- Etiqueta del campo para la URL -->
+      <input [(ngModel)]="nuevaMascota.foto" name="foto" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto" required> <!-- Campo de entrada para la URL de la foto de la mascota, vinculado a nuevaMascota.foto -->
+  </div>
+  <button type="submit" class="agregar-button">Agregar Mascota</button> <!-- Botón para enviar el formulario y agregar la nueva mascota -->
 </form>

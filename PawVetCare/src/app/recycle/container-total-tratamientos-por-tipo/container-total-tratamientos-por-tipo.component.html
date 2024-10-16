@@ -1,9 +1,15 @@
 <div class="container-inicializar">
+    <!-- Título que indica el propósito de la sección -->
     <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
+
+    <!-- Formulario para buscar medicamentos por nombre -->
     <form class="buscador-form">
+        <!-- Campo de entrada para el nombre del medicamento, requerido -->
         <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
+        <!-- Botón para enviar el formulario y buscar el medicamento -->
         <button type="submit" class="buscador-button">Buscar</button>
     </form>
+
+    <!-- Componente que muestra un carrusel de medicamentos, pasando la lista de medicamentos como input -->
     <app-carrusel-medicamentos-dashboard [medicamentos]="medicamentos"></app-carrusel-medicamentos-dashboard>
-  </div>
-  
+</div>

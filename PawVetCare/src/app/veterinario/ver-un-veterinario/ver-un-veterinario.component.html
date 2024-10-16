@@ -1,9 +1,17 @@
+<!-- Encabezado visible solo si el tipo de usuario es 'admin' -->
 <header *ngIf="userType === 'admin'">
-    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
-  </header>
-  <section class="content">
-      <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
-      <p class="segundoTitulo">Aquí está la información del veterinario:</p>
-      <app-informacion-veterinario [veterinarioForm]="veterinarioForm" [veterinario]="veterinario" [isEditMode]="isEditMode"></app-informacion-veterinario>
-    </section>
-    
+  <!-- Componente que muestra el encabezado para el admin, pasando el tipo de usuario como input -->
+  <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+</header>
+
+<!-- Sección principal del contenido -->
+<section class="content">
+  <!-- Mensaje de bienvenida visible solo si el tipo de usuario es 'admin' -->
+  <p *ngIf="userType === 'admin'" class="primerTitulo">Hola, admin</p>
+  <!-- Título de la sección que indica que se está mostrando información sobre el veterinario -->
+  <p class="segundoTitulo">Aquí está la información del veterinario:</p>
+  
+  <!-- Componente que muestra la información del veterinario -->
+  <!-- Se le pasan como inputs el formulario, el objeto veterinario y el estado de edición -->
+  <app-informacion-veterinario [veterinarioForm]="veterinarioForm" [veterinario]="veterinario" [isEditMode]="isEditMode"></app-informacion-veterinario>
+</section>
