@@ -26,10 +26,10 @@
 }
 
 .info-itemNombre {
-    width: 300px;
+    width: 250px;
     position: relative;
     margin-top: -105px;
-    margin-left: 200px;
+    margin-left: 250px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -150,4 +150,12 @@
 
 .pagination button:hover {
     background-color: #545454;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    margin-top: 50px;
+    margin-left: 10px;
 }

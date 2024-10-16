@@ -15,6 +15,13 @@
       <small class="info-title">Contraseña:</small>
       <input [(ngModel)]="nuevoVeterinario.contrasena" name="contraseña" class="inputadd-text" id="peso" placeholder="Ingresa la contraseña" required>
     </div>
+    <div class="infoadd-itemEstado">
+      <small class="info-title">Estado:</small>
+      <select [(ngModel)]="nuevoVeterinario.estado" name="estado" class="inputadd-text" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
     <div class="infoadd-itemURL">
       <small class="info-title">URL:</small>
       <input [(ngModel)]="nuevoVeterinario.foto" name="url" class="inputadd-text" id="enfermedad" placeholder="Ingresa la URL de la foto de perfil" required>

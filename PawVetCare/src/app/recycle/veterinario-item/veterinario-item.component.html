@@ -2,6 +2,7 @@
     <div *ngFor="let veterinario of veterinariosPagina" class="veterinario-item">
       <div class="veterinario-info">
         <img class="veterinario-foto" [src]="veterinario.foto" [alt]="'Foto de ' + veterinario.nombre">
+        <img class="estadoimg" [src]="'/assets/' + (veterinario.estado ? 'check' : 'wrong') + '.png'" [alt]="'Estado ' + (veterinario.estado ? 'Activo' : 'Inactivo')" class="estadoimg">
         <div class="info-itemNombre"><small class="info-title">Nombre:</small><label class="info-label">{{veterinario.nombre}}</label></div>
         <div class="info-itemCedula"><small class="info-title">Cédula:</small><label class="info-label">{{veterinario.cedula}}</label></div>
         <div class="info-itemEspecialidad"><small class="info-title">Especialidad:</small><label class="info-label">{{veterinario.especialidad}}</label></div>

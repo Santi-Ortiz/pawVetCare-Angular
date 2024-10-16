@@ -2,6 +2,9 @@
     <form [formGroup]="veterinarioForm" class="containerVeterinario">    
       <p class="tituloEditar">Editar</p>
       <p class="tituloEliminar">Eliminar</p>
+
+      <img *ngIf="veterinario?.estado === false" class="estadoimg" src="/assets/wrong.png" alt="Estado Inactivo">
+    <img *ngIf="veterinario?.estado === true" class="estadoimg" src="/assets/check.png" alt="Estado Activo">
       
       <div class="info-item">
         <small class="info-title">Nombre:</small>
@@ -21,6 +24,14 @@
       <div class="info-itemFoto">
         <small class="info-title">URL Foto:</small>
         <input class="info-label" formControlName="foto">
+      </div>
+
+      <div class="info-itemEstado">
+        <small class="info-title">Estado:</small>
+        <select id="state" class="info-select" formControlName="estado">
+          <option [ngValue]="true">Activo</option>
+          <option [ngValue]="false">Inactivo</option>
+        </select>
       </div>
 
       <img class="veterinarioimg" [src]="veterinarioForm.get('foto')?.value || '/assets/errorMascota.png'" alt="Foto del veterinario">
