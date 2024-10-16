@@ -21,10 +21,12 @@
   <p class="segundoTitulo">Navega por los clientes:</p>
 
   <!-- Formulario para buscar clientes por nombre -->
-  <form class="buscador-form">
-      <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
-      <button type="submit" class="buscador-button">Buscar</button>
-  </form>
+  <form (ngSubmit)="buscarCliente(cedulaCliente)" class="buscador-form">
+    <!-- Campo de entrada vinculado a la variable 'clienteId' mediante ngModel -->
+    <input [(ngModel)]="cedulaCliente" name="id" class="buscador-input" placeholder="Buscar por cédula" required>
+    <!-- Botón para enviar el formulario -->
+    <button type="submit" class="buscador-button">Buscar</button>
+</form>
 
   <!-- Componente que muestra la lista de clientes, con paginación -->
   <app-cliente-item
