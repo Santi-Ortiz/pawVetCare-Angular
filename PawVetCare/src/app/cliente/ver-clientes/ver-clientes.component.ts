@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/model/cliente'; // Modelo Cliente
 import { Mascota } from 'src/app/model/mascota'; // Modelo Mascota
+import { AuthService } from 'src/app/services/auth.service';
 import { ClienteService } from 'src/app/services/cliente.service'; // Servicio para clientes
 import { MascotasService } from 'src/app/services/mascotas.service'; // Servicio para mascotas
 
@@ -13,7 +14,7 @@ import { MascotasService } from 'src/app/services/mascotas.service'; // Servicio
   styleUrls: ['./ver-clientes.component.css']
 })
 export class VerClientesComponent {
-  userType = 'admin'; // Define si el usuario es admin o veterinario
+  userType: string | null | undefined; // Define si el usuario es admin o veterinario
   cedulaCliente: number | undefined; // ID del cliente que se buscará
   index = 0; // Índice inicial del carrusel de clientes
   intervalId: any; // Almacena el identificador del intervalo del carrusel automático
@@ -34,10 +35,12 @@ export class VerClientesComponent {
   mascotaSeleccionada: Mascota | undefined; // Mascota seleccionada, si aplica
   
   // Constructor que inyecta los servicios necesarios
-  constructor(private clientesService: ClienteService, private router: Router) {} 
+  constructor(private clientesService: ClienteService, private authService: AuthService, private router: Router) {} 
 
   // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType);
     // Validación del tipo de usuario (admin o vet) y obtención de la lista de clientes
     if (this.userType === 'admin') {
       this.clientesService.obtenerTodosClientes().subscribe((clientes: Cliente[]) => {
