@@ -4,7 +4,8 @@ import { TratamientoMedicamento } from './tratamientoMedicamento';
 export interface Tratamiento {
     id: number;
     fecha: Date;
-    cedula: number;
+    id_veterinario: number;
     // medicamentos: Medicamento[];
+
     tratamientoMedicamentos: TratamientoMedicamento[];
   }

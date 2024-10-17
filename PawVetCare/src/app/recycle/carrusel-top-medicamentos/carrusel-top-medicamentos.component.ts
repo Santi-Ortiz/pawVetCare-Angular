@@ -19,7 +19,6 @@ export class CarruselTopMedicamentosComponent {
   intervalId: any; // ID del intervalo para poder limpiar el intervalo al destruir el componente.
 
   ngOnInit(): void {
-    // Método del ciclo de vida que se ejecuta al inicializar el componente.
     this.autoMoverCarrusel(); // Llama al método para iniciar el movimiento automático del carrusel.
   }
 
