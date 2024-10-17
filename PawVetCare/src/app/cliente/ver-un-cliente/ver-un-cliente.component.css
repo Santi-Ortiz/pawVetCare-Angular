@@ -10,11 +10,12 @@ html, body {
 }
 
 body {
-    padding-bottom: 100px;
+    padding-bottom: 450px;
 }
 
 .content {
     flex: 1;
+    padding-bottom: 320px;
 }
 
 .primerTitulo {
