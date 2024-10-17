@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'; // Importa el decorador Component desde Angular core
+import { TratamientoService } from 'src/app/services/tratamiento.service';
 
 // Decorador que define el componente
 @Component({
@@ -7,5 +8,19 @@ import { Component } from '@angular/core'; // Importa el decorador Component des
   styleUrls: ['./container-total-tratamientos.component.css'] // Ruta del archivo de estilos CSS
 })
 export class ContainerTotalTratamientosComponent {
-  // Clase vacía que representa el componente. Aquí se pueden agregar propiedades y métodos en el futuro.
+
+  totalTratamientos = -1;
+
+  constructor(private tratamientosService: TratamientoService) { }
+
+  ngOnInit(): void {
+    this.tratamientosService.obtenerTotalTratamientosUltimoMes().subscribe(
+      (total: number) => {
+        this.totalTratamientos = total;
+      },
+      (error) => {
+        console.error("Error al obtener el total de tratamientos del último mes: ", error);
+      }
+    )
+  }
 }
