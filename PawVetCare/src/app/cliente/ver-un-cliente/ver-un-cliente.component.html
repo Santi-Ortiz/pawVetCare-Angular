@@ -22,12 +22,12 @@
   <!-- Título secundario que se muestra siempre -->
   <p class="segundoTitulo">Aquí está la información del cliente:</p>
   
-  <!-- Título para indicar la lista de mascotas -->
-  <p class="tercerTitulo">Sus mascotas:</p>
-
   <!-- Componente que muestra la información del cliente y permite la edición -->
   <!-- Se pasan las propiedades 'mascotaForm', 'cliente' e 'isEditMode' al componente de información del cliente -->
   <app-informacion-cliente [mascotaForm]="mascotaForm" [cliente]="cliente" [isEditMode]="isEditMode"></app-informacion-cliente>
+
+  <!-- Título para indicar la lista de mascotas -->
+  <p class="tercerTitulo">Sus mascotas:</p>
 
   <!-- Si el cliente tiene mascotas (al menos una), se muestra el componente de carrusel de mascotas -->
   <div *ngIf="cliente.mascotas && cliente.mascotas.length > 0">
