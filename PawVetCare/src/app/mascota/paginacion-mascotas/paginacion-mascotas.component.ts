@@ -3,6 +3,7 @@ import { Router } from '@angular/router'; // Importa el servicio Router para la 
 import { MascotasService } from '../../services/mascotas.service'; // Importa el servicio que gestiona las mascotas
 import { Mascota } from '../../model/mascota'; // Importa la interfaz o clase Mascota para tipar las mascotas
 import { AuthService } from 'src/app/services/auth.service'; // Importa el servicio de autenticación para obtener el rol del usuario
+import { DataShareService } from 'src/app/services/data-share.service';
 
 @Component({
   selector: 'app-paginacion-mascotas', // Selector utilizado para insertar este componente en el HTML
@@ -18,33 +19,25 @@ export class PaginacionMascotasComponent {
   mascotas: Mascota[] = []; // Array que contiene la lista de mascotas cargadas
 
   // Constructor que inyecta los servicios MascotasService, Router y AuthService
-  constructor(private mascotasService: MascotasService, private router: Router, private authService: AuthService) {}
+  constructor(private mascotasService: MascotasService, private dataShareService: DataShareService, private router: Router, private authService: AuthService) {}
 
   // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
-    this.userType = this.authService.getUserRole(); // Obtiene el rol del usuario a través del servicio de autenticación
-    
-    // Si el usuario es administrador, se cargan las mascotas del administrador
-    if (this.userType === 'admin') {
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType); // Imprime el tipo de usuario en la consola
+    if (this.dataShareService.isSearch()) {
+      // Si la búsqueda está activa, utiliza los resultados del servicio compartido
+      this.mascotas = this.dataShareService.getMascotas();
+      this.calcularTotalPaginas();
+    } else {
+      // Si no hay búsqueda activa, carga todas las mascotas del administrador
       this.mascotasService.obtenerMascotasAdmin().subscribe(
         (mascotas: Mascota[]) => {
-          this.mascotas = mascotas; // Asigna las mascotas obtenidas a la variable
-          this.calcularTotalPaginas(); // Calcula cuántas páginas se necesitan para mostrar todas las mascotas
+          this.mascotas = mascotas;
+          this.calcularTotalPaginas();
         },
         (error) => {
-          console.error('Error al cargar las mascotas del admin:', error); // Maneja cualquier error que ocurra al obtener los datos
-        }
-      );
-    } 
-    // Si el usuario es veterinario, se cargan las mascotas asociadas al veterinario
-    else if (this.userType === 'vet') {
-      this.mascotasService.obtenerMascotasVet().subscribe(
-        (mascotas: Mascota[]) => {
-          this.mascotas = mascotas; // Asigna las mascotas obtenidas a la variable
-          this.calcularTotalPaginas(); // Calcula cuántas páginas se necesitan
-        },
-        (error) => {
-          console.error('Error al cargar las mascotas del vet:', error); // Maneja cualquier error que ocurra al obtener los datos
+          console.error('Error al cargar las mascotas:', error);
         }
       );
     }
