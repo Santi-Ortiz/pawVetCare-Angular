@@ -1,4 +1,4 @@
-<div class="carrusel-container" *ngIf="tratamientos.length > 0">
+<div class="carrusel-container" *ngIf="tratamientos.length > 0" [ngStyle]="{'margin-top': marginTop, 'left': left}">
     <!-- Contenedor del carrusel, solo se muestra si hay medicamentos disponibles -->
     
     <button class="carrusel-prev" (click)="cambiarTratamiento(-1)">

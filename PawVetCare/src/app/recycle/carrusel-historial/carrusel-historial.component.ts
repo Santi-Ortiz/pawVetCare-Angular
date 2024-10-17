@@ -14,6 +14,8 @@ import { VeterinarioService } from 'src/app/services/vet.service';
   styleUrls: ['./carrusel-historial.component.css']
 })
 export class CarruselHistorialComponent {
+  @Input() marginTop: string = '0px'; // Input para establecer el margen superior del carrusel desde el componente padre
+  @Input() left: string = '0px'; // Input para establecer la posición 'left' del carrusel desde el componente padre
   @Input() tratamientos: Tratamiento[] = []; 
   // Array de medicamentos que se recibe como entrada (Input). Se inicializa como un array vacío.
   

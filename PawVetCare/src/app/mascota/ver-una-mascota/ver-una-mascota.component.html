@@ -22,7 +22,8 @@
   <!-- Títulos adicionales para todos los usuarios -->
   <p class="segundoTitulo">Aquí está la información de la mascota:</p>
   <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Dar tratamiento:</p>
-  <p class="cuartoTitulo">Mira la historía clínica:</p>
+  <p class="cuartoTitulo" *ngIf="userType !== 'cliente'" >Mira la historía clínica:</p>
+  <p class="quintoTitulo" *ngIf="userType == 'cliente'" >Mira la historía clínica:</p>
 
   <!-- Componente que muestra la información de la mascota y el formulario de edición si está en modo de edición -->
   <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
@@ -31,5 +32,6 @@
   <app-formulario-dar-tratamiento *ngIf="userType !== 'cliente'"></app-formulario-dar-tratamiento>
 
   <!-- Carrusel que muestra los medicamentos, pasando la variable 'medicamentos' como input -->
-  <app-carrusel-historial [tratamientos]="tratamientos"></app-carrusel-historial>
+  <app-carrusel-historial *ngIf="userType !== 'cliente'" [tratamientos]="tratamientos" [marginTop]="'-100px'" [left]="'30px'"></app-carrusel-historial>
+  <app-carrusel-historial *ngIf="userType == 'cliente'" [tratamientos]="tratamientos" [marginTop]="'590px'" [left]="'30px'"></app-carrusel-historial>
 </section>
