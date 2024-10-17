@@ -1,8 +1,8 @@
 <div class="container-informacion">
   <!-- Formulario que utiliza el grupo de controles de formulario 'mascotaForm' -->
   <form [formGroup]="mascotaForm" class="containerMascota">    
-    <p class="tituloEditar">Editar</p>
-    <p class="tituloEliminar">Eliminar</p>
+    <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEditar">Editar</p>
+    <p *ngIf="userType === 'admin' || userType === 'vet'" class="tituloEliminar">Eliminar</p>
     
     <!-- Campo para ingresar el nombre de la mascota -->
     <div class="info-item">
