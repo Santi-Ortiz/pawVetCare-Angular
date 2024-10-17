@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Mascota } from 'src/app/model/mascota';
+import { Medicamento } from 'src/app/model/medicamento';
 
 @Component({
   selector: 'app-carrusel-top-medicamentos',
@@ -7,18 +8,18 @@ import { Mascota } from 'src/app/model/mascota';
   styleUrls: ['./carrusel-top-medicamentos.component.css']
 })
 export class CarruselTopMedicamentosComponent {
-  @Input() mascotas: Mascota[] = []; 
-  // Entrada que recibe una lista de mascotas desde el componente padre.
+  @Input() medicamentos: Medicamento[] = []; 
+  // Array de medicamentos que se recibe como entrada (Input). Se inicializa como un array vacío.
+  
+  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+  // Referencia al elemento del DOM que contendrá el carrusel.
 
-  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined; 
-  // Referencia al elemento del carrusel en el DOM, que permite manipularlo.
-
-  index = 0; // Índice actual del carrusel, que indica qué mascota se está mostrando.
-  intervalId: any; // ID del intervalo que se utilizará para mover el carrusel automáticamente.
+  index = 0; // Índice actual del medicamento que se muestra en el carrusel.
+  intervalId: any; // ID del intervalo para poder limpiar el intervalo al destruir el componente.
 
   ngOnInit(): void {
     // Método del ciclo de vida que se ejecuta al inicializar el componente.
-    this.autoMoverCarrusel(); // Llama al método que inicia el movimiento automático del carrusel.
+    this.autoMoverCarrusel(); // Llama al método para iniciar el movimiento automático del carrusel.
   }
 
   ngOnDestroy(): void {
@@ -28,19 +29,23 @@ export class CarruselTopMedicamentosComponent {
     }
   }
 
-  cambiarMascota(direccion: number): void {
-    // Método que cambia la mascota mostrada en el carrusel.
-    const totalMascotas = this.mascotas.length; // Total de mascotas en el array.
-    // Actualiza el índice considerando la dirección y asegurando que se mantenga dentro de los límites.
-    this.index = (this.index + direccion + totalMascotas) % totalMascotas; 
+  cambiarMedicamento(direccion: number): void {
+    // Método que cambia el medicamento que se muestra en el carrusel.
+    const totalMedicamentos = this.medicamentos.length; // Obtiene la cantidad total de medicamentos.
+    this.index = (this.index + direccion + totalMedicamentos) % totalMedicamentos; 
+    // Actualiza el índice actual basado en la dirección (1 para siguiente, -1 para anterior).
+    // Utiliza el operador módulo para asegurar que el índice esté dentro de los límites del array.
+
     if (this.carrusel) {
-      // Aplica un estilo de transformación al carrusel para mostrar la mascota correspondiente.
+      // Si la referencia al carrusel es válida, aplica una transformación CSS para moverlo.
       this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
+      // Mueve el carrusel en el eje X basado en el índice actual.
     }
   }
 
   autoMoverCarrusel(): void {
-    // Método que establece un intervalo para mover el carrusel automáticamente.
-    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000); // Cambia de mascota cada 6 segundos.
+    // Método para iniciar el movimiento automático del carrusel.
+    this.intervalId = setInterval(() => this.cambiarMedicamento(1), 6000); 
+    // Cambia automáticamente al siguiente medicamento cada 6 segundos.
   }
 }

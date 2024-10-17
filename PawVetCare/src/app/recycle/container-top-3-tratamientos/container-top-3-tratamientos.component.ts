@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core'; // Importa los módulos necesarios de Angular
 import { Router } from '@angular/router'; // Importa el servicio Router para la navegación
 import { Mascota } from 'src/app/model/mascota'; // Importa la clase Mascota desde el modelo
+import { Medicamento } from 'src/app/model/medicamento';
 import { MascotasService } from 'src/app/services/mascotas.service'; // Importa el servicio de mascotas
+import { MedicamentoService } from 'src/app/services/medicamento.service';
 
 @Component({
   selector: 'app-container-top-3-tratamientos', // Selector del componente
@@ -9,129 +11,80 @@ import { MascotasService } from 'src/app/services/mascotas.service'; // Importa 
   styleUrls: ['./container-top-3-tratamientos.component.css'] // Ruta de los estilos CSS
 })
 export class ContainerTop3TratamientosComponent {
-  userType = 'admin'; // Variable para almacenar el tipo de usuario (admin o vet)
+  userType = 'admin';  // Se establece que el tipo de usuario es 'admin'
   mascotaId: number | undefined; // ID de la mascota seleccionada
-  index = 0; // Índice actual del carrusel
-  intervalId: any; // ID del intervalo para el carrusel
-  mascotas: Mascota[] = []; // Array para almacenar la lista de mascotas
-  mascotaSeleccionada: Mascota | undefined; // Mascota seleccionada por el usuario
+  index = 0; // Índice inicial para el carrusel
+  intervalId: any; // Variable para almacenar el identificador del intervalo del carrusel
+  medicamentos: Medicamento[] = []; // Arreglo que almacenará los medicamentos
 
-  // Objeto para almacenar la nueva mascota que se va a agregar
-  nuevaMascota: Mascota = {
+  // Inicializamos un nuevo objeto 'Medicamento'
+  nuevoMedicamento: Medicamento = {
     id: 0,
     nombre: '',
-    raza: '',
-    edad: 0,
-    peso: 0,
-    enfermedad: '',
-    foto: '',
-    estado: true,
-    cedulaCliente: 0,
-    tratamientos: [],
-  };
+    precio_venta: 0,
+    precio_compra: 0,
+    unidades_disponibles: 0,
+    unidades_vendidas: 0
+  }
 
-  // Referencia al elemento del carrusel
+  // Accedemos al carrusel en la plantilla HTML mediante ViewChild
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
 
-  constructor(private mascotasService: MascotasService, private router: Router) {} 
+  // Inyectamos los servicios necesarios para obtener medicamentos y la navegación
+  constructor(private medicamentoService: MedicamentoService, private router: Router) {} 
 
+  // ngOnInit se ejecuta al inicializar el componente
   ngOnInit(): void {
-    // Método que se ejecuta al inicializar el componente
-    // Se valida el tipo de usuario: admin o veterinario
-    if (this.userType === 'admin') {
-      // Si es un administrador, obtiene la lista de mascotas desde el servicio
-      this.mascotasService.obtenerMascotasAdmin().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas; // Almacena la lista de mascotas
-      });
-      console.log('Admin accediendo a las mascotas');
-    } else if (this.userType === 'vet') {
-      // Si es un veterinario, obtiene la lista de mascotas desde el servicio
-      this.mascotasService.obtenerMascotasVet().subscribe((mascotas: Mascota[]) => {
-        this.mascotas = mascotas; // Almacena la lista de mascotas
-      });
-      console.log('Veterinario accediendo a las mascotas');
-    }
-  
-    this.autoMoverCarrusel(); // Inicia el movimiento automático del carrusel
-  }
-  
+    // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
+    this.medicamentoService.obtenerTodosMedicamentos().subscribe((medicamentos: Medicamento[]) => {
+      this.medicamentos = medicamentos; // Asignamos los medicamentos obtenidos
+    });
 
+    // Activamos el movimiento automático del carrusel
+    this.autoMoverCarrusel();
+  }
+
+  // ngOnDestroy se ejecuta cuando el componente es destruido
   ngOnDestroy(): void {
-    // Método que se ejecuta al destruir el componente
-    // Limpia el intervalo si existe
+    // Limpiamos el intervalo del carrusel cuando el componente se destruye
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
   }
 
-  cambiarMascota(direccion: number): void {
-    // Método para cambiar la mascota mostrada en el carrusel
-    const totalMascotas = this.mascotas.length; // Total de mascotas disponibles
-    this.index = (this.index + direccion + totalMascotas) % totalMascotas; // Calcula el nuevo índice
-    console.log(`Mostrando mascota en índice: ${this.index}`); // Muestra el índice actual en la consola
+  // Método para cambiar de medicamento en el carrusel
+  cambiarMedicamento(direccion: number): void {
+    const totalMedicamentos = this.medicamentos.length; // Número total de medicamentos en el carrusel
+    // Cambiamos el índice basado en la dirección (1 para siguiente, -1 para anterior)
+    this.index = (this.index + direccion + totalMedicamentos) % totalMedicamentos; 
+    console.log(`Mostrando medicamento en índice: ${this.index}`); // Registro del índice actual
+
+    // Cambiamos la posición del carrusel usando transformaciones de estilo
     if (this.carrusel) {
-      // Aplica la transformación al carrusel para mostrar la mascota correspondiente
       this.carrusel.nativeElement.style.transform = `translateX(-${this.index * 100}%)`; 
     }
   }
 
+  // Método para mover el carrusel automáticamente cada 6 segundos
   autoMoverCarrusel(): void {
-    // Método para mover automáticamente el carrusel cada 6 segundos
-    this.intervalId = setInterval(() => this.cambiarMascota(1), 6000);
+    this.intervalId = setInterval(() => this.cambiarMedicamento(1), 6000); // Cambia al siguiente medicamento cada 6 segundos
   }
 
-  buscarMascota(mascotaId: number | undefined): void {
-    // Método para buscar una mascota por su ID
-    let mascota: Mascota | undefined; // Variable para almacenar la mascota encontrada
-    const id = Number(mascotaId); // Convierte el ID a número
+  // Método para buscar un medicamento por ID
+  buscarMedicamento(medicamentoId: number | undefined): void {
+    const id = Number(medicamentoId); // Convertimos el ID a número
     if (!id) {
-      return; // Si el ID no es válido, sale del método
+      return; // Si no hay ID válido, salimos de la función
     }
-    
-    // Se valida el tipo de usuario: admin o veterinario
-    if (this.userType === 'admin') {
-      // Si es un administrador, busca la mascota por ID
-      const mascota = this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
-        this.mascotaSeleccionada = mascota; // Almacena la mascota seleccionada
-      });
-    } else if (this.userType === 'vet') {
-      // Si es un veterinario, busca la mascota por ID
-      const mascota = this.mascotasService.obtenerMascotaPorId(id).subscribe((mascota: Mascota) => {
-        this.mascotaSeleccionada = mascota; // Almacena la mascota seleccionada
-      });
-    }
-    
-    if (mascota) {
-      // Si se encontró la mascota, navega a la página de detalles de la mascota
-      this.router.navigate(['/mascota', id]);
+
+    // Obtenemos el medicamento por su ID
+    const medicamento = this.medicamentoService.obtenerMedicamentoPorId(id);
+    if (medicamento) {
+      // Si se encuentra el medicamento, navegamos a su página de detalles
+      this.router.navigate(['/medicamento', id]);
     } else {
-      // Si no se encontró la mascota, muestra un mensaje de alerta
-      alert(`Mascota con ID ${id} no encontrada`);
+      // Si no se encuentra, mostramos una alerta
+      alert(`Medicamento con ID ${id} no encontrado`);
     }
-  }
-  
-  agregarMascota(): void {
-    // Método para agregar una nueva mascota
-    if (this.userType === 'admin') {
-      // Si es un administrador, utiliza el servicio para agregar la mascota
-      this.mascotasService.agregarMascotaAdmin(this.nuevaMascota, this.nuevaMascota.cedulaCliente); 
-    } else if (this.userType === 'vet') {
-      // Si es un veterinario, utiliza el servicio para agregar la mascota
-      this.mascotasService.agregarMascotaVet(this.nuevaMascota, this.nuevaMascota.cedulaCliente); 
-    }
-    alert('Mascota agregada exitosamente'); // Muestra un mensaje de éxito
-    // Resetea el objeto nuevaMascota a su estado inicial
-    this.nuevaMascota = { 
-      id: 0,
-      nombre: '',
-      raza: '',
-      edad: 0,
-      peso: 0,
-      enfermedad: '',
-      foto: '',
-      estado: true,
-      cedulaCliente: 0,
-      tratamientos: [],
-    };
   }
 }

@@ -62,7 +62,7 @@
     position: relative;
     top: 200px;
     left: 88px; 
-    margin-top: -130px;
+    margin-top: -80px;
     width: 1540px; 
     height: 200px;
     background: #FFFFFF;
@@ -137,9 +137,9 @@
 
 .carrusel-container {
     position: relative;
-    top: 250px;
-    left: 35px; 
-    width: 1470px; 
+    top: 200px;
+    left: 88px; 
+    width: 1540px; 
     height: 200px;
     border-radius: 12px;
     padding: 20px 0;
@@ -263,11 +263,24 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemCantidad{
+.info-itemUnidadesDisponibles {
     position: absolute;
-    width: 275px;
+    width: 155px;
     top: 55px;
     margin-left: 940px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemUnidadesVendidas {
+    position: absolute;
+    width: 155px;
+    top: 55px;
+    margin-left: 1135px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;

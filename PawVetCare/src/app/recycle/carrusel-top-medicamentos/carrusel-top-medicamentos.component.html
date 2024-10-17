@@ -1,57 +1,58 @@
-<div class="carrusel-container" *ngIf="mascotas.length > 0">
-    <!-- Este contenedor se muestra solo si hay mascotas disponibles en el array. -->
-
-    <button class="carrusel-prev" (click)="cambiarMascota(-1)">
-        <!-- Botón para cambiar a la mascota anterior, invoca el método cambiarMascota con -1 como argumento. -->
-        <img src="../assets/previous.png" alt="Regreso">
-        <!-- Imagen del botón que indica la acción de volver o regresar. -->
+<div class="carrusel-container" *ngIf="medicamentos.length > 0">
+    <!-- Contenedor del carrusel, solo se muestra si hay medicamentos disponibles -->
+    
+    <button class="carrusel-prev" (click)="cambiarMedicamento(-1)">
+        <!-- Botón para cambiar al medicamento anterior -->
+        <img src="../assets/previous.png" alt="Regreso"> <!-- Icono para regresar -->
     </button>
     
     <div class="carrusel">
-        <!-- Contenedor principal del carrusel que alberga los elementos de las mascotas. -->
-
-        <div class="medicamento-item" *ngFor="let mascota of mascotas; let i = index" 
-            [ngStyle]="{'display': i === index ? 'block' : 'none'}">
-            <!-- Itera sobre cada mascota en el array y muestra solo la que coincide con el índice actual. -->
-            <!-- Usamos ngStyle para mostrar la mascota actual (display: block) y ocultar las demás (display: none). -->
-
+        <!-- Contenedor principal del carrusel que alberga los medicamentos -->
+        
+        <div class="medicamento-item" 
+             *ngFor="let medicamento of medicamentos; let i = index" 
+             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+            <!-- Se utiliza *ngFor para iterar sobre el array de medicamentos -->
+            <!-- Solo el medicamento cuyo índice coincida con 'index' se mostrará -->
+            
             <div class="medicamento-info">
-                <!-- Contenedor que muestra la información de cada mascota. -->
-
+                <!-- Contenedor de información del medicamento -->
+                
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
-                    <!-- Etiqueta que indica el campo 'Nombre' de la mascota. -->
-                    <label class="info-label">{{ mascota.nombre }}</label>
-                    <!-- Muestra el nombre de la mascota usando la interpolación de Angular. -->
+                    <label class="info-label">{{ medicamento.nombre }}</label>
+                    <!-- Muestra el nombre del medicamento -->
                 </div>
                 
                 <div class="info-itemPrecioVenta">
-                    <small class="info-title">Raza:</small>
-                    <!-- Etiqueta que indica el campo 'Raza' de la mascota. -->
-                    <label class="info-label">{{ mascota.raza }}</label>
-                    <!-- Muestra la raza de la mascota. -->
+                    <small class="info-title">P. venta:</small>
+                    <label class="info-label">{{ medicamento.precio_venta }}</label>
+                    <!-- Muestra el precio de venta del medicamento -->
                 </div>
-
+                
                 <div class="info-itemPrecioCompra">
-                    <small class="info-title">Edad:</small>
-                    <!-- Etiqueta que indica el campo 'Edad' de la mascota. -->
-                    <label class="info-label">{{ mascota.edad }}</label>
-                    <!-- Muestra la edad de la mascota. -->
+                    <small class="info-title">P. compra:</small>
+                    <label class="info-label">{{ medicamento.precio_compra }}</label>
+                    <!-- Muestra el precio de compra del medicamento -->
                 </div>
-
-                <div class="info-itemCantidad">
-                    <small class="info-title">Cant. Tratamientos:</small>
-                    <!-- Etiqueta que indica la cantidad de tratamientos. -->
-                    <label class="info-label">{{ mascota.edad }}</label>
-                    <!-- Muestra la edad de la mascota (parece que hay un error aquí, debería ser otra propiedad, como tratamientos disponibles). -->
+                
+                <div class="info-itemUnidadesDisponibles">
+                    <small class="info-title">Uni. Disp.:</small>
+                    <label class="info-label">{{ medicamento.unidades_disponibles }}</label>
+                   
                 </div>
+                
+                <div class="info-itemUnidadesVendidas">
+                    <small class="info-title">Uni. Vend.:</small>
+                    <label class="info-label">{{ medicamento.unidades_vendidas }}</label>
+                    
+                </div> 
             </div>
         </div>
     </div>
-
-    <button class="carrusel-next" (click)="cambiarMascota(1)">
-        <!-- Botón para cambiar a la siguiente mascota, invoca el método cambiarMascota con 1 como argumento. -->
-        <img src="assets/next.png" alt="Siguiente">
-        <!-- Imagen del botón que indica la acción de avanzar o siguiente. -->
+    
+    <button class="carrusel-next" (click)="cambiarMedicamento(1)">
+        <!-- Botón para cambiar al siguiente medicamento -->
+        <img src="assets/next.png" alt="Siguiente"> <!-- Icono para avanzar -->
     </button>
 </div>
