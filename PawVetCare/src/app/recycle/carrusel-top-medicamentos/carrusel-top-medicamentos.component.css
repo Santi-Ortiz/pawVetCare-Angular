@@ -138,8 +138,8 @@
 .carrusel-container {
     position: relative;
     top: 200px;
-    left: 88px; 
-    width: 1540px; 
+    left: 30px; 
+    width: 1480px; 
     height: 200px;
     border-radius: 12px;
     padding: 20px 0;
@@ -226,7 +226,7 @@
 
 .info-itemNombre {
     position: absolute;
-    width: 320px;
+    width: 270px;
     top: 55px;
     margin-left: 0px;
     flex-direction: column;
@@ -241,7 +241,7 @@
     position: absolute;
     width: 250px;
     top: 55px;
-    margin-left: 360px;
+    margin-left: 310px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -254,7 +254,7 @@
     position: absolute;
     width: 250px;
     top: 55px;
-    margin-left: 650px;
+    margin-left: 600px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -267,7 +267,7 @@
     position: absolute;
     width: 155px;
     top: 55px;
-    margin-left: 940px;
+    margin-left: 890px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -280,7 +280,7 @@
     position: absolute;
     width: 155px;
     top: 55px;
-    margin-left: 1135px;
+    margin-left: 1085px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
