@@ -31,7 +31,7 @@
 
   <!-- Si el cliente tiene mascotas (al menos una), se muestra el componente de carrusel de mascotas -->
   <div *ngIf="cliente.mascotas && cliente.mascotas.length > 0">
-    <app-carrusel-mascotas [mascotas]="cliente.mascotas"></app-carrusel-mascotas> <!-- Se pasa la lista de mascotas al componente de carrusel -->
+    <app-carrusel-mascotas [mascotas]="cliente.mascotas" [marginTop]="'470px'" [left]="'30px'"></app-carrusel-mascotas> <!-- Se pasa la lista de mascotas al componente de carrusel -->
   </div>
   
 </section>
