@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mascota } from 'src/app/model/mascota';
+import { AuthService } from 'src/app/services/auth.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 })
 export class InformacionMascotaComponent {
   // Define el tipo de usuario, en este caso, 'admin'
-  userType = 'admin';
+  userType: string | null | undefined;
 
   // Inputs recibidos del componente padre
   @Input()
@@ -24,7 +25,8 @@ export class InformacionMascotaComponent {
     private fb: FormBuilder,  // Servicio para construir formularios
     private route: ActivatedRoute,  // Para obtener parámetros de la URL
     private router: Router,  // Para navegar entre diferentes rutas
-    private mascotasService: MascotasService  // Servicio para manejar operaciones CRUD de mascotas
+    private mascotasService: MascotasService,  // Servicio para manejar operaciones CRUD de mascotas
+    private authService: AuthService
   ) {
 
     // Inicialización del formulario de la mascota con valores vacíos
@@ -44,7 +46,10 @@ export class InformacionMascotaComponent {
       this.mascota.estado = nuevoEstado;
     });
   }
-
+  ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType);
+  }
   // Método para alternar entre el modo de edición y guardar
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn');  // Obtener el botón de editar

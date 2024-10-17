@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/co
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/model/cliente';
+import { AuthService } from 'src/app/services/auth.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 
@@ -11,7 +12,7 @@ import { MascotasService } from 'src/app/services/mascotas.service';
   styleUrls: ['./ver-un-cliente.component.css']
 })
 export class VerUnClienteComponent {
-  userType = 'admin'; // Tipo de usuario, puede ser 'admin' o 'vet'
+  userType: string | null | undefined; // Tipo de usuario, puede ser 'admin' o 'vet'
   clienteId: number | undefined; // ID del cliente
   cliente: Cliente = { // Inicializa un cliente vacío
     id: 0,
@@ -27,7 +28,8 @@ export class VerUnClienteComponent {
 
   constructor(
     private fb: FormBuilder,  // Inyección de dependencia del FormBuilder
-    private route: ActivatedRoute, // Para acceder a los parámetros de la ruta
+    private route: ActivatedRoute,
+    private authService: AuthService, // Para acceder a los parámetros de la ruta
     private router: Router, // Para navegar entre rutas
     private clienteService: ClienteService  // Servicio para gestionar clientes
   ) {
@@ -41,6 +43,9 @@ export class VerUnClienteComponent {
   }
 
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType);
+
     // Obtiene el ID del cliente de los parámetros de la ruta
     const id = Number(this.route.snapshot.paramMap.get('id'));
 

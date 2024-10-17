@@ -32,7 +32,8 @@
     
   
     <!-- Enlace para ver todas las mascotas -->
-    <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>
+    <a *ngIf="userType === 'admin' || userType === 'vet'" routerLink="/mascotas/todas" class="todas-button"> + Ver todas las mascotas </a>
+
 
   <!-- Texto condicional según el tipo de usuario -->
   <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Agrega mascotas:</p> <!-- Texto para admin y vet -->

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/model/cliente';
+import { AuthService } from 'src/app/services/auth.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./paginacion-clientes.component.css']
 })
 export class PaginacionClientesComponent {
-  userType: string = 'admin'; // Tipo de usuario, por defecto 'admin'
+  userType: string | null | undefined; // Tipo de usuario, por defecto 'admin'
   currentPage: number = 1; // Página actual de la paginación
   itemsPerPage: number = 4; // Número de clientes a mostrar por página
   totalPages: number = 1; // Total de páginas calculadas
@@ -26,10 +27,12 @@ export class PaginacionClientesComponent {
     mascotas: [],
   };
   // Inyectamos el servicio ClienteService y Router en el constructor
-  constructor(private clientesService: ClienteService, private router: Router) {}
+  constructor(private clientesService: ClienteService, private authService: AuthService, private router: Router) {}
 
   // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
+    this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    console.log("El userType es: ", this.userType);
     // Verifica el tipo de usuario y realiza la llamada al servicio de clientes
     if (this.userType === 'admin') {
       this.clientesService.obtenerTodosClientes().subscribe(

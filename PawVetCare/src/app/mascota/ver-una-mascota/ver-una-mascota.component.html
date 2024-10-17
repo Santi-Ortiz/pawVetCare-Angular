@@ -21,7 +21,7 @@
 
   <!-- Títulos adicionales para todos los usuarios -->
   <p class="segundoTitulo">Aquí está la información de la mascota:</p>
-  <p class="tercerTitulo">Dar tratamiento:</p>
+  <p *ngIf="userType !== 'cliente'" class="tercerTitulo">Dar tratamiento:</p>
   <p class="cuartoTitulo">Mira la historía clínica:</p>
 
   <!-- Componente que muestra la información de la mascota y el formulario de edición si está en modo de edición -->
