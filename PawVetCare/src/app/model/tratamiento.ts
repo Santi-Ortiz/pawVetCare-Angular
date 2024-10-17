@@ -6,7 +6,7 @@ import { Veterinario } from './veterinario';
 export interface Tratamiento {
   id: number;
   fecha: Date;
-  veterinario: Veterinario;
+  veterinario?: Veterinario;
   mascota: Mascota;
   tratamientoMedicamentos: TratamientoMedicamento[];
 }

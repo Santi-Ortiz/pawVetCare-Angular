@@ -15,6 +15,7 @@ import { VeterinarioService } from 'src/app/services/vet.service';
 })
 export class CarruselHistorialComponent {
   @Input() tratamientos: Tratamiento[] = []; 
+  medicamentosCache: { [id: number]: string } = {};
   // Array de medicamentos que se recibe como entrada (Input). Se inicializa como un array vacío.
   
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
@@ -38,8 +39,7 @@ export class CarruselHistorialComponent {
   ngOnInit(): void {
     // Método del ciclo de vida que se ejecuta al inicializar el componente.
     this.autoMoverCarrusel(); // Llama al método para iniciar el movimiento automático del carrusel.
-    const medicamentoName = this.medicamentoService.obtenerMedicamentoPorId(this.tratamientos[0].id);
-    const veterinarioName = this.veterinarioService.getVeterinarioById(this.tratamientos[0].id);
+    
   }
 
   ngOnDestroy(): void {
@@ -68,4 +68,38 @@ export class CarruselHistorialComponent {
     this.intervalId = setInterval(() => this.cambiarTratamiento(1), 6000); 
     // Cambia automáticamente al siguiente medicamento cada 6 segundos.
   }
+
+  obtenerNombreMedicamento(medicamentoId: number): string | null {
+    if (this.medicamentosCache[medicamentoId]) {
+      return this.medicamentosCache[medicamentoId];
+    } else {
+      this.medicamentoService.obtenerMedicamentoPorId(medicamentoId).subscribe(
+        (medicamento) => {
+          this.medicamentosCache[medicamentoId] = medicamento.nombre;
+        },
+        (error) => {
+          console.error('Error al obtener el medicamento:', error);
+        }
+      );
+      return null;
+    }
+  }
+
+  obtenerNombreVeterinario(veterinarioId: number | undefined): string {
+    if (!veterinarioId) return 'N/A';
+  
+    let nombreVeterinario = 'N/A';
+    this.veterinarioService.getVeterinarioById(veterinarioId).subscribe(
+      (veterinario) => {
+        nombreVeterinario = veterinario.nombre;
+      },
+      (error) => {
+        console.error('Error al obtener el veterinario:', error);
+      }
+    );
+    return nombreVeterinario;
+  }
+  
+
+  
 }

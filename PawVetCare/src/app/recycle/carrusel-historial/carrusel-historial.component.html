@@ -1,47 +1,39 @@
 <div class="carrusel-container" *ngIf="tratamientos.length > 0">
-    <!-- Contenedor del carrusel, solo se muestra si hay medicamentos disponibles -->
-    
     <button class="carrusel-prev" (click)="cambiarTratamiento(-1)">
-        <!-- Botón para cambiar al medicamento anterior -->
-        <img src="../assets/previous.png" alt="Regreso"> <!-- Icono para regresar -->
+        <img src="../assets/previous.png" alt="Regreso">
     </button>
-    
+
     <div class="carrusel">
-        <!-- Contenedor principal del carrusel que alberga los medicamentos -->
-        
         <div class="medicamento-item" 
              *ngFor="let tratamiento of tratamientos; let i = index" 
              [ngStyle]="{'display': i === index ? 'block' : 'none'}">
-            <!-- Se utiliza *ngFor para iterar sobre el array de medicamentos -->
-            <!-- Solo el medicamento cuyo índice coincida con 'index' se mostrará -->
-            
             <div class="medicamento-info">
-                <!-- Contenedor de información del medicamento -->
                 
                 <div class="info-itemNombre">
                     <small class="info-title">Medicamento:</small>
-                    <label class="info-label">{{ tratamiento.id }}</label>
-                    <!-- Muestra el nombre del medicamento -->
-                </div>
-                
+                    <label class="info-label">
+                        {{ obtenerNombreMedicamento(tratamiento.tratamientoMedicamentos[0].medicamentoId) || 'N/A' }}
+                    </label>
+                </div>                
+
                 <div class="info-itemVeterinario">
                     <small class="info-title">Fecha:</small>
-                    <label class="info-label">{{ tratamiento.fecha }}</label>
-                    <!-- Muestra el precio de venta del medicamento -->
+                    <label class="info-label">{{ tratamiento.fecha | date:'yyyy-MM-dd' }}</label>
                 </div>
-                
+
                 <div class="info-itemFecha">
                     <small class="info-title">Veterinario:</small>
-                    <label class="info-label">{{ tratamiento.id }}</label>
-                    <!-- Muestra el precio de compra del medicamento -->
+                    <label class="info-label">
+                        {{ tratamiento.veterinario?.id || 'Sin ID' }}
+                      </label>                                                               
+                    <!-- Imprime el nombre del veterinario -->
                 </div>
-                
+
             </div>
         </div>
     </div>
-    
+
     <button class="carrusel-next" (click)="cambiarTratamiento(1)">
-        <!-- Botón para cambiar al siguiente medicamento -->
-        <img src="assets/next.png" alt="Siguiente"> <!-- Icono para avanzar -->
+        <img src="assets/next.png" alt="Siguiente">
     </button>
 </div>

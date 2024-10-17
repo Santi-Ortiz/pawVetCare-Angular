@@ -7,7 +7,7 @@ export interface Veterinario {
     foto: string;
     nombre: string;
     estado: boolean;
-    nombreEspecialidad: string;
+    nombreEspecialidad?: string;
     // nombreEspecialidad: Especialidad;
     tratamientos: Tratamiento[];
   }

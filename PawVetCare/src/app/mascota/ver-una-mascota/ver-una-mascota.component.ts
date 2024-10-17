@@ -8,6 +8,7 @@ import { Medicamento } from 'src/app/model/medicamento';
 import { MedicamentoService } from 'src/app/services/medicamento.service';
 import { Tratamiento } from 'src/app/model/tratamiento';
 import { TratamientoService } from 'src/app/services/tratamiento.service';
+import { TratamientoDTO } from 'src/app/model/TratamientoDTO';
 
 @Component({
   selector: 'app-ver-una-mascota',
@@ -68,6 +69,21 @@ export class VerUnaMascotaComponent implements OnInit {
       this.mascota.estado = nuevoEstado;
     });
   }
+  // Método de conversión de DTO a Tratamiento
+  convertirADominio(dto: TratamientoDTO): Tratamiento {
+    return {
+      id: dto.id,
+      fecha: dto.fecha,
+      veterinario: { id: dto.veterinarioId, nombre: '', cedula: 0, estado: true, foto: '', contrasena: '', nombreEspecialidad: '', tratamientos: [] },
+      mascota: { id: dto.mascotaId, nombre: '', raza: '', edad: 0, peso: 0, enfermedad: '', foto: '', estado: true, cedulaCliente: 0 },
+      tratamientoMedicamentos: dto.medicamentos.map(m => ({
+        id: 0,
+        tratamientoId: dto.id,
+        medicamentoId: m.id,
+        cantidad: m.cantidad,
+      })),
+    };
+  }
 
   ngOnInit(): void {
      // Obtiene el ID de la mascota desde la URL
@@ -80,11 +96,17 @@ export class VerUnaMascotaComponent implements OnInit {
      }
      
     // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
-    this.mascotaService.obtenerTratamientosPorMascotaId(id).subscribe((tratamientos: Tratamiento[]) => {
-      this.tratamientos = tratamientos; // Asignamos los medicamentos obtenidos
-      console.log(id);
-      console.log(tratamientos);
-    });
+    this.mascotaService.obtenerTratamientosPorMascotaId(id).subscribe(
+      (tratamientosDTO: TratamientoDTO[]) => {
+        this.tratamientos = tratamientosDTO.map(dto => this.convertirADominio(dto));
+        console.log('Tratamientos convertidos:', this.tratamientos);
+      },
+      (error) => {
+        console.error('Error al obtener los tratamientos:', error);
+      }
+    );
+
+    
 
     // Obtiene el rol del usuario actual (admin, vet o cliente)
     this.userType = this.authService.getUserRole(); 

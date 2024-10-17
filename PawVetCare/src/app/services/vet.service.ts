@@ -58,7 +58,7 @@ export class VeterinarioService {
   }
 
   getVeterinarioById(id: number): Observable<Veterinario> {
-    return this.http.get<Veterinario>(`${this.apiUrl}/find/${id}`)
+    return this.http.get<Veterinario>(`${this.apiUrl}/findID/${id}`)
   }
 
   addVeterinario(veterinario: Veterinario, idVet: number): Observable<string> {

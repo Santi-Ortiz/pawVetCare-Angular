@@ -10,6 +10,6 @@ export interface Mascota {
     foto: string;
     estado: boolean;
     cedulaCliente: number;
-    tratamientos: Tratamiento[];
+    tratamientos?: Tratamiento[];
   }
   
