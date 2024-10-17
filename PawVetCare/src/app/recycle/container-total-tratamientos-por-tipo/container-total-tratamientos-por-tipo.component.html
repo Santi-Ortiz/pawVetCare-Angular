@@ -2,14 +2,24 @@
     <!-- Título que indica el propósito de la sección -->
     <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
 
-    <!-- Formulario para buscar medicamentos por nombre -->
-    <form class="buscador-form">
-        <!-- Campo de entrada para el nombre del medicamento, requerido -->
-        <input name="nombre" class="buscador-input" placeholder="Buscar por nombre" required>
-        <!-- Botón para enviar el formulario y buscar el medicamento -->
-        <button type="submit" class="buscador-button">Buscar</button>
-    </form>
-
+    <table *ngIf="topTratamientos.length > 0" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID del Tratamiento</th>
+            <th>Fecha de aplicación </th>
+            <th>Cantidad de Medicamentos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tratamiento of topTratamientos; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ tratamiento[0].nombre }}</td> <!-- Nombre del tratamiento -->
+            <td>{{ tratamiento[0].fecha }}</td> <!-- Fecha de aplicación del tratamiento -->
+            <td>{{ tratamiento[1] }}</td> <!-- Cantidad de medicamentos administrados -->
+          </tr>
+        </tbody>
+      </table>
     <!-- Componente que muestra un carrusel de medicamentos, pasando la lista de medicamentos como input -->
-    <app-carrusel-medicamentos-dashboard [medicamentos]="medicamentos"></app-carrusel-medicamentos-dashboard>
+    <!-- <app-carrusel-medicamentos-dashboard [medicamentos]="medicamentos"></app-carrusel-medicamentos-dashboard> -->
 </div>
