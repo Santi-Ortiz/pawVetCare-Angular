@@ -76,4 +76,8 @@ export class MascotasService {
   contarTotalMascotas(): Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/cantidad`)
   }
+
+  obtenerTratamientosPorMascotaId(id: number): Observable<Tratamiento[]> {
+    return this.http.get<Tratamiento[]>(`${this.apiUrl}/${id}/tratamientos`);
+  }
 }

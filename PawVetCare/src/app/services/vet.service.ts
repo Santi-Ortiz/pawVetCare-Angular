@@ -61,8 +61,8 @@ export class VeterinarioService {
     return this.http.post<string>(`${this.apiUrl}/agregar?idVet=${idVet}`, veterinario)
   }
 
-  updateVeterinario(id: number, veterinario: Veterinario): Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/update/${id}`, veterinario);
+  updateVeterinario(cedula: number, veterinario: Veterinario): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${cedula}`, veterinario);
   }
 
   deleteVeterinario(cedula: number): Observable<void> {

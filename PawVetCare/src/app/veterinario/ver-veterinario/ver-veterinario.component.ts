@@ -23,10 +23,7 @@ import { VeterinarioService } from 'src/app/services/vet.service';
       foto: '',
       nombre: '',
       estado: false,
-      especialidad: {
-        id: 0,
-        nombreEspecialidad: '',
-      },
+      nombreEspecialidad: '',
       tratamientos: [],
     }
 
@@ -114,10 +111,7 @@ import { VeterinarioService } from 'src/app/services/vet.service';
         foto: '',
         nombre: '',
         estado: false,
-        especialidad: {
-          id: 0,
-          nombreEspecialidad: '',
-        },
+        nombreEspecialidad: '',
         tratamientos: [],
       }
     }

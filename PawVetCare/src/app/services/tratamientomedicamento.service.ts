@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TratamientoMedicamentoService {
 
-  private apiUrl = 'http://localhost:8090/api/tratamiento-medicamento'; // Cambia la URL si es necesario
+  private apiUrl = 'http://localhost:8090/api/tratamiento-medicamento';
 
   constructor(private http: HttpClient) { }
 

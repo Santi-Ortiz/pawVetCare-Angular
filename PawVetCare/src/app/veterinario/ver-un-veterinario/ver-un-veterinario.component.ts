@@ -28,10 +28,7 @@ export class VerUnVeterinarioComponent {
     foto: '',
     nombre: '',
     estado: false,
-    especialidad: {
-      id: 0,
-      nombreEspecialidad: '',
-    },
+    nombreEspecialidad: '',
     tratamientos: [],
   }
 
@@ -49,7 +46,7 @@ export class VerUnVeterinarioComponent {
       contrasena: [''],  // Campo para la contraseña del veterinario
       foto: [''],  // Campo para la foto del veterinario
       estado: false,  // Campo para el estado del veterinario (activo/inactivo)
-      especialidad: [''],  // Campo para la especialidad del veterinario
+      nombreEspecialidad: [''],  // Campo para la nombreEspecialidad del veterinario
       tratamientos: ['']  // Campo para los tratamientos que puede realizar el veterinario
     });
   }
@@ -70,7 +67,7 @@ export class VerUnVeterinarioComponent {
         cedula: this.veterinario.cedula,
         contrasena: this.veterinario.contrasena,
         foto: this.veterinario.foto,
-        especialidad: this.veterinario.especialidad,
+        nombreEspecialidad: this.veterinario.nombreEspecialidad,
         tratamientos: this.veterinario.tratamientos
       });
 
@@ -85,10 +82,7 @@ export class VerUnVeterinarioComponent {
         foto: '',
         nombre: '',
         estado: false,
-        especialidad: {
-          id: 0,
-          nombreEspecialidad: '',
-        },
+        nombreEspecialidad: '',
         tratamientos: [],
       };
     });
@@ -118,7 +112,8 @@ export class VerUnVeterinarioComponent {
 
       if (this.veterinario) {
         // Llama al servicio para actualizar los datos del veterinario
-        this.veterinarioService.updateVeterinario(veterinarioActualizado.id, veterinarioActualizado).subscribe(response => {
+        console.log(veterinarioActualizado.cedula);
+        this.veterinarioService.updateVeterinario(veterinarioActualizado.cedula, veterinarioActualizado).subscribe(response => {
           console.log('Veterinario actualizado:', response);
           alert('Veterinario actualizado exitosamente'); // Muestra un mensaje de éxito
         }, error => {

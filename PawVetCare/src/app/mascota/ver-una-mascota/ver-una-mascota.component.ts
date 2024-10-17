@@ -6,6 +6,8 @@ import { Mascota } from '../../model/mascota';
 import { AuthService } from 'src/app/services/auth.service';
 import { Medicamento } from 'src/app/model/medicamento';
 import { MedicamentoService } from 'src/app/services/medicamento.service';
+import { Tratamiento } from 'src/app/model/tratamiento';
+import { TratamientoService } from 'src/app/services/tratamiento.service';
 
 @Component({
   selector: 'app-ver-una-mascota',
@@ -16,8 +18,7 @@ export class VerUnaMascotaComponent implements OnInit {
 
   // Define el tipo de usuario actual
   userType: string | null | undefined;
-  medicamentos: Medicamento[] = []; // Arreglo que almacenará los medicamentos
-
+  tratamientos: Tratamiento[] = [];
   // Formulario para manejar la edición de la información de la mascota
   mascotaForm: FormGroup;
   isEditMode: boolean = false;  // Controla si estamos en modo de edición
@@ -41,7 +42,7 @@ export class VerUnaMascotaComponent implements OnInit {
 
   // Inyectamos los servicios necesarios para obtener medicamentos y la navegación
   constructor(
-    private medicamentoService: MedicamentoService, 
+    private mascotaService: MascotasService, 
   
     private fb: FormBuilder,  // Inyecta el servicio FormBuilder para manejar formularios
     private route: ActivatedRoute, // Inyecta la ruta activa para obtener parámetros de la URL
@@ -70,8 +71,8 @@ export class VerUnaMascotaComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
-    this.medicamentoService.obtenerTodosMedicamentos().subscribe((medicamentos: Medicamento[]) => {
-      this.medicamentos = medicamentos; // Asignamos los medicamentos obtenidos
+    this.mascotaService.obtenerTratamientosPorMascotaId(this.mascota.id).subscribe((tratamientos: Tratamiento[]) => {
+      this.tratamientos = tratamientos; // Asignamos los medicamentos obtenidos
     });
 
     // Obtiene el rol del usuario actual (admin, vet o cliente)

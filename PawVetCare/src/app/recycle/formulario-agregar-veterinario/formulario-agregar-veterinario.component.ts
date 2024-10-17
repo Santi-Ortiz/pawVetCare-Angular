@@ -17,10 +17,7 @@ export class FormularioAgregarVeterinarioComponent {
     foto: '', // URL de la foto inicial del veterinario.
     nombre: '', // Nombre inicial del veterinario.
     estado: false, // Estado inicial del veterinario (inactivo por defecto).
-    especialidad: { // Objeto que representa la especialidad del veterinario.
-      id: 0, // ID de la especialidad (se asigna 0 como valor predeterminado).
-      nombreEspecialidad: '', // Nombre de la especialidad (vacío por defecto).
-    },
+    nombreEspecialidad: '',
     tratamientos: [], // Lista de tratamientos inicial (vacía por defecto).
   }
 
@@ -43,10 +40,7 @@ export class FormularioAgregarVeterinarioComponent {
           foto: '',
           nombre: '',
           estado: false,
-          especialidad: {
-            id: 0,
-            nombreEspecialidad: '',
-          },
+          nombreEspecialidad: '',
           tratamientos: [],
         };
 

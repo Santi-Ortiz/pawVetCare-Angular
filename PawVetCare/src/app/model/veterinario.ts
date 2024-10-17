@@ -1,4 +1,3 @@
-import { Especialidad } from "./especialidad";
 import { Tratamiento } from "./tratamiento";
 
 export interface Veterinario {
@@ -8,7 +7,8 @@ export interface Veterinario {
     foto: string;
     nombre: string;
     estado: boolean;
-    especialidad: Especialidad;
+    nombreEspecialidad: string;
+    // nombreEspecialidad: Especialidad;
     tratamientos: Tratamiento[];
   }
   

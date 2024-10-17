@@ -30,7 +30,7 @@ export class InformacionVeterinarioComponent {
       cedula: [''],
       contrasena: [''],
       foto: [''],
-      especialidad: [''],
+      nombreEspecialidad: [''],
       tratamientos: ['']
     });
   }
@@ -65,8 +65,8 @@ export class InformacionVeterinarioComponent {
 
       if (this.veterinario) {
         // Actualiza el veterinario utilizando el servicio correspondiente
-        this.veterinarioService.updateVeterinario(this.veterinario.id, veterinarioActualizado).subscribe(
-          (response: String) => {
+        this.veterinarioService.updateVeterinario(this.veterinario.cedula, veterinarioActualizado).subscribe(
+          (response: String) => { 
             console.log('Veterinario actualizado correctamente', response);
             this.router.navigate(['/veterinarios/todos']); // Redirige a la lista de veterinarios
           },

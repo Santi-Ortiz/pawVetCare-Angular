@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Medicamento } from 'src/app/model/medicamento';
+import { Tratamiento } from 'src/app/model/tratamiento';
 
 @Component({
   selector: 'app-carrusel-historial',
@@ -7,7 +8,7 @@ import { Medicamento } from 'src/app/model/medicamento';
   styleUrls: ['./carrusel-historial.component.css']
 })
 export class CarruselHistorialComponent {
-  @Input() medicamentos: Medicamento[] = []; 
+  @Input() tratamientos: Tratamiento[] = []; 
   // Array de medicamentos que se recibe como entrada (Input). Se inicializa como un array vacío.
   
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
@@ -28,10 +29,10 @@ export class CarruselHistorialComponent {
     }
   }
 
-  cambiarMedicamento(direccion: number): void {
+  cambiarTratamiento(direccion: number): void {
     // Método que cambia el medicamento que se muestra en el carrusel.
-    const totalMedicamentos = this.medicamentos.length; // Obtiene la cantidad total de medicamentos.
-    this.index = (this.index + direccion + totalMedicamentos) % totalMedicamentos; 
+    const totalTratamientos = this.tratamientos.length; // Obtiene la cantidad total de medicamentos.
+    this.index = (this.index + direccion + totalTratamientos) % totalTratamientos; 
     // Actualiza el índice actual basado en la dirección (1 para siguiente, -1 para anterior).
     // Utiliza el operador módulo para asegurar que el índice esté dentro de los límites del array.
 
@@ -44,7 +45,7 @@ export class CarruselHistorialComponent {
 
   autoMoverCarrusel(): void {
     // Método para iniciar el movimiento automático del carrusel.
-    this.intervalId = setInterval(() => this.cambiarMedicamento(1), 6000); 
+    this.intervalId = setInterval(() => this.cambiarTratamiento(1), 6000); 
     // Cambia automáticamente al siguiente medicamento cada 6 segundos.
   }
 }
