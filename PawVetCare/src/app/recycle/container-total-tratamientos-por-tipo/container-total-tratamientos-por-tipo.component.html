@@ -1,25 +1,30 @@
 <div class="container-inicializar">
-    <!-- Título que indica el propósito de la sección -->
-    <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
+  <p class="subTitulo">Cantidad de tratamientos por tipo de medicamento administrado en el último mes:</p>
 
-    <table *ngIf="topTratamientos.length > 0" class="table table-bordered">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>ID del Tratamiento</th>
-            <th>Fecha de aplicación </th>
-            <th>Cantidad de Medicamentos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let tratamiento of topTratamientos; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ tratamiento[0].nombre }}</td> <!-- Nombre del tratamiento -->
-            <td>{{ tratamiento[0].fecha }}</td> <!-- Fecha de aplicación del tratamiento -->
-            <td>{{ tratamiento[1] }}</td> <!-- Cantidad de medicamentos administrados -->
-          </tr>
-        </tbody>
-      </table>
-    <!-- Componente que muestra un carrusel de medicamentos, pasando la lista de medicamentos como input -->
-    <!-- <app-carrusel-medicamentos-dashboard [medicamentos]="medicamentos"></app-carrusel-medicamentos-dashboard> -->
+  <table *ngIf="topTratamientos.length > 0" class="tabla-tratamientos">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID del Tratamiento</th>
+        <th>Fecha de aplicación</th>
+        <th>Cantidad de Medicamentos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Muestra solo 3 tratamientos por página -->
+      <tr *ngFor="let tratamiento of paginatedTratamientos(); let i = index">
+        <td>{{ currentPage * itemsPerPage + i + 1 }}</td>
+        <td>{{ tratamiento[0].nombre }}</td>
+        <td>{{ tratamiento[0].fecha }}</td>
+        <td>{{ tratamiento[1] }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Controles de paginación -->
+  <div class="paginacion-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Atrás</button>
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage + 1 === totalPages">Adelante</button>
+  </div>
 </div>
