@@ -31,13 +31,13 @@ export class AuthService {
     const url = `${this.apiUrl}/veterinario?cedula=${cedula}&password=${password}`;
     return this.http.post(url, {}).pipe(
       tap((response: any) => {
-        // Guardamos el rol y el ID del usuario en localStorage o en una variable compartida
         localStorage.setItem('userRole', 'vet');
-        localStorage.setItem('userId', response.cedula);
+        localStorage.setItem('userId', response.cedula); // Guardar la cédula en localStorage
         this.currentUser = response;
       })
     );
   }
+  
 
   //Login Cliente
   //  loginCliente(id: string): Observable<any> {

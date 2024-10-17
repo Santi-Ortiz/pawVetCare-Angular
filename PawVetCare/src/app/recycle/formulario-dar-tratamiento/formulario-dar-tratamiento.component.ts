@@ -1,12 +1,124 @@
-import { Component, Input } from '@angular/core'; // Importa las decoraciones y funcionalidades básicas de Angular.
-import { Mascota } from 'src/app/model/mascota'; // Importa el modelo de datos de Mascota, que define la estructura de una mascota.
-import { MascotasService } from 'src/app/services/mascotas.service'; // Importa el servicio MascotasService, que se encargará de las operaciones relacionadas con las mascotas.
+import { Component, OnInit } from '@angular/core';
+import { MedicamentoService } from 'src/app/services/medicamento.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Medicamento } from 'src/app/model/medicamento';
+import { TratamientoMedicamento } from 'src/app/model/tratamientoMedicamento';
+import { Tratamiento } from 'src/app/model/tratamiento';
+import { TratamientoService } from 'src/app/services/tratamiento.service';
+import { forkJoin, map } from 'rxjs';
+import { VeterinarioService } from 'src/app/services/vet.service';
+import { MascotasService } from 'src/app/services/mascotas.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
-  selector: 'app-formulario-dar-tratamiento', // Define el selector para este componente, que se usará en el HTML para incluirlo.
-  templateUrl: './formulario-dar-tratamiento.component.html', // Especifica la ubicación de la plantilla HTML asociada a este componente.
-  styleUrls: ['./formulario-dar-tratamiento.component.css'] // Especifica la hoja de estilos CSS asociada a este componente.
+  selector: 'app-formulario-dar-tratamiento',
+  templateUrl: './formulario-dar-tratamiento.component.html',
+  styleUrls: ['./formulario-dar-tratamiento.component.css']
 })
-export class FormularioDarTratamientoComponent { // Declara la clase del componente, que contiene la lógica y los datos para la plantilla.
-  // Aquí puedes agregar propiedades, métodos y lógica necesaria para el formulario de tratamiento.
+export class FormularioDarTratamientoComponent implements OnInit {
+  medicamentos: Medicamento[] = []; // Lista de medicamentos obtenidos del backend
+  medicamentosSeleccionados: number[] = []; // IDs de los medicamentos seleccionados
+  cantidad: number = 1; // Cantidad inicial por defecto
+  cedulaVet: number | undefined; // Cédula del veterinario que inició sesión
+  userType: string | null | undefined;
+
+  constructor(
+    private medicamentosService: MedicamentoService,
+    private tratamientoService: TratamientoService,
+    private route: ActivatedRoute, 
+    private veterinarioService: VeterinarioService,
+    private mascotaService: MascotasService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    
+    this.cargarMedicamentos();
+    this.cargarUsuario();
+  }
+
+  cargarMedicamentos(): void {
+    this.medicamentosService.obtenerTodosMedicamentos().subscribe(
+      (data: Medicamento[]) => {
+        this.medicamentos = data;
+      },
+      (error) => {
+        console.error('Error al obtener los medicamentos:', error);
+      }
+    );
+  }
+
+  cargarUsuario(): void {
+    this.userType = this.authService.getUserRole(); // Obtiene el rol del usuario
+    if (this.userType === 'vet') {
+      this.cedulaVet = this.authService.getUserId() ?? undefined;
+    }
+  }
+  
+
+  darTratamiento(): void {
+    const mascotaId = Number(this.route.snapshot.paramMap.get('id'));
+  
+    // Obtener el veterinario
+    this.veterinarioService.getVeterinarioByCedula(this.cedulaVet!).subscribe(
+      (veterinario) => {
+        // Obtener la mascota
+        this.mascotaService.obtenerMascotaPorId(mascotaId).subscribe(
+          (mascota) => {
+            // Verificar medicamentos seleccionados
+            const comprobaciones = this.medicamentosSeleccionados.map((medicamentoId) =>
+              this.medicamentosService.obtenerMedicamentoPorId(medicamentoId).pipe(
+                map((medicamento) => {
+                  if (medicamento.unidades_disponibles < this.cantidad) {
+                    throw new Error(`El medicamento ${medicamento.nombre} no tiene suficientes unidades.`);
+                  }
+                  return medicamento;
+                })
+              )
+            );
+  
+            // Ejecutar las comprobaciones
+            forkJoin(comprobaciones).subscribe(
+              (medicamentos) => {
+                const data = {
+                  mascota: mascota,
+                  veterinario: veterinario,
+                  medicamento: medicamentos[0], // Suponiendo que se envía un solo medicamento
+                  cantidad: this.cantidad,
+                };
+  
+                console.log('Datos a enviar:', JSON.stringify(data));
+  
+                // Llamar al servicio para enviar los datos
+                this.tratamientoService.darTratamiento(data).subscribe(
+                  (response) => {
+                    alert(response.message);
+                    console.log('Tratamiento registrado:', response);
+                  },
+                  (error) => {
+                    console.error('Error al registrar el tratamiento:', error);
+                    alert('Error al registrar el tratamiento.');
+                  }
+                );
+              },
+              (error) => {
+                alert(error.message);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al obtener la mascota:', error);
+            alert('No se pudo obtener la información de la mascota.');
+          }
+        );
+      },
+      (error) => {
+        console.error('Error al obtener el veterinario:', error);
+        alert('No se pudo obtener la información del veterinario.');
+      }
+    );
+  }
+  
+  
+  
 }

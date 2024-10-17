@@ -1,19 +1,32 @@
-<form class="dar-medicamento-container"> <!-- Contenedor principal del formulario para dar medicamentos. -->
-  <div class="infoadd-itemMedicamento"> <!-- Sección para seleccionar el medicamento. -->
-    <small class="info-title">Medicamento:</small> <!-- Etiqueta que indica el campo de medicamento. -->
-    <select name="medicamento" class="inputadd-text" required> <!-- Lista desplegable para seleccionar un medicamento; es un campo obligatorio. -->
-      <option>ACOLAN</option> <!-- Opción de medicamento: ACOLAN. -->
-      <option>ACTIONIS</option> <!-- Opción de medicamento: ACTIONIS. -->
-      <option>ACUIMIX</option> <!-- Opción de medicamento: ACUIMIX. -->
-    </select>
+<form class="dar-medicamento-container" (ngSubmit)="darTratamiento()"> 
+  <div class="infoadd-itemMedicamento">
+    <small class="info-title">Seleccionar Medicamentos:</small>
+    <select multiple [(ngModel)]="medicamentosSeleccionados" name="medicamentos" class="inputadd-text" required>
+      <option *ngFor="let medicamento of medicamentos" [value]="medicamento.id">
+        {{ medicamento.nombre }}
+      </option>
+    </select>    
   </div>
-  <div class="infoadd-itemCantidad"> <!-- Sección para ingresar la cantidad del medicamento. -->
-      <small class="info-title">Cantidad:</small> <!-- Etiqueta que indica el campo de cantidad. -->
-      <input name="cantidad" type="number" class="inputadd-text" id="cantidad" placeholder="Ingresa la cantidad" required min="1" onkeydown="return false"> <!-- Campo de entrada para la cantidad; es un campo obligatorio, solo permite números y no permite valores menores a 1. -->
+
+  <div class="infoadd-itemCantidad">
+    <small class="info-title">Cantidad:</small>
+    <input [(ngModel)]="cantidad" name="cantidad" type="number" class="inputadd-text" 
+           placeholder="Ingresa la cantidad" required min="1" onkeydown="return false">
   </div>
+
   <div class="infoadd-itemCedula">
-    <small class="info-title">C.C. Vet:</small> <!-- Etiqueta que indica el campo para la Cédula del vet. -->
-    <input name="cc" class="inputadd-text" id="url" placeholder="Ingresa la cédula" required>
+    <small class="info-title">C.C. Vet:</small>
+    <input 
+      name="cc" 
+      class="inputadd-text" 
+      id="ccVet" 
+      placeholder="Ingresa la cédula"
+      [value]="cedulaVet" 
+      [readonly]="userType === 'vet'" 
+      [disabled]="userType === 'vet'"
+      [(ngModel)]="cedulaVet" 
+      required>
   </div>
-  <button type="submit" class="dar-button">Dar Medicamento</button> <!-- Botón para enviar el formulario y dar el medicamento. -->
+
+  <button type="submit" class="dar-button">Dar Medicamento</button>
 </form>

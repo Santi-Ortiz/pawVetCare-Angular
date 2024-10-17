@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { Tratamiento } from '../model/tratamiento';
+import { Medicamento } from '../model/medicamento';
 
 @Injectable({
     providedIn: 'root'
@@ -19,4 +20,10 @@ export class TratamientoService {
     obtenerTop3Tratamientos(): Observable<Tratamiento[]>{
         return this.http.get<Tratamiento[]>(`${this.apiUrl}/top3`);	
     }
+    
+    darTratamiento(data: any): Observable<any> {
+        // Enviar los datos individuales al backend
+        return this.http.post(`${this.apiUrl}/dar`, data);
+      }
+      
 }
