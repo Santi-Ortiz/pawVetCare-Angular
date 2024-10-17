@@ -40,9 +40,21 @@ export class AuthService {
   }
 
   //Login Cliente
-   loginCliente(id: string): Observable<any> {
-    const params = new HttpParams().set('id', id);
-    return this.http.post(`${this.apiUrl}/cliente`, null, { params });
+  //  loginCliente(id: string): Observable<any> {
+  //   const params = new HttpParams().set('id', id);
+  //   return this.http.post(`${this.apiUrl}/cliente`, null, { params });
+  // }
+  loginCliente(id: number): Observable<any> {
+    
+    const url = `${this.apiUrl}/cliente?id=${id}`;
+    return this.http.post(url, {}).pipe(
+      tap((response: any) => {
+        // Guardamos el rol y el ID del usuario en localStorage o en una variable compartida
+        localStorage.setItem('userRole', 'cliente');
+        localStorage.setItem('userId', response.cedula);
+        this.currentUser = response;
+      })
+    );
   }
   
   setUserRole(role: string): void {
