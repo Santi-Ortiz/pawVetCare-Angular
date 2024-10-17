@@ -1,7 +1,7 @@
-<div class="carrusel-container" *ngIf="medicamentos.length > 0">
+<div class="carrusel-container" *ngIf="top3Tratamientos.length > 0">
     <!-- Contenedor del carrusel, solo se muestra si hay medicamentos disponibles -->
     
-    <button class="carrusel-prev" (click)="cambiarMedicamento(-1)">
+    <button class="carrusel-prev" (click)="cambiarTratamiento(-1)">
         <!-- Botón para cambiar al medicamento anterior -->
         <img src="../assets/previous.png" alt="Regreso"> <!-- Icono para regresar -->
     </button>
@@ -10,7 +10,7 @@
         <!-- Contenedor principal del carrusel que alberga los medicamentos -->
         
         <div class="medicamento-item" 
-             *ngFor="let medicamento of medicamentos; let i = index" 
+             *ngFor="let tratamiento of top3Tratamientos; let i = index" 
              [ngStyle]="{'display': i === index ? 'block' : 'none'}">
             <!-- Se utiliza *ngFor para iterar sobre el array de medicamentos -->
             <!-- Solo el medicamento cuyo índice coincida con 'index' se mostrará -->
@@ -20,38 +20,38 @@
                 
                 <div class="info-itemNombre">
                     <small class="info-title">Nombre:</small>
-                    <label class="info-label">{{ medicamento.nombre }}</label>
+                    <label class="info-label">{{ tratamiento.cedula }}</label>
                     <!-- Muestra el nombre del medicamento -->
                 </div>
                 
                 <div class="info-itemPrecioVenta">
                     <small class="info-title">P. venta:</small>
-                    <label class="info-label">{{ medicamento.precio_venta }}</label>
+                    <label class="info-label">{{ tratamiento.fecha }}</label>
                     <!-- Muestra el precio de venta del medicamento -->
                 </div>
-                
+<!--                 
                 <div class="info-itemPrecioCompra">
                     <small class="info-title">P. compra:</small>
-                    <label class="info-label">{{ medicamento.precio_compra }}</label>
-                    <!-- Muestra el precio de compra del medicamento -->
+                    <label class="info-label">{{ tratamiento.precio_compra }}</label>
+                    
                 </div>
                 
                 <div class="info-itemUnidadesDisponibles">
                     <small class="info-title">Uni. Disp.:</small>
-                    <label class="info-label">{{ medicamento.unidades_disponibles }}</label>
+                    <label class="info-label">{{ tratamiento.unidades_disponibles }}</label>
                    
                 </div>
                 
                 <div class="info-itemUnidadesVendidas">
                     <small class="info-title">Uni. Vend.:</small>
-                    <label class="info-label">{{ medicamento.unidades_vendidas }}</label>
+                    <label class="info-label">{{ tratamiento.unidades_vendidas }}</label>
                     
-                </div> 
+                </div>  -->
             </div>
         </div>
     </div>
     
-    <button class="carrusel-next" (click)="cambiarMedicamento(1)">
+    <button class="carrusel-next" (click)="cambiarTratamiento(1)">
         <!-- Botón para cambiar al siguiente medicamento -->
         <img src="assets/next.png" alt="Siguiente"> <!-- Icono para avanzar -->
     </button>

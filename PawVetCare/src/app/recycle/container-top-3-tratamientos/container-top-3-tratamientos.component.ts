@@ -2,8 +2,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core'; // Importa los
 import { Router } from '@angular/router'; // Importa el servicio Router para la navegación
 import { Mascota } from 'src/app/model/mascota'; // Importa la clase Mascota desde el modelo
 import { Medicamento } from 'src/app/model/medicamento';
+import { Tratamiento } from 'src/app/model/tratamiento';
 import { MascotasService } from 'src/app/services/mascotas.service'; // Importa el servicio de mascotas
 import { MedicamentoService } from 'src/app/services/medicamento.service';
+import { TratamientoService } from 'src/app/services/tratamiento.service';
 
 @Component({
   selector: 'app-container-top-3-tratamientos', // Selector del componente
@@ -15,29 +17,22 @@ export class ContainerTop3TratamientosComponent {
   mascotaId: number | undefined; // ID de la mascota seleccionada
   index = 0; // Índice inicial para el carrusel
   intervalId: any; // Variable para almacenar el identificador del intervalo del carrusel
-  medicamentos: Medicamento[] = []; // Arreglo que almacenará los medicamentos
+  // medicamentos: Medicamento[] = []; // Arreglo que almacenará los medicamentos
+  top3Tratamientos: Tratamiento[] = [];
 
-  // Inicializamos un nuevo objeto 'Medicamento'
-  nuevoMedicamento: Medicamento = {
-    id: 0,
-    nombre: '',
-    precio_venta: 0,
-    precio_compra: 0,
-    unidades_disponibles: 0,
-    unidades_vendidas: 0
-  }
+  
 
   // Accedemos al carrusel en la plantilla HTML mediante ViewChild
   @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
 
   // Inyectamos los servicios necesarios para obtener medicamentos y la navegación
-  constructor(private medicamentoService: MedicamentoService, private router: Router) {} 
+  constructor(private tratamientoService: TratamientoService, private router: Router) {} 
 
   // ngOnInit se ejecuta al inicializar el componente
   ngOnInit(): void {
     // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
-    this.medicamentoService.obtenerTodosMedicamentos().subscribe((medicamentos: Medicamento[]) => {
-      this.medicamentos = medicamentos; // Asignamos los medicamentos obtenidos
+    this.tratamientoService.obtenerTop3Tratamientos().subscribe((top3Tratamientos: Tratamiento[]) => {
+      this.top3Tratamientos = top3Tratamientos; // Asignamos los medicamentos obtenidos
     });
 
     // Activamos el movimiento automático del carrusel
@@ -54,9 +49,9 @@ export class ContainerTop3TratamientosComponent {
 
   // Método para cambiar de medicamento en el carrusel
   cambiarMedicamento(direccion: number): void {
-    const totalMedicamentos = this.medicamentos.length; // Número total de medicamentos en el carrusel
+    const totalTratamientos = this.top3Tratamientos.length; // Número total de medicamentos en el carrusel
     // Cambiamos el índice basado en la dirección (1 para siguiente, -1 para anterior)
-    this.index = (this.index + direccion + totalMedicamentos) % totalMedicamentos; 
+    this.index = (this.index + direccion + totalTratamientos) % totalTratamientos; 
     console.log(`Mostrando medicamento en índice: ${this.index}`); // Registro del índice actual
 
     // Cambiamos la posición del carrusel usando transformaciones de estilo
@@ -70,21 +65,21 @@ export class ContainerTop3TratamientosComponent {
     this.intervalId = setInterval(() => this.cambiarMedicamento(1), 6000); // Cambia al siguiente medicamento cada 6 segundos
   }
 
-  // Método para buscar un medicamento por ID
-  buscarMedicamento(medicamentoId: number | undefined): void {
-    const id = Number(medicamentoId); // Convertimos el ID a número
-    if (!id) {
-      return; // Si no hay ID válido, salimos de la función
-    }
+  // // Método para buscar un medicamento por ID
+  // buscarTratamiento(medicamentoId: number | undefined): void {
+  //   const id = Number(medicamentoId); // Convertimos el ID a número
+  //   if (!id) {
+  //     return; // Si no hay ID válido, salimos de la función
+  //   }
 
-    // Obtenemos el medicamento por su ID
-    const medicamento = this.medicamentoService.obtenerMedicamentoPorId(id);
-    if (medicamento) {
-      // Si se encuentra el medicamento, navegamos a su página de detalles
-      this.router.navigate(['/medicamento', id]);
-    } else {
-      // Si no se encuentra, mostramos una alerta
-      alert(`Medicamento con ID ${id} no encontrado`);
-    }
-  }
+  //   // Obtenemos el medicamento por su ID
+  //   const medicamento = this.medicamentoService.obtenerMedicamentoPorId(id);
+  //   if (medicamento) {
+  //     // Si se encuentra el medicamento, navegamos a su página de detalles
+  //     this.router.navigate(['/medicamento', id]);
+  //   } else {
+  //     // Si no se encuentra, mostramos una alerta
+  //     alert(`Medicamento con ID ${id} no encontrado`);
+  //   }
+  // }
 }
