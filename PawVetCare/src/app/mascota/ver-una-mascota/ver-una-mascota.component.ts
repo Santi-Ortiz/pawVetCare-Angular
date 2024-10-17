@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MascotasService } from '../../services/mascotas.service';
 import { Mascota } from '../../model/mascota';
 import { AuthService } from 'src/app/services/auth.service';
+import { Medicamento } from 'src/app/model/medicamento';
+import { MedicamentoService } from 'src/app/services/medicamento.service';
 
 @Component({
   selector: 'app-ver-una-mascota',
@@ -14,6 +16,7 @@ export class VerUnaMascotaComponent implements OnInit {
 
   // Define el tipo de usuario actual
   userType: string | null | undefined;
+  medicamentos: Medicamento[] = []; // Arreglo que almacenará los medicamentos
 
   // Formulario para manejar la edición de la información de la mascota
   mascotaForm: FormGroup;
@@ -33,7 +36,13 @@ export class VerUnaMascotaComponent implements OnInit {
     tratamientos: [],
   }
 
+  // Accedemos al carrusel en la plantilla HTML mediante ViewChild
+  @ViewChild('carrusel', { static: true }) carrusel: ElementRef | undefined;
+
+  // Inyectamos los servicios necesarios para obtener medicamentos y la navegación
   constructor(
+    private medicamentoService: MedicamentoService, 
+  
     private fb: FormBuilder,  // Inyecta el servicio FormBuilder para manejar formularios
     private route: ActivatedRoute, // Inyecta la ruta activa para obtener parámetros de la URL
     private router: Router,  // Inyecta el enrutador para redirigir a otras páginas
@@ -60,6 +69,11 @@ export class VerUnaMascotaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
+    this.medicamentoService.obtenerTodosMedicamentos().subscribe((medicamentos: Medicamento[]) => {
+      this.medicamentos = medicamentos; // Asignamos los medicamentos obtenidos
+    });
+
     // Obtiene el rol del usuario actual (admin, vet o cliente)
     this.userType = this.authService.getUserRole(); 
     

@@ -62,6 +62,7 @@ import { ContainerGananciasTotalesComponent } from './recycle/container-ganancia
 import { ContainerTop3TratamientosComponent } from './recycle/container-top-3-tratamientos/container-top-3-tratamientos.component';
 import { CarruselTopMedicamentosComponent } from './recycle/carrusel-top-medicamentos/carrusel-top-medicamentos.component';
 import { FormularioDarTratamientoComponent } from './recycle/formulario-dar-tratamiento/formulario-dar-tratamiento.component';
+import { CarruselHistorialComponent } from './recycle/carrusel-historial/carrusel-historial.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,8 @@ import { FormularioDarTratamientoComponent } from './recycle/formulario-dar-trat
     ContainerGananciasTotalesComponent,
     ContainerTop3TratamientosComponent,
     CarruselTopMedicamentosComponent,
-    FormularioDarTratamientoComponent
+    FormularioDarTratamientoComponent,
+    CarruselHistorialComponent
   ],
   imports: [
     HttpClientModule,

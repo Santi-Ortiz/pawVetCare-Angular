@@ -10,7 +10,7 @@ html, body {
 }
 .content {
     flex: 1;
-    padding-bottom: 120px;
+    padding-bottom: 320px;
 }
 
 .primerTitulo {
@@ -46,6 +46,21 @@ html, body {
 .tercerTitulo {
     position: absolute; 
     top: 640px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842;
+}
+
+.cuartoTitulo {
+    position: absolute; 
+    top: 920px; 
     left: 85px;
     width: 1190px; 
     height: 252px; 
