@@ -119,20 +119,21 @@ export class VerMascotasComponent {
     this.intervalId = setInterval(() => this.cambiarMascota(1), 6000); // Cambia la mascota cada 6 segundos
   }
 
-  buscarMascota(mascotaName: string): void {
-    this.mascotasService.obtenerMascotaPorNombre(mascotaName).subscribe(
-      (mascota) => {
-        if (mascota) {
-          // Redirige a la página de detalles de la mascota si se encuentra
-          this.router.navigate(['/mascota', mascota.id]);
-        } else {
-          console.log('Mascota no encontrada');
+  buscarMascotas(): void {
+    if (this.mascotaName.trim()) {
+      this.mascotasService.buscarMascotasPorNombre(this.mascotaName).subscribe(
+        (response) => {
+          console.log('Mascotas encontradas:', response);
+          this.mascotas = response;
+        },
+        (error) => {
+          console.error('Error al buscar mascotas:', error);
+          alert('No se encontraron mascotas con ese nombre.');
         }
-      },
-      (error) => {
-        console.error('Error al buscar la mascota:', error);
-      }
-    );
+      );
+    } else {
+      alert('Por favor, ingrese un nombre para buscar.');
+    }
   }
 
   // Método para agregar una nueva mascota

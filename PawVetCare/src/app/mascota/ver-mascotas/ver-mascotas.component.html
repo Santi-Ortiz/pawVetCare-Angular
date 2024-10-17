@@ -19,10 +19,17 @@
   <p class="segundoTitulo">Aquí están todas las mascotas:</p>
 
     <!-- Búsqueda por ID, se oculta para cliente -->
-    <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascota(mascotaName)" class="buscador-form">
-      <input [(ngModel)]="mascotaName" name="mascotaName" class="buscador-input" placeholder="Buscar por nombre" required>
-      <button type="submit" class="buscador-button">Buscar</button>
+  <form *ngIf="userType !== 'cliente'" (ngSubmit)="buscarMascotas()" class="buscador-form">
+    <input
+      type="text"
+      [(ngModel)]="mascotaName"
+      placeholder="Buscar mascota por nombre" required
+      class="buscador-input" 
+      name="nombreMascota"
+    />
+    <button type="submit" class="buscador-button">Buscar</button>
   </form>
+    
   
     <!-- Enlace para ver todas las mascotas -->
     <a routerLink="/mascotas/todas" class="todas-button">+ Ver todas las mascotas</a>

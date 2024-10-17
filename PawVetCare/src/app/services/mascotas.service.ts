@@ -32,9 +32,9 @@ export class MascotasService {
     return this.http.get<Mascota>(`${this.apiUrl}/find/${id}`);
   }
 
-  // Obtener una mascota por nombre
-  obtenerMascotaPorNombre(nombre: string): Observable<Mascota> {
-    return this.http.get<Mascota>(`${this.apiUrl}/find/${nombre}`);
+  // Obtener mascotas por nombre
+  buscarMascotasPorNombre(nombre: string): Observable<Mascota[]> {
+    return this.http.get<Mascota[]>(`${this.apiUrl}/find/nom/${nombre}`);
   }
 
   // Agregar nueva mascota (Administrador)
