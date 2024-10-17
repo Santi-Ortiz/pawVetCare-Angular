@@ -5,11 +5,11 @@
   <form (ngSubmit)="loginCliente()" #loginForm="ngForm"> <!-- Formulario que se enviará al hacer clic en el botón de envío, llama a loginCliente() -->
     <div class="form-group"> <!-- Grupo de formulario para la cédula -->
       <label for="id">Cédula</label> <!-- Etiqueta que indica el propósito del campo de entrada -->
-      <input type="text" id="id" name="id" [(ngModel)]="id" placeholder="Ej. 101234567" required> <!-- Campo de entrada para la cédula, vinculado al modelo -->
+      <input type="text" id="cedula" name="cedula" [(ngModel)]="cedula" placeholder="Ej. 101234567" required> <!-- Campo de entrada para la cédula, vinculado al modelo -->
     </div>
     
     <div class="form-group"> <!-- Grupo de formulario para el botón de envío -->
-      <input type="submit" value="Ver mis mascotas"> <!-- Botón de envío que, al hacer clic, envía el formulario -->
+      <input type="submit" value="Ver mis mascotas" [disabled]="!loginForm.form.valid"> <!-- Botón de envío que, al hacer clic, envía el formulario -->
     </div>
   </form>
 </div>

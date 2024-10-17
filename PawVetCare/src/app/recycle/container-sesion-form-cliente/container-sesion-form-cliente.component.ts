@@ -9,24 +9,24 @@ import { AuthService } from 'src/app/services/auth.service'; // Importa el servi
   styleUrls: ['./container-sesion-form-cliente.component.css'] // Ruta al archivo de estilos CSS del componente
 })
 export class ContainerSesionFormClienteComponent {
-  id: string = ''; // Cédula del cliente, inicializada como una cadena vacía
-
+  // id: string = ''; // Cédula del cliente, inicializada como una cadena vacía
+  cedula: number | any; // Cédula del cliente, inicializada como 0
   // Constructor que inyecta AuthService y Router
   constructor(private authService: AuthService, private router: Router) {}
 
   // Método para manejar el inicio de sesión del cliente
   loginCliente(): void {
     // Llama al método loginCliente del servicio de autenticación
-    this.authService.loginCliente(this.id).subscribe(
+    this.authService.loginCliente(this.cedula).subscribe(
       response => {
         console.log('Inicio de sesión exitoso', response); // Log del éxito del inicio de sesión
-        this.authService.setUserId(response.cedula); // Guarda el ID del cliente en el servicio de autenticación
+        // this.authService.setUserId(response.cedula); // Guarda el ID del cliente en el servicio de autenticación
         this.authService.setUserRole('cliente'); // Establece el rol del usuario como 'cliente'
         this.router.navigate(['/mascotas']); // Redirige al cliente a la página de mascotas
       },
       error => {
         console.error('Error de inicio de sesión', error); // Log del error de inicio de sesión
-        alert('Error de inicio de sesión: ' + error.error); // Muestra un mensaje de error al usuario
+        alert('Credenciales incorrectas'); // Muestra un mensaje de error al usuario
       }
     );
   }
