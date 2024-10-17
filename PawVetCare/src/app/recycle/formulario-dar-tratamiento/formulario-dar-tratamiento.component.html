@@ -1,8 +1,8 @@
 <form class="dar-medicamento-container" (ngSubmit)="darTratamiento()"> 
   <div class="infoadd-itemMedicamento">
     <small class="info-title">Seleccionar Medicamentos:</small>
-    <select select [(ngModel)]="medicamentosSeleccionados" name="medicamentos" class="inputadd-text" required>
-      <option value="" disabled selected>Selecciona uno</option>
+    <select multiple [(ngModel)]="medicamentosSeleccionados" name="medicamentos" class="inputadd-text" required>
+      <!-- <option value="" disabled selected>Selecciona uno</option> -->
       <option *ngFor="let medicamento of medicamentos" [value]="medicamento.id">
         {{ medicamento.nombre }}
       </option>
