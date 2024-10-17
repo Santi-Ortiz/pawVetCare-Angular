@@ -22,10 +22,14 @@
   <!-- Títulos adicionales para todos los usuarios -->
   <p class="segundoTitulo">Aquí está la información de la mascota:</p>
   <p class="tercerTitulo">Dar tratamiento:</p>
+  <p class="cuartoTitulo">Mira la historía clínica:</p>
 
   <!-- Componente que muestra la información de la mascota y el formulario de edición si está en modo de edición -->
   <app-informacion-mascota [mascotaForm]="mascotaForm" [mascota]="mascota" [isEditMode]="isEditMode"></app-informacion-mascota>
 
   <!-- Formulario para dar tratamiento, visible solo si el usuario no es cliente -->
   <app-formulario-dar-tratamiento *ngIf="userType !== 'cliente'"></app-formulario-dar-tratamiento>
+
+  <!-- Carrusel que muestra los medicamentos, pasando la variable 'medicamentos' como input -->
+  <app-carrusel-historial [medicamentos]="medicamentos"></app-carrusel-historial>
 </section>
