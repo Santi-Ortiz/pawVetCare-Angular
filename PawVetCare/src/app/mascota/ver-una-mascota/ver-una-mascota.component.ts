@@ -70,22 +70,26 @@ export class VerUnaMascotaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+     // Obtiene el ID de la mascota desde la URL
+     const id = Number(this.route.snapshot.paramMap.get('id'));
+  
+     // Si no hay un ID válido, muestra una alerta
+     if (!id) {
+       alert('ID de mascota inválido.');
+       return;
+     }
+     
     // Obtenemos todos los medicamentos y los asignamos al arreglo 'medicamentos'
-    this.mascotaService.obtenerTratamientosPorMascotaId(this.mascota.id).subscribe((tratamientos: Tratamiento[]) => {
+    this.mascotaService.obtenerTratamientosPorMascotaId(id).subscribe((tratamientos: Tratamiento[]) => {
       this.tratamientos = tratamientos; // Asignamos los medicamentos obtenidos
+      console.log(id);
+      console.log(tratamientos);
     });
 
     // Obtiene el rol del usuario actual (admin, vet o cliente)
     this.userType = this.authService.getUserRole(); 
     
-    // Obtiene el ID de la mascota desde la URL
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-  
-    // Si no hay un ID válido, muestra una alerta
-    if (!id) {
-      alert('ID de mascota inválido.');
-      return;
-    }
+   
   
     // Llama al servicio para obtener los detalles de la mascota por ID
     this.mascotasService.obtenerMascotaPorId(id).subscribe(

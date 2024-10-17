@@ -1,6 +1,12 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Medicamento } from 'src/app/model/medicamento';
 import { Tratamiento } from 'src/app/model/tratamiento';
+import { AuthService } from 'src/app/services/auth.service';
+import { MascotasService } from 'src/app/services/mascotas.service';
+import { MedicamentoService } from 'src/app/services/medicamento.service';
+import { VeterinarioService } from 'src/app/services/vet.service';
 
 @Component({
   selector: 'app-carrusel-historial',
@@ -17,9 +23,23 @@ export class CarruselHistorialComponent {
   index = 0; // Índice actual del medicamento que se muestra en el carrusel.
   intervalId: any; // ID del intervalo para poder limpiar el intervalo al destruir el componente.
 
+  constructor(
+    private mascotaService: MascotasService, 
+  
+    private fb: FormBuilder,  // Inyecta el servicio FormBuilder para manejar formularios
+    private route: ActivatedRoute, // Inyecta la ruta activa para obtener parámetros de la URL
+    private router: Router,  // Inyecta el enrutador para redirigir a otras páginas
+    private mascotasService: MascotasService, 
+    private veterinarioService: VeterinarioService, 
+    private medicamentoService: MedicamentoService, 
+    private authService: AuthService,  // Inyecta el servicio de autenticación para obtener el rol del usuario
+  ) {}
+
   ngOnInit(): void {
     // Método del ciclo de vida que se ejecuta al inicializar el componente.
     this.autoMoverCarrusel(); // Llama al método para iniciar el movimiento automático del carrusel.
+    const medicamentoName = this.medicamentoService.obtenerMedicamentoPorId(this.tratamientos[0].id);
+    const veterinarioName = this.veterinarioService.getVeterinarioById(this.tratamientos[0].id);
   }
 
   ngOnDestroy(): void {

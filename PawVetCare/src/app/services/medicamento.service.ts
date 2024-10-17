@@ -41,4 +41,5 @@ export class MedicamentoService {
     obtenerCostosTotales(): Observable<number>{
         return this.http.get<number>(`${this.apiUrl}/costos-totales`);
     }
+
 }
