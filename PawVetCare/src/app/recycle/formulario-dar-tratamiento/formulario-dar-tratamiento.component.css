@@ -35,7 +35,7 @@
 .infoadd-itemMedicamento {
     position: absolute;
     left: 40px;
-    width: 700px;
+    width: 360px;
     top:40px;
     flex-direction: column;
     background-color: #F3F4F6;
@@ -48,6 +48,19 @@
 .infoadd-itemCantidad {
     position: absolute;
     left: 790px;
+    width: 300px;
+    top:40px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemCedula {
+    position: absolute;
+    left: 445px;
     width: 300px;
     top:40px;
     flex-direction: column;
