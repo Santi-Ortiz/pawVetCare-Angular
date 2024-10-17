@@ -5,6 +5,7 @@ import { MascotasService } from '../../services/mascotas.service';
 import { ClienteService } from '../../services/cliente.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cliente } from 'src/app/model/cliente';
+import { DataShareService } from 'src/app/services/data-share.service';
 
 @Component({
   selector: 'app-ver-mascotas', // Define el selector que se utilizará en el HTML para este componente
@@ -42,7 +43,8 @@ export class VerMascotasComponent {
     private mascotasService: MascotasService, // Servicio para obtener y gestionar mascotas
     private router: Router, // Servicio de enrutamiento para navegar entre páginas
     private authService: AuthService, // Servicio de autenticación para obtener información del usuario
-    private clienteService: ClienteService // Servicio para obtener información del cliente
+    private clienteService: ClienteService,
+    private dataShareService: DataShareService, 
   ) {}
 
   // Método que se ejecuta al inicializar el componente
@@ -122,9 +124,12 @@ export class VerMascotasComponent {
   buscarMascotas(): void {
     if (this.mascotaName.trim()) {
       this.mascotasService.buscarMascotasPorNombre(this.mascotaName).subscribe(
-        (response) => {
+        (response: Mascota[]) => {
           console.log('Mascotas encontradas:', response);
-          this.mascotas = response;
+          // Guarda las mascotas en el servicio compartido con la bandera de búsqueda activa
+          this.dataShareService.setMascotas(response, true);
+          // Navega al componente de paginación
+          this.router.navigate(['/mascotas/todas']);
         },
         (error) => {
           console.error('Error al buscar mascotas:', error);
@@ -135,6 +140,7 @@ export class VerMascotasComponent {
       alert('Por favor, ingrese un nombre para buscar.');
     }
   }
+  
 
   // Método para agregar una nueva mascota
   agregarMascota(): void {
