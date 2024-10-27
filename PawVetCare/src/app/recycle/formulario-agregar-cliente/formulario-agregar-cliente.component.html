@@ -1,6 +1,6 @@
-<form (ngSubmit)="agregarMascota()" class="agregar-container"> <!-- Formulario para agregar un nuevo cliente -->
-    <div class="infoadd-itemNombre"> <!-- Contenedor para el campo de nombre -->
-        <small class="info-title">Nombre:</small> <!-- Etiqueta para el campo de nombre -->
+<form #clienteForm="ngForm" (ngSubmit)="agregarCliente(clienteForm)" class="agregar-container">
+    <div class="infoadd-itemNombre">
+        <small class="info-title">Nombre:</small>
         <input 
             [(ngModel)]="nuevoCliente.nombre"
             name="nombre"
@@ -8,10 +8,14 @@
             id="nombre" 
             placeholder="Ingresa el nombre" 
             required 
+            #nombre="ngModel"
         >
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error">
+            El nombre es requerido.
+        </div>
     </div>
-    <div class="infoadd-itemCedula"> <!-- Contenedor para el campo de cédula -->
-        <small class="info-title">Cédula:</small> <!-- Etiqueta para el campo de cédula -->
+    <div class="infoadd-itemCedula">
+        <small class="info-title">Cédula:</small>
         <input 
             [(ngModel)]="nuevoCliente.cedula" 
             name="cedula" 
@@ -20,10 +24,14 @@
             id="cedula" 
             placeholder="Ingresa la cédula" 
             required
+            #cedula="ngModel"
         >
+        <div *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)" class="error">
+            La cédula es requerida.
+        </div>
     </div>
-    <div class="infoadd-itemCorreo"> <!-- Contenedor para el campo de correo -->
-        <small class="info-title">Correo:</small> <!-- Etiqueta para el campo de correo -->
+    <div class="infoadd-itemCorreo">
+        <small class="info-title">Correo:</small>
         <input 
             [(ngModel)]="nuevoCliente.correo"
             name="correo" 
@@ -32,10 +40,14 @@
             id="correo"  
             placeholder="Ingresa el correo"  
             required  
+            #correo="ngModel"
         >
+        <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="error">
+            El correo es requerido y debe ser válido.
+        </div>
     </div>
-    <div class="infoadd-itemCelular"> <!-- Contenedor para el campo de celular -->
-        <small class="info-title">Celular:</small> <!-- Etiqueta para el campo de celular -->
+    <div class="infoadd-itemCelular">
+        <small class="info-title">Celular:</small>
         <input 
             [(ngModel)]="nuevoCliente.celular"
             name="celular"
@@ -44,7 +56,11 @@
             id="celular"
             placeholder="Ingresa el celular"
             required
+            #celular="ngModel"
         >
+        <div *ngIf="celular.invalid && (celular.dirty || celular.touched)" class="error">
+            El celular es requerido.
+        </div>
     </div>
-    <button type="submit" class="agregar-button">Agregar Cliente</button> <!-- Botón para enviar el formulario -->
+    <button type="submit" class="agregar-button" [disabled]="clienteForm.invalid">Agregar Cliente</button>
 </form>
