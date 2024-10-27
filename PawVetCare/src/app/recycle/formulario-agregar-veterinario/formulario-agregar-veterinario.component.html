@@ -1,45 +1,54 @@
-<form (ngSubmit)="agregarVeterinario()" class="agregar-container">
-  <!-- Se define un formulario que, al ser enviado, ejecuta el método agregarVeterinario. La clase 'agregar-container' se utiliza para aplicar estilos específicos. -->
-  
+<form #veterinarioForm="ngForm" (ngSubmit)="agregarVeterinario(veterinarioForm)" class="agregar-container">
   <div class="infoadd-itemNombre">
-    <small class="info-title">Nombre:</small> <!-- Etiqueta que indica el campo para el nombre del veterinario. -->
-    <input [(ngModel)]="nuevoVeterinario.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
-    <!-- Campo de entrada para el nombre del veterinario. Se usa ngModel para enlazar el valor del input con la propiedad 'nombre' del objeto 'nuevoVeterinario'. -->
+    <small class="info-title">Nombre:</small>
+    <input [(ngModel)]="nuevoVeterinario.nombre" name="nombre" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required #nombre="ngModel">
+    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error">
+      El nombre es requerido.
+    </div>
   </div>
   
   <div class="infoadd-itemEspecialidad">
-    <small class="info-title">Especialidad:</small> <!-- Etiqueta que indica el campo para la nombreEspecialidad del veterinario. -->
-    <input [(ngModel)]="nuevoVeterinario.nombreEspecialidad" name="nombreEspecialidad" class="inputadd-text" id="nombreEspecialidad" placeholder="Ingresa la nombreEspecialidad" required>
-    <!-- Campo de entrada para la nombreEspecialidad. Se enlaza con 'nuevoVeterinario.nombreEspecialidad.id', que representa la nombreEspecialidad seleccionada. -->
+    <small class="info-title">Especialidad:</small>
+    <input [(ngModel)]="nuevoVeterinario.nombreEspecialidad" name="nombreEspecialidad" class="inputadd-text" id="nombreEspecialidad" placeholder="Ingresa la especialidad" required #nombreEspecialidad="ngModel">
+    <div *ngIf="nombreEspecialidad.invalid && (nombreEspecialidad.dirty || nombreEspecialidad.touched)" class="error">
+      La especialidad es requerida.
+    </div>
   </div>
   
   <div class="infoadd-itemCedula">
-    <small class="info-title">Cédula:</small> <!-- Etiqueta que indica el campo para la cédula del veterinario. -->
-    <input [(ngModel)]="nuevoVeterinario.cedula" name="cedula" type="number" class="inputadd-text" id="cedula" placeholder="Ingresa la cédula" required>
-    <!-- Campo de entrada para la cédula del veterinario, definido como tipo 'number' para restringir la entrada a números. -->
+    <small class="info-title">Cédula:</small>
+    <input [(ngModel)]="nuevoVeterinario.cedula" name="cedula" type="number" class="inputadd-text" id="cedula" placeholder="Ingresa la cédula" required #cedula="ngModel">
+    <div *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)" class="error">
+      La cédula es requerida.
+    </div>
   </div>
   
   <div class="infoadd-itemContraseña">
-    <small class="info-title">Contraseña:</small> <!-- Etiqueta que indica el campo para la contraseña. -->
-    <input [(ngModel)]="nuevoVeterinario.contrasena" name="contraseña" class="inputadd-text" id="contrasena" placeholder="Ingresa la contraseña" required>
-    <!-- Campo de entrada para la contraseña, enlazado con 'nuevoVeterinario.contrasena'. -->
+    <small class="info-title">Contraseña:</small>
+    <input [(ngModel)]="nuevoVeterinario.contrasena" name="contrasena" class="inputadd-text" id="contrasena" placeholder="Ingresa la contraseña" required #contrasena="ngModel">
+    <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
+      La contraseña es requerida.
+    </div>
   </div>
   
   <div class="infoadd-itemEstado">
-    <small class="info-title">Estado:</small> <!-- Etiqueta que indica el campo para el estado del veterinario. -->
-    <select [(ngModel)]="nuevoVeterinario.estado" name="estado" class="inputadd-text" required>
-      <!-- Select para elegir el estado (Activo/Inactivo) del veterinario. -->
-      <option [value]="true">Activo</option> <!-- Opción para estado activo. -->
-      <option [value]="false">Inactivo</option> <!-- Opción para estado inactivo. -->
+    <small class="info-title">Estado:</small>
+    <select [(ngModel)]="nuevoVeterinario.estado" name="estado" class="inputadd-text" required #estado="ngModel">
+      <option [value]="true">Activo</option>
+      <option [value]="false">Inactivo</option>
     </select>
+    <div *ngIf="estado.invalid && (estado.dirty || estado.touched)" class="error">
+      El estado es requerido.
+    </div>
   </div>
   
   <div class="infoadd-itemURL">
-    <small class="info-title">URL:</small> <!-- Etiqueta que indica el campo para la URL de la foto de perfil. -->
-    <input [(ngModel)]="nuevoVeterinario.foto" name="url" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto de perfil" required>
-    <!-- Campo de entrada para la URL de la foto de perfil del veterinario, enlazado con 'nuevoVeterinario.foto'. -->
+    <small class="info-title">URL:</small>
+    <input [(ngModel)]="nuevoVeterinario.foto" name="url" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto de perfil" required #url="ngModel">
+    <div *ngIf="url.invalid && (url.dirty || url.touched)" class="error">
+      La URL de la foto es requerida.
+    </div>
   </div>
   
-  <button type="submit" class="agregar-button">Agregar Veterinario</button>
-  <!-- Botón para enviar el formulario. Al hacer clic, se ejecutará la acción de agregar el veterinario. -->
+  <button type="submit" class="agregar-button" [disabled]="veterinarioForm.invalid">Agregar Veterinario</button>
 </form>
