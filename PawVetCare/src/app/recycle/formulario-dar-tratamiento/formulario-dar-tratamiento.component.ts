@@ -17,7 +17,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class FormularioDarTratamientoComponent implements OnInit {
   medicamentos: Medicamento[] = []; // Lista de medicamentos obtenidos del backend
-  medicamentosSeleccionados: number[] = []; // IDs de los medicamentos seleccionados
+  medicamentoSeleccionado: number | null = null;; // IDs de los medicamentos seleccionados
   cantidad: number = 1; // Cantidad inicial por defecto
   cedulaVet: number | undefined; // Cédula del veterinario que inició sesión
   userType: string | null | undefined;
@@ -57,38 +57,39 @@ export class FormularioDarTratamientoComponent implements OnInit {
   
 
   darTratamiento(): void {
+    if (!this.medicamentoSeleccionado) {
+      alert('Por favor, seleccione un medicamento.');
+      return;
+    }
+
     const mascotaId = Number(this.route.snapshot.paramMap.get('id'));
-  
+
+    // Ya validamos que medicamentoSeleccionado no es null, así que es seguro usarlo
+    const medicamentoId: number = this.medicamentoSeleccionado;
+
     // Obtener el veterinario
     this.veterinarioService.getVeterinarioByCedula(this.cedulaVet!).subscribe(
       (veterinario) => {
         // Obtener la mascota
         this.mascotaService.obtenerMascotaPorId(mascotaId).subscribe(
           (mascota) => {
-            // Verificar medicamentos seleccionados
-            const comprobaciones = this.medicamentosSeleccionados.map((medicamentoId) =>
-              this.medicamentosService.obtenerMedicamentoPorId(medicamentoId).pipe(
-                map((medicamento) => {
-                  if (medicamento.unidades_disponibles < this.cantidad) {
-                    throw new Error(`El medicamento ${medicamento.nombre} no tiene suficientes unidades.`);
-                  }
-                  return medicamento;
-                })
-              )
-            );
-  
-            // Ejecutar las comprobaciones
-            forkJoin(comprobaciones).subscribe(
-              (medicamentos) => {
+            // Verificar el medicamento seleccionado usando el ID validado
+            this.medicamentosService.obtenerMedicamentoPorId(medicamentoId).subscribe(
+              (medicamento) => {
+                if (medicamento.unidades_disponibles < this.cantidad) {
+                  alert(`El medicamento ${medicamento.nombre} no tiene suficientes unidades.`);
+                  return;
+                }
+
                 const data = {
                   mascota: mascota,
                   veterinario: veterinario,
-                  medicamento: medicamentos[0], // Suponiendo que se envía un solo medicamento
+                  medicamento: medicamento,
                   cantidad: this.cantidad,
                 };
-  
+
                 console.log('Datos a enviar:', JSON.stringify(data));
-  
+
                 // Llamar al servicio para enviar los datos
                 this.tratamientoService.darTratamiento(data).subscribe(
                   (response) => {
@@ -102,7 +103,8 @@ export class FormularioDarTratamientoComponent implements OnInit {
                 );
               },
               (error) => {
-                alert(error.message);
+                console.error('Error al obtener el medicamento:', error);
+                alert('Error al obtener la información del medicamento.');
               }
             );
           },

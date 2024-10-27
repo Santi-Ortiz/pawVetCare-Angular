@@ -239,9 +239,22 @@
 
 .info-itemVeterinario {
     position: absolute;
-    width: 490px;
+    width: 250px;
     top: 55px;
     margin-left: 510px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemCantidad {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 800px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
