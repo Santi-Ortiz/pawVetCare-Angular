@@ -18,10 +18,12 @@ export class AuthService {
     const url = `${this.apiUrl}/admin?username=${username}&password=${password}`;
     return this.http.post(url, {}).pipe(
       tap((response: any) => {
-        // Guardamos el rol y el ID del usuario en localStorage o en una variable compartida
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userId', response.id);
-        this.currentUser = response;
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('userRole', 'admin');
+          localStorage.setItem('authToken', token);
+          this.currentUser = response;
+        }
       })
     );
   }
@@ -31,28 +33,28 @@ export class AuthService {
     const url = `${this.apiUrl}/veterinario?cedula=${cedula}&password=${password}`;
     return this.http.post(url, {}).pipe(
       tap((response: any) => {
-        localStorage.setItem('userRole', 'vet');
-        localStorage.setItem('userId', response.cedula); // Guardar la cédula en localStorage
-        this.currentUser = response;
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('userRole', 'vet');
+          localStorage.setItem('authToken', token);
+          this.currentUser = response;
+        }
       })
     );
   }
   
 
-  //Login Cliente
-  //  loginCliente(id: string): Observable<any> {
-  //   const params = new HttpParams().set('id', id);
-  //   return this.http.post(`${this.apiUrl}/cliente`, null, { params });
-  // }
   loginCliente(id: number): Observable<any> {
     
     const url = `${this.apiUrl}/cliente?id=${id}`;
     return this.http.post(url, {}).pipe(
       tap((response: any) => {
-        // Guardamos el rol y el ID del usuario en localStorage o en una variable compartida
-        localStorage.setItem('userRole', 'cliente');
-        localStorage.setItem('userId', response.cedula);
-        this.currentUser = response;
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('userRole', 'cliente');
+          localStorage.setItem('authToken', token);
+          this.currentUser = response;
+        }
       })
     );
   }
@@ -68,8 +70,12 @@ export class AuthService {
 
   // Método para obtener el ID del usuario
   getUserId(): number | null {
-    const id = localStorage.getItem('userId');
-    return id ? Number(id) : null;
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken.idCliente || null; // Suponiendo que la cédula está en el payload del token
+    }
+    return null;
   }
 
   // Método para guardar el userId en el localStorage (opcional)
@@ -82,10 +88,16 @@ export class AuthService {
     return !!localStorage.getItem('userRole');
   }
 
+  private decodeToken(token: string): any {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  }
+
   // Cerrar sesión
   logout(): void {
     localStorage.removeItem('userRole');
     localStorage.removeItem('userId');
+    localStorage.removeItem('authToken');
     this.router.navigate(['/login']);  // Redirigir a la página de login
   }
 }

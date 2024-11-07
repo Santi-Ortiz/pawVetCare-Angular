@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Cliente } from '../model/cliente'; 
 import { Admin } from '../model/admin'; 
 import { Veterinario } from '../model/veterinario'; 
+import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +35,13 @@ export class SesionService {
   }
 
   // Iniciar sesión de administrador
-  loginAdmin(username: string, password: string): Observable<any> {
-    const params = new HttpParams()
-      .set('username', username)
-      .set('password', password);
+  loginAdmin(usuario: Usuario): Observable<String> {
+    // const params = new HttpParams()
+    //   .set('username', username)
+    //   .set('password', password);
   
-    return this.http.post(`${this.apiUrl}/admin`, {}, { params });
+    return this.http.post(`${this.apiUrl}/admin`, usuario, {
+      responseType: 'text'
+    });
   }  
 }

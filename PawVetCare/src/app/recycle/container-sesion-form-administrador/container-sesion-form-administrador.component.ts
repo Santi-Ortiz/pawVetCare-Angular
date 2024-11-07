@@ -18,7 +18,7 @@ export class ContainerSesionFormAdministradorComponent { // Definición de la cl
   // Método para manejar el inicio de sesión del administrador
   loginAdmin(): void { // Método que no retorna ningún valor
     this.authService.loginAdmin(this.admin.username, this.admin.password).subscribe( // Llama al método loginAdmin del servicio de autenticación
-      (response) => { // Callback que se ejecuta si la llamada es exitosa
+      (response) => { 
         console.log('Inicio de sesión exitoso', response); // Muestra en consola que el inicio de sesión fue exitoso
         this.authService.setUserRole('admin'); // Establece el rol del usuario como 'admin' en el servicio de autenticación
         this.router.navigate(['/mascotas']); // Redirige al administrador a la página de mascotas

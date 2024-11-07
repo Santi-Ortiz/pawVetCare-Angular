@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,6 +63,7 @@ import { ContainerTop3TratamientosComponent } from './recycle/container-top-3-tr
 import { CarruselTopMedicamentosComponent } from './recycle/carrusel-top-medicamentos/carrusel-top-medicamentos.component';
 import { FormularioDarTratamientoComponent } from './recycle/formulario-dar-tratamiento/formulario-dar-tratamiento.component';
 import { CarruselHistorialComponent } from './recycle/carrusel-historial/carrusel-historial.component';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,7 +133,11 @@ import { CarruselHistorialComponent } from './recycle/carrusel-historial/carruse
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

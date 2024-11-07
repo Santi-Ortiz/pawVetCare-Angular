@@ -80,7 +80,7 @@ export class VerMascotasComponent {
       );
     } else if (this.userType === 'cliente') {
       // Si el usuario es un cliente, carga las mascotas asociadas a ese cliente
-      const idCliente = this.authService.getUserId(); // Obtiene el ID del cliente autenticado
+      const idCliente = this.authService.getUserId();
 
       if (idCliente !== null) {
         // Verifica que el ID del cliente no sea nulo
