@@ -68,16 +68,6 @@ export class AuthService {
     return localStorage.getItem('userRole');
   }
 
-  // Método para obtener el ID del usuario
-  getUserId(): number | null {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.decodeToken(token);
-      return decodedToken.idCliente || null; // Suponiendo que la cédula está en el payload del token
-    }
-    return null;
-  }
-
   // Método para guardar el userId en el localStorage (opcional)
   setUserId(id: number): void {
     localStorage.setItem('userId', id.toString());
@@ -86,11 +76,6 @@ export class AuthService {
   // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
     return !!localStorage.getItem('userRole');
-  }
-
-  private decodeToken(token: string): any {
-    const payload = token.split('.')[1];
-    return JSON.parse(atob(payload));
   }
 
   // Cerrar sesión
