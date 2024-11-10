@@ -15,6 +15,7 @@ import { DataShareService } from 'src/app/services/data-share.service';
 export class VerMascotasComponent {
 
   userType: string | null | undefined;
+  clienteId: number | null = null;
   cliente: Cliente | undefined;
   mascotaName: string = "";
   index = 0;
@@ -50,6 +51,7 @@ export class VerMascotasComponent {
   // Método que se ejecuta al inicializar el componente
   ngOnInit(): void {
     this.userType = this.authService.getUserRole(); // Obtiene el tipo de usuario autenticado
+    this.clienteId = this.authService.getIdFromToken();
     console.log("El userType es: ", this.userType); // Imprime el tipo de usuario en la consola
 
     this.loadMascotas(); // Carga las mascotas según el tipo de usuario
@@ -79,20 +81,20 @@ export class VerMascotasComponent {
         }
       );
     } else if (this.userType === 'cliente') {
-      // Si el usuario es un cliente, carga las mascotas asociadas a ese cliente
-
-      if (idCliente !== null) {
-        this.clienteService.obtenerMascotasCliente(idCliente).subscribe(
-          (data: Mascota[]) => {
+      // Si el usuario es un cliente, carga las mascotas asociadas
+      this.clienteService.obtenerMascotasCliente().subscribe(
+        (data: Mascota[]) => {
+          if (data.length > 0) {
             this.mascotas = data; // Asigna las mascotas obtenidas al arreglo
-          },
-          (error: any) => {
-            console.error('Error al obtener mascotas del cliente', error); // Maneja el error
+            console.log('Mascotas cargadas:', this.mascotas);
+          } else {
+            console.warn('El cliente no tiene mascotas registradas.');
           }
-        );
-      } else {
-        console.error('El ID del cliente es nulo.'); // Maneja el caso en que no haya un ID válido
-      }
+        },
+        (error: any) => {
+          console.error('Error al obtener mascotas del cliente:', error); // Maneja el error
+        }
+      );
     }
   }
 

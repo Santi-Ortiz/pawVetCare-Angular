@@ -76,12 +76,13 @@ export class VerUnClienteComponent {
         alert(`Cliente con cedula ${id} no encontrado`);
       }
     );
-      this.clienteService.obtenerMascotasCliente(id).subscribe(
+      this.clienteService.obtenerMascotasCliente().subscribe(
         (mascotas) => {
-          this.cliente.mascotas = mascotas;
+          this.cliente.mascotas = mascotas; // Asigna las mascotas obtenidas a la propiedad `mascotas` del cliente
+          console.log('Mascotas obtenidas:', this.cliente.mascotas);
         },
         (error) => {
-          console.error('Error al obtener las mascotas del cliente:', error);
+          console.error('Error al obtener las mascotas del cliente:', error); // Maneja el error
         }
       );
       console.log("Mascotas del cliente: ", this.cliente.mascotas);

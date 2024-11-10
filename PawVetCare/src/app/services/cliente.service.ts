@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente } from '../model/cliente'; 
 import { Mascota } from '../model/mascota'; 
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class ClienteService {
 
   private apiUrl = 'http://localhost:8090/api/cliente';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) { }
 
   // Obtener información de una mascota específica del cliente
   obtenerMascotaCliente(idMascota: number): Observable<Mascota> {
@@ -19,10 +23,14 @@ export class ClienteService {
   }
 
   // Obtener todas las mascotas de un cliente
-  obtenerMascotasCliente(idCliente: number): Observable<Mascota[]> {
-    return this.http.get<Mascota[]>(`${this.apiUrl}/mascotas/${idCliente}`);
+  obtenerMascotasCliente(): Observable<Mascota[]> {
+    const url = 'http://localhost:8090/api/cliente/mascotas';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`, // Obtén el token del AuthService
+    });
+  
+    return this.http.get<Mascota[]>(url, { headers });
   }
-
 
   // Obtener todos los clientes
   obtenerTodosClientes(): Observable<Cliente[]> {

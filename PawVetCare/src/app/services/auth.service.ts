@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { jwtDecode } from "jwt-decode"; // Importa la función como un módulo
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
@@ -78,6 +79,26 @@ export class AuthService {
     return !!localStorage.getItem('userRole');
   }
 
+  // Obtener el token del localStorage
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  // Método para decodificar el token y obtener el idCliente (username)
+  getIdFromToken(): number | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    try {
+      const decoded: any = jwtDecode(token); // Decodifica el token
+      return Number(decoded.sub); // Cambia "sub" por el nombre del campo que contiene el ID en tu token
+    } catch (error) {
+      console.error('Error al decodificar el token', error);
+      return null;
+    }
+  }
+  
   // Cerrar sesión
   logout(): void {
     localStorage.removeItem('userRole');

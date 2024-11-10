@@ -19,8 +19,9 @@ export class FormularioDarTratamientoComponent implements OnInit {
   medicamentos: Medicamento[] = []; // Lista de medicamentos obtenidos del backend
   medicamentoSeleccionado: number | null = null;; // IDs de los medicamentos seleccionados
   cantidad: number = 1; // Cantidad inicial por defecto
-  cedulaVet: number | undefined; // Cédula del veterinario que inició sesión
+  cedulaVet: number | null = null; // Cédula del veterinario que inició sesión
   userType: string | null | undefined;
+
 
   constructor(
     private medicamentosService: MedicamentoService,
@@ -51,7 +52,10 @@ export class FormularioDarTratamientoComponent implements OnInit {
   cargarUsuario(): void {
     this.userType = this.authService.getUserRole(); // Obtiene el rol del usuario
     if (this.userType === 'vet') {
-      this.cedulaVet = this.authService.getUserId() ?? undefined;
+      this.cedulaVet = this.authService.getIdFromToken(); // Extrae el ID del veterinario desde el token
+      if (!this.cedulaVet) {
+        alert('No se pudo obtener la cédula del veterinario desde el token.');
+      }
     }
   }
   
