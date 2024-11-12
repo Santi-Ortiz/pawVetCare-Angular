@@ -25,8 +25,13 @@
     <!-- Campo para editar la nombreEspecialidad del veterinario -->
     <div class="info-itemEspecialidad">
       <small class="info-title">Especialidad:</small>
-      <input class="info-label" formControlName="nombreEspecialidad">
+      <select class="info-label" formControlName="nombreEspecialidad">
+        <option *ngFor="let especialidad of especialidades" [value]="especialidad.NOMBRE_ESPECIALIDAD">
+          {{ especialidad.NOMBRE_ESPECIALIDAD }}
+        </option>
+      </select>
     </div>
+
 
     <!-- Campo para editar la URL de la foto del veterinario -->
     <div class="info-itemFoto">

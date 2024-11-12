@@ -10,6 +10,16 @@ import { VeterinarioService } from 'src/app/services/vet.service'; // Servicio p
   styleUrls: ['./informacion-veterinario.component.css'] // Enlaza el archivo CSS para los estilos
 })
 export class InformacionVeterinarioComponent {
+  especialidades = [
+    { ID: 1, NOMBRE_ESPECIALIDAD: 'Cardiología' },
+    { ID: 3, NOMBRE_ESPECIALIDAD: 'Dermatología' },
+    { ID: 7, NOMBRE_ESPECIALIDAD: 'Neurología' },
+    { ID: 2, NOMBRE_ESPECIALIDAD: 'Nutrición' },
+    { ID: 4, NOMBRE_ESPECIALIDAD: 'Oncología' },
+    { ID: 6, NOMBRE_ESPECIALIDAD: 'Parasitología' },
+    { ID: 5, NOMBRE_ESPECIALIDAD: 'Toxicología' },
+    { ID: 8, NOMBRE_ESPECIALIDAD: 'Cirugía' }
+  ];
   // Define el tipo de usuario, aquí se establece como 'admin'
   userType = 'admin';
 
@@ -40,8 +50,14 @@ export class InformacionVeterinarioComponent {
     // Si hay un veterinario disponible, sus valores se asignan al formulario
     if (this.veterinario) {
       this.veterinarioForm.patchValue(this.veterinario);
+  
+      // Asigna la especialidad actual del veterinario al campo correspondiente
+      this.veterinarioForm.patchValue({
+        nombreEspecialidad: this.veterinario.nombreEspecialidad
+      });
     }
   }
+  
 
   // Método para alternar el modo edición
   toggleEditMode(): void {
