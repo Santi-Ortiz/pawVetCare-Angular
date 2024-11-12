@@ -66,9 +66,9 @@ export class VeterinarioService {
   }
 
   // Agregar un veterinario
-  addVeterinario(veterinario: Veterinario, idVet: number): Observable<string> {
-    return this.http.post<string>(
-      `${this.apiUrl}/agregar?idVet=${idVet}`,
+  addVeterinario(veterinario: Veterinario, idVet: number): Observable<Veterinario> {
+    return this.http.post<Veterinario>(
+      `${this.apiUrl}/agregar`,
       veterinario
     );
   }

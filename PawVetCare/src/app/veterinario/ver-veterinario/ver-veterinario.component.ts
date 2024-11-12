@@ -91,8 +91,9 @@ import { VeterinarioService } from 'src/app/services/vet.service';
     
     
     agregarVeterinario(): void {
+      console.log(this.nuevoVeterinario)
       this.veterinarioService.addVeterinario(this.nuevoVeterinario,this.nuevoVeterinario.cedula).subscribe(
-        (response: string) => {
+        (response: Veterinario) => {
           alert('Veterinario agregado exitosamente');
           this.resetFormularioVeterinario();  
         },
