@@ -88,6 +88,46 @@ export class VerUnClienteComponent {
       console.log("Mascotas del cliente: ", this.cliente.mascotas);
   }
 
+  ngOnChanges(): void {
+
+    
+    // Obtiene el ID del cliente de los parámetros de la ruta
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    
+    // Obtiene los datos del cliente según el ID
+    this.clienteService.obtenerClientePorId(id).subscribe(
+      (cliente: Cliente) => {
+        this.cliente = cliente; // Asigna el cliente obtenido
+        console.log(cliente);
+
+        // Inicializa el formulario con los datos del cliente
+        this.mascotaForm.patchValue({
+          cedula: this.cliente.cedula,
+          nombre: this.cliente.nombre,
+          correo: this.cliente.correo,
+          celular: this.cliente.celular,
+        });
+
+        this.mascotaForm.disable(); // Desactiva el formulario inicialmente
+        console.log("Mascotas del cliente: ", this.cliente.mascotas);
+      },
+      (error) => {
+        console.error(`Error al obtener el cliente con cedula ${id}:`, error);
+        alert(`Cliente con cedula ${id} no encontrado`);
+      }
+    );
+      this.clienteService.obtenerMascotasClienteC(id).subscribe(
+        (mascotas) => {
+          this.cliente.mascotas = mascotas; // Asigna las mascotas obtenidas a la propiedad `mascotas` del cliente
+          console.log('Mascotas obtenidas:', this.cliente.mascotas);
+        },
+        (error) => {
+          console.error('Error al obtener las mascotas del cliente:', error); // Maneja el error
+        }
+      );
+      console.log("Mascotas del cliente: ", this.cliente.mascotas);
+  }
+
   toggleEditMode(): void {
     const botonEditar = document.getElementById('editarBtn'); // Obtiene el botón de editar
     this.isEditMode = !this.isEditMode; // Alterna el modo de edición
