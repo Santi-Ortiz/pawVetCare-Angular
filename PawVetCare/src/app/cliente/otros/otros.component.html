@@ -1,0 +1,162 @@
+<!-- Header específico según el rol del usuario -->
+<header *ngIf="userType === 'admin'"> <!-- Muestra el header específico para administradores -->
+    <app-header-admin-mascotas [userType]="'admin'"></app-header-admin-mascotas>
+  </header>
+  <header *ngIf="userType === 'vet'"> <!-- Muestra el header específico para veterinarios -->
+    <app-header-admin-mascotas [userType]="'vet'"></app-header-admin-mascotas>
+  </header>
+  <header *ngIf="userType === 'cliente'"> <!-- Muestra el header específico para clientes -->
+    <app-header-admin-mascotas [userType]="'cliente'"></app-header-admin-mascotas>
+  </header>
+
+<section class="content">
+  <!-- Sección de música -->
+  <aside class="image-gallery-left">
+    <img src="../assets/audifonos.png" alt="Imagen 1">
+    <img src="../assets/piano.png" alt="Imagen 1">
+</aside>
+  <section class="music-section">
+    <h2 class="titulo">¡Música para tus mascotas!</h2>
+
+    <div class="mood-container">
+        <!-- Música para diferentes estados de ánimo -->
+        
+        <!-- Música para hacer bailar a tu mascota -->
+        <div class="mood-section" id="baila">
+            <h3>¡Haz bailar a tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/baila.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/dog-dancing.png" alt="Perro bailando" class="mood-image">
+                <img src="assets/gato-dancing.png" alt="Gato bailando" class="mood-image">
+            </div>
+        </div>
+        
+
+        <!-- Música para estado de ánimo feliz -->
+        <div class="mood-section" id="feliz">
+            <h3>¡Abraza a tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/abrazo.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/dog-abrazo.png" alt="Perro feliz" class="mood-image">
+                <img src="assets/cat-abrazando.png" alt="Gato feliz" class="mood-image">
+            </div>
+        </div>
+
+        <!-- Música para estado de ánimo triste -->
+        <div class="mood-section" id="triste">
+            <h3>¡Alienta a tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/miaumiau.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/dog-sad.png" alt="Perro triste" class="mood-image">
+                <img src="assets/cat-sad.png" alt="Gato triste" class="mood-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="music-section" style="margin-top: 0px;">
+
+    <div class="mood-container">
+        <!-- Música para diferentes estados de ánimo -->
+        
+        <!-- Música para hacer bailar a tu mascota -->
+        <div class="mood-section" id="baila">
+            <h3>¡Relaja a tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/relajar.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/dog-relaja.png" alt="Perro bailando" class="mood-image">
+                <img src="assets/cat-relaja.png" alt="Gato bailando" class="mood-image">
+            </div>
+        </div>
+        
+
+        <!-- Música para estado de ánimo feliz -->
+        <div class="mood-section" id="feliz">
+            <h3>¡Duerme con tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/dormir.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/dog-durmiendo.png" alt="Perro feliz" class="mood-image">
+                <img src="assets/cat-durmiendo.png" alt="Gato feliz" class="mood-image">
+            </div>
+        </div>
+
+        <!-- Música para estado de ánimo triste -->
+        <div class="mood-section" id="triste">
+            <h3>¡Juega con tu mascota!</h3>
+            <div class="mood-content">
+                <div class="audio-player">
+                    <audio controls>
+                        <source src="../assets/jugar.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+            <div class="images-container">
+                <img src="assets/perro-jugando.png" alt="Perro triste" class="mood-image">
+                <img src="assets/cat-jugando.png" alt="Gato triste" class="mood-image">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pet-friendly-restaurants-section">
+    <h2>Restaurantes Pet-Friendly para ir con tu mascota</h2>
+  
+    <section class="map-section">
+      <div class="map-container">
+        <iframe src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Javeriana&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="400px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+  
+    <div class="restaurants-container">
+      <div class="restaurants-carousel">
+        <div class="carousel-item" *ngFor="let restaurant of restaurants; let i = index" [class.active]="i === currentRestaurantIndex">
+          <h3>{{ restaurant.name }}</h3>
+          <p>{{ restaurant.address }}</p>
+          <p class="restaurant-description">{{ restaurant.description }}</p>
+          <button class="map-btn" (click)="openMap(restaurant.mapLink)">
+            <img src="assets/pin.png" alt="Pin"> Ver en el mapa
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <aside class="image-gallery-right">
+    <img src="../assets/gato-feliz.png" alt="Imagen 2">
+    <img src="../assets/mp3.png" alt="Imagen 2">
+</aside>
+</section>

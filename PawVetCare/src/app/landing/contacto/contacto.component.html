@@ -1,47 +1,17 @@
 <!-- Componente de encabezado de la página -->
 <app-header-home></app-header-home>
-
-<!-- Sección principal de contenido -->
 <section class="content">
     <!-- Título principal de la sección -->
-    <p class="primerTitulo">¡Ládranos o maúllanos a cualquier hora!</p>
-
+    <p class="primerTitulo">¡Habla con PetBot!</p>
     <!-- Aside izquierdo que contiene una imagen de contacto -->
-    <aside class="image-gallery-left">
-        <img src="../assets/circuloMascotaContacto1.png" alt="Imagen 1">
-    </aside>
-
-    <!-- Contenedor del formulario -->
-    <div class="form-container">
-        <h2>Formulario de Contacto</h2>
-        <form>
-            <!-- Campo para el primer nombre -->
-            <label for="first-name">Primer Nombre</label>
-            <input type="text" id="first-name" name="first-name" required>
-
-            <!-- Campo para el apellido -->
-            <label for="last-name">Apellido</label>
-            <input type="text" id="last-name" name="last-name" required>
-
-            <!-- Campo para el correo electrónico -->
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <!-- Campo para el asunto -->
-            <label for="subject">Asunto</label>
-            <input type="text" id="subject" name="subject" required>
-
-            <!-- Campo para el mensaje -->
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <!-- Botón para enviar el formulario -->
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-
+<aside class="image-gallery-left">
+    <img src="../assets/circuloMascotaContacto1.png" alt="Imagen 1">
+</aside>
+    <app-chat-bot></app-chat-bot>
     <!-- Aside derecho que contiene otra imagen de contacto -->
     <aside class="image-gallery-right">
         <img src="../assets/circuloMascotaContacto2.png" alt="Imagen 2">
     </aside>
 </section>
+
+

@@ -1,0 +1,37 @@
+<div class="chatbot-container" #chatContainer>
+    <h2>¡Ládranos o maúllanos a cualquier hora!</h2>
+    <div class="chat-window">
+        <div *ngFor="let message of messages" class="message" [ngClass]="message.type">
+            <p>{{ message.text }}</p>
+            <div *ngIf="message.options" class="options">
+                <button *ngFor="let option of message.options" (click)="handleOptionSelect(option)">
+                    {{ option.text }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de entrada de texto para el nombre -->
+    <div class="input-container" *ngIf="!nameReceived && !inputDisabled">
+        <input type="text" [(ngModel)]="userInput.name" placeholder="Ingresa tu nombre" />
+        <button (click)="handleNameInput()">Enviar</button>
+    </div>
+
+    <!-- Sección de entrada de correo electrónico -->
+    <div class="input-container" *ngIf="nameReceived && !emailReceived && !inputDisabled">
+        <input type="email" [(ngModel)]="userInput.email" placeholder="Ingresa tu correo electrónico" />
+        <button (click)="handleEmailInput()">Enviar</button>
+    </div>
+
+    <!-- Sección de entrada del teléfono -->
+    <div class="input-container" *ngIf="emailReceived && !phoneReceived && !inputDisabled">
+        <input type="tel" [(ngModel)]="userInput.phone" placeholder="Ingresa tu número de teléfono" />
+        <button (click)="handlePhoneInput()">Enviar</button>
+    </div>
+
+    <!-- Sección para la consulta -->
+    <div class="input-container" *ngIf="phoneReceived && !inputDisabled">
+        <input type="text" [(ngModel)]="userInput.query" placeholder="Escribe tu consulta" />
+        <button (click)="handleQuerySubmit()">Enviar</button>
+    </div>
+</div>
