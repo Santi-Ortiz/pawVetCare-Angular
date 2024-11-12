@@ -56,6 +56,16 @@
                 INICIALIZACIÓN
                 <div class="indicator"></div>
             </a>
+
+            <!-- MÚSICA solo visible para cliente -->
+            <a *ngIf="userType === 'cliente'"
+               routerLink="/otros" 
+               routerLinkActive="selected" 
+               [routerLinkActiveOptions]="{ exact: true }" 
+               class="header-menu-item">
+                VETPLAY
+                <div class="indicator"></div>
+            </a>
         </div>
     </nav>
 

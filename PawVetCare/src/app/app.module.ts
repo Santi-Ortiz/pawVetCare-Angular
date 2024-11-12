@@ -63,6 +63,8 @@ import { ContainerTop3TratamientosComponent } from './recycle/container-top-3-tr
 import { CarruselTopMedicamentosComponent } from './recycle/carrusel-top-medicamentos/carrusel-top-medicamentos.component';
 import { FormularioDarTratamientoComponent } from './recycle/formulario-dar-tratamiento/formulario-dar-tratamiento.component';
 import { CarruselHistorialComponent } from './recycle/carrusel-historial/carrusel-historial.component';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { OtrosComponent } from './cliente/otros/otros.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,7 +125,9 @@ import { CarruselHistorialComponent } from './recycle/carrusel-historial/carruse
     ContainerTop3TratamientosComponent,
     CarruselTopMedicamentosComponent,
     FormularioDarTratamientoComponent,
-    CarruselHistorialComponent
+    CarruselHistorialComponent,
+    ChatBotComponent,
+    OtrosComponent
   ],
   imports: [
     HttpClientModule,

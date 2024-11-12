@@ -17,7 +17,7 @@ body {
 
 .content {
     flex: 1;
-    padding-bottom: 1050px;
+    padding-bottom: 270px;
 }
 
 .top-bar {
@@ -239,7 +239,7 @@ body {
 .image-gallery-right {
     background-color: #FFFFFFFF;
     position: absolute;
-    top: 200px;
+    top: 150px;
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -249,13 +249,13 @@ body {
 }
 
 .image-gallery-left {
-  left: 60px;
+  left: 130px;
   background-color: #FFFFFFFF;
 }
 
 .image-gallery-right {
-    top: 230px;
-    right: 60px;
+    top: 180px;
+    right: 130px;
 }
 
 .image-gallery-left img,
@@ -334,3 +334,4 @@ body {
     left: 1330px; 
     width: 300px; 
 }
+

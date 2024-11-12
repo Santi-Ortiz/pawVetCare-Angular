@@ -21,6 +21,7 @@ import { IniciarVeterinarioComponent } from './iniciar-sesion/iniciar-veterinari
 import { IniciarAdministradorComponent } from './iniciar-sesion/iniciar-administrador/iniciar-administrador.component';
 import { VerDashboardComponent } from './dashboard/ver-dashboard/ver-dashboard.component';
 import { AuthGuard } from './guard/authguard';
+import { OtrosComponent } from './cliente/otros/otros.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -62,6 +63,7 @@ const routes: Routes = [
   {path: 'iniciarSesion/veterinario', component: IniciarVeterinarioComponent},
   {path: 'iniciarSesion/administrador', component: IniciarAdministradorComponent},
   {path: 'registro', component: RegistroClienteComponent},
+  {path: 'otros', component: OtrosComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
