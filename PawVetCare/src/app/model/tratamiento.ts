@@ -4,9 +4,12 @@ import { TratamientoMedicamento } from './tratamientoMedicamento';
 import { Veterinario } from './veterinario';
 
 export interface Tratamiento {
+  medicamentoPosicionCero: TratamientoMedicamento;
   id: number;
   fecha: Date;
-  veterinario: Veterinario;
-  mascota: Mascota;
-  tratamientoMedicamentos: TratamientoMedicamento[];
+  veterinarioId: number;
+  veterinarioNombre?: string; // Campo opcional para el nombre del veterinario
+  mascotaId: number;
+  tratamientoMedicamentos: TratamientoMedicamento[]; // Relación intermedia con medicamentos
 }
+

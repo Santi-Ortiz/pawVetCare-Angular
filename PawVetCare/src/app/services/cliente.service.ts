@@ -32,6 +32,16 @@ export class ClienteService {
     return this.http.get<Mascota[]>(url, { headers });
   }
 
+  // Obtener todas las mascotas de un cliente
+  obtenerMascotasClienteC(id: number): Observable<Mascota[]> {
+    const url = `http://localhost:8090/api/cliente/mascotasCID/${id}`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`, // Obtén el token del AuthService
+    });
+  
+    return this.http.get<Mascota[]>(url, { headers });
+  }
+
   // Obtener todos los clientes
   obtenerTodosClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${this.apiUrl}/todos`);

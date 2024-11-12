@@ -76,7 +76,7 @@ export class VerUnClienteComponent {
         alert(`Cliente con cedula ${id} no encontrado`);
       }
     );
-      this.clienteService.obtenerMascotasCliente().subscribe(
+      this.clienteService.obtenerMascotasClienteC(id).subscribe(
         (mascotas) => {
           this.cliente.mascotas = mascotas; // Asigna las mascotas obtenidas a la propiedad `mascotas` del cliente
           console.log('Mascotas obtenidas:', this.cliente.mascotas);

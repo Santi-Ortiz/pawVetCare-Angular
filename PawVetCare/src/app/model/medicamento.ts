@@ -5,4 +5,5 @@ export interface Medicamento {
     precio_compra: number;
     unidades_disponibles: number;
     unidades_vendidas: number;
+    
   }

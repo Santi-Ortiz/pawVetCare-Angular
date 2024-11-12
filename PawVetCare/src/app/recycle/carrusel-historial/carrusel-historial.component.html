@@ -1,53 +1,43 @@
-<div class="carrusel-container" *ngIf="tratamientos.length > 0" [ngStyle]="{'margin-top': marginTop, 'left': left}">
-    <!-- Contenedor del carrusel, solo se muestra si hay medicamentos disponibles -->
-    
-    <button class="carrusel-prev" (click)="cambiarTratamiento(-1)">
-        <!-- Botón para cambiar al medicamento anterior -->
-        <img src="../assets/previous.png" alt="Regreso"> <!-- Icono para regresar -->
-    </button>
-    
-    <div class="carrusel">
-        <!-- Contenedor principal del carrusel que alberga los medicamentos -->
-        
-        <div class="medicamento-item" 
-             *ngFor="let tratamiento of tratamientos; let i = index" 
-             [ngStyle]="{'display': i === index ? 'block' : 'none'}">
-            <!-- Se utiliza *ngFor para iterar sobre el array de medicamentos -->
-            <!-- Solo el medicamento cuyo índice coincida con 'index' se mostrará -->
-            
-            <div class="medicamento-info">
-                <!-- Contenedor de información del medicamento -->
-                
-                <div class="info-itemNombre">
-                    <small class="info-title">Medicamento:</small>
-                    <label class="info-label">{{ tratamiento.id }}</label>
-                    <!-- Muestra el nombre del medicamento -->
-                </div>
-                
-                <div class="info-itemVeterinario">
-                    <small class="info-title">Veterinario:</small>
-                    <label class="info-label">{{ tratamiento.id }}</label>
-                    <!-- Muestra el vet -->
-                </div>
+<div class="carrusel-container" *ngIf="tratamientos && tratamientos.length > 0; else noTratamientos"  [ngStyle]="{'margin-top': marginTop, 'left': left}">
+  <button class="carrusel-prev" (click)="cambiarTratamiento(-1)">
+    <img src="../assets/previous.png" alt="Regreso">
+  </button>
 
-                <div class="info-itemCantidad">
-                    <small class="info-title">Cantidad:</small>
-                    <label class="info-label">{{ tratamiento.id }}</label>
-                    <!-- Muestra el vet -->
-                </div>
-                
-                <div class="info-itemFecha">
-                    <small class="info-title">Fecha:</small>
-                    <label class="info-label">{{ tratamiento.fecha }}</label>
-                    <!-- Muestra la fecha -->
-                </div>
-                
-            </div>
+  <div class="carrusel">
+    <div class="medicamento-item" *ngFor="let tratamiento of tratamientos; let i = index" [ngStyle]="{'display': i === index ? 'block' : 'none'}">
+      <div class="medicamento-info">
+        <div class="info-itemNombre">
+          <small class="info-title">Veterinario:</small>
+          <label class="info-label">{{ tratamiento?.veterinarioNombre || 'Sin nombre' }}</label>
         </div>
+
+        <div class="info-itemMedicamento">
+          <small class="info-title">Medicamento:</small>
+          <label class="info-label">
+            {{ tratamiento.medicamentoPosicionCero.nombre || 'Sin nombre' }}
+          </label>
+        </div>
+        
+        <div class="info-itemCantidad">
+          <small class="info-title">Cantidad:</small>
+          <label class="info-label">
+            {{ tratamiento.medicamentoPosicionCero.cantidad || 'No especificada' }}
+          </label>
+        </div>        
+
+        <div class="info-itemFecha">
+          <small class="info-title">Fecha:</small>
+          <label class="info-label">{{ tratamiento?.fecha | date: 'dd/MM/yyyy' }}</label>
+        </div>
+      </div>
     </div>
-    
-    <button class="carrusel-next" (click)="cambiarTratamiento(1)">
-        <!-- Botón para cambiar al siguiente medicamento -->
-        <img src="assets/next.png" alt="Siguiente"> <!-- Icono para avanzar -->
-    </button>
+  </div>
+
+  <button class="carrusel-next" (click)="cambiarTratamiento(1)">
+    <img src="assets/next.png" alt="Siguiente">
+  </button>
 </div>
+
+<ng-template #noTratamientos>
+  <p>No hay tratamientos disponibles para mostrar.</p>
+</ng-template>
