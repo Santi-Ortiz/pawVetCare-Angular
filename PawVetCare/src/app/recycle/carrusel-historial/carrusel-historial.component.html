@@ -14,14 +14,14 @@
         <div class="info-itemMedicamento">
           <small class="info-title">Medicamento:</small>
           <label class="info-label">
-            {{ tratamiento.medicamentoPosicionCero.nombre || 'Sin nombre' }}
+            {{ tratamiento?.medicamentoPosicionCero?.nombre || 'Sin nombre' }}
           </label>
         </div>
         
         <div class="info-itemCantidad">
           <small class="info-title">Cantidad:</small>
           <label class="info-label">
-            {{ tratamiento.medicamentoPosicionCero.cantidad || 'No especificada' }}
+            {{ tratamiento?.medicamentoPosicionCero?.cantidad || 'No especificada' }}
           </label>
         </div>        
 

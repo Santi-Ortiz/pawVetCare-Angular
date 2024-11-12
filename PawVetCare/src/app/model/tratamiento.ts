@@ -10,6 +10,6 @@ export interface Tratamiento {
   veterinarioId: number;
   veterinarioNombre?: string; // Campo opcional para el nombre del veterinario
   mascotaId: number;
-  tratamientoMedicamentos: TratamientoMedicamento[]; // Relación intermedia con medicamentos
+  medicamentos: TratamientoMedicamento[]; // Relación intermedia con medicamentos
 }
 

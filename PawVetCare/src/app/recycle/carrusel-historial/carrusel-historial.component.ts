@@ -37,18 +37,6 @@ export class CarruselHistorialComponent {
             tratamiento.veterinarioNombre = veterinario.nombre || 'Sin nombre';
           });
         }
-
-         // Asignar el medicamento en la posición 0
-         console.log("hola"+tratamiento.tratamientoMedicamentos?.[0])
-         tratamiento.medicamentoPosicionCero = tratamiento.tratamientoMedicamentos?.[0] || {
-           nombre: 'Sin nombre',
-           cantidad: 'No especificada',
-         };
-         
-        console.log('Tratamiento:', tratamiento);
-        console.log('Veterinario Nombre:', tratamiento.veterinarioNombre);
-        console.log('Medicamentos:', tratamiento.tratamientoMedicamentos);
-
       });
     } else {
       console.warn('No se recibieron tratamientos o el array está vacío.');
@@ -61,22 +49,34 @@ export class CarruselHistorialComponent {
     }
     if (this.tratamientos?.length > 0) {
       this.tratamientos.forEach((tratamiento) => {
+        // Asegurarse de que tratamientoMedicamentos esté definido
+        tratamiento.medicamentos = tratamiento.medicamentos || [];
+  
         // Cargar el nombre del veterinario
-        if (!tratamiento.veterinarioNombre) {
+        if (tratamiento.veterinarioId) {
           this.veterinarioService.getVeterinarioById(tratamiento.veterinarioId).subscribe((veterinario) => {
-            tratamiento.veterinarioNombre = veterinario.nombre || 'Sin nombre';
+            tratamiento.veterinarioNombre = veterinario?.nombre || 'Sin nombre';
           });
         }
-        
-        tratamiento.medicamentoPosicionCero = tratamiento.tratamientoMedicamentos?.[0] || {
+  
+        // Cargar los nombres de los medicamentos
+        tratamiento.medicamentos.forEach((medicamento) => {
+          console.log("aqui")
+          if (medicamento.id) {
+            this.medicamentoService.obtenerMedicamentoPorId(medicamento.id).subscribe((medicamentoCargado) => {
+              medicamento.nombre = medicamentoCargado?.nombre || 'Nombre no disponible';
+            });
+          }
+        });
+  
+        // Establecer el primer medicamento como medicamentoPosicionCero
+        tratamiento.medicamentoPosicionCero = tratamiento.medicamentos[0] || {
           nombre: 'Sin nombre',
           cantidad: 'No especificada',
         };
-  
-        console.log('Tratamiento:', tratamiento.fecha);
-        console.log('Veterinario Nombre:', tratamiento.veterinarioNombre);
-        console.log('Medicamentos:', tratamiento.tratamientoMedicamentos);
       });
+    } else {
+      console.warn('No se recibieron tratamientos o el array está vacío.');
     }
   }  
 
@@ -100,26 +100,36 @@ export class CarruselHistorialComponent {
   }
 
   cargarDatosTratamientos(): void {
-    console.log("entre")
-    console.log(this.tratamientos)
-    this.tratamientos.forEach((tratamiento) => {
-      console.log("aca")
-      // Cargar el nombre del veterinario
-      this.veterinarioService.getVeterinarioById(tratamiento.veterinarioId).subscribe((veterinario) => {
-        console.log(veterinario.nombre)
-        tratamiento.veterinarioNombre = veterinario.nombre || 'Sin nombre';
-      });
-    
-      // Cargar los nombres de los medicamentos
-      tratamiento.tratamientoMedicamentos.forEach((medicamento) => {
-        console.log("aqui"+medicamento.id)
-        if (!medicamento.nombre) {
-          this.medicamentoService.obtenerMedicamentoPorId(medicamento.id).subscribe((medicamentoCargado) => {
-            medicamento.nombre = medicamentoCargado.nombre || 'Nombre no disponible';
+    console.log("Entre a cargar datos de tratamientos");
+    if (this.tratamientos?.length > 0) {
+      this.tratamientos.forEach((tratamiento) => {
+        // Asegurarse de que tratamientoMedicamentos esté definido
+        tratamiento.medicamentos = tratamiento.medicamentos || [];
+  
+        // Cargar el nombre del veterinario
+        if (tratamiento.veterinarioId) {
+          this.veterinarioService.getVeterinarioById(tratamiento.veterinarioId).subscribe((veterinario) => {
+            tratamiento.veterinarioNombre = veterinario?.nombre || 'Sin nombre';
           });
         }
+  
+        // Cargar los nombres de los medicamentos
+        tratamiento.medicamentos.forEach((medicamento) => {
+          if (medicamento.id) {
+            this.medicamentoService.obtenerMedicamentoPorId(medicamento.id).subscribe((medicamentoCargado) => {
+              medicamento.nombre = medicamentoCargado?.nombre || 'Nombre no disponible';
+            });
+          }
+        });
+  
+        // Establecer el primer medicamento como medicamentoPosicionCero
+        tratamiento.medicamentoPosicionCero = tratamiento.medicamentos[0] || {
+          nombre: 'Sin nombre',
+          cantidad: 'No especificada',
+        };
       });
-    });
-    
+    } else {
+      console.warn('No se recibieron tratamientos o el array está vacío.');
+    }
   }
 }
