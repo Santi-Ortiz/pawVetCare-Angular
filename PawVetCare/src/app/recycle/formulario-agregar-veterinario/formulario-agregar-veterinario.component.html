@@ -9,11 +9,15 @@
   
   <div class="infoadd-itemEspecialidad">
     <small class="info-title">Especialidad:</small>
-    <input [(ngModel)]="nuevoVeterinario.nombreEspecialidad" name="nombreEspecialidad" class="inputadd-text" id="nombreEspecialidad" placeholder="Ingresa la especialidad" required #nombreEspecialidad="ngModel">
+    <select [(ngModel)]="nuevoVeterinario.nombreEspecialidad" name="nombreEspecialidad" class="inputadd-text" id="nombreEspecialidad" required #nombreEspecialidad="ngModel">
+      <option *ngFor="let especialidad of especialidades" [value]="especialidad.NOMBRE_ESPECIALIDAD">
+        {{ especialidad.NOMBRE_ESPECIALIDAD }}
+      </option>
+    </select>
     <div *ngIf="nombreEspecialidad.invalid && (nombreEspecialidad.dirty || nombreEspecialidad.touched)" class="error">
       La especialidad es requerida.
     </div>
-  </div>
+  </div>  
   
   <div class="infoadd-itemCedula">
     <small class="info-title">Cédula:</small>

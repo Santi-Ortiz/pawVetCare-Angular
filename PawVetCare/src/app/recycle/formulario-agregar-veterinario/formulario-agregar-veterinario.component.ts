@@ -10,6 +10,17 @@ import { VeterinarioService } from 'src/app/services/vet.service';
   styleUrls: ['./formulario-agregar-veterinario.component.css']
 })
 export class FormularioAgregarVeterinarioComponent {
+  especialidades = [
+    { ID: 1, NOMBRE_ESPECIALIDAD: 'Cardiología' },
+    { ID: 3, NOMBRE_ESPECIALIDAD: 'Dermatología' },
+    { ID: 7, NOMBRE_ESPECIALIDAD: 'Neurología' },
+    { ID: 2, NOMBRE_ESPECIALIDAD: 'Nutrición' },
+    { ID: 4, NOMBRE_ESPECIALIDAD: 'Oncología' },
+    { ID: 6, NOMBRE_ESPECIALIDAD: 'Parasitología' },
+    { ID: 5, NOMBRE_ESPECIALIDAD: 'Toxicología' },
+    { ID: 8, NOMBRE_ESPECIALIDAD: 'Cirugía' }
+  ];
+  
   @Input() nuevoVeterinario: Veterinario = {
     id: 0,
     cedula: 0,
